@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://avalanche.openie.dev/sitemap.xml

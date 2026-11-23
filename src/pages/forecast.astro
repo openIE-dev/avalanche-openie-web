@@ -1,0 +1,164 @@
+---
+import Layout from '../layouts/Layout.astro';
+import RegisterSwitcher from '../components/RegisterSwitcher.astro';
+import ForecastTable from '../components/ForecastTable.astro';
+import { AI_HISTORY_38, SIX_KERNEL_AUDIT } from '../data/forecast';
+---
+
+<Layout
+  title="1950–2026 AI History Ratchet, Falsifiable Forecast & 6-Kernel Proof Audit"
+  description="Complete 38-milestone historical AI ratchet ledger (1950–2026, AI01–AI38), 18-milestone falsifiable Month/Quarter/Year/Decade forecast (HM01–HD04), and 6-kernel Lean 4.36.0 soundness audit."
+>
+
+<div class="max-w-7xl mx-auto px-6 py-16 space-y-20">
+  <!-- Header -->
+  <header class="space-y-5 border-b border-brand-border pb-10">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <a href="/" class="font-mono text-xs text-brand-cyan no-underline hover:underline">&larr; Back to Avalanche Observatory</a>
+      <RegisterSwitcher label="Explanation Mode" />
+    </div>
+    <p class="section-label-cyan">Historical Audit &amp; Forecasting Methodology</p>
+    <h1 class="font-display text-4xl sm:text-6xl font-bold text-brand-white tracking-tight">
+      Seventy-Six Years of Ratchets &amp; Provable Horizon Forecasting
+    </h1>
+    <p class="font-body text-brand-slate text-base md:text-lg max-w-4xl leading-relaxed">
+      Projecting 38 foundational artificial intelligence milestones (1950–2026, <code class="code-chip">AI01–AI38</code>) onto the conserved externalization operator <code class="code-chip">𝒞 = 𝒯 &compfn; 𝒢_&theta; &compfn; ℰ</code> explains why historical paradigms ignited or stalled&mdash;and anchors 18 falsifiable future hypotheses (<code class="code-chip">HM01–HD04</code>) backed by a 6-kernel <code class="code-chip">Lean 4.36.0</code> soundness audit.
+    </p>
+  </header>
+
+  <!-- Part I: 18-Milestone Falsifiable Forecasting Blueprint -->
+  <section id="horizons" class="space-y-6 scroll-mt-24">
+    <div>
+      <p class="section-label mb-2">I &middot; Falsifiable Horizon Ledger (HM01–HD04)</p>
+      <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-white">
+        18 Pre-Registered Milestones Across Month, Quarter, Year, &amp; Decade Horizons
+      </h2>
+      <p class="font-body text-brand-slate text-sm sm:text-base mt-2 max-w-3xl">
+        Every milestone pairs a formal theorem anchor with an explicit red disproof criterion. Speculative neural (<code class="code-chip">BM18</code>) and extracellular-vesicle (<code class="code-chip">EV01–EV16</code>) clinical items are marked <strong class="text-brand-white">Speculative [S]</strong> and kept strictly separate from verified computational results.
+      </p>
+    </div>
+
+    <ForecastTable />
+  </section>
+
+  <!-- Part II: Six-Kernel Lean 4.36.0 Soundness Audit -->
+  <section id="six-kernel" class="space-y-6 scroll-mt-24">
+    <div>
+      <p class="section-label-cyan mb-2">II &middot; Multi-Kernel Formal Soundness Audit (CVE-2026-72844 Hardened)</p>
+      <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-white">
+        Why Formal Proofs Are Audited by Six Independent Checkers Inside bubblewrap
+      </h2>
+      <p class="font-body text-brand-slate text-sm sm:text-base mt-2 max-w-4xl leading-relaxed">
+        In 2026, Lean 4 kernel disclosures&mdash;<code class="code-chip">CVE-2026-72844</code> (nested inductive <code class="code-chip">.proj</code> type confusion CWE-843 in &le; v4.31.0), <code class="code-chip">CVE-2026-72711</code> (<code class="code-chip">add_opaque</code> free-variable check), <code class="code-chip">#16688</code> (<code class="code-chip">Kernel.Environment.replay</code> <code class="code-chip">.inductInfo</code> skipping), and <code class="code-chip">#16693</code> (<code class="code-chip">Lean.ofReduceBool</code> compiler-trust bypass)&mdash;demonstrated that formal certainty should not depend on a single C++ binary or unsandboxed <code class="code-chip">.olean</code> cache. All <strong class="text-brand-white">103 cataloged theorems</strong> (45 in communication-avalanche, 27 in lut-adapt, 31 in time-as-an-index) plus all <strong class="text-brand-white">5,393 RCE theorem constants</strong> (1,264 declarations at <code class="code-chip">f87d6af2</code>) contain 0 <code class="code-chip">sorry</code>, 0 custom axioms, 0 <code class="code-chip">opaque</code>, and 0 <code class="code-chip">Lean.ofReduceBool</code>, and are exported to text NDJSON inside a network-isolated Linux <code class="code-chip">bubblewrap 0.11.1</code> (<code class="code-chip">bwrap</code>) sandbox checked unanimously by six independent verifiers:
+      </p>
+    </div>
+
+    <div class="glass-card overflow-x-auto">
+      <table class="w-full border-collapse text-left min-w-[920px]">
+        <thead>
+          <tr class="border-b border-brand-border bg-brand-white/[0.02] font-mono text-[10.5px] uppercase tracking-wider text-brand-gray">
+            <th class="py-3.5 px-4">Independent Proof Checker</th>
+            <th class="py-3.5 px-4">Implementation &amp; Soundness Basis</th>
+            <th class="py-3.5 px-4">CTA (45)</th>
+            <th class="py-3.5 px-4">LUT6 (27)</th>
+            <th class="py-3.5 px-4">Horizon (31)</th>
+            <th class="py-3.5 px-4">RCE (f87d6af2)</th>
+            <th class="py-3.5 px-4">Mitigated Vulnerability Classes</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-brand-border text-xs">
+          {SIX_KERNEL_AUDIT.map((k) => (
+            <tr class="hover:bg-brand-white/[0.02] transition-colors align-top">
+              <td class="py-3.5 px-4 font-mono font-bold text-brand-cyan whitespace-nowrap">{k.checker}</td>
+              <td class="py-3.5 px-4 font-body text-brand-light max-w-[260px]">{k.implementation}</td>
+              <td class="py-3.5 px-4 font-mono text-brand-emerald whitespace-nowrap">{k.ctaDecls}</td>
+              <td class="py-3.5 px-4 font-mono text-brand-emerald whitespace-nowrap">{k.lutDecls}</td>
+              <td class="py-3.5 px-4 font-mono text-brand-emerald whitespace-nowrap">{k.horizonDecls}</td>
+              <td class="py-3.5 px-4 font-mono text-brand-emerald whitespace-nowrap">{k.rceConstants}</td>
+              <td class="py-3.5 px-4 font-mono text-[11px] text-brand-slate max-w-[280px]">{k.mitigatedCves}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Part III: Full 38-Milestone Historical AI Ratchet Table (1950–2026) -->
+  <section id="history" class="space-y-6 scroll-mt-24">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+      <div>
+        <p class="section-label mb-2">III &middot; Historical Ratchet Audit (1950–2026, AI01–AI38)</p>
+        <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-white">
+          All 38 Artificial Intelligence Milestones Projected onto (ℰ, 𝒢_&theta;, 𝒯)
+        </h2>
+      </div>
+      <div class="flex flex-wrap gap-1.5" role="tablist" aria-label="Filter Historical Milestones by Era">
+        <button type="button" data-era-filter="all" class="era-btn px-3 py-1 rounded-full font-mono text-[11px] border border-brand-amber bg-brand-amber/15 text-brand-white cursor-pointer">All 38</button>
+        <button type="button" data-era-filter="Era I" class="era-btn px-3 py-1 rounded-full font-mono text-[11px] border border-brand-border text-brand-slate hover:text-brand-white cursor-pointer">Era I (50–65)</button>
+        <button type="button" data-era-filter="Era II" class="era-btn px-3 py-1 rounded-full font-mono text-[11px] border border-brand-border text-brand-slate hover:text-brand-white cursor-pointer">Era II (69–81)</button>
+        <button type="button" data-era-filter="Era III" class="era-btn px-3 py-1 rounded-full font-mono text-[11px] border border-brand-border text-brand-slate hover:text-brand-white cursor-pointer">Era III (82–98)</button>
+        <button type="button" data-era-filter="Era IV" class="era-btn px-3 py-1 rounded-full font-mono text-[11px] border border-brand-border text-brand-slate hover:text-brand-white cursor-pointer">Era IV (06–16)</button>
+        <button type="button" data-era-filter="Era V" class="era-btn px-3 py-1 rounded-full font-mono text-[11px] border border-brand-border text-brand-slate hover:text-brand-white cursor-pointer">Era V (17–22)</button>
+        <button type="button" data-era-filter="Era VI" class="era-btn px-3 py-1 rounded-full font-mono text-[11px] border border-brand-border text-brand-slate hover:text-brand-white cursor-pointer">Era VI (23–25)</button>
+        <button type="button" data-era-filter="Era VII" class="era-btn px-3 py-1 rounded-full font-mono text-[11px] border border-brand-border text-brand-slate hover:text-brand-white cursor-pointer">Era VII (2026)</button>
+      </div>
+    </div>
+
+    <div class="glass-card overflow-x-auto">
+      <table class="w-full border-collapse text-left min-w-[980px]">
+        <thead>
+          <tr class="border-b border-brand-border bg-brand-white/[0.02] font-mono text-[10.5px] uppercase tracking-wider text-brand-gray">
+            <th class="py-3 px-4">ID &amp; Year</th>
+            <th class="py-3 px-4">Milestone &amp; Era</th>
+            <th class="py-3 px-4 text-brand-amber">Externalized Substrate (ℰ)</th>
+            <th class="py-3 px-4 text-brand-cyan">Threshold / Verifier Gate (𝒢_θ)</th>
+            <th class="py-3 px-4 text-brand-emerald">Bottleneck Unlocked (𝒯)</th>
+            <th class="py-3 px-4 text-brand-rose">Stall Boundary / Winter Cause</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-brand-border text-xs">
+          {AI_HISTORY_38.map((item) => (
+            <tr data-era-row={item.era} class="hover:bg-brand-white/[0.02] transition-colors align-top">
+              <td class="py-3 px-4 whitespace-nowrap">
+                <div class="font-mono font-bold text-brand-amber">{item.id}</div>
+                <div class="font-mono text-[11px] text-brand-gray">{item.year}</div>
+              </td>
+              <td class="py-3 px-4 max-w-[210px]">
+                <div class="font-display font-semibold text-brand-white">{item.milestone}</div>
+                <div class="font-mono text-[10px] text-brand-gray mt-0.5">{item.era}</div>
+              </td>
+              <td class="py-3 px-4 font-body text-brand-light max-w-[200px]">{item.substrate}</td>
+              <td class="py-3 px-4 font-mono text-[11px] text-brand-cyan max-w-[200px]">{item.gate}</td>
+              <td class="py-3 px-4 font-body text-brand-light max-w-[210px]">{item.unlocked}</td>
+              <td class="py-3 px-4 font-body text-brand-slate max-w-[220px]">{item.stallBoundary}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script>
+  const eraBtns = document.querySelectorAll<HTMLButtonElement>('[data-era-filter]');
+  const eraRows = document.querySelectorAll<HTMLTableRowElement>('[data-era-row]');
+  eraBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const f = btn.getAttribute('data-era-filter') || 'all';
+      eraBtns.forEach(b => {
+        const active = b === btn;
+        b.classList.toggle('border-brand-amber', active);
+        b.classList.toggle('bg-brand-amber/15', active);
+        b.classList.toggle('text-brand-white', active);
+        b.classList.toggle('border-brand-border', !active);
+        b.classList.toggle('text-brand-slate', !active);
+      });
+      eraRows.forEach(r => {
+        const era = r.getAttribute('data-era-row') || '';
+        r.classList.toggle('hidden', f !== 'all' && !era.startsWith(f));
+      });
+    });
+  });
+</script>
+
+</Layout>

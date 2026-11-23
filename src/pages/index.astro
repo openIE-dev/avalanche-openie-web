@@ -1,0 +1,625 @@
+---
+import Layout from '../layouts/Layout.astro';
+import RegisterSwitcher from '../components/RegisterSwitcher.astro';
+import NineRungRatchet from '../components/NineRungRatchet.astro';
+import ForcingSimulator from '../components/ForcingSimulator.astro';
+import ForecastTable from '../components/ForecastTable.astro';
+import { BIO_MODELS, AI_WINTER_DIAGNOSES, TRANSLATION_MATRIX, TEN_CAMPS } from '../data/science';
+import { LEARNING_MODALITIES, SISTER_REFERENCES } from '../data/ecosystem';
+---
+
+<Layout title="An Educational Guide to the 9-Rung Computer Intelligence Avalanche & Compilation Threshold">
+
+<!-- ═══ HERO: EDUCATIONAL OBSERVATORY ═══ -->
+<section class="min-h-[90vh] flex items-center justify-center relative overflow-hidden px-6 pt-12 pb-16">
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] rounded-full bg-brand-amber/[0.045] blur-[140px]"></div>
+    <div class="absolute bottom-1/4 right-1/4 translate-x-1/3 translate-y-1/4 w-[620px] h-[620px] rounded-full bg-brand-cyan/[0.05] blur-[150px]"></div>
+  </div>
+
+  <div class="relative z-10 max-w-6xl mx-auto w-full">
+    <div class="text-center max-w-4xl mx-auto">
+      <!-- Phase-Transition Diagram Emblem -->
+      <div class="flex justify-center mb-8" aria-hidden="true">
+        <svg width="240" height="86" viewBox="0 0 240 86" fill="none" class="select-none float">
+          <g stroke="#F59E0B" stroke-width="1.2" opacity="0.65">
+            <circle cx="28" cy="56" r="4" fill="#F59E0B" />
+            <circle cx="52" cy="48" r="4" fill="#F59E0B" />
+            <circle cx="76" cy="40" r="4.5" fill="#EA580C" />
+            <path d="M 28,56 L 52,48 L 76,40 L 116,40" stroke-dasharray="3 3" />
+          </g>
+          <line x1="120" y1="10" x2="120" y2="76" stroke="#FFFFFF" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.7" />
+          <circle cx="120" cy="40" r="6" fill="#00D4AA" />
+          <circle cx="120" cy="40" r="12" stroke="#00D4AA" stroke-width="0.9" opacity="0.45" />
+          <g stroke="#00D4AA" stroke-width="1.4">
+            <path d="M 124,40 L 158,30 L 188,22 L 216,16" />
+            <rect x="154" y="26" width="8" height="8" rx="1.5" fill="#00D4AA" />
+            <rect x="184" y="18" width="8" height="8" rx="1.5" fill="#00D4AA" />
+            <rect x="212" y="12" width="9" height="9" rx="1.5" fill="#10B981" />
+          </g>
+          <text x="54" y="76" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#F59E0B" text-anchor="middle">R1–R5 EPHEMERAL</text>
+          <text x="120" y="83" font-family="JetBrains Mono, monospace" font-size="8" fill="#94A3B8" text-anchor="middle">C(z)=1</text>
+          <text x="186" y="76" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#00D4AA" text-anchor="middle">R6–R9 COMPILED</text>
+        </svg>
+      </div>
+
+      <p class="section-label mb-4">
+        OPEN EDUCATIONAL REFERENCE &middot; EVOLUTIONARY RATCHETS &middot; THERMODYNAMICS &amp; FORECASTING
+      </p>
+
+      <h1 class="font-display text-4xl sm:text-6xl md:text-[66px] font-bold text-brand-white mb-6 tracking-tight leading-[1.03]">
+        Intelligence cannot scale ecologically <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-amber via-brand-cyan to-brand-emerald">until it compiles.</span>
+      </h1>
+
+      <!-- Explanation Mode Switcher -->
+      <div class="flex justify-center mb-6">
+        <RegisterSwitcher label="Explanation Mode" />
+      </div>
+
+      <!-- Plain-Language Subheadline -->
+      <p class="reg-visionary font-body text-brand-light text-base sm:text-lg md:text-[19px] max-w-3xl mx-auto leading-relaxed mb-7">
+        An interactive study guide to <strong class="text-brand-white">evolutionary and computational ratchets</strong>. Across 3.8 billion years of biology and 76 years of artificial intelligence, solving the same recurring problems from scratch wastes energy and compounds noise. Crossing <strong class="text-brand-cyan">The Compilation Threshold</strong> turns verified exploratory discoveries into zero-FLOP Boolean logic, microjoule lookup tables, and cooperative multi-paradigm ecologies.
+      </p>
+
+      <!-- Formal Science Tuple Block -->
+      <div class="reg-scientist eq-block max-w-3xl mx-auto mb-8">
+        <p class="eq">
+          <span class="amber">⟨ R₁..R₅ Ephemeral Inference ⟩</span>
+          <span class="op">&boxh;&boxh;[ &Delta;T &gt; &Delta;T* &middot; C(z) = 1 ]&boxh;&boxh;&#9654;</span>
+          <span class="tuple">⟨ R₆..R₉ Compiled Substrates &middot; CpJ &uarr; ⟩</span>
+        </p>
+        <p class="eq-caption">
+          Proposition 1 Stationary Amortization Horizon &amp; Deterministic Soundness Gate &middot; CTA-T1..T45
+        </p>
+      </div>
+
+      <!-- Primary Learning Navigation -->
+      <div class="flex flex-wrap gap-3 justify-center mb-12">
+        <a href="#rungs" class="inline-flex items-center gap-2 font-mono text-xs sm:text-sm text-brand-dark bg-brand-cyan px-6 py-3 rounded-lg no-underline hover:bg-brand-teal transition-colors font-semibold">
+          Study the 9 Rungs
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+        <a href="#forcing" class="inline-flex items-center gap-2 font-mono text-xs sm:text-sm text-brand-amber border border-brand-amber/40 px-5 py-3 rounded-lg no-underline hover:bg-brand-amber/10 transition-colors">
+          Explore CpJ Simulator
+        </a>
+        <a href="https://research.openie.dev/tv/?channel=avalanche" class="inline-flex items-center gap-1.5 font-mono text-xs sm:text-sm text-brand-white bg-brand-white/[0.04] border border-brand-border px-4 py-3 rounded-lg no-underline hover:border-brand-amber transition-colors">
+          <span class="text-brand-amber" aria-hidden="true">&#9654;</span> Research TV
+        </a>
+        <a href="https://research.openie.dev/radio/?desk=avalanche" class="inline-flex items-center gap-1.5 font-mono text-xs sm:text-sm text-brand-white bg-brand-white/[0.04] border border-brand-border px-4 py-3 rounded-lg no-underline hover:border-brand-cyan transition-colors">
+          <span class="text-brand-cyan" aria-hidden="true">&#9673;</span> Research Radio
+        </a>
+      </div>
+    </div>
+
+    <!-- EMPIRICAL & FORMAL EVIDENCE SUMMARY STRIP (Strictly Separated Telemetry) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-reveal>
+      <!-- Card 1 -->
+      <div class="glass-card spotlight-card p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="ev-badge ev-theorem">6-Kernel [T] &middot; bwrap</span>
+            <span class="font-mono text-[10px] text-brand-gray">Lean 4.36.0</span>
+          </div>
+          <div class="font-display text-3xl md:text-4xl font-bold text-brand-white tracking-tight">103</div>
+          <div class="font-display text-sm font-semibold text-brand-cyan mt-0.5">Six-Kernel Formal Theorems</div>
+        </div>
+        <p class="font-mono text-[11px] text-brand-slate leading-relaxed mt-3 pt-3 border-t border-brand-border">
+          Checked by con-leche &amp; con-ron --verified in bwrap (45 CTA + 27 LUT6 + 31 Horizon), plus <strong class="text-brand-white">5,393</strong> RCE theorem constants at f87d6af2; 0 sorry, 0 opaque, 0 ofReduceBool.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="glass-card spotlight-card p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="ev-badge ev-measured">INA3221 measured_j</span>
+            <span class="font-mono text-[10px] text-brand-gray">CTA-E5</span>
+          </div>
+          <div class="font-display text-3xl md:text-4xl font-bold text-brand-white tracking-tight">98 / 100</div>
+          <div class="font-display text-sm font-semibold text-brand-cyan mt-0.5">Ten-Paradigm Synthesis (DES-10)</div>
+        </div>
+        <p class="font-mono text-[11px] text-brand-slate leading-relaxed mt-3 pt-3 border-t border-brand-border">
+          Exceeds the &le; 49% isolated ceiling across all 10 AI paradigms (48% solo LLM, 49% 3-agent debate) at <strong class="text-brand-white">9.26&times;–26.87&times;</strong> higher physical Tegra INA3221 measured_j CpJ.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="glass-card spotlight-card p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="ev-badge ev-measured">927.30 &micro;J measured_j</span>
+            <span class="font-mono text-[10px] text-brand-gray">Jetson Thor</span>
+          </div>
+          <div class="font-display text-3xl md:text-4xl font-bold text-brand-amber tracking-tight">75,374&times;</div>
+          <div class="font-display text-sm font-semibold text-brand-white mt-0.5">Lower Attested Handoff Energy</div>
+        </div>
+        <p class="font-mono text-[11px] text-brand-slate leading-relaxed mt-3 pt-3 border-t border-brand-border">
+          927.30 &micro;J VDD_CPU_SOC_MSS measured_j (1 KiB verify) &amp; <strong class="text-brand-white">78,855&times;</strong> lower latency for binary BLAKE3 + Ed25519 channels vs. natural-language multi-agent prose relays.
+        </p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="glass-card spotlight-card p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="ev-badge ev-reported">reported_j + F_NOCACHE</span>
+            <span class="font-mono text-[10px] text-brand-gray">C(z) = 1</span>
+          </div>
+          <div class="font-display text-3xl md:text-4xl font-bold text-brand-emerald tracking-tight">0.00%</div>
+          <div class="font-display text-sm font-semibold text-brand-white mt-0.5">Broken Commits Admitted</div>
+        </div>
+        <p class="font-mono text-[11px] text-brand-slate leading-relaxed mt-3 pt-3 border-t border-brand-border">
+          Verified across CTA-E2 (59/60), 48-task MoL study (91.67%), BigCodeBench v0.1.3 (90.62%), 40/40 H15-Iterative &rarr; 1.77 &micro;J DNULLMM1 Gear-0 replay, &amp; 970 MB RAM on 34.66B Sparse-MoE.
+        </p>
+      </div>
+    </div>
+
+    <!-- Companion Study Guide Routes -->
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-xs text-brand-gray">
+      <span>Companion Study Chapters:</span>
+      <a href="/rungs" class="text-brand-amber hover:underline no-underline">/rungs (Complete 9-Rung Guide &amp; Seminar Notes)</a>
+      <span aria-hidden="true">&middot;</span>
+      <a href="/forecast" class="text-brand-cyan hover:underline no-underline">/forecast (1950–2026 AI Ratchet &amp; 6-Kernel Proof Audit)</a>
+      <span aria-hidden="true">&middot;</span>
+      <a href="/ecosystem" class="text-brand-cyan hover:underline no-underline">/ecosystem (Open Papers, Interactive Labs &amp; TV/Radio)</a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" aria-hidden="true" />
+
+<!-- ═══ SECTION I (#rungs): THE 9-RUNG COMPUTER INTELLIGENCE AVALANCHE ═══ -->
+<section id="rungs" class="max-w-7xl mx-auto px-6 py-20 scroll-mt-20">
+  <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10" data-reveal>
+    <div class="max-w-3xl">
+      <p class="section-label mb-3">Chapter I &middot; The 9-Rung Computer Intelligence Avalanche</p>
+      <h2 class="font-display text-3xl sm:text-5xl font-bold text-brand-white tracking-tight">
+        Why stateless tool loops stall at <span class="text-brand-rose">Rung 5</span>&mdash;and how compilation unlocks <span class="text-brand-cyan">Rungs 6–9</span>.
+      </h2>
+      <p class="reg-visionary font-body text-brand-slate text-base md:text-lg leading-relaxed mt-4">
+        Rungs 1 through 5 (Search, Generation, Reasoning, Communication, Tool Use) dramatically expanded what single-turn inference can do, yet remain stateless: each session wakes cold (&Delta;<em>T</em> &approx; 1), re-pays full floating-point compute on familiar patterns, and compounds errors across unverified prose handoffs. Crossing <strong class="text-brand-white">The Compilation Threshold</strong> converts verified experience into low-energy persistent substrates.
+      </p>
+      <p class="reg-scientist font-mono text-xs sm:text-sm text-brand-light leading-relaxed mt-3">
+        Formalized across <code class="code-chip">Avalanche/QuorumRatchet.lean</code>, <code class="code-chip">EnzymaticSynthesis.lean</code>, and <code class="code-chip">LutAdapt/Cascade.lean</code>: Phase 1 operates at &Delta;T &approx; 1 &le; &Delta;T*; Phase 2 satisfies &Delta;T &gt; E_compile / (p₀&prime;(c_wake &minus; c₀)) with C(z) = 1 (0.00% broken commits).
+      </p>
+    </div>
+    <a href="/rungs" class="shrink-0 inline-flex items-center gap-2 font-mono text-xs text-brand-amber border border-brand-amber/35 px-4 py-2.5 rounded-lg no-underline hover:bg-brand-amber/10 transition-colors">
+      Read Full /rungs Chapter &amp; Seminar Notes &rarr;
+    </a>
+  </div>
+
+  <NineRungRatchet />
+</section>
+
+<hr class="section-divider" aria-hidden="true" />
+
+<!-- ═══ SECTION II (#science): WHAT AN EVOLUTIONARY / COMPUTATIONAL RATCHET IS ═══ -->
+<section id="science" class="max-w-7xl mx-auto px-6 py-20 scroll-mt-20 space-y-14">
+  <div class="max-w-4xl" data-reveal>
+    <p class="section-label-cyan mb-3">Chapter II &middot; What a Ratchet Is (3.8 Gyr Biology CL01–CL24 + 76 Years AI AI01–AI38)</p>
+    <h2 class="font-display text-3xl sm:text-5xl font-bold text-brand-white tracking-tight">
+      One three-phase operator connects <span class="text-brand-amber">living cells</span>, <span class="text-brand-cyan">human culture</span>, and <span class="text-brand-emerald">digital verification</span>.
+    </h2>
+    <p class="reg-visionary font-body text-brand-slate text-base md:text-lg leading-relaxed mt-4">
+      In mechanical engineering and evolutionary biology, a <strong class="text-brand-white">ratchet</strong> is a mechanism that permits forward motion while preventing backward slip. Across 3.8 billion years of living systems (<code class="code-chip">CL01–CL24</code>) and 76 years of artificial intelligence (1950–2026, <code class="code-chip">AI01–AI38</code>), major jumps in collective capability repeatedly arose not from making isolated components larger, but from pairing an <strong class="text-brand-white">externalized signal</strong> with a <strong class="text-brand-cyan">selective threshold and verification gate</strong>.
+    </p>
+  </div>
+
+  <!-- Conserved Operator + CpJ Equations & Fig 02 SVG -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch" data-reveal>
+    <div class="lg:col-span-5 eq-block flex flex-col justify-center space-y-5">
+      <div>
+        <div class="font-mono text-[10.5px] uppercase tracking-[0.16em] text-brand-cyan mb-2 text-center">Conserved Avalanche Cycle Operator ([T])</div>
+        <p class="eq">
+          <span class="tuple">𝒞 = 𝒯 &compfn; 𝒢<sub>&theta;</sub> &compfn; ℰ</span>
+        </p>
+        <p class="font-mono text-xs text-brand-slate text-center leading-relaxed mt-2">
+          <span class="text-brand-amber">ℰ Externalize</span> (s<sub>i</sub> &rarr; m &isin; ℳ) &rarr;
+          <span class="text-brand-cyan">𝒢<sub>&theta;</sub> Threshold &amp; Gate</span> (&Sigma; w<sub>kj</sub> 𝕀[V<sub>j</sub>(m<sub>k</sub>)=1] &ge; &theta;<sub>j</sub>) &rarr;
+          <span class="text-brand-emerald">𝒯 Non-Regressing Ratchet</span> (Q(t+1) &ge; Q(t))
+        </p>
+      </div>
+      <div class="pt-4 border-t border-brand-border">
+        <div class="font-mono text-[10.5px] uppercase tracking-[0.16em] text-brand-amber mb-2 text-center">Cross-Substrate Efficiency Metric</div>
+        <p class="eq">
+          <span class="amber">CpJ</span> <span class="op">=</span> <span class="tuple">Q / (E<sub>compute</sub> + E<sub>comm</sub> + E<sub>idle</sub>)</span>
+        </p>
+        <p class="eq-caption">Verified Coherence Units per Joule &middot; CTA-T1..T23</p>
+      </div>
+    </div>
+
+    <figure class="lg:col-span-7 glass-card p-5 md:p-6 flex flex-col justify-between">
+      <svg
+        viewBox="0 0 680 250"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-full h-auto"
+        role="img"
+        aria-label="Fig 02: Conserved 3-phase operator Externalize E, Threshold and Gate Ingest G_theta, and Non-Regressing Ratchet T contrasted against unverified k-hop decay f^k."
+      >
+        <rect width="680" height="250" rx="8" fill="var(--svg-bg)" />
+        <text x="24" y="28" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="0.16em" fill="#00D4AA">FIG. 02 &middot; ANATOMY OF THE THREE-PHASE EXTERNALIZATION RATCHET</text>
+
+        <g transform="translate(24, 52)">
+          <rect width="186" height="122" rx="8" fill="var(--svg-panel)" stroke="#F59E0B" stroke-width="1.3" />
+          <text x="14" y="24" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#F59E0B">1 &middot; EXTERNALIZE (ℰ)</text>
+          <text x="14" y="46" font-family="Inter, sans-serif" font-size="11.5" fill="var(--svg-text)">Bounded tracer packet</text>
+          <text x="14" y="66" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; Bio: AHL / EV / cAMP</text>
+          <text x="14" y="83" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; Culture: Print / Git</text>
+          <text x="14" y="100" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#F59E0B">&bull; Digital: &Phi;_IR binary frame</text>
+        </g>
+
+        <line x1="212" y1="113" x2="244" y2="113" stroke="#F59E0B" stroke-width="1.8" stroke-dasharray="4 3" class="anim-flow" />
+
+        <g transform="translate(246, 52)">
+          <rect width="188" height="122" rx="8" fill="var(--svg-panel)" stroke="#00D4AA" stroke-width="1.5" />
+          <text x="14" y="24" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#00D4AA">2 &middot; THRESHOLD &amp; GATE (𝒢_θ)</text>
+          <text x="14" y="46" font-family="Inter, sans-serif" font-size="11.5" fill="var(--svg-text)">Selective admission</text>
+          <text x="14" y="66" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; Bio: Hill n_H&ge;2 &amp; SepJ</text>
+          <text x="14" y="83" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; Crypto: BLAKE3+Ed25519</text>
+          <text x="14" y="100" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#00D4AA">&bull; Gate: eventfd &amp; C(z)=1</text>
+        </g>
+
+        <line x1="436" y1="113" x2="468" y2="113" stroke="#00D4AA" stroke-width="1.8" stroke-dasharray="4 3" class="anim-flow" />
+
+        <g transform="translate(470, 52)">
+          <rect width="186" height="122" rx="8" fill="var(--svg-panel)" stroke="#10B981" stroke-width="1.5" />
+          <text x="14" y="24" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#10B981">3 &middot; RATCHET LOCK-IN (𝒯)</text>
+          <text x="14" y="46" font-family="Inter, sans-serif" font-size="11.5" fill="var(--svg-text)">Non-regressing memory</text>
+          <text x="14" y="66" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; Q(t+1) &ge; Q(t) (CTA-T5)</text>
+          <text x="14" y="83" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; 100% Gen-20 lock-in</text>
+          <text x="14" y="100" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#10B981">&bull; DNULLMM1 &amp; LUT6 pages</text>
+        </g>
+
+        <rect x="24" y="192" width="632" height="40" rx="6" fill="rgba(244,63,94,0.08)" stroke="rgba(244,63,94,0.32)" stroke-width="1" />
+        <text x="38" y="216" font-family="JetBrains Mono, monospace" font-size="10" fill="#FB7185">WITHOUT GATE V_j = 1 (CTA-T1..T2): k-hop error grows as err₀ + k&epsilon; and fidelity decays exponentially as f^k &rarr; AI Winters &amp; Relay Drift</text>
+      </svg>
+      <figcaption class="mt-3 pt-2.5 border-t border-brand-border font-mono text-[10.5px] text-brand-gray uppercase tracking-wider">
+        <span class="text-brand-cyan mr-2">Fig 02</span>Sub-threshold arrivals (A<sub>j</sub> &lt; &theta;<sub>j</sub>) and unverified payloads (V<sub>j</sub> = 0) trigger zero downstream state transitions (CTA-T7, CTA-T17).
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- 3.8 Gyr Biological & Cultural Pre-Registered Models (CA-M1 to CA-M5) -->
+  <div class="space-y-4" data-reveal>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <h3 class="font-display text-xl md:text-2xl font-bold text-brand-white">
+        Five Biological &amp; Cultural Transitions (CL01–CL24 &middot; Pre-Registered Models CA-M1 to CA-M5, seed = 20261123)
+      </h3>
+      <span class="font-mono text-xs text-brand-gray">board_metered = false on biophysical simulations ([M])</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      {BIO_MODELS.map((m) => (
+        <div class="glass-card spotlight-card p-4 flex flex-col justify-between space-y-3">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-1 font-mono text-[10px]">
+              <span class="text-brand-amber font-bold">{m.id} &middot; {m.ladderSpan}</span>
+              <span class="text-brand-gray">{m.era}</span>
+            </div>
+            <h4 class="font-display text-sm font-bold text-brand-white leading-snug">{m.system}</h4>
+            <div class="font-display text-lg font-bold text-brand-cyan">{m.metricHeadline}</div>
+            <p class="reg-visionary font-body text-xs text-brand-slate leading-relaxed">{m.mechanism}</p>
+            <p class="reg-scientist font-mono text-[11px] text-brand-light leading-snug bg-brand-dark/50 p-2.5 rounded border border-brand-border">{m.metricDetail}</p>
+          </div>
+          <div class="pt-2.5 border-t border-brand-border space-y-1">
+            <div class="font-mono text-[10px] text-brand-emerald">{m.evidenceTag}</div>
+            <p class="font-body text-[11px] text-brand-gray leading-snug"><strong class="text-brand-light">Computational parallel:</strong> {m.computationalParallel}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Mechanistic Diagnosis of AI Winters (1969/1973, 1987, 2026) -->
+  <div class="space-y-4" data-reveal>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <h3 class="font-display text-xl md:text-2xl font-bold text-brand-white">
+        How the Same Operator Diagnoses AI Winters (1950–2026 &middot; AI01–AI38)
+      </h3>
+      <a href="/forecast#history" class="font-mono text-xs text-brand-cyan hover:underline no-underline">Study all 38 historical milestones &rarr;</a>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      {AI_WINTER_DIAGNOSES.map((w) => (
+        <div class="glass-card p-5 border-brand-rose/25 space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-mono text-xs font-bold text-brand-rose">{w.year}</span>
+            <span class="ev-badge ev-kill">{w.brokenOperator}</span>
+          </div>
+          <h4 class="font-display text-base font-bold text-brand-white">{w.title}</h4>
+          <p class="reg-visionary font-body text-xs sm:text-sm text-brand-light leading-relaxed">{w.plainTakeaway}</p>
+          <p class="reg-scientist font-mono text-[11px] text-brand-slate leading-relaxed bg-brand-dark/55 p-3 rounded border border-brand-border">{w.scientistMechanism}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Plain Language <-> Formal Science Translation Matrix (6 Rows) -->
+  <div class="space-y-4" data-reveal>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <h3 class="font-display text-xl md:text-2xl font-bold text-brand-white">
+        Plain Language &harr; Formal Science Translation Guide
+      </h3>
+      <span class="font-mono text-xs text-brand-gray">6 core theorems &amp; measurements explained in two registers</span>
+    </div>
+    <div class="glass-card overflow-x-auto">
+      <table class="w-full border-collapse text-left min-w-[760px]">
+        <thead>
+          <tr class="border-b border-brand-border bg-brand-white/[0.02] font-mono text-[10.5px] uppercase tracking-wider">
+            <th class="py-3.5 px-4 text-brand-gray"># &middot; Concept</th>
+            <th class="py-3.5 px-4 text-brand-cyan reg-scientist">Formal Science (Equation &amp; Empirical Measurement)</th>
+            <th class="py-3.5 px-4 text-brand-amber reg-visionary">Plain-Language Explanation</th>
+            <th class="py-3.5 px-4 text-brand-emerald reg-scientist">Proof / Study Anchor</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-brand-border text-xs">
+          {TRANSLATION_MATRIX.map((row) => (
+            <tr class="hover:bg-brand-white/[0.02] transition-colors align-top">
+              <td class="py-3.5 px-4 whitespace-nowrap">
+                <span class="font-mono text-brand-amber mr-1.5">{row.idx}</span>
+                <span class="font-display font-semibold text-brand-white">{row.domain}</span>
+              </td>
+              <td class="py-3.5 px-4 font-mono text-[11.5px] text-brand-light leading-relaxed reg-scientist">
+                {row.scientistStatement}
+              </td>
+              <td class="py-3.5 px-4 font-body text-[13px] text-brand-white leading-relaxed reg-visionary">
+                {row.plainStatement}
+              </td>
+              <td class="py-3.5 px-4 font-mono text-[11px] text-brand-emerald whitespace-nowrap reg-scientist">
+                {row.anchor}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" aria-hidden="true" />
+
+<!-- ═══ SECTION III (#forcing): THE THERMODYNAMIC FORCING FUNCTION, DES-10, & SIMULATOR ═══ -->
+<section id="forcing" class="max-w-7xl mx-auto px-6 py-20 scroll-mt-20 space-y-14">
+  <div class="max-w-4xl" data-reveal>
+    <p class="section-label mb-3">Chapter III &middot; The Thermodynamic Forcing Function &amp; Ten-Paradigm Synthesis (DES-10)</p>
+    <h2 class="font-display text-3xl sm:text-5xl font-bold text-brand-white tracking-tight">
+      Why physics forces repeatable procedures to <span class="text-brand-cyan">compile downward</span>.
+    </h2>
+    <p class="reg-visionary font-body text-brand-slate text-base md:text-lg leading-relaxed mt-4">
+      Thermodynamic cost and multi-hop error compounding act as a natural <strong class="text-brand-white">forcing function</strong>: any system that keeps re-solving recurring structures with 15–100+ J neural calls is outcompeted on energy and reliability by one that verifies novel solutions once and compiles them into millijoule rules, microjoule lookup tables, and picojoule Boolean circuits. Similarly, coupling all ten AI research paradigms via sub-millijoule <strong class="text-brand-cyan">Digital Enzymes</strong> (<code class="code-chip">DES-10</code>) overcomes the niche blind spots of every single paradigm in isolation.
+    </p>
+  </div>
+
+  <ForcingSimulator />
+
+  <!-- 10 Siloed AI Paradigms vs. DES-10 Hardware Benchmark Table (CTA-E5) -->
+  <div class="space-y-4" data-reveal>
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-3">
+      <div>
+        <h3 class="font-display text-xl md:text-2xl font-bold text-brand-white">
+          Experiment CTA-E5: Ten Isolated AI Paradigms (C1–C10) vs. DES-10 (100 Tasks &times; 5 Regimes)
+        </h3>
+        <p class="font-mono text-[11px] text-brand-gray mt-1">
+          Strict telemetry separation: Jetson AGX Thor physical TI INA3221 (VDD_CPU_SOC_MSS) &amp; INA238 (VIN) <strong class="text-brand-cyan">measured_j</strong> vs. Intel Core i9-13900H RAPL <strong class="text-brand-indigo">reported_j</strong> (never summed).
+        </p>
+      </div>
+      <span class="ev-badge ev-measured">board_metered = true on Jetson AGX Thor</span>
+    </div>
+
+    <div class="glass-card overflow-x-auto">
+      <table class="w-full border-collapse text-left min-w-[980px]">
+        <thead>
+          <tr class="border-b border-brand-border bg-brand-white/[0.02] font-mono text-[10.5px] uppercase tracking-wider text-brand-gray">
+            <th class="py-3 px-4">Paradigm (C1–C10 &amp; DES-10)</th>
+            <th class="py-3 px-4">Functional Role</th>
+            <th class="py-3 px-4">Verified Pass (R1/R2/R3/R4/R5)</th>
+            <th class="py-3 px-4">False Commits</th>
+            <th class="py-3 px-4 text-brand-cyan">Jetson Thor measured_j &amp; CpJ</th>
+            <th class="py-3 px-4 text-brand-indigo">i9-13900H reported_j &amp; CpJ</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-brand-border text-xs">
+          {TEN_CAMPS.map((c) => (
+            <tr class:list={[
+              "transition-colors align-top",
+              c.isComposite
+                ? "bg-brand-cyan/[0.09] font-semibold"
+                : "hover:bg-brand-white/[0.02]"
+            ]}>
+              <td class="py-3 px-4">
+                <div class="flex items-center gap-2">
+                  <span class:list={["font-mono font-bold", c.isComposite ? "text-brand-cyan" : "text-brand-amber"]}>{c.id}</span>
+                  <span class="font-display text-brand-white">{c.name}</span>
+                </div>
+                <p class="reg-visionary font-body text-[11px] text-brand-gray mt-1">{c.nicheSuperpower}</p>
+              </td>
+              <td class="py-3 px-4 font-mono text-[11px] text-brand-light">{c.tierRole}</td>
+              <td class="py-3 px-4">
+                <div class="flex items-center gap-2">
+                  <span class:list={["font-mono text-sm font-bold", c.isComposite ? "text-brand-cyan" : "text-brand-white"]}>{c.soloPassPct}%</span>
+                  <span class="font-mono text-[10.5px] text-brand-gray">({c.regimeBreakdown})</span>
+                </div>
+                <div class="w-28 h-1.5 rounded-full bg-brand-white/10 mt-1.5 overflow-hidden">
+                  <div class:list={["h-full rounded-full", c.isComposite ? "bg-brand-cyan" : "bg-brand-amber"]} style={`width: ${c.soloPassPct}%`}></div>
+                </div>
+              </td>
+              <td class="py-3 px-4 font-mono">
+                <span class={c.falseCommitPct === 0 ? "text-brand-emerald" : c.falseCommitPct <= 1 ? "text-brand-cyan" : "text-brand-rose"}>
+                  {c.falseCommitPct}%
+                </span>
+              </td>
+              <td class="py-3 px-4 font-mono text-[11px]">
+                <div class="text-brand-white">{c.thorMeasuredJ}</div>
+                <div class="text-brand-cyan">{c.thorCpJ} tasks/J</div>
+              </td>
+              <td class="py-3 px-4 font-mono text-[11px]">
+                <div class="text-brand-light">{c.i9ReportedJ}</div>
+                <div class="text-brand-indigo">{c.i9CpJ} tasks/J</div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" aria-hidden="true" />
+
+<!-- ═══ SECTION IV (#forecast): FALSIFIABLE SCIENTIFIC FORECASTING METHODOLOGY ═══ -->
+<section id="forecast" class="max-w-7xl mx-auto px-6 py-20 scroll-mt-20 space-y-10">
+  <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6" data-reveal>
+    <div class="max-w-3xl">
+      <p class="section-label-cyan mb-3">Chapter IV &middot; Falsifiable Forecasting Methodology (Month / Quarter / Year / Decade, HM01–HD04)</p>
+      <h2 class="font-display text-3xl sm:text-5xl font-bold text-brand-white tracking-tight">
+        How to test whether a capability is crossing the <span class="text-brand-emerald">compilation threshold</span>.
+      </h2>
+      <p class="font-body text-brand-slate text-base md:text-lg leading-relaxed mt-4">
+        Scientific forecasting requires explicit disproof conditions rather than open-ended narrative predictions. Below are three diagnostic tests anyone can apply to evaluate an AI system, followed by 18 falsifiable hypotheses spanning <strong class="text-brand-white">Months 1–3</strong>, <strong class="text-brand-white">Quarters 1–4</strong>, <strong class="text-brand-white">Years 1–5</strong>, and <strong class="text-brand-white">Decade 2026–2036</strong>.
+      </p>
+    </div>
+    <a href="/forecast" class="shrink-0 inline-flex items-center gap-2 font-mono text-xs text-brand-cyan border border-brand-cyan/35 px-4 py-2.5 rounded-lg no-underline hover:bg-brand-cyan/10 transition-colors">
+      Full /forecast + 38-Yr History + 6-Kernel Audit &rarr;
+    </a>
+  </div>
+
+  <!-- 3-Step Diagnostic Checklist for Learners & Researchers -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4" data-reveal>
+    <div class="glass-card p-5 space-y-2 border-brand-amber/25">
+      <div class="font-mono text-[10.5px] uppercase tracking-wider text-brand-amber font-semibold">Test 01 &middot; Soundness Gate Check</div>
+      <h3 class="font-display text-base font-bold text-brand-white">Does an independent check gate commits?</h3>
+      <p class="font-body text-xs text-brand-slate leading-relaxed">
+        Ask whether candidate outputs pass a deterministic specification, compiler, or held-out behavioral check (<code class="code-chip">C(z) = 1</code>) before mutating shared state&mdash;or whether an unverified LLM-as-judge admits subtle regressions (<em>f</em><sup><em>k</em></sup> decay).
+      </p>
+    </div>
+    <div class="glass-card p-5 space-y-2 border-brand-cyan/30">
+      <div class="font-mono text-[10.5px] uppercase tracking-wider text-brand-cyan font-semibold">Test 02 &middot; Second-Arrival Energy Ratio</div>
+      <h3 class="font-display text-base font-bold text-brand-white">Does the 100th repeat cost microjoules or joules?</h3>
+      <p class="font-body text-xs text-brand-slate leading-relaxed">
+        Measure hardware energy on the 1st vs. 100th alpha-renamed arrival of a solved structural class. Systems below the threshold pay ~1.0&times; energy every time; compiled systems drop 10&sup3;&times;–10&sup9;&times; once &Delta;<em>T</em> &gt; &Delta;<em>T</em>*.
+      </p>
+    </div>
+    <div class="glass-card p-5 space-y-2 border-brand-emerald/30">
+      <div class="font-mono text-[10.5px] uppercase tracking-wider text-brand-emerald font-semibold">Test 03 &middot; Explicit Kill Criterion</div>
+      <h3 class="font-display text-base font-bold text-brand-white">What measurement would refute the claim?</h3>
+      <p class="font-body text-xs text-brand-slate leading-relaxed">
+        Every valid engineering or clinical forecast states a quantitative threshold (Falsifiers 1–6, <em>h</em> &le; <em>h</em><sub>min</sub>, or sham-controlled RCT <em>p</em> &lt; 0.01) that immediately invalidates the claim if unmet.
+      </p>
+    </div>
+  </div>
+
+  <ForecastTable />
+</section>
+
+<hr class="section-divider" aria-hidden="true" />
+
+<!-- ═══ SECTION V (#ecosystem): OPEN RESEARCH, INTERACTIVE LABS & MEDIA ═══ -->
+<section id="ecosystem" class="max-w-7xl mx-auto px-6 py-20 scroll-mt-20 space-y-14">
+  <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6" data-reveal>
+    <div class="max-w-3xl">
+      <p class="section-label mb-3">Chapter V &middot; Open Educational Resources, Primary Papers &amp; Sister Reference Maps</p>
+      <h2 class="font-display text-3xl sm:text-5xl font-bold text-brand-white tracking-tight">
+        Continue learning across <span class="text-brand-cyan">papers</span>, <span class="text-brand-amber">interactive labs</span>, TV, and Radio.
+      </h2>
+      <p class="font-body text-brand-slate text-base md:text-lg leading-relaxed mt-4">
+        Every equation, simulation, and hardware trace summarized on this site is documented in full open-access monographs, interactive browser laboratories, short visual explainers, and sister teaching references.
+      </p>
+    </div>
+    <a href="/ecosystem" class="shrink-0 inline-flex items-center gap-2 font-mono text-xs text-brand-amber border border-brand-amber/35 px-4 py-2.5 rounded-lg no-underline hover:bg-brand-amber/10 transition-colors">
+      Explore Full /ecosystem Study Directory &rarr;
+    </a>
+  </div>
+
+  <!-- 3 Open Learning Modalities -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-5" data-reveal>
+    {LEARNING_MODALITIES.map((m) => (
+      <div class:list={[
+        "glass-card spotlight-card p-6 flex flex-col justify-between space-y-4",
+        m.accent === 'amber' ? "border-brand-amber/30" : m.accent === 'cyan' ? "border-brand-cyan/35" : "border-brand-indigo/35"
+      ]}>
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between gap-2 font-mono text-[10.5px] uppercase tracking-wider">
+            <span class={m.accent === 'amber' ? "text-brand-amber font-bold" : m.accent === 'cyan' ? "text-brand-cyan font-bold" : "text-brand-indigo font-bold"}>{m.kind}</span>
+            <span class="text-brand-gray">{m.scope}</span>
+          </div>
+          <a href={m.url} class="block font-display text-xl font-bold text-brand-white hover:text-brand-cyan no-underline transition-colors">
+            {m.title} &nearr;
+          </a>
+          <div class="font-mono text-xs text-brand-light">{m.subtitle}</div>
+          <p class="font-body text-sm text-brand-slate leading-relaxed">{m.description}</p>
+        </div>
+        <ul class="space-y-1.5 pt-3 border-t border-brand-border font-mono text-[11px] text-brand-light">
+          {m.highlights.map((h) => (
+            <li class="flex items-start gap-2">
+              <span class="text-brand-cyan mt-0.5">&bull;</span>
+              <span>{h}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <!-- Sister Open Reference Monographs & TV/Radio Explainers -->
+  <div class="space-y-4" data-reveal>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <h3 class="font-display text-xl md:text-2xl font-bold text-brand-white">
+        Sister Periodic-Stack Educational Reference Maps
+      </h3>
+      <div class="flex items-center gap-4 font-mono text-xs">
+        <a href="https://research.openie.dev/tv/?channel=avalanche" class="text-brand-amber no-underline hover:underline">&#9654; Research TV</a>
+        <a href="https://research.openie.dev/radio/?desk=avalanche" class="text-brand-cyan no-underline hover:underline">&#9673; Research Radio</a>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {SISTER_REFERENCES.map((s) => (
+        <div class="glass-card spotlight-card p-5 flex flex-col justify-between space-y-4">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class:list={[
+                "font-mono text-[10.5px] px-2 py-0.5 rounded border font-semibold",
+                s.phase === 1
+                  ? "text-brand-amber border-brand-amber/35 bg-brand-amber/10"
+                  : "text-brand-cyan border-brand-cyan/35 bg-brand-cyan/10"
+              ]}>
+                {s.rungCoord}
+              </span>
+              <span class="font-mono text-[10px] uppercase tracking-wider text-brand-gray">{s.topicArea}</span>
+            </div>
+
+            <div>
+              <a href={s.url} class="font-display text-lg font-bold text-brand-white hover:text-brand-cyan no-underline transition-colors">
+                {s.name} <span class="font-mono text-xs font-normal text-brand-gray">({s.domain}) &nearr;</span>
+              </a>
+              {s.altDomain && s.altUrl && (
+                <div class="mt-0.5">
+                  <a href={s.altUrl} class="font-mono text-[11px] text-brand-amber hover:underline no-underline">
+                    Also accessible via {s.altDomain} &nearr;
+                  </a>
+                </div>
+              )}
+            </div>
+
+            <div class="reg-scientist font-mono text-[11px] text-brand-cyan bg-brand-dark/55 px-2.5 py-1.5 rounded border border-brand-border overflow-x-auto">
+              {s.formalSignature}
+            </div>
+
+            <p class="font-body text-xs text-brand-slate leading-relaxed">
+              {s.summary}
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-brand-border flex items-center justify-between gap-2">
+            <a href={s.tvUrl} class="inline-flex items-center gap-1 font-mono text-[11px] text-brand-amber hover:text-brand-gold no-underline transition-colors">
+              <span aria-hidden="true">&#9654;</span> Watch Explainer
+            </a>
+            <a href={s.radioUrl} class="inline-flex items-center gap-1 font-mono text-[11px] text-brand-cyan hover:text-brand-teal no-underline transition-colors">
+              <span aria-hidden="true">&#9673;</span> Audio Deep-Dive
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+</Layout>

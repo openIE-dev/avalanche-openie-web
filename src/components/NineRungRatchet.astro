@@ -1,0 +1,387 @@
+---
+import { NINE_RUNGS, COMPILATION_THRESHOLD } from '../data/rungs';
+---
+
+<div class="space-y-8">
+  <!-- Fig 01: Full-width custom SVG educational diagram -->
+  <figure class="glass-card p-4 sm:p-6 md:p-8" data-reveal>
+    <svg
+      id="nine-rung-svg"
+      viewBox="0 0 1120 560"
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-full h-auto select-none"
+      role="img"
+      aria-label="Fig 01: The 9-Rung Computer Intelligence Avalanche contrasting Phase 1 Stateless Ephemeral Inference (Rungs 1 to 5 in Amber) across The Compilation Threshold (Proposition 1 and C(z)=1) into Phase 2 Stateful Compiled Substrates (Rungs 6 to 9 in Crystalline Cyan)."
+    >
+      <defs>
+        <linearGradient id="phase1-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.09" />
+          <stop offset="100%" stop-color="#EA580C" stop-opacity="0.03" />
+        </linearGradient>
+        <linearGradient id="phase2-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00D4AA" stop-opacity="0.11" />
+          <stop offset="100%" stop-color="#10B981" stop-opacity="0.03" />
+        </linearGradient>
+        <linearGradient id="ratchet-path-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#F59E0B" />
+          <stop offset="52%" stop-color="#EA580C" />
+          <stop offset="58%" stop-color="#FFFFFF" />
+          <stop offset="66%" stop-color="#00D4AA" />
+          <stop offset="100%" stop-color="#10B981" />
+        </linearGradient>
+        <radialGradient id="threshold-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#00D4AA" stop-opacity="0.35" />
+          <stop offset="55%" stop-color="#F59E0B" stop-opacity="0.12" />
+          <stop offset="100%" stop-color="#00D4AA" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+
+      <rect width="1120" height="560" rx="10" fill="var(--svg-bg)" />
+
+      <!-- Subtle coordinate grid -->
+      <g stroke="var(--svg-grid)" stroke-width="1">
+        <line x1="60" y1="140" x2="1070" y2="140" />
+        <line x1="60" y1="220" x2="1070" y2="220" />
+        <line x1="60" y1="300" x2="1070" y2="300" />
+        <line x1="60" y1="380" x2="1070" y2="380" />
+        <line x1="60" y1="460" x2="1070" y2="460" />
+      </g>
+
+      <!-- Header -->
+      <g transform="translate(42, 36)">
+        <text x="0" y="0" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.18em" fill="#F59E0B">FIG. 01 &middot; THE 9-RUNG COMPUTER INTELLIGENCE AVALANCHE &amp; THE COMPILATION THRESHOLD</text>
+        <text x="0" y="28" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="23" fill="var(--svg-text)">From Stateless Floating-Point Inference (R1–R5) to Stateful Compiled Competence (R6–R9)</text>
+        <text x="0" y="48" font-family="Inter, sans-serif" font-size="12" fill="var(--svg-muted)">Select any rung node below to compare its plain-language intuition, formal mathematical equation, and empirical measurements.</text>
+      </g>
+
+      <!-- Phase 1 Zone Box (Left: R1–R5) -->
+      <rect x="42" y="104" width="548" height="392" rx="8" fill="url(#phase1-bg)" stroke="rgba(245,158,11,0.25)" stroke-width="1" />
+      <text x="60" y="128" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" letter-spacing="0.14em" fill="#F59E0B">PHASE 1 &middot; STATELESS EPHEMERAL INFERENCE (RUNGS 1–5)</text>
+      <text x="60" y="145" font-family="Inter, sans-serif" font-size="11" fill="var(--svg-muted)">&Delta;T &approx; 1 &le; &Delta;T* &middot; Full MAC cost re-paid on every repeat &middot; Unverified k-hop drift f^k</text>
+
+      <!-- Phase 2 Zone Box (Right: R6–R9) -->
+      <rect x="640" y="104" width="438" height="392" rx="8" fill="url(#phase2-bg)" stroke="rgba(0,212,170,0.3)" stroke-width="1" />
+      <text x="658" y="128" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" letter-spacing="0.14em" fill="#00D4AA">PHASE 2 &middot; STATEFUL COMPILED SUBSTRATES (RUNGS 6–9)</text>
+      <text x="658" y="145" font-family="Inter, sans-serif" font-size="11" fill="var(--svg-muted)">&Delta;T &gt; &Delta;T* &amp; C(z) = 1 &middot; 0.00% broken commits &middot; 1.77 &micro;J mmap &rarr; 15.59 est_mW LUT6</text>
+
+      <!-- THE COMPILATION THRESHOLD VERTICAL BARRIER -->
+      <ellipse cx="615" cy="300" rx="54" ry="185" fill="url(#threshold-glow)" />
+      <line x1="615" y1="98" x2="615" y2="504" stroke="#00D4AA" stroke-width="2" stroke-dasharray="6 4" class="anim-flow" />
+      <g transform="translate(615, 300)">
+        <rect x="-21" y="-128" width="42" height="256" rx="6" fill="var(--svg-panel)" stroke="#00D4AA" stroke-width="1.4" />
+        <text transform="rotate(-90)" x="0" y="-4" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="600" letter-spacing="0.14em" fill="var(--svg-text)" text-anchor="middle">COMPILATION THRESHOLD</text>
+        <text transform="rotate(-90)" x="0" y="10" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#00D4AA" text-anchor="middle">&Delta;T &gt; E_comp/(p₀&apos;&Delta;c) &middot; C(z)=1</text>
+      </g>
+
+      <!-- Ratchet trajectory -->
+      <path
+        d="M 95,445 L 198,412 L 302,374 L 406,336 L 518,292 L 692,235 L 795,196 L 898,162 L 1012,130"
+        fill="none"
+        stroke="url(#ratchet-path-grad)"
+        stroke-width="3"
+      />
+
+      <!-- Ephemeral Rung-5 Stall Ceiling Annotation -->
+      <line x1="465" y1="262" x2="582" y2="262" stroke="#F43F5E" stroke-width="1.4" stroke-dasharray="3 3" />
+      <text x="524" y="253" font-family="JetBrains Mono, monospace" font-size="9" fill="#F43F5E" text-anchor="middle">COLD-START CEILING (&Delta;T &approx; 1)</text>
+
+      <!-- 9 Interactive Rung Nodes -->
+      <g class="rung-svg-node cursor-pointer" data-rung-node="1" transform="translate(95, 445)">
+        <circle r="19" fill="var(--svg-panel)" stroke="#F59E0B" stroke-width="1.8" class="node-ring" />
+        <text y="4" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#F59E0B" text-anchor="middle">R1</text>
+        <text y="34" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="600" fill="var(--svg-text)" text-anchor="middle">Search</text>
+        <text y="48" font-family="JetBrains Mono, monospace" font-size="8.5" fill="var(--svg-dim)" text-anchor="middle">Access &darr;</text>
+      </g>
+
+      <g class="rung-svg-node cursor-pointer" data-rung-node="2" transform="translate(198, 412)">
+        <circle r="19" fill="var(--svg-panel)" stroke="#F59E0B" stroke-width="1.8" class="node-ring" />
+        <text y="4" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#F59E0B" text-anchor="middle">R2</text>
+        <text y="34" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="600" fill="var(--svg-text)" text-anchor="middle">Generation</text>
+        <text y="48" font-family="JetBrains Mono, monospace" font-size="8.5" fill="var(--svg-dim)" text-anchor="middle">Synthesis &darr;</text>
+      </g>
+
+      <g class="rung-svg-node cursor-pointer" data-rung-node="3" transform="translate(302, 374)">
+        <circle r="19" fill="var(--svg-panel)" stroke="#F59E0B" stroke-width="1.8" class="node-ring" />
+        <text y="4" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#F59E0B" text-anchor="middle">R3</text>
+        <text y="34" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="600" fill="var(--svg-text)" text-anchor="middle">Reasoning</text>
+        <text y="48" font-family="JetBrains Mono, monospace" font-size="8.5" fill="var(--svg-dim)" text-anchor="middle">&lt;think&gt; MACs</text>
+      </g>
+
+      <g class="rung-svg-node cursor-pointer" data-rung-node="4" transform="translate(406, 336)">
+        <circle r="19" fill="var(--svg-panel)" stroke="#F59E0B" stroke-width="1.8" class="node-ring" />
+        <text y="4" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#F59E0B" text-anchor="middle">R4</text>
+        <text y="34" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="600" fill="var(--svg-text)" text-anchor="middle">Comm</text>
+        <text y="48" font-family="JetBrains Mono, monospace" font-size="8.5" fill="var(--svg-dim)" text-anchor="middle">O(N&sup2;) &Phi;_IR</text>
+      </g>
+
+      <g class="rung-svg-node cursor-pointer" data-rung-node="5" transform="translate(518, 292)">
+        <circle r="26" fill="rgba(244,63,94,0.16)" class="pulse" />
+        <circle r="21" fill="var(--svg-panel)" stroke="#F43F5E" stroke-width="2.4" class="node-ring" />
+        <text y="4" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="#F43F5E" text-anchor="middle">R5</text>
+        <text y="36" font-family="Space Grotesk, sans-serif" font-size="12.5" font-weight="700" fill="#F43F5E" text-anchor="middle">Tool Use</text>
+        <text y="50" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#F59E0B" text-anchor="middle">BOTTLENECK</text>
+      </g>
+
+      <g class="rung-svg-node cursor-pointer" data-rung-node="6" transform="translate(692, 235)">
+        <circle r="19" fill="var(--svg-panel)" stroke="#00D4AA" stroke-width="1.8" class="node-ring" />
+        <text y="4" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#00D4AA" text-anchor="middle">R6</text>
+        <text y="34" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="600" fill="var(--svg-text)" text-anchor="middle">Immersion</text>
+        <text y="48" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#00D4AA" text-anchor="middle">0-Clock Sleep</text>
+      </g>
+
+      <g class="rung-svg-node cursor-pointer" data-rung-node="7" transform="translate(795, 196)">
+        <circle r="21" fill="var(--svg-panel)" stroke="#00D4AA" stroke-width="2.2" class="node-ring" />
+        <text y="4" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#00D4AA" text-anchor="middle">R7</text>
+        <text y="34" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="600" fill="var(--svg-text)" text-anchor="middle">Competence</text>
+        <text y="48" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#00D4AA" text-anchor="middle">0-FLOP LUT6</text>
+      </g>
+
+      <g class="rung-svg-node cursor-pointer" data-rung-node="8" transform="translate(898, 162)">
+        <circle r="19" fill="var(--svg-panel)" stroke="#00D4AA" stroke-width="1.8" class="node-ring" />
+        <text y="4" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#00D4AA" text-anchor="middle">R8</text>
+        <text y="34" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="600" fill="var(--svg-text)" text-anchor="middle">Ecology</text>
+        <text y="48" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#00D4AA" text-anchor="middle">DES-10 (98%)</text>
+      </g>
+
+      <g class="rung-svg-node cursor-pointer" data-rung-node="9" transform="translate(1012, 130)">
+        <circle r="21" fill="var(--svg-panel)" stroke="#10B981" stroke-width="2.2" class="node-ring" />
+        <text y="4" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#10B981" text-anchor="middle">R9</text>
+        <text y="34" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="600" fill="var(--svg-text)" text-anchor="middle">Economy</text>
+        <text y="48" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#10B981" text-anchor="middle">p_i/c_i &middot; CpJ &uarr;</text>
+      </g>
+
+      <!-- Bottom telemetry scale bar -->
+      <g transform="translate(42, 532)">
+        <text x="0" y="0" font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing="0.14em" fill="var(--svg-dim)">⟨ MARGINAL ENERGY: ~100 J EPHEMERAL RELAY  &rarr;  15 mJ KERNEL  &rarr;  1.77 &micro;J DNULLMM1  &rarr;  62.4 pJ est_j CE-GATED LUT6 ⟩</text>
+        <text x="1036" y="0" font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing="0.1em" fill="var(--svg-dim)" text-anchor="end">educational diagram</text>
+      </g>
+    </svg>
+    <figcaption class="mt-4 pt-3 border-t border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono text-[11px] text-brand-gray tracking-wider uppercase">
+      <span><span class="text-brand-amber mr-2">Fig 01</span>The 9-Rung Computer Intelligence Avalanche &amp; Proposition 1&rsquo;s Compilation Threshold.</span>
+      <span class="text-brand-cyan">Select R1–R9 below to study each rung &darr;</span>
+    </figcaption>
+  </figure>
+
+  <!-- Compilation Threshold Callout Strip -->
+  <div class="glass-card p-5 md:p-6 border-brand-cyan/30 bg-gradient-to-r from-brand-amber/[0.05] via-brand-cyan/[0.06] to-brand-emerald/[0.05]" data-reveal>
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div class="space-y-1.5 max-w-3xl">
+        <div class="font-mono text-[11px] tracking-[0.16em] uppercase text-brand-cyan">{COMPILATION_THRESHOLD.kicker}</div>
+        <p class="reg-visionary font-body text-sm text-brand-light leading-relaxed">{COMPILATION_THRESHOLD.plain}</p>
+        <p class="reg-scientist font-mono text-xs sm:text-[13px] text-brand-white bg-brand-dark/50 px-3 py-2 rounded border border-brand-border overflow-x-auto">{COMPILATION_THRESHOLD.equation}</p>
+      </div>
+      <div class="reg-scientist shrink-0 lg:max-w-xs text-xs font-mono text-brand-slate border-l-2 border-brand-cyan pl-3.5 space-y-1">
+        <div class="text-brand-cyan font-medium">{COMPILATION_THRESHOLD.leanAnchors}</div>
+        <div class="text-[11px] text-brand-gray leading-snug">{COMPILATION_THRESHOLD.receipt}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive 9-Rung Selector Buttons -->
+  <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Select one of the 9 Avalanche Rungs">
+    {NINE_RUNGS.map((r) => (
+      <button
+        type="button"
+        role="tab"
+        aria-selected={r.num === 5 ? "true" : "false"}
+        aria-controls={`rung-panel-${r.num}`}
+        id={`rung-tab-${r.num}`}
+        data-rung-btn={r.num}
+        class:list={[
+          "rung-tab-btn px-3.5 py-2 rounded-lg font-mono text-xs border transition-all cursor-pointer flex items-center gap-2",
+          r.num === 5
+            ? "active-rung border-brand-rose bg-brand-rose/15 text-brand-white shadow-sm"
+            : r.phase === 1
+              ? "border-brand-amber/25 bg-brand-amber/[0.04] text-brand-slate hover:text-brand-white hover:border-brand-amber/60"
+              : "border-brand-cyan/25 bg-brand-cyan/[0.04] text-brand-slate hover:text-brand-white hover:border-brand-cyan/60"
+        ]}
+      >
+        <span class={r.isBottleneck ? "text-brand-rose font-bold" : r.phase === 1 ? "text-brand-amber font-bold" : "text-brand-cyan font-bold"}>
+          {r.code}
+        </span>
+        <span>{r.name}</span>
+        {r.isBottleneck && (
+          <span class="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-brand-rose/20 text-brand-rose border border-brand-rose/40">Bottleneck</span>
+        )}
+      </button>
+    ))}
+  </div>
+
+  <!-- Interactive 9-Rung Inspector Panels -->
+  {NINE_RUNGS.map((r) => (
+    <div
+      id={`rung-panel-${r.num}`}
+      role="tabpanel"
+      aria-labelledby={`rung-tab-${r.num}`}
+      data-rung-panel={r.num}
+      class:list={[
+        "glass-card spotlight-card p-6 md:p-8 space-y-6",
+        r.num !== 5 && "hidden",
+        r.phase === 1 ? "phase-amber" : ""
+      ]}
+    >
+      <!-- Top Header -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-brand-border">
+        <div>
+          <div class="flex flex-wrap items-center gap-2.5 mb-2">
+            <span class:list={[
+              "font-mono text-xs px-2.5 py-0.5 rounded border font-semibold",
+              r.isBottleneck
+                ? "text-brand-rose border-brand-rose/40 bg-brand-rose/10"
+                : r.phase === 1
+                  ? "text-brand-amber border-brand-amber/40 bg-brand-amber/10"
+                  : "text-brand-cyan border-brand-cyan/40 bg-brand-cyan/10"
+            ]}>
+              Rung {r.num} &middot; {r.name}
+            </span>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-brand-gray">{r.phaseLabel}</span>
+            <span class:list={[
+              "ev-badge",
+              r.evidenceClass === 'measured' ? 'ev-measured' :
+              r.evidenceClass === 'reported' ? 'ev-reported' :
+              r.evidenceClass === 'est' ? 'ev-est' : 'ev-theorem'
+            ]}>
+              {r.evidenceBadge}
+            </span>
+          </div>
+          <h3 class="font-display text-2xl md:text-3xl font-bold text-brand-white tracking-tight">
+            {r.plainHeadline}
+          </h3>
+        </div>
+
+        <!-- Direct Educational Explainers (TV / Radio) -->
+        <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+          <a href={r.tvChannel} class="inline-flex items-center gap-1.5 font-mono text-xs text-brand-amber border border-brand-amber/35 px-3.5 py-2 rounded-lg no-underline hover:bg-brand-amber/12 transition-colors">
+            <span aria-hidden="true">&#9654;</span> TV Explainer
+          </a>
+          <a href={r.radioDesk} class="inline-flex items-center gap-1.5 font-mono text-xs text-brand-cyan border border-brand-cyan/35 px-3.5 py-2 rounded-lg no-underline hover:bg-brand-cyan/12 transition-colors">
+            <span aria-hidden="true">&#9673;</span> Radio Deep-Dive
+          </a>
+        </div>
+      </div>
+
+      <!-- Dual Register Body (Plain-Language Intuition + Formal Science) -->
+      <div class="reg-pair">
+        <!-- Plain-Language Column -->
+        <div class="reg-visionary space-y-4 rounded-xl p-5 border border-brand-amber/20 bg-brand-amber/[0.025]">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-[10px] tracking-[0.16em] uppercase text-brand-amber">Plain-Language Explanation &middot; Conceptual Intuition</span>
+            <span class="font-mono text-[11px] text-brand-gray">{r.collapsedCost}</span>
+          </div>
+          <p class="font-body text-sm md:text-[15px] text-brand-light leading-relaxed">
+            {r.plainBody}
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div class="p-3 rounded-lg bg-brand-dark/50 border border-brand-border">
+              <div class="font-mono text-[10px] uppercase tracking-wider text-brand-gray mb-1">Capability Unlocked</div>
+              <div class="font-body text-xs text-brand-white leading-snug">{r.whatUnlocked}</div>
+            </div>
+            <div class="p-3 rounded-lg bg-brand-dark/50 border border-brand-border">
+              <div class="font-mono text-[10px] uppercase tracking-wider text-brand-gray mb-1">Structural / Physical Limit</div>
+              <div class="font-body text-xs text-brand-white leading-snug">{r.structuralLimit}</div>
+            </div>
+          </div>
+          <p class="font-body text-xs text-brand-slate italic border-l-2 border-brand-amber pl-3">
+            {r.keyTakeaway}
+          </p>
+        </div>
+
+        <!-- Formal Science Column -->
+        <div class="reg-scientist space-y-4 rounded-xl p-5 border border-brand-cyan/25 bg-brand-cyan/[0.025]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-mono text-[10px] tracking-[0.16em] uppercase text-brand-cyan">Formal Science &middot; Equation &amp; Empirical Evidence</span>
+            <span class="font-mono text-[10.5px] text-brand-gray">{r.energyRegime}</span>
+          </div>
+          <div>
+            <div class="font-mono text-[10px] uppercase tracking-wider text-brand-gray mb-1">Mathematical Mechanism</div>
+            <div class="font-display text-sm font-semibold text-brand-white mb-2">{r.scientificLaw}</div>
+            <pre class="font-mono text-xs text-brand-cyan bg-brand-dark/70 p-3 rounded-lg border border-brand-border overflow-x-auto whitespace-pre-wrap">{r.equation}</pre>
+          </div>
+          <div>
+            <div class="font-mono text-[10px] uppercase tracking-wider text-brand-gray mb-1">Six-Kernel Lean 4.36.0 Theorem Anchor</div>
+            <div class="font-mono text-xs text-brand-emerald">{r.leanAnchors}</div>
+          </div>
+          <div class="p-3 rounded-lg bg-brand-dark/55 border border-brand-border">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-brand-amber mb-1">Pre-Registered Experimental / RTL Measurement</div>
+            <p class="font-body text-xs text-brand-light leading-relaxed">{r.empiricalFinding}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Further Study References Bar -->
+      <div class="pt-4 border-t border-brand-border flex flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-mono text-[10.5px] uppercase tracking-wider text-brand-gray mr-1">Further Study:</span>
+          {r.references.map((ref) => (
+            <a
+              href={ref.url}
+              class="font-mono text-xs text-brand-white bg-brand-white/[0.04] border border-brand-border px-3 py-1 rounded-md no-underline hover:border-brand-cyan hover:text-brand-cyan transition-colors"
+            >
+              {ref.label} &nearr;
+            </a>
+          ))}
+        </div>
+        <a href="/rungs" class="font-mono text-xs text-brand-amber hover:text-brand-gold no-underline">
+          Read complete /rungs guide &amp; 4-part seminar notes &rarr;
+        </a>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  function initNineRungInspector() {
+    const btns = document.querySelectorAll<HTMLButtonElement>('[data-rung-btn]');
+    const panels = document.querySelectorAll<HTMLElement>('[data-rung-panel]');
+    const svgNodes = document.querySelectorAll<SVGGElement>('[data-rung-node]');
+
+    function selectRung(targetNum: number) {
+      btns.forEach(btn => {
+        const n = Number(btn.getAttribute('data-rung-btn'));
+        const active = n === targetNum;
+        btn.setAttribute('aria-selected', String(active));
+        if (active) {
+          btn.classList.add('ring-2', n <= 5 ? 'ring-brand-amber' : 'ring-brand-cyan', 'text-brand-white');
+        } else {
+          btn.classList.remove('ring-2', 'ring-brand-amber', 'ring-brand-cyan');
+        }
+      });
+
+      panels.forEach(panel => {
+        const n = Number(panel.getAttribute('data-rung-panel'));
+        panel.classList.toggle('hidden', n !== targetNum);
+      });
+
+      svgNodes.forEach(node => {
+        const n = Number(node.getAttribute('data-rung-node'));
+        const ring = node.querySelector('.node-ring') as SVGCircleElement | null;
+        if (!ring) return;
+        if (n === targetNum) {
+          ring.setAttribute('stroke-width', '3.5');
+          node.style.filter = n <= 5 ? 'drop-shadow(0 0 8px rgba(245,158,11,0.65))' : 'drop-shadow(0 0 8px rgba(0,212,170,0.75))';
+        } else {
+          ring.setAttribute('stroke-width', n === 5 || n === 7 || n === 9 ? '2.2' : '1.8');
+          node.style.filter = '';
+        }
+      });
+    }
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectRung(Number(btn.getAttribute('data-rung-btn')));
+      });
+    });
+
+    svgNodes.forEach(node => {
+      node.addEventListener('click', () => {
+        const num = Number(node.getAttribute('data-rung-node'));
+        selectRung(num);
+        document.getElementById(`rung-panel-${num}`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+
+    selectRung(5);
+  }
+
+  initNineRungInspector();
+</script>

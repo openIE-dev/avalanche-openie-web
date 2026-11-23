@@ -1,0 +1,112 @@
+---
+import { HORIZON_MILESTONES } from '../data/forecast';
+---
+
+<div class="space-y-6">
+  <!-- Filter Tabs -->
+  <div class="flex flex-wrap items-center justify-between gap-4">
+    <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter Forecast Milestones by Horizon">
+      <button type="button" data-hz-filter="all" class="hz-tab-btn px-3.5 py-1.5 rounded-full font-mono text-xs border border-brand-cyan bg-brand-cyan/15 text-brand-white cursor-pointer transition-all">
+        All 18
+      </button>
+      <button type="button" data-hz-filter="month" class="hz-tab-btn px-3.5 py-1.5 rounded-full font-mono text-xs border border-brand-border bg-brand-white/[0.03] text-brand-slate hover:text-brand-white cursor-pointer transition-all">
+        Months 1–3 (HM01–HM04)
+      </button>
+      <button type="button" data-hz-filter="quarter" class="hz-tab-btn px-3.5 py-1.5 rounded-full font-mono text-xs border border-brand-border bg-brand-white/[0.03] text-brand-slate hover:text-brand-white cursor-pointer transition-all">
+        Quarters 1–4 (HQ01–HQ04)
+      </button>
+      <button type="button" data-hz-filter="year" class="hz-tab-btn px-3.5 py-1.5 rounded-full font-mono text-xs border border-brand-border bg-brand-white/[0.03] text-brand-slate hover:text-brand-white cursor-pointer transition-all">
+        Years 1–5 (HY01–HY06)
+      </button>
+      <button type="button" data-hz-filter="decade" class="hz-tab-btn px-3.5 py-1.5 rounded-full font-mono text-xs border border-brand-border bg-brand-white/[0.03] text-brand-slate hover:text-brand-white cursor-pointer transition-all">
+        Decade 2026–2036 (HD01–HD04)
+      </button>
+    </div>
+
+    <div class="font-mono text-[11px] text-brand-gray">
+      Theorem CTA-T43: <span class="text-brand-cyan">CpJ(Month) &lt; CpJ(Quarter) &lt; CpJ(Year) &lt; CpJ(Decade)</span>
+    </div>
+  </div>
+
+  <!-- Responsive Table -->
+  <div class="glass-card overflow-x-auto">
+    <table class="w-full border-collapse text-left min-w-[960px]">
+      <thead>
+        <tr class="border-b border-brand-border font-mono text-[10.5px] uppercase tracking-wider text-brand-gray bg-brand-white/[0.02]">
+          <th class="py-3.5 px-4">ID &amp; Window</th>
+          <th class="py-3.5 px-4">Milestone &amp; Bridged Camps</th>
+          <th class="py-3.5 px-4">Lean 4.36.0 Anchor</th>
+          <th class="py-3.5 px-4">Quantitative Gate Metric</th>
+          <th class="py-3.5 px-4 text-brand-rose">Explicit Red Falsifier / Kill Criterion</th>
+          <th class="py-3.5 px-4">Status</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-brand-border text-xs">
+        {HORIZON_MILESTONES.map((m) => (
+          <tr data-hz-row={m.bucket} class="hover:bg-brand-white/[0.02] transition-colors align-top">
+            <td class="py-3.5 px-4 whitespace-nowrap">
+              <div class="font-mono font-bold text-brand-white">{m.id}</div>
+              <div class="font-mono text-[11px] text-brand-gray mt-0.5">{m.windowLabel}</div>
+            </td>
+            <td class="py-3.5 px-4 max-w-[240px]">
+              <div class="font-display font-semibold text-brand-white text-[13px] leading-snug">{m.title}</div>
+              <div class="font-mono text-[10.5px] text-brand-cyan mt-1">Bridges: {m.bridgedCamps}</div>
+            </td>
+            <td class="py-3.5 px-4 max-w-[180px]">
+              <div class="font-mono text-[11px] text-brand-emerald leading-snug">{m.leanAnchor}</div>
+              <div class="font-body text-[11px] text-brand-gray mt-0.5">{m.mechanism}</div>
+            </td>
+            <td class="py-3.5 px-4 max-w-[250px] font-body text-brand-light leading-relaxed">
+              {m.gateMetric}
+            </td>
+            <td class="py-3.5 px-4 max-w-[250px]">
+              <div class="p-2 rounded bg-brand-rose/[0.06] border border-brand-rose/25 font-body text-[11.5px] text-brand-light leading-snug">
+                <span class="font-mono text-[10px] font-bold uppercase text-brand-rose mr-1">KILL IF:</span>
+                {m.killCriterion}
+              </div>
+            </td>
+            <td class="py-3.5 px-4 whitespace-nowrap">
+              <span class:list={[
+                "ev-badge",
+                m.statusKind === 'verified' ? 'ev-measured' :
+                m.statusKind === 'active' ? 'ev-est' :
+                m.statusKind === 'proof' ? 'ev-theorem' : 'ev-spec'
+              ]}>
+                {m.statusLabel}
+              </span>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  function initForecastFilter() {
+    const btns = document.querySelectorAll<HTMLButtonElement>('[data-hz-filter]');
+    const rows = document.querySelectorAll<HTMLTableRowElement>('[data-hz-row]');
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-hz-filter') || 'all';
+        btns.forEach(b => {
+          const active = b === btn;
+          b.classList.toggle('border-brand-cyan', active);
+          b.classList.toggle('bg-brand-cyan/15', active);
+          b.classList.toggle('text-brand-white', active);
+          b.classList.toggle('border-brand-border', !active);
+          b.classList.toggle('bg-brand-white/[0.03]', !active);
+          b.classList.toggle('text-brand-slate', !active);
+        });
+
+        rows.forEach(row => {
+          const bucket = row.getAttribute('data-hz-row');
+          row.classList.toggle('hidden', filter !== 'all' && bucket !== filter);
+        });
+      });
+    });
+  }
+
+  initForecastFilter();
+</script>

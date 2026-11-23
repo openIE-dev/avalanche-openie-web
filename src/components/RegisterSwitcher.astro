@@ -1,0 +1,24 @@
+---
+interface Props {
+  label?: string;
+  compact?: boolean;
+}
+const { label = "Explanation Mode", compact = false } = Astro.props;
+---
+
+<div class="inline-flex items-center gap-2" role="group" aria-label={`${label}: switch between Both, Plain Language, and Formal Science`}>
+  {!compact && (
+    <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-gray hidden sm:inline">View:</span>
+  )}
+  <div class="reg-pill-group">
+    <button type="button" class="reg-pill-btn" data-set-register="both" data-active="true" aria-pressed="true" title="Show Plain-Language intuition and Formal Science equations side by side">
+      Both
+    </button>
+    <button type="button" class="reg-pill-btn" data-set-register="visionary" data-active="false" aria-pressed="false" title="Plain-language conceptual intuition for learners and general readers">
+      Plain Language
+    </button>
+    <button type="button" class="reg-pill-btn" data-set-register="scientist" data-active="false" aria-pressed="false" title="Formal mathematical equations, Lean 4.36.0 theorems, and empirical measurements">
+      Formal Science
+    </button>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Privacy" description="Privacy policy for avalanche.openie.dev. Zero tracking, zero cookies, self-hosted fonts.">
+
+<article class="max-w-3xl mx-auto px-6 py-24">
+  <header class="mb-12 pb-8 border-b border-brand-border">
+    <p class="section-label mb-4">Privacy</p>
+    <h1 class="font-display text-[clamp(28px,4.5vw,44px)] font-bold text-brand-white tracking-tight mb-3">Privacy</h1>
+    <p class="font-mono text-[12px] text-brand-gray">Zero Analytics &middot; Zero Cookies &middot; Self-Hosted Fonts</p>
+  </header>
+
+  <div class="prose-data">
+    <h2>What we collect</h2>
+    <p>Nothing. <code>avalanche.openie.dev</code> is a static educational document. There are no user accounts, no analytics scripts, no telemetry beacons, and no cookies. All typography (<code>Inter</code>, <code>Space Grotesk</code>, and <code>JetBrains Mono</code>) is served directly from this origin so no third-party font CDN receives your IP address.</p>
+
+    <h2>Local browser preferences</h2>
+    <p>The Dark/Light theme toggle (<code>oe-theme</code>) and Plain-Language/Formal-Science explanation switcher (<code>oe-avalanche-register</code>) store your display preference exclusively in your own browser&rsquo;s <code>localStorage</code>; those values never leave your device.</p>
+
+    <h2>Standard HTTP logs</h2>
+    <p>The web server serving these static pages records standard short-retention operational HTTP logs solely to maintain availability and mitigate network abuse, never for profiling or commercial use.</p>
+
+    <h2>Contact</h2>
+    <p>For questions, write to <a href="mailto:contact@openie.dev" class="text-brand-amber">contact@openie.dev</a>.</p>
+  </div>
+</article>
+
+</Layout>

@@ -1,0 +1,192 @@
+---
+import Layout from '../layouts/Layout.astro';
+import RegisterSwitcher from '../components/RegisterSwitcher.astro';
+import { NINE_RUNGS, COMPILATION_THRESHOLD, LITERATURE_TRADITIONS, SEMINAR_MODULES } from '../data/rungs';
+---
+
+<Layout
+  title="The 9 Rungs Reference & Seminar Guide"
+  description="Complete encyclopedic educational reference for Rungs 1 through 9 of the Computer Intelligence Avalanche, Proposition 1's Compilation Threshold, four complementary research traditions, and a 4-part seminar teaching guide."
+>
+
+<div class="max-w-6xl mx-auto px-6 py-16 space-y-20">
+  <!-- Header -->
+  <header class="space-y-5 border-b border-brand-border pb-10">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <a href="/" class="font-mono text-xs text-brand-cyan no-underline hover:underline">&larr; Back to Avalanche Observatory</a>
+      <RegisterSwitcher label="Explanation Mode" />
+    </div>
+    <p class="section-label">Encyclopedic Study Reference &middot; Rungs 1 Through 9</p>
+    <h1 class="font-display text-4xl sm:text-6xl font-bold text-brand-white tracking-tight">
+      The 9-Rung Computer Intelligence Avalanche
+    </h1>
+    <p class="font-body text-brand-slate text-base md:text-lg max-w-3xl leading-relaxed">
+      A complete side-by-side reference contrasting <strong class="text-brand-white">Phase 1: Stateless Ephemeral Inference (Rungs 1–5)</strong> against <strong class="text-brand-cyan">Proposition 1&rsquo;s Compilation Threshold</strong> and <strong class="text-brand-white">Phase 2: Stateful Compiled Substrates (Rungs 6–9)</strong>, together with a synthesis of four external research traditions and a 4-module seminar guide.
+    </p>
+  </header>
+
+  <!-- All 9 Rungs Printed in Full Sequential Order (with Compilation Threshold Divider after R5) -->
+  <section class="space-y-8">
+    <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-white">
+      I &middot; Complete Rung-by-Rung Walkthrough (R1 &rarr; R9)
+    </h2>
+
+    {NINE_RUNGS.map((r) => (
+      <>
+        <article id={`rung-${r.num}`} class:list={[
+          "glass-card p-6 md:p-8 space-y-5 scroll-mt-24",
+          r.isBottleneck ? "border-brand-rose/40" : r.phase === 1 ? "border-brand-amber/25" : "border-brand-cyan/30"
+        ]}>
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-4 border-b border-brand-border">
+            <div>
+              <div class="flex flex-wrap items-center gap-2.5 mb-2">
+                <span class:list={[
+                  "font-mono text-xs px-2.5 py-0.5 rounded border font-bold",
+                  r.isBottleneck ? "text-brand-rose border-brand-rose/40 bg-brand-rose/10" :
+                  r.phase === 1 ? "text-brand-amber border-brand-amber/40 bg-brand-amber/10" :
+                  "text-brand-cyan border-brand-cyan/40 bg-brand-cyan/10"
+                ]}>
+                  Rung {r.num} &middot; {r.name}
+                </span>
+                <span class="font-mono text-[11px] uppercase tracking-wider text-brand-gray">{r.phaseLabel}</span>
+                <span class:list={[
+                  "ev-badge",
+                  r.evidenceClass === 'measured' ? 'ev-measured' :
+                  r.evidenceClass === 'reported' ? 'ev-reported' :
+                  r.evidenceClass === 'est' ? 'ev-est' : 'ev-theorem'
+                ]}>
+                  {r.evidenceBadge}
+                </span>
+              </div>
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-brand-white">{r.plainHeadline}</h3>
+            </div>
+            <div class="flex items-center gap-2.5 shrink-0">
+              <a href={r.tvChannel} class="font-mono text-xs text-brand-amber border border-brand-amber/35 px-3 py-1.5 rounded-md no-underline hover:bg-brand-amber/10">&#9654; TV</a>
+              <a href={r.radioDesk} class="font-mono text-xs text-brand-cyan border border-brand-cyan/35 px-3 py-1.5 rounded-md no-underline hover:bg-brand-cyan/10">&#9673; Radio</a>
+            </div>
+          </div>
+
+          <div class="reg-pair">
+            <div class="reg-visionary space-y-3 p-4 rounded-xl bg-brand-amber/[0.025] border border-brand-amber/20">
+              <div class="font-mono text-[10px] uppercase tracking-wider text-brand-amber">Plain-Language Explanation</div>
+              <p class="font-body text-sm text-brand-light leading-relaxed">{r.plainBody}</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div class="p-2.5 rounded bg-brand-dark/50 border border-brand-border">
+                  <div class="font-mono text-[10px] uppercase text-brand-gray">Capability Unlocked</div>
+                  <div class="font-body text-xs text-brand-white mt-0.5">{r.whatUnlocked}</div>
+                </div>
+                <div class="p-2.5 rounded bg-brand-dark/50 border border-brand-border">
+                  <div class="font-mono text-[10px] uppercase text-brand-gray">Structural Limit</div>
+                  <div class="font-body text-xs text-brand-white mt-0.5">{r.structuralLimit}</div>
+                </div>
+              </div>
+              <p class="font-body text-xs text-brand-slate italic border-l-2 border-brand-amber pl-3">{r.keyTakeaway}</p>
+            </div>
+
+            <div class="reg-scientist space-y-3 p-4 rounded-xl bg-brand-cyan/[0.025] border border-brand-cyan/25">
+              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-wider">
+                <span class="text-brand-cyan">Formal Mechanism &amp; Measurement</span>
+                <span class="text-brand-gray">{r.energyRegime}</span>
+              </div>
+              <div class="font-display text-sm font-semibold text-brand-white">{r.scientificLaw}</div>
+              <pre class="font-mono text-xs text-brand-cyan bg-brand-dark/70 p-3 rounded border border-brand-border overflow-x-auto whitespace-pre-wrap">{r.equation}</pre>
+              <div class="font-mono text-xs text-brand-emerald">{r.leanAnchors}</div>
+              <p class="font-body text-xs text-brand-light leading-relaxed bg-brand-dark/50 p-3 rounded border border-brand-border">{r.empiricalFinding}</p>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-brand-border flex flex-wrap items-center gap-2">
+            <span class="font-mono text-[10px] uppercase tracking-wider text-brand-gray">Open References:</span>
+            {r.references.map((ref) => (
+              <a href={ref.url} class="font-mono text-xs text-brand-light bg-brand-white/[0.04] border border-brand-border px-2.5 py-1 rounded no-underline hover:border-brand-cyan hover:text-brand-cyan">
+                {ref.label} &nearr;
+              </a>
+            ))}
+          </div>
+        </article>
+
+        {r.num === 5 && (
+          <div class="eq-block my-8 border-brand-cyan/40">
+            <div class="font-mono text-xs uppercase tracking-[0.18em] text-brand-cyan text-center mb-2">
+              &boxh;&boxh; THE COMPILATION THRESHOLD (PROPOSITION 1) &boxh;&boxh;
+            </div>
+            <p class="eq">{COMPILATION_THRESHOLD.equation}</p>
+            <p class="reg-visionary font-body text-sm text-brand-light text-center max-w-3xl mx-auto mt-3 leading-relaxed">
+              {COMPILATION_THRESHOLD.plain}
+            </p>
+            <p class="eq-caption">{COMPILATION_THRESHOLD.leanAnchors}</p>
+          </div>
+        )}
+      </>
+    ))}
+  </section>
+
+  <!-- Literature Synthesis of 4 External Research Traditions -->
+  <section class="space-y-6">
+    <div>
+      <p class="section-label-cyan mb-2">II &middot; Literature Synthesis</p>
+      <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-white">
+        Four Complementary Research Traditions Approaching the Threshold
+      </h2>
+      <p class="font-body text-brand-slate text-sm sm:text-base mt-2 max-w-3xl">
+        Four active areas of computer science and machine-learning research each establish an essential piece of downward compilation, while leaving complementary gaps when studied in isolation.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {LITERATURE_TRADITIONS.map((lt) => (
+        <div class="glass-card p-6 space-y-3">
+          <div class="font-mono text-xs text-brand-amber font-bold">{lt.tradition}</div>
+          <div class="font-mono text-[11px] text-brand-cyan">{lt.exemplars}</div>
+          <p class="font-body text-xs sm:text-sm text-brand-light leading-relaxed">
+            <strong class="text-brand-white">What it establishes:</strong> {lt.whatItEstablishes}
+          </p>
+          <p class="font-body text-xs sm:text-sm text-brand-slate leading-relaxed">
+            <strong class="text-brand-rose">Open gap in isolation:</strong> {lt.openGapInIsolation}
+          </p>
+          <p class="font-body text-xs sm:text-sm text-brand-light leading-relaxed pt-2 border-t border-brand-border">
+            <strong class="text-brand-emerald">How the pieces combine:</strong> {lt.howPiecesCombine}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 4-Part Seminar & Lecture Guide -->
+  <section class="space-y-6">
+    <div>
+      <p class="section-label mb-2">III &middot; Teaching &amp; Seminar Notes</p>
+      <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-white">
+        Four-Module Lecture Outline: &ldquo;The Compilation Threshold&rdquo;
+      </h2>
+      <p class="font-body text-brand-slate text-sm sm:text-base mt-2 max-w-3xl">
+        Structured notes for presenting the 9-Rung Computer Intelligence Avalanche in university seminars, reading groups, or engineering workshops (~65 minutes total).
+      </p>
+    </div>
+
+    <div class="space-y-5">
+      {SEMINAR_MODULES.map((m) => (
+        <div class="glass-card p-6 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-brand-border">
+            <div>
+              <span class="font-mono text-xs font-bold text-brand-amber mr-2">{m.part}</span>
+              <span class="font-display text-lg font-bold text-brand-white">{m.title}</span>
+            </div>
+            <span class="font-mono text-xs text-brand-gray">{m.readingTime}</span>
+          </div>
+          <div class="font-mono text-xs text-brand-cyan">Visual figure focus: {m.visualFocus}</div>
+          <div class="space-y-2.5 font-body text-sm text-brand-light leading-relaxed">
+            {m.coreNotes.map((p) => (
+              <p>{p}</p>
+            ))}
+          </div>
+          <div class="pt-3 border-t border-brand-border font-mono text-xs text-brand-emerald">
+            Formal &amp; empirical citation: {m.formalAnchor}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</div>
+
+</Layout>

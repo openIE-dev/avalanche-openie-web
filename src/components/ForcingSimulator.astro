@@ -1,0 +1,586 @@
+---
+import { FIVE_LOOPS } from '../data/science';
+---
+
+<div class="space-y-10">
+  <!-- 5-Loop Forcing Function SVG + Cards -->
+  <figure class="glass-card p-5 md:p-8" data-reveal>
+    <svg
+      viewBox="0 0 1100 280"
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-full h-auto"
+      role="img"
+      aria-label="Fig 03: The 5-Loop Downward Compilation Forcing Function wiring Loop 1 Phi_IR Bus, Loop 2 1-Pass Calibration, Loop 3 SSP + FormEBM-v3 Pre-Filter, Loop 4 Tier 3 to 0 Crystallization, and Loop 5 Dual-Rail Joule Ledger and h_min Auto-Pruning."
+    >
+      <rect width="1100" height="280" rx="10" fill="var(--svg-bg)" />
+      <text x="34" y="34" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.18em" fill="#00D4AA">FIG. 03 &middot; THE 5-LOOP CLOSED-LOOP FORCING FUNCTION (CTA-T32 TO CTA-T45)</text>
+      <text x="34" y="58" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="20" fill="var(--svg-text)">Self-Tightening Thermodynamic Ratchet: ~15 J Discovery &rarr; 15 mJ Rule &rarr; 1.77 &micro;J mmap &rarr; ~12 pJ est_j LUT6</text>
+
+      <!-- Connecting forward arrows -->
+      <g stroke="#00D4AA" stroke-width="1.6" stroke-dasharray="5 4" class="anim-flow">
+        <line x1="218" y1="142" x2="246" y2="142" />
+        <line x1="428" y1="142" x2="456" y2="142" />
+        <line x1="638" y1="142" x2="666" y2="142" />
+        <line x1="848" y1="142" x2="876" y2="142" />
+      </g>
+
+      <!-- Feedback eviction / update arc from Loop 5 back to Loop 2 -->
+      <path d="M 970,214 C 970,256 336,256 336,214" fill="none" stroke="#F59E0B" stroke-width="1.4" stroke-dasharray="4 4" />
+      <text x="653" y="264" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#F59E0B" text-anchor="middle">&larr; LOOP 5 FEEDBACK: ENERGY LEDGER &amp; AUTO-PRUNE SKILLS WITH h &le; h_min = E_comp / (N &middot; &Delta;c) (CTA-T45) &larr;</text>
+
+      <!-- Loop 1 -->
+      <g transform="translate(34, 84)">
+        <rect width="184" height="124" rx="8" fill="var(--svg-panel)" stroke="rgba(245,158,11,0.45)" stroke-width="1.3" />
+        <text x="14" y="24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#F59E0B">LOOP 1 &middot; ENVELOPE</text>
+        <text x="14" y="46" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="700" fill="var(--svg-text)">BLAKE3 + Ed25519</text>
+        <text x="14" y="64" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="700" fill="var(--svg-text)">&Phi;_IR Binary Bus</text>
+        <text x="14" y="88" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">927.30 &micro;J Thor shunt</text>
+        <text x="14" y="104" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#00D4AA">0 / 200 faults leaked</text>
+      </g>
+
+      <!-- Loop 2 -->
+      <g transform="translate(244, 84)">
+        <rect width="184" height="124" rx="8" fill="var(--svg-panel)" stroke="rgba(245,158,11,0.4)" stroke-width="1.3" />
+        <text x="14" y="24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#F59E0B">LOOP 2 &middot; CALIBRATE</text>
+        <text x="14" y="46" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="700" fill="var(--svg-text)">1-Pass Hardware</text>
+        <text x="14" y="64" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="700" fill="var(--svg-text)">cost_lut.json</text>
+        <text x="14" y="88" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">0 gradient epochs</text>
+        <text x="14" y="104" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#00D4AA">K &middot; m probe pass (T40)</text>
+      </g>
+
+      <!-- Loop 3 -->
+      <g transform="translate(454, 84)">
+        <rect width="184" height="124" rx="8" fill="var(--svg-panel)" stroke="rgba(0,212,170,0.45)" stroke-width="1.3" />
+        <text x="14" y="24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#00D4AA">LOOP 3 &middot; PRE-FILTER</text>
+        <text x="14" y="46" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="700" fill="var(--svg-text)">2.11 &micro;s SSP Flow +</text>
+        <text x="14" y="64" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="700" fill="var(--svg-text)">FormEBM-v3 Gate</text>
+        <text x="14" y="88" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">0.9437 shape AUROC</text>
+        <text x="14" y="104" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#00D4AA">0 empty eventfd polls</text>
+      </g>
+
+      <!-- Loop 4 -->
+      <g transform="translate(664, 84)">
+        <rect width="184" height="124" rx="8" fill="var(--svg-panel)" stroke="rgba(0,212,170,0.55)" stroke-width="1.5" />
+        <text x="14" y="24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#00D4AA">LOOP 4 &middot; COMPILE</text>
+        <text x="14" y="46" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="700" fill="var(--svg-text)">Tier 3 &rarr; 2 &rarr; 1 &rarr; 0</text>
+        <text x="14" y="64" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="700" fill="var(--svg-text)">Crystallizer</text>
+        <text x="14" y="88" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">DNULLMM1 &rarr; LUT6</text>
+        <text x="14" y="104" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#00D4AA">0.00% broken (T44)</text>
+      </g>
+
+      <!-- Loop 5 -->
+      <g transform="translate(874, 84)">
+        <rect width="192" height="124" rx="8" fill="var(--svg-panel)" stroke="rgba(16,185,129,0.55)" stroke-width="1.5" />
+        <text x="14" y="24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#10B981">LOOP 5 &middot; GOVERN</text>
+        <text x="14" y="46" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="700" fill="var(--svg-text)">Dual-Rail Ledger &amp;</text>
+        <text x="14" y="64" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="700" fill="var(--svg-text)">h_min Auto-Pruning</text>
+        <text x="14" y="88" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">measured &ne; reported</text>
+        <text x="14" y="104" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#10B981">CpJ(M)&lt;Q&lt;Y&lt;D (T43)</text>
+      </g>
+    </svg>
+  </figure>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4" data-reveal>
+    {FIVE_LOOPS.map((item) => (
+      <div class="glass-card spotlight-card p-4 flex flex-col justify-between space-y-3">
+        <div class="space-y-2">
+          <div class="font-mono text-[10.5px] uppercase tracking-wider text-brand-cyan font-semibold">{item.loop}</div>
+          <h4 class="font-display text-base font-bold text-brand-white leading-snug">{item.name}</h4>
+          <p class="reg-visionary font-body text-xs text-brand-slate leading-relaxed">{item.summary}</p>
+          <p class="reg-scientist font-mono text-[11px] text-brand-cyan bg-brand-dark/55 px-2.5 py-1.5 rounded border border-brand-border">{item.formalSpec}</p>
+        </div>
+        <div class="pt-2 border-t border-brand-border space-y-1">
+          <div class="reg-scientist font-mono text-[10px] text-brand-emerald">{item.theorems}</div>
+          <p class="font-mono text-[10.5px] text-brand-gray leading-snug">{item.receipt}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Interactive Live CpJ Payback Simulator -->
+  <div class="glass-card p-6 md:p-8 space-y-6 border-brand-cyan/30" data-reveal>
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-5 border-b border-brand-border">
+      <div>
+        <p class="section-label-cyan mb-2">Interactive Instrument &middot; Proposition 1, CTA-T41, CTA-T43, &amp; CTA-T45</p>
+        <h3 class="font-display text-2xl md:text-3xl font-bold text-brand-white tracking-tight">
+          Live Coherence-per-Joule (<code class="code-chip">CpJ</code>) Payback &amp; Horizon Simulator
+        </h3>
+        <p class="font-body text-sm text-brand-slate mt-1 max-w-3xl">
+          Simulate <code class="code-chip">K = 22</code> structural task classes arriving under a Zipfian stream (<code class="code-chip">CTA</code> Worked Example 5 generalized). Adjust horizon <em>N</em>, Zipf recurrence skew <em>s</em>, frontier wake energy <em>c</em><sub>3</sub>, and per-class compilation budget <em>E</em><sub>compile</sub> to inspect exact payback <em>N</em>*, 4-tier downward promotion (<code class="code-chip">Tier 3 &rarr; Tier 2 &rarr; Tier 1 DNULLMM1 &rarr; Tier 0 LUT6</code>), and automatic <em>h</em><sub>min</sub> eviction.
+        </p>
+      </div>
+      <button
+        id="sim-reset-btn"
+        type="button"
+        class="shrink-0 font-mono text-xs text-brand-cyan border border-brand-cyan/40 px-3.5 py-2 rounded-lg bg-transparent hover:bg-brand-cyan/10 cursor-pointer transition-colors"
+      >
+        Reset to Worked Example 5 (N = 1,000)
+      </button>
+    </div>
+
+    <!-- 4 Controls -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <label class="block space-y-2 p-3.5 rounded-xl bg-brand-dark/45 border border-brand-border">
+        <div class="flex justify-between items-center font-mono text-xs">
+          <span class="text-brand-light">Stream Horizon <em class="not-italic text-brand-cyan">N</em></span>
+          <span id="sim-val-n" class="text-brand-white font-semibold">1,000</span>
+        </div>
+        <input id="sim-input-n" type="range" min="2.0" max="5.0" step="0.01" value="3.0" class="sim-slider" aria-label="Task Stream Horizon N (log10 scale from 100 to 100,000)" />
+        <div class="flex justify-between font-mono text-[10px] text-brand-gray">
+          <span>100</span>
+          <span>1,000</span>
+          <span>10,000</span>
+          <span>100,000</span>
+        </div>
+      </label>
+
+      <label class="block space-y-2 p-3.5 rounded-xl bg-brand-dark/45 border border-brand-border">
+        <div class="flex justify-between items-center font-mono text-xs">
+          <span class="text-brand-light">Zipf Skew <em class="not-italic text-brand-cyan">s</em></span>
+          <span id="sim-val-s" class="text-brand-white font-semibold">0.85</span>
+        </div>
+        <input id="sim-input-s" type="range" min="0.50" max="1.30" step="0.01" value="0.85" class="sim-slider" aria-label="Zipf Recurrence Skew s (0.50 to 1.30)" />
+        <div class="flex justify-between font-mono text-[10px] text-brand-gray">
+          <span>0.50 (Flat)</span>
+          <span>0.85</span>
+          <span>1.30 (Concentrated)</span>
+        </div>
+      </label>
+
+      <label class="block space-y-2 p-3.5 rounded-xl bg-brand-dark/45 border border-brand-border">
+        <div class="flex justify-between items-center font-mono text-xs">
+          <span class="text-brand-light">Frontier Wake <em class="not-italic text-brand-amber">c₃</em></span>
+          <span id="sim-val-c3" class="text-brand-amber font-semibold">15.0 J</span>
+        </div>
+        <input id="sim-input-c3" type="range" min="5" max="125" step="0.5" value="15" class="sim-slider" aria-label="Frontier Wake Cost c3 in Joules (5 J to 125 J)" />
+        <div class="flex justify-between font-mono text-[10px] text-brand-gray">
+          <span>5 J</span>
+          <span>15 J (CTA-E2)</span>
+          <span>125 J</span>
+        </div>
+      </label>
+
+      <label class="block space-y-2 p-3.5 rounded-xl bg-brand-dark/45 border border-brand-border">
+        <div class="flex justify-between items-center font-mono text-xs">
+          <span class="text-brand-light">Compile Cost <em class="not-italic text-brand-cyan">E_comp</em></span>
+          <span id="sim-val-ecomp" class="text-brand-cyan font-semibold">0.50 J</span>
+        </div>
+        <input id="sim-input-ecomp" type="range" min="0.5" max="15.0" step="0.25" value="0.5" class="sim-slider" aria-label="Compilation Cost E_compile per class in Joules (0.5 J to 15 J)" />
+        <div class="flex justify-between font-mono text-[10px] text-brand-gray">
+          <span>0.5 J</span>
+          <span>5.0 J</span>
+          <span>15.0 J</span>
+        </div>
+      </label>
+    </div>
+
+    <!-- Live Simulated KPI Readout Strip -->
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3.5">
+      <div class="p-3.5 rounded-xl bg-brand-amber/[0.06] border border-brand-amber/25">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-amber">Ephemeral Rung-5 Spend</div>
+        <div id="sim-kpi-mono-j" class="font-display text-xl md:text-2xl font-bold text-brand-white mt-1">15.00 kJ</div>
+        <div id="sim-kpi-mono-cpj" class="font-mono text-[11px] text-brand-gray mt-0.5">0.0667 tasks / J</div>
+      </div>
+
+      <div class="p-3.5 rounded-xl bg-brand-cyan/[0.08] border border-brand-cyan/35">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-cyan">4-Tier Avalanche Spend</div>
+        <div id="sim-kpi-av-j" class="font-display text-xl md:text-2xl font-bold text-brand-white mt-1">343.3 J</div>
+        <div id="sim-kpi-av-cpj" class="font-mono text-[11px] text-brand-cyan mt-0.5">2.913 tasks / J</div>
+      </div>
+
+      <div class="p-3.5 rounded-xl bg-brand-emerald/[0.08] border border-brand-emerald/35">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-emerald">CpJ Gain &amp; Energy Cut</div>
+        <div id="sim-kpi-mult" class="font-display text-xl md:text-2xl font-bold text-brand-emerald mt-1">43.7&times; CpJ</div>
+        <div id="sim-kpi-saved" class="font-mono text-[11px] text-brand-gray mt-0.5">97.7% joules saved</div>
+      </div>
+
+      <div class="p-3.5 rounded-xl bg-brand-dark/55 border border-brand-border">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-light">Payback Invocation N*</div>
+        <div id="sim-kpi-nstar" class="font-display text-xl md:text-2xl font-bold text-brand-white mt-1">N* = 1 repeat</div>
+        <div id="sim-kpi-crossover" class="font-mono text-[11px] text-brand-gray mt-0.5">Stream crossover: #24</div>
+      </div>
+
+      <div class="p-3.5 rounded-xl bg-brand-rose/[0.06] border border-brand-rose/30 col-span-2 lg:col-span-1">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-rose">Kill Floor h_min (CTA-T45)</div>
+        <div id="sim-kpi-hmin" class="font-display text-xl md:text-2xl font-bold text-brand-white mt-1">0.0033%</div>
+        <div id="sim-kpi-tiers" class="font-mono text-[11px] text-brand-gray mt-0.5">Tier 0/1 share: 91.2%</div>
+      </div>
+    </div>
+
+    <!-- Dual-Panel HTML5 Canvas + Horizon Monotonicity Bar -->
+    <div class="rounded-xl border border-brand-border bg-brand-dark/50 p-3 sm:p-4">
+      <canvas
+        id="cpj-sim-canvas"
+        width="1040"
+        height="340"
+        class="w-full h-[270px] sm:h-[320px] block"
+        aria-label="Live interactive plot of Cumulative Energy (left) and Coherence per Joule CpJ(t) growth (right) comparing Ephemeral Rung-5 LLM vs. OpenIE 4-Tier Compiled Avalanche."
+      ></canvas>
+    </div>
+
+    <!-- Month -> Quarter -> Year -> Decade Monotonicity Strip (CTA-T43) -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-1">
+      <div class="p-3 rounded-lg border border-brand-border bg-brand-dark/40">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-gray">Month Horizon (0.08&times;N)</div>
+        <div id="sim-hz-m" class="font-mono text-sm font-semibold text-brand-white mt-1">-- tasks/J</div>
+      </div>
+      <div class="p-3 rounded-lg border border-brand-border bg-brand-dark/40">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-gray">Quarter Horizon (0.25&times;N)</div>
+        <div id="sim-hz-q" class="font-mono text-sm font-semibold text-brand-cyan mt-1">-- tasks/J</div>
+      </div>
+      <div class="p-3 rounded-lg border border-brand-border bg-brand-dark/40">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-gray">Year Horizon (1.0&times;N)</div>
+        <div id="sim-hz-y" class="font-mono text-sm font-semibold text-brand-cyan mt-1">-- tasks/J</div>
+      </div>
+      <div class="p-3 rounded-lg border border-brand-emerald/30 bg-brand-emerald/[0.05]">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-emerald">Decade Horizon (10&times;N) &middot; CTA-T43</div>
+        <div id="sim-hz-d" class="font-mono text-sm font-semibold text-brand-emerald mt-1">-- tasks/J</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initCpJSimulator() {
+    const inputN = document.getElementById('sim-input-n') as HTMLInputElement | null;
+    const inputS = document.getElementById('sim-input-s') as HTMLInputElement | null;
+    const inputC3 = document.getElementById('sim-input-c3') as HTMLInputElement | null;
+    const inputEcomp = document.getElementById('sim-input-ecomp') as HTMLInputElement | null;
+    const resetBtn = document.getElementById('sim-reset-btn');
+    const canvas = document.getElementById('cpj-sim-canvas') as HTMLCanvasElement | null;
+    if (!inputN || !inputS || !inputC3 || !inputEcomp || !canvas) return;
+
+    const K_CLASSES = 22;
+    const C2 = 0.0157;     // Tier 2 symbolic/AST rule + attested envelope (J)
+    const C1 = 0.0006448;  // Tier 1 DNULLMM1 1.77 uJ mmap + cross-process Ed25519 envelope (J)
+    const C0 = 6.24e-11;   // Tier 0 CE-gated LUT6 cycle est_j (J)
+
+    function formatEnergy(j: number): string {
+      if (j >= 1e6) return `${(j / 1e6).toFixed(2)} MJ`;
+      if (j >= 1e3) return `${(j / 1e3).toFixed(2)} kJ`;
+      if (j >= 1) return `${j.toFixed(1)} J`;
+      return `${(j * 1e3).toFixed(2)} mJ`;
+    }
+
+    function formatCpJ(cpj: number): string {
+      if (cpj >= 1000) return `${(cpj / 1000).toFixed(2)}k tasks/J`;
+      if (cpj >= 10) return `${cpj.toFixed(1)} tasks/J`;
+      if (cpj >= 1) return `${cpj.toFixed(2)} tasks/J`;
+      return `${cpj.toFixed(4)} tasks/J`;
+    }
+
+    function buildDeterministicSchedule(N: number, s: number): number[] {
+      const weights: number[] = [];
+      let wSum = 0;
+      for (let k = 1; k <= K_CLASSES; k++) {
+        const w = 1 / Math.pow(k, s);
+        weights.push(w);
+        wSum += w;
+      }
+      // Deterministic Smooth Weighted Round-Robin (exact Zipf proportions without RNG jitter)
+      const norm = weights.map(w => w / wSum);
+      const current = new Array(K_CLASSES).fill(0);
+      const seq = new Array<number>(N);
+      for (let t = 0; t < N; t++) {
+        let bestIdx = 0;
+        for (let k = 0; k < K_CLASSES; k++) {
+          current[k] += norm[k];
+          if (current[k] > current[bestIdx]) bestIdx = k;
+        }
+        current[bestIdx] -= 1;
+        seq[t] = bestIdx;
+      }
+      return seq;
+    }
+
+    function simulateHorizon(N: number, s: number, c3: number, eComp: number) {
+      // Split eComp across Tier 3->2 (82%), Tier 2->1 (8%), Tier 1->0 (10%) matching Worked Example 5 proportions
+      const e32 = eComp * 0.82;
+      const e21 = eComp * 0.08;
+      const e10 = eComp * 0.25;
+
+      const seq = buildDeterministicSchedule(N, s);
+      const counts = new Array(K_CLASSES).fill(0);
+      const tier = new Array(K_CLASSES).fill(3); // 3 -> 2 -> 1 -> 0
+
+      let cumMono = 0;
+      let cumAv = 0;
+      let crossoverStep = -1;
+      let tier01Hits = 0;
+
+      const sampleCount = 120;
+      const stride = Math.max(1, Math.floor(N / sampleCount));
+      const xs: number[] = [];
+      const monoCurve: number[] = [];
+      const avCurve: number[] = [];
+      const cpjMonoCurve: number[] = [];
+      const cpjAvCurve: number[] = [];
+
+      // Pre-count expected class hits to enforce CTA-T45 h_min gate on compilation
+      const totalClassHits = new Array(K_CLASSES).fill(0);
+      for (let t = 0; t < N; t++) totalClassHits[seq[t]]++;
+      const minHitsFor32 = Math.ceil(e32 / Math.max(c3 - C2, 0.001)) + 1;
+
+      for (let t = 0; t < N; t++) {
+        const cls = seq[t];
+        counts[cls]++;
+        cumMono += c3;
+
+        const curTier = tier[cls];
+        if (curTier === 3) {
+          cumAv += 0.002 + c3; // fast miss probe + Tier 3 wake
+          if (counts[cls] >= 1 && totalClassHits[cls] >= minHitsFor32) {
+            cumAv += e32;
+            tier[cls] = 2;
+          }
+        } else if (curTier === 2) {
+          cumAv += C2;
+          if (counts[cls] >= 4) {
+            cumAv += e21;
+            tier[cls] = 1;
+          }
+        } else if (curTier === 1) {
+          cumAv += C1;
+          tier01Hits++;
+          if (cls < 4 && counts[cls] >= 50) {
+            cumAv += e10;
+            tier[cls] = 0;
+          }
+        } else {
+          cumAv += C0;
+          tier01Hits++;
+        }
+
+        if (crossoverStep === -1 && cumAv < cumMono) {
+          crossoverStep = t + 1;
+        }
+
+        if (t % stride === 0 || t === N - 1) {
+          const step = t + 1;
+          xs.push(step);
+          monoCurve.push(cumMono);
+          avCurve.push(cumAv);
+          cpjMonoCurve.push(step / Math.max(cumMono, 1e-9));
+          cpjAvCurve.push(step / Math.max(cumAv, 1e-9));
+        }
+      }
+
+      // Compute CTA-T43 analytical steady-state trajectory across Month/Quarter/Year/Decade
+      const steadyRate = (0.28 * C0) + (0.64 * C1) + (0.08 * C2);
+      const initFixed = Math.max(0.5, cumAv - N * steadyRate);
+      const cpjAt = (T: number) => T / (initFixed + T * steadyRate);
+
+      return {
+        N,
+        cumMono,
+        cumAv,
+        cpjMono: N / cumMono,
+        cpjAv: N / cumAv,
+        nStarClass: Math.max(1, Math.ceil(e32 / Math.max(c3 - C2, 0.01))),
+        crossoverStep,
+        tier01Share: (tier01Hits / N) * 100,
+        hMinPct: (eComp / (N * Math.max(c3 - C1, 0.01))) * 100,
+        xs,
+        monoCurve,
+        avCurve,
+        cpjMonoCurve,
+        cpjAvCurve,
+        hzM: cpjAt(Math.max(25, Math.round(N * 0.083))),
+        hzQ: cpjAt(Math.max(75, Math.round(N * 0.25))),
+        hzY: N / cumAv,
+        hzD: cpjAt(N * 10),
+      };
+    }
+
+    function render() {
+      const logN = parseFloat(inputN!.value);
+      const N = Math.round(Math.pow(10, logN));
+      const s = parseFloat(inputS!.value);
+      const c3 = parseFloat(inputC3!.value);
+      const eComp = parseFloat(inputEcomp!.value);
+
+      document.getElementById('sim-val-n')!.textContent = N.toLocaleString();
+      document.getElementById('sim-val-s')!.textContent = s.toFixed(2);
+      document.getElementById('sim-val-c3')!.textContent = `${c3.toFixed(1)} J`;
+      document.getElementById('sim-val-ecomp')!.textContent = `${eComp.toFixed(2)} J`;
+
+      const res = simulateHorizon(N, s, c3, eComp);
+
+      document.getElementById('sim-kpi-mono-j')!.textContent = formatEnergy(res.cumMono);
+      document.getElementById('sim-kpi-mono-cpj')!.textContent = formatCpJ(res.cpjMono);
+      document.getElementById('sim-kpi-av-j')!.textContent = formatEnergy(res.cumAv);
+      document.getElementById('sim-kpi-av-cpj')!.textContent = formatCpJ(res.cpjAv);
+
+      const mult = res.cpjAv / res.cpjMono;
+      const savedPct = Math.max(0, (1 - res.cumAv / res.cumMono) * 100);
+      document.getElementById('sim-kpi-mult')!.textContent = `${mult >= 100 ? mult.toFixed(0) : mult.toFixed(1)}× CpJ`;
+      document.getElementById('sim-kpi-saved')!.textContent = `${savedPct.toFixed(1)}% joules saved`;
+      document.getElementById('sim-kpi-nstar')!.textContent = `N* = ${res.nStarClass} ${res.nStarClass === 1 ? 'repeat' : 'repeats'}`;
+      document.getElementById('sim-kpi-crossover')!.textContent = res.crossoverStep > 0 ? `Stream crossover: #${res.crossoverStep}` : 'Horizon < ΔT*';
+      document.getElementById('sim-kpi-hmin')!.textContent = `${res.hMinPct < 0.01 ? res.hMinPct.toFixed(4) : res.hMinPct.toFixed(2)}%`;
+      document.getElementById('sim-kpi-tiers')!.textContent = `Tier 0/1 share: ${res.tier01Share.toFixed(1)}%`;
+
+      document.getElementById('sim-hz-m')!.textContent = formatCpJ(res.hzM);
+      document.getElementById('sim-hz-q')!.textContent = formatCpJ(res.hzQ);
+      document.getElementById('sim-hz-y')!.textContent = formatCpJ(res.hzY);
+      document.getElementById('sim-hz-d')!.textContent = formatCpJ(res.hzD);
+
+      // Draw Canvas
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = canvas!.getBoundingClientRect();
+      const cw = Math.max(600, rect.width);
+      const ch = Math.max(260, rect.height);
+      canvas!.width = cw * dpr;
+      canvas!.height = ch * dpr;
+      const ctx = canvas!.getContext('2d');
+      if (!ctx) return;
+      ctx.scale(dpr, dpr);
+
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      const textCol = isLight ? '#0F172A' : '#FFFFFF';
+      const mutedCol = isLight ? '#64748B' : '#94A3B8';
+      const gridCol = isLight ? 'rgba(15,23,42,0.07)' : 'rgba(255,255,255,0.06)';
+      const amberCol = isLight ? '#D97706' : '#F59E0B';
+      const cyanCol = isLight ? '#0D9488' : '#00D4AA';
+
+      ctx.clearRect(0, 0, cw, ch);
+
+      const gap = 46;
+      const padL = 54, padR = 24, padT = 38, padB = 36;
+      const pw = (cw - padL - padR - gap) / 2;
+      const ph = ch - padT - padB;
+
+      // Panel A: Cumulative Energy (Left)
+      const p1x = padL;
+      ctx.font = '600 11px "JetBrains Mono", monospace';
+      ctx.fillStyle = amberCol;
+      ctx.fillText('PANEL A · CUMULATIVE ENERGY SPEND (JOULES)', p1x, 20);
+
+      // Grid & Axes Panel A
+      ctx.strokeStyle = gridCol;
+      ctx.lineWidth = 1;
+      for (let g = 0; g <= 4; g++) {
+        const gy = padT + (ph * g) / 4;
+        ctx.beginPath();
+        ctx.moveTo(p1x, gy);
+        ctx.lineTo(p1x + pw, gy);
+        ctx.stroke();
+      }
+
+      const maxE = Math.max(res.cumMono, res.cumAv, 1);
+      // Plot Ephemeral Mono Curve
+      ctx.beginPath();
+      res.xs.forEach((x, idx) => {
+        const px = p1x + ((x / res.N) * pw);
+        const py = padT + ph - (res.monoCurve[idx] / maxE) * ph;
+        if (idx === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      });
+      ctx.strokeStyle = amberCol;
+      ctx.lineWidth = 2.4;
+      ctx.stroke();
+
+      // Plot 4-Tier Avalanche Curve
+      ctx.beginPath();
+      res.xs.forEach((x, idx) => {
+        const px = p1x + ((x / res.N) * pw);
+        const py = padT + ph - (res.avCurve[idx] / maxE) * ph;
+        if (idx === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      });
+      ctx.strokeStyle = cyanCol;
+      ctx.lineWidth = 2.8;
+      ctx.stroke();
+
+      // Shaded savings wedge
+      ctx.beginPath();
+      res.xs.forEach((x, idx) => {
+        const px = p1x + ((x / res.N) * pw);
+        const py = padT + ph - (res.monoCurve[idx] / maxE) * ph;
+        if (idx === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      });
+      for (let idx = res.xs.length - 1; idx >= 0; idx--) {
+        const px = p1x + ((res.xs[idx] / res.N) * pw);
+        const py = padT + ph - (res.avCurve[idx] / maxE) * ph;
+        ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.fillStyle = isLight ? 'rgba(13,148,136,0.10)' : 'rgba(0,212,170,0.10)';
+      ctx.fill();
+
+      ctx.font = '10px "JetBrains Mono", monospace';
+      ctx.fillStyle = mutedCol;
+      ctx.fillText(formatEnergy(maxE), 4, padT + 8);
+      ctx.fillText('0 J', 22, padT + ph);
+      ctx.fillText('t = 1', p1x, ch - 10);
+      ctx.fillText(`N = ${res.N.toLocaleString()}`, p1x + pw - 68, ch - 10);
+
+      // Legend inside Panel A
+      ctx.fillStyle = amberCol;
+      ctx.fillText(`── Ephemeral LLM (${formatEnergy(res.cumMono)})`, p1x + 10, padT + 18);
+      ctx.fillStyle = cyanCol;
+      ctx.fillText(`── 4-Tier Avalanche (${formatEnergy(res.cumAv)})`, p1x + 10, padT + 34);
+
+      // Panel B: Coherence per Joule CpJ(t) Trajectory (Right)
+      const p2x = padL + pw + gap;
+      ctx.font = '600 11px "JetBrains Mono", monospace';
+      ctx.fillStyle = cyanCol;
+      ctx.fillText('PANEL B · COHERENCE PER JOULE CpJ(t) GROWTH', p2x, 20);
+
+      ctx.strokeStyle = gridCol;
+      ctx.lineWidth = 1;
+      for (let g = 0; g <= 4; g++) {
+        const gy = padT + (ph * g) / 4;
+        ctx.beginPath();
+        ctx.moveTo(p2x, gy);
+        ctx.lineTo(p2x + pw, gy);
+        ctx.stroke();
+      }
+
+      const maxCpJ = Math.max(...res.cpjAvCurve, res.cpjMono * 1.5, 0.1);
+
+      // Ephemeral flat CpJ baseline
+      ctx.beginPath();
+      res.xs.forEach((x, idx) => {
+        const px = p2x + ((x / res.N) * pw);
+        const py = padT + ph - (res.cpjMonoCurve[idx] / maxCpJ) * ph;
+        if (idx === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      });
+      ctx.strokeStyle = amberCol;
+      ctx.setLineDash([4, 4]);
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // 4-Tier Avalanche rising CpJ curve
+      ctx.beginPath();
+      res.xs.forEach((x, idx) => {
+        const px = p2x + ((x / res.N) * pw);
+        const py = padT + ph - (res.cpjAvCurve[idx] / maxCpJ) * ph;
+        if (idx === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      });
+      ctx.strokeStyle = cyanCol;
+      ctx.lineWidth = 2.8;
+      ctx.stroke();
+
+      ctx.font = '10px "JetBrains Mono", monospace';
+      ctx.fillStyle = textCol;
+      ctx.fillText(`${maxCpJ.toFixed(1)} t/J`, p2x + 6, padT + 14);
+      ctx.fillStyle = mutedCol;
+      ctx.fillText('t = 1', p2x, ch - 10);
+      ctx.fillText(`N = ${res.N.toLocaleString()}`, p2x + pw - 68, ch - 10);
+    }
+
+    [inputN, inputS, inputC3, inputEcomp].forEach(inp => inp.addEventListener('input', render));
+    resetBtn?.addEventListener('click', () => {
+      inputN.value = '3.0';
+      inputS.value = '0.85';
+      inputC3.value = '15';
+      inputEcomp.value = '0.5';
+      render();
+    });
+    window.addEventListener('resize', render);
+    window.addEventListener('oe-theme-change', render);
+    render();
+  }
+
+  initCpJSimulator();
+</script>
