@@ -242,6 +242,8 @@ export const NINE_RUNGS: RungData[] = [
     references: [
       { label: 'compute.openie.dev', url: 'https://compute.openie.dev' },
       { label: 'Observatory: LUT6 Cascade', url: 'https://research.openie.dev/living/lut-adapt/' },
+      { label: 'Lab 11: 64-Codon Wobble', url: 'https://research.openie.dev/tutorials/?lab=lab-11-lut6-codon-wobble' },
+      { label: 'Lab 12: Fanless M.2 Envelope', url: 'https://research.openie.dev/tutorials/?lab=lab-12-aller-m2-thermal' },
     ],
     tvChannel: 'https://research.openie.dev/tv/?channel=compute',
     radioDesk: 'https://research.openie.dev/radio/?desk=compute',
@@ -300,7 +302,7 @@ export const NINE_RUNGS: RungData[] = [
     references: [
       { label: 'stack.openie.dev', url: 'https://stack.openie.dev' },
       { label: 'compute.openie.dev', url: 'https://compute.openie.dev' },
-      { label: 'Tutorials: Labs 1–5', url: 'https://research.openie.dev/tutorials/' },
+      { label: 'Tutorials: 12 Interactive Labs', url: 'https://research.openie.dev/tutorials/' },
     ],
     tvChannel: 'https://research.openie.dev/tv/?channel=stack',
     radioDesk: 'https://research.openie.dev/radio/?desk=stack',
@@ -439,7 +441,7 @@ export const AVALANCHE_UNIFYING_SYNTHESIS = {
     'Binary Completion Authority C(z) = 1: Stochastic outputs never self-certify; zero broken commits cross into persistent memory.',
     'Physical Joules as the Sole Continuous Variable: Strict hardware separation of physical DC shunts (measured_j), on-chip counters (reported_j), and circuit switching models (est_j).',
     'Explicit Pre-Registered Red Kill Criteria: Every compiled page and horizon forecast (HM01–HD04) states an exact mathematical threshold (h ≤ h_min, Falsifiers 1–6) that immediately invalidates or evicts it.',
-    'Six-Kernel Lean 4.36.0 Proof Anchors: 123 formal theorems + 5,393 RCE constants audited unanimously inside network-isolated bubblewrap sandboxes with 0 sorry and 0 custom axioms.',
+    'Six-Kernel Lean 4.36.0 Proof Anchors: 132 formal theorems + 5,393 RCE constants audited unanimously inside network-isolated bubblewrap sandboxes with 0 sorry and 0 custom axioms.',
   ],
 };
 
@@ -499,6 +501,6 @@ export const SEMINAR_MODULES: SeminarModule[] = [
       'Teach rigorous measurement hygiene: never merge physical current-shunt readings (measured_j), on-chip OS counters (reported_j), and analytical switching formulas (est_j), and always withhold idle subtraction when thermal drift exceeds pre-registered thresholds (Falsifier 6).',
       'Conclude by auditing how every Month, Quarter, Year, and Decade forecast (HM01–HD04) pairs a formal mathematical invariant with an explicit red falsifier that would refute the hypothesis.',
     ],
-    formalAnchor: 'Theorems CTA-T24..T28, CTA-T43, & CTA-T45 · Six-kernel Lean 4.36.0 bwrap audit (103 theorems + 5,393 RCE constants).',
+    formalAnchor: 'Theorems CTA-T24..T28, CTA-T43, & CTA-T45 · Six-kernel Lean 4.36.0 bwrap audit (132 theorems + 5,393 RCE constants).',
   },
 ];

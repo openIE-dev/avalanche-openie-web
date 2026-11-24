@@ -432,7 +432,7 @@ export const OPEN_REPLICATION_PROTOCOL: ReplicationStep[] = [
     plainGoal:
       'Verify every mathematical theorem behind the ratchet, Beneš routing network, and horizon monotonicity without trusting a single prover binary or network cache.',
     technicalChecklist:
-      'Export the 123 cataloged theorems (45 CTA + 27 LUT6 + 20 Wobble/Nucleus + 31 Horizon at 09511ee3) and 5,393 RCE constants to text NDJSON inside bubblewrap 0.11.1 (bwrap --unshare-net --ro-bind); run con-leche --verified, con-ron --verified, lean4lean, nanoda, leanchecker --paranoid, and Lean v4.36.0.',
+      'Export the 132 cataloged theorems (45 CTA + 36 LUT6 + 20 Wobble/Nucleus + 31 Horizon at 09511ee3) and 5,393 RCE constants to text NDJSON inside bubblewrap 0.11.1 (bwrap --unshare-net --ro-bind); run con-leche --verified, con-ron --verified, lean4lean, nanoda, leanchecker --paranoid, and Lean v4.36.0.',
     passFailGate: 'PASS iff 6/6 checkers accept with 0 sorryAx, 0 custom axioms, 0 opaque, and 0 Lean.ofReduceBool.',
   },
   {

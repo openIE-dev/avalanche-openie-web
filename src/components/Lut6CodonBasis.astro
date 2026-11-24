@@ -14,7 +14,29 @@ const serializedPresets = JSON.stringify(WALSH_PRESETS).replace(/</g, '\\u003c')
 <section id="lut6-basis" class="space-y-14 scroll-mt-24">
   <!-- Section Header -->
   <div class="space-y-4">
-    <p class="section-label-cyan">IA &middot; Atomic Substrate &middot; 64-Codon LUT6 (u64) Basis &amp; 16 KB Bootstrap Nucleus</p>
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <p class="section-label-cyan mb-0">IA &middot; Atomic Substrate &middot; 64-Codon LUT6 (u64) Basis &amp; 16 KB Bootstrap Nucleus</p>
+      <div class="flex flex-wrap items-center gap-2 font-mono text-[11px]">
+        <a
+          href="https://research.openie.dev/tutorials/?lab=lab-11-lut6-codon-wobble"
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md border border-brand-emerald/40 bg-brand-emerald/10 text-brand-emerald no-underline hover:bg-brand-emerald/20 transition-colors font-semibold"
+        >
+          Interactive Lab 11 &nearr;
+        </a>
+        <a
+          href="https://research.openie.dev/tv/?study=lut6-codon-nucleus"
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md border border-brand-amber/40 bg-brand-amber/10 text-brand-amber no-underline hover:bg-brand-amber/20 transition-colors"
+        >
+          <span aria-hidden="true">&#9654;</span> Research TV: 64-Codon Lookup Nucleus
+        </a>
+        <a
+          href="https://research.openie.dev/radio/?desk=avalanche"
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md border border-brand-cyan/40 bg-brand-cyan/10 text-brand-cyan no-underline hover:bg-brand-cyan/20 transition-colors"
+        >
+          <span aria-hidden="true">&#9673;</span> Radio Ep 15
+        </a>
+      </div>
+    </div>
     <h2 class="font-display text-2xl sm:text-4xl font-bold text-brand-white tracking-tight">
       Why <span class="text-brand-cyan">LUT6 (<code class="code-chip">u64</code>)</span> Is the Atomic 64-Codon Basis of Verified Knowledge
     </h2>
@@ -281,6 +303,33 @@ sizeof(CompactLut6Page) = 4,096 B = 32,768 bits  (1:1 with 36-Kbit RAMB36 BRAM)<
             </div>
           ))}
         </div>
+      </div>
+    </div>
+
+    <!-- Walsh Inspector Companion Labs & Media Footer -->
+    <div class="pt-4 border-t border-brand-border flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+      <p class="font-mono text-[11px] text-brand-slate m-0">
+        Hands-on curriculum &amp; audiovisual walkthroughs for the 64-codon <code class="code-chip">LUT6</code> basis (<code class="code-chip">NucleusWobble.lean</code> &middot; 20 six-kernel theorems):
+      </p>
+      <div class="flex flex-wrap items-center gap-2.5 shrink-0 font-mono text-xs">
+        <a
+          href="https://research.openie.dev/tutorials/?lab=lab-11-lut6-codon-wobble"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-brand-cyan text-brand-dark font-semibold no-underline hover:bg-brand-teal transition-colors"
+        >
+          Launch Interactive Lab 11 &nearr;
+        </a>
+        <a
+          href="https://research.openie.dev/tv/?study=lut6-codon-nucleus"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-brand-amber/40 bg-brand-amber/10 text-brand-amber no-underline hover:bg-brand-amber/20 transition-colors"
+        >
+          <span aria-hidden="true">&#9654;</span> Research TV: 64-Codon Lookup Nucleus
+        </a>
+        <a
+          href="https://research.openie.dev/radio/?desk=avalanche"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-brand-cyan/40 bg-brand-cyan/10 text-brand-cyan no-underline hover:bg-brand-cyan/20 transition-colors"
+        >
+          <span aria-hidden="true">&#9673;</span> Radio Ep 15
+        </a>
       </div>
     </div>
   </div>
