@@ -1,0 +1,880 @@
+---
+import defaultRadar from '../data/rung-radar.json';
+
+interface Props {
+  radar?: any;
+}
+
+const { radar = defaultRadar } = Astro.props;
+const items = radar?.items || [];
+const summary = radar?.rung_summary || {};
+const histogram = summary?.histogram || [];
+const shares = summary?.shares_pct || {};
+const regimeCounts = summary?.counts_by_regime || {};
+const clsCounts = radar?.counts_by_classification || {};
+const srcCounts = radar?.counts_by_source || {};
+const pilotSummary = radar?.shape_d_pilot_summary || {};
+const foundryPilots = radar?.foundry_pilots || [];
+
+const maxHistCount = Math.max(1, ...histogram.map((h: any) => h.count || 0));
+const phase1Hist = histogram.filter((h: any) => h.rung <= 5);
+const phase2Hist = histogram.filter((h: any) => h.rung >= 6);
+const serializedPayload = JSON.stringify(radar).replace(/</g, '\\u003c');
+
+function regimeLabel(reg: string): string {
+  if (reg === 'crossing_compilation_threshold') return 'Crossing Threshold';
+  if (reg === 'compiled_rungs_6_9') return 'Rungs 6–9 Compiled';
+  return 'Rungs 1–5 Ephemeral';
+}
+
+function regimeBadgeClass(reg: string): string {
+  if (reg === 'crossing_compilation_threshold') return 'ev-theorem';
+  if (reg === 'compiled_rungs_6_9') return 'ev-measured';
+  return 'ev-est';
+}
+
+function relationBadgeClass(rel: string): string {
+  if (rel === 'CHALLENGES_ASSUMPTION') return 'ev-kill';
+  if (rel === 'NEW_FRONTIER_GAP') return 'ev-reported';
+  return 'ev-measured';
+}
+---
+
+<section id="rung-radar" class="max-w-7xl mx-auto space-y-6 scroll-mt-24">
+  <!-- Header -->
+  <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+    <div>
+      <p class="section-label-cyan mb-2">Live 6-Hour Literature Observatory &middot; Autonomous Global Rung Radar</p>
+      <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-white">
+        Where Live Open-Access Research Lands on the 9-Rung Avalanche Map
+      </h2>
+      <p class="reg-visionary font-body text-brand-slate text-sm sm:text-base mt-2 max-w-4xl leading-relaxed">
+        Polled every 6 hours across <strong class="text-brand-white">arXiv</strong>, <strong class="text-brand-white">OpenAlex</strong>, <strong class="text-brand-white">Europe PMC</strong>, and <strong class="text-brand-white">bioRxiv</strong>, each incoming paper is cryptographically hashed and scored by whether it stays inside cold-start single-session inference (<strong class="text-brand-amber">Rungs 1–5</strong>) or pairs strict verification checks with persistent low-energy memory (<strong class="text-brand-cyan">Crossing the Compilation Threshold into Rungs 6–9</strong>).
+      </p>
+      <p class="reg-scientist font-mono text-xs text-brand-light mt-2 max-w-4xl leading-relaxed">
+        Deterministic 9-Rung projection + epistemic <code class="code-chip">[T]/[E]/[M]/[S]</code> telemetry audit + sub-60s <code class="code-chip">Shape D</code> RAPL <code class="code-chip">reported_j</code> falsifier arena (<code class="code-chip">board_metered=false</code>). Manifest SHA-256: <code id="grr-manifest-hash" class="code-chip">{(radar?.manifest_sha256 || '').slice(0, 16)}&hellip;</code>
+      </p>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+      <span id="grr-sync-badge" class="ev-badge ev-measured">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan pulse"></span>
+        <span>Scraped <span id="grr-scraped-ts">{radar?.scraped_at_utc || 'live'}</span></span>
+      </span>
+      <button
+        type="button"
+        id="grr-refresh-btn"
+        class="font-mono text-xs px-3 py-1.5 rounded-lg border border-brand-border bg-brand-white/[0.03] text-brand-cyan hover:border-brand-cyan cursor-pointer transition-colors"
+      >
+        &#8635; Refresh 6h Feed
+      </button>
+      <a
+        href="https://research.openie.dev/radio/#rung-radar"
+        class="font-mono text-xs px-3 py-1.5 rounded-lg border border-brand-amber/35 bg-brand-amber/10 text-brand-amber no-underline hover:bg-brand-amber/20 transition-colors"
+      >
+        &#9673; Listen on Research Radio &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- 4-Card Live Summary Telemetry Strip -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="glass-card p-4 flex flex-col justify-between">
+      <div class="flex items-center justify-between gap-2">
+        <span class="font-mono text-[10.5px] uppercase tracking-wider text-brand-gray">Deduplicated Papers</span>
+        <span class="ev-badge ev-reported">4 Public APIs</span>
+      </div>
+      <div id="grr-stat-total" class="font-display text-3xl font-bold text-brand-white mt-2">{radar?.total_external_works || items.length}</div>
+      <div class="font-mono text-[11px] text-brand-slate mt-2 pt-2 border-t border-brand-border truncate">
+        arXiv {srcCounts['arXiv'] || 0} &middot; OpenAlex {srcCounts['OpenAlex'] || 0} &middot; EPMC {srcCounts['Europe PMC'] || 0} &middot; bioRxiv {srcCounts['bioRxiv'] || 0}
+      </div>
+    </div>
+
+    <div class="glass-card phase-amber p-4 flex flex-col justify-between">
+      <div class="flex items-center justify-between gap-2">
+        <span class="font-mono text-[10.5px] uppercase tracking-wider text-brand-amber">Trapped in Rungs 1–5</span>
+        <span class="ev-badge ev-est">&Delta;T &approx; 1</span>
+      </div>
+      <div class="flex items-baseline gap-2 mt-2">
+        <span id="grr-stat-ephemeral" class="font-display text-3xl font-bold text-brand-amber">{shares.ephemeral_trapped_pct ?? 0}%</span>
+        <span class="font-mono text-xs text-brand-gray">({regimeCounts.ephemeral_rungs_1_5 || 0} papers)</span>
+      </div>
+      <div class="font-body text-xs text-brand-slate mt-2 pt-2 border-t border-brand-border">
+        Stateless inference (<span id="grr-stat-r15-all" class="font-mono text-brand-white">{shares.rungs_1_5_total_pct ?? 0}%</span> sit in R1–R5 overall)
+      </div>
+    </div>
+
+    <div class="glass-card p-4 flex flex-col justify-between">
+      <div class="flex items-center justify-between gap-2">
+        <span class="font-mono text-[10.5px] uppercase tracking-wider text-brand-cyan">Crossing Threshold</span>
+        <span class="ev-badge ev-theorem">C(z) = 1</span>
+      </div>
+      <div class="flex items-baseline gap-2 mt-2">
+        <span id="grr-stat-crossing" class="font-display text-3xl font-bold text-brand-cyan">{shares.crossing_threshold_pct ?? 0}%</span>
+        <span class="font-mono text-xs text-brand-gray">({regimeCounts.crossing_compilation_threshold || 0} papers)</span>
+      </div>
+      <div class="font-body text-xs text-brand-slate mt-2 pt-2 border-t border-brand-border">
+        Formal verifiers, lookup lowering &amp; attested gates
+      </div>
+    </div>
+
+    <div class="glass-card p-4 flex flex-col justify-between">
+      <div class="flex items-center justify-between gap-2">
+        <span class="font-mono text-[10.5px] uppercase tracking-wider text-brand-emerald">Compiled R6–R9 &amp; Pilots</span>
+        <span class="ev-badge ev-measured">&lt;60s RAPL</span>
+      </div>
+      <div class="flex items-baseline gap-2 mt-2">
+        <span id="grr-stat-compiled" class="font-display text-3xl font-bold text-brand-emerald">{shares.compiled_rungs_6_9_pct ?? 0}%</span>
+        <span class="font-mono text-xs text-brand-gray">({regimeCounts.compiled_rungs_6_9 || 0} native R6–R9)</span>
+      </div>
+      <div class="font-mono text-[11px] text-brand-slate mt-2 pt-2 border-t border-brand-border">
+        Pilots: {pilotSummary?.counts_by_status?.PROMOTED_CANDIDATE ?? 4} promoted &middot; {pilotSummary?.counts_by_status?.KILLED_BY_NULL ?? 1} killed ({pilotSummary?.total_pilot_wall_sec ?? 0}s)
+      </div>
+    </div>
+  </div>
+
+  <!-- Visual 9-Rung Live Literature Histogram with Compilation Threshold Barrier -->
+  <div class="glass-card p-5 sm:p-6 space-y-4">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <div>
+        <div class="font-mono text-[10.5px] uppercase tracking-[0.15em] text-brand-amber">
+          Interactive 9-Rung Live Literature Histogram &middot; Click Any Rung Bar to Filter
+        </div>
+        <p class="font-body text-xs text-brand-slate mt-0.5">
+          Bars compare Phase 1 stateless inference (<span class="text-brand-amber font-semibold">R1–R5</span>, peaking at the <span class="text-brand-rose font-semibold">R5 Tool Use</span> bottleneck) across <span class="text-brand-cyan font-semibold">The Compilation Threshold</span> into Phase 2 compiled substrates (<span class="text-brand-cyan font-semibold">R6–R9</span>).
+        </p>
+      </div>
+      <button
+        type="button"
+        id="grr-clear-rung-btn"
+        class="hidden font-mono text-[11px] px-3 py-1 rounded-full border border-brand-cyan bg-brand-cyan/15 text-brand-white cursor-pointer self-start sm:self-auto"
+      >
+        Clear Rung Filter &times;
+      </button>
+    </div>
+
+    <div class="overflow-x-auto pb-2">
+      <div class="min-w-[740px] grid grid-cols-11 gap-2 items-stretch pt-3">
+        <!-- Phase 1: Rungs 1 to 5 -->
+        <div class="col-span-5 rounded-xl border border-brand-amber/25 bg-brand-amber/[0.04] p-3.5 flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="font-mono text-[10px] font-semibold uppercase tracking-wider text-brand-amber">
+              Phase 1 &middot; Rungs 1–5 Ephemeral
+            </span>
+            <span class="font-mono text-[10px] text-brand-gray">&Delta;T &approx; 1 &le; &Delta;T*</span>
+          </div>
+          <div class="grid grid-cols-5 gap-2 items-end h-44">
+            {phase1Hist.map((h: any) => {
+              const pctHeight = Math.max(10, Math.round(((h.count || 0) / maxHistCount) * 100));
+              const isR5 = h.rung === 5;
+              const barColor = isR5
+                ? 'bg-gradient-to-t from-brand-rose/80 to-brand-amber/90 border-brand-rose/60'
+                : 'bg-gradient-to-t from-brand-amber/65 to-brand-amber/90 border-brand-amber/50';
+              return (
+                <button
+                  type="button"
+                  data-grr-rung={String(h.rung)}
+                  aria-label={`Filter by Rung ${h.rung}: ${h.name} (${h.count} papers)`}
+                  class="grr-rung-bar group flex flex-col items-center justify-end h-full p-1.5 rounded-lg border border-transparent hover:border-brand-amber/50 hover:bg-brand-white/[0.03] cursor-pointer transition-all bg-transparent"
+                >
+                  <span class="grr-bar-count font-mono text-xs font-bold text-brand-white mb-1">{h.count}</span>
+                  <span class="font-mono text-[9.5px] text-brand-gray mb-1.5">{h.share_pct}%</span>
+                  <div class="w-full flex-1 flex items-end justify-center">
+                    <div
+                      class={`grr-bar-fill w-full max-w-[38px] rounded-t-md border transition-all duration-300 ${barColor}`}
+                      style={`height: ${pctHeight}%`}
+                    ></div>
+                  </div>
+                  <span class={`font-mono text-[11px] font-bold mt-2 ${isR5 ? 'text-brand-rose' : 'text-brand-amber'}`}>
+                    {h.code}
+                  </span>
+                  <span class="font-body text-[10px] text-brand-slate truncate max-w-full">{h.name}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <!-- THE COMPILATION THRESHOLD BARRIER -->
+        <div class="col-span-1 flex flex-col items-center justify-center relative py-2">
+          <div class="h-full w-px border-l-2 border-dashed border-brand-cyan/70 absolute inset-y-2"></div>
+          <div class="relative z-10 px-2 py-2.5 rounded-lg border border-brand-cyan/60 bg-brand-navy text-center shadow-sm">
+            <div class="font-mono text-[9px] font-bold uppercase tracking-widest text-brand-cyan leading-tight">
+              Compilation<br />Threshold
+            </div>
+            <div class="font-mono text-[9px] text-brand-white mt-1">R5 &#9474; R6</div>
+            <div class="font-mono text-[8.5px] text-brand-emerald mt-0.5">C(z)=1</div>
+          </div>
+        </div>
+
+        <!-- Phase 2: Rungs 6 to 9 -->
+        <div class="col-span-5 rounded-xl border border-brand-cyan/30 bg-brand-cyan/[0.04] p-3.5 flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="font-mono text-[10px] font-semibold uppercase tracking-wider text-brand-cyan">
+              Phase 2 &middot; Rungs 6–9 Compiled
+            </span>
+            <span class="font-mono text-[10px] text-brand-emerald">&Delta;T &gt; &Delta;T* &middot; CpJ &uarr;</span>
+          </div>
+          <div class="grid grid-cols-4 gap-2 items-end h-44">
+            {phase2Hist.map((h: any) => {
+              const pctHeight = Math.max(10, Math.round(((h.count || 0) / maxHistCount) * 100));
+              return (
+                <button
+                  type="button"
+                  data-grr-rung={String(h.rung)}
+                  aria-label={`Filter by Rung ${h.rung}: ${h.name} (${h.count} papers)`}
+                  class="grr-rung-bar group flex flex-col items-center justify-end h-full p-1.5 rounded-lg border border-transparent hover:border-brand-cyan/50 hover:bg-brand-white/[0.03] cursor-pointer transition-all bg-transparent"
+                >
+                  <span class="grr-bar-count font-mono text-xs font-bold text-brand-white mb-1">{h.count}</span>
+                  <span class="font-mono text-[9.5px] text-brand-gray mb-1.5">{h.share_pct}%</span>
+                  <div class="w-full flex-1 flex items-end justify-center">
+                    <div
+                      class="grr-bar-fill w-full max-w-[42px] rounded-t-md border border-brand-cyan/60 bg-gradient-to-t from-brand-cyan/65 to-brand-emerald/90 transition-all duration-300"
+                      style={`height: ${pctHeight}%`}
+                    ></div>
+                  </div>
+                  <span class="font-mono text-[11px] font-bold text-brand-cyan mt-2">{h.code}</span>
+                  <span class="font-body text-[10px] text-brand-slate truncate max-w-full">{h.name}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter Pills + Target Tier Dropdown + Search Input -->
+  <div class="glass-card p-4 space-y-3">
+    <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filter Global Rung Radar papers">
+      <button
+        type="button"
+        data-grr-pill="all"
+        class="grr-pill-btn px-3.5 py-1.5 rounded-full font-mono text-xs border border-brand-cyan bg-brand-cyan/15 text-brand-white cursor-pointer transition-all"
+      >
+        All (<span data-grr-count="all">{items.length}</span>)
+      </button>
+      <button
+        type="button"
+        data-grr-pill="crossing_compilation_threshold"
+        class="grr-pill-btn px-3.5 py-1.5 rounded-full font-mono text-xs border border-brand-border bg-brand-white/[0.03] text-brand-slate hover:text-brand-white cursor-pointer transition-all"
+      >
+        Crossing Threshold (<span data-grr-count="crossing_compilation_threshold">{regimeCounts.crossing_compilation_threshold || 0}</span>)
+      </button>
+      <button
+        type="button"
+        data-grr-pill="ephemeral_rungs_1_5"
+        class="grr-pill-btn px-3.5 py-1.5 rounded-full font-mono text-xs border border-brand-border bg-brand-white/[0.03] text-brand-slate hover:text-brand-white cursor-pointer transition-all"
+      >
+        Rungs 1–5 Ephemeral (<span data-grr-count="ephemeral_rungs_1_5">{regimeCounts.ephemeral_rungs_1_5 || 0}</span>)
+      </button>
+      <button
+        type="button"
+        data-grr-pill="compiled_rungs_6_9"
+        class="grr-pill-btn px-3.5 py-1.5 rounded-full font-mono text-xs border border-brand-border bg-brand-white/[0.03] text-brand-slate hover:text-brand-white cursor-pointer transition-all"
+      >
+        Rungs 6–9 Compiled (<span data-grr-count="compiled_rungs_6_9">{regimeCounts.compiled_rungs_6_9 || 0}</span>)
+      </button>
+      <button
+        type="button"
+        data-grr-pill="CHALLENGES_ASSUMPTION"
+        class="grr-pill-btn px-3.5 py-1.5 rounded-full font-mono text-xs border border-brand-border bg-brand-white/[0.03] text-brand-slate hover:text-brand-white cursor-pointer transition-all"
+      >
+        Challenges Assumption (<span data-grr-count="CHALLENGES_ASSUMPTION">{clsCounts.CHALLENGES_ASSUMPTION || 0}</span>)
+      </button>
+      <button
+        type="button"
+        data-grr-pill="NEW_FRONTIER_GAP"
+        class="grr-pill-btn px-3.5 py-1.5 rounded-full font-mono text-xs border border-brand-border bg-brand-white/[0.03] text-brand-slate hover:text-brand-white cursor-pointer transition-all"
+      >
+        New Frontier Gap (<span data-grr-count="NEW_FRONTIER_GAP">{clsCounts.NEW_FRONTIER_GAP || 0}</span>)
+      </button>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2 border-t border-brand-border">
+      <div class="flex flex-wrap items-center gap-2">
+        <select
+          id="grr-tier-select"
+          aria-label="Filter by Target Execution Tier"
+          class="font-mono text-xs px-3 py-1.5 rounded-lg border border-brand-border bg-brand-navy text-brand-light"
+        >
+          <option value="all">All Target Tiers (Tier 3 &rarr; Tier 0)</option>
+          <option value="Tier 0 (Single-Cycle Silicon)">Tier 0 (Single-Cycle Silicon)</option>
+          <option value="Tier 1 (Indexed Case Store)">Tier 1 (Indexed Case Store)</option>
+          <option value="Tier 2 (Verified Rule/Checker)">Tier 2 (Verified Rule/Checker)</option>
+          <option value="Tier 3 (Frontier Search)">Tier 3 (Frontier Search)</option>
+        </select>
+
+        <button
+          type="button"
+          id="grr-expand-all-btn"
+          class="font-mono text-xs px-3 py-1.5 rounded-lg border border-brand-border bg-brand-white/[0.03] text-brand-slate hover:text-brand-white cursor-pointer transition-colors"
+        >
+          Expand All Formal &amp; Falsifier Cards
+        </button>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <span id="grr-visible-count" class="font-mono text-[11px] text-brand-gray whitespace-nowrap">
+          Showing {Math.min(12, items.length)} of {items.length}
+        </span>
+        <input
+          id="grr-search-input"
+          type="search"
+          placeholder="Search title, takeaway, arXiv, DOI, author, Rung…"
+          aria-label="Search Global Rung Radar papers"
+          class="font-body text-xs px-3.5 py-1.5 rounded-lg border border-brand-border bg-brand-navy text-brand-white placeholder:text-brand-gray min-w-[240px] flex-1"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Paper Cards Grid -->
+  <div id="grr-cards-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    {items.map((it: any, idx: number) => {
+      const isPhase2 = (it.rung || 1) >= 6;
+      const isR5 = it.rung === 5;
+      const rungChipCls = isPhase2
+        ? 'border-brand-cyan/45 bg-brand-cyan/12 text-brand-cyan'
+        : isR5
+        ? 'border-brand-rose/45 bg-brand-rose/12 text-brand-rose'
+        : 'border-brand-amber/45 bg-brand-amber/12 text-brand-amber';
+      const doiHref = it.doi ? `https://doi.org/${it.doi}` : null;
+      const hay = `${it.title} ${it.plain_takeaway} ${it.formal_mechanism || ''} ${it.falsifier_test || ''} ${it.external_id} ${it.doi || ''} ${it.source} ${it.rung_code} ${it.rung_name} ${it.target_tier} ${(it.authors || []).join(' ')} ${it.linked_study_title || ''}`.toLowerCase();
+
+      return (
+        <article
+          class={`grr-card glass-card p-5 flex flex-col justify-between ${idx >= 12 ? 'hidden' : ''}`}
+          data-rung={String(it.rung)}
+          data-regime={it.threshold_regime}
+          data-relation={it.openie_relation || it.classification}
+          data-tier={it.target_tier}
+          data-hay={hay}
+        >
+          <div class="space-y-3">
+            <!-- Badges Row -->
+            <div class="flex flex-wrap items-center justify-between gap-1.5">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class={`font-mono text-[11px] font-bold px-2 py-0.5 rounded border ${rungChipCls}`}>
+                  {it.rung_code} &middot; {it.rung_name}
+                </span>
+                <span class={`ev-badge ${regimeBadgeClass(it.threshold_regime)}`}>
+                  {regimeLabel(it.threshold_regime)}
+                </span>
+                <span class="font-mono text-[10.5px] px-2 py-0.5 rounded border border-brand-border bg-brand-white/[0.03] text-brand-light">
+                  {it.epistemic_badge}
+                </span>
+              </div>
+              <span class={`ev-badge ${relationBadgeClass(it.openie_relation || it.classification)}`}>
+                {it.openie_relation || it.classification}
+              </span>
+            </div>
+
+            <!-- Title & Source Metadata -->
+            <div>
+              <h3 class="font-display text-base font-bold text-brand-white leading-snug">
+                <a
+                  href={it.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-brand-white no-underline hover:text-brand-cyan transition-colors"
+                >
+                  {it.title} &#8599;
+                </a>
+              </h3>
+              <div class="font-mono text-[10.5px] text-brand-gray mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span class="text-brand-light font-semibold">{it.source}</span>
+                <span>{it.external_id}</span>
+                {it.published_date && <span>{it.published_date}</span>}
+                <span class="text-brand-cyan">{it.target_tier}</span>
+              </div>
+              {(it.authors || []).length > 0 && (
+                <div class="font-body text-[11px] text-brand-gray mt-1 truncate">
+                  {(it.authors || []).join(', ')}
+                </div>
+              )}
+            </div>
+
+            <!-- Plain-Language Takeaway -->
+            <div class="reg-visionary p-3 rounded-lg border border-brand-border bg-brand-white/[0.025]">
+              <div class="font-mono text-[10px] uppercase tracking-wider text-brand-amber mb-1">
+                Plain-Language Takeaway (9-Rung Projection)
+              </div>
+              <p class="font-body text-xs sm:text-[13px] text-brand-light leading-relaxed m-0">
+                {it.plain_takeaway}
+              </p>
+            </div>
+
+            <!-- Expandable Formal Science, Falsifier Test & Abstract -->
+            <details class="grr-details group rounded-lg border border-brand-border bg-brand-white/[0.02]">
+              <summary class="font-mono text-[11px] text-brand-cyan px-3 py-2 cursor-pointer select-none flex items-center justify-between gap-2">
+                <span>Formal Science Invariant, Falsifier Test &amp; Digest</span>
+                <span class="text-brand-gray group-open:rotate-180 transition-transform">&#9662;</span>
+              </summary>
+              <div class="px-3 pb-3 pt-1 space-y-2.5 border-t border-brand-border text-xs">
+                <div>
+                  <span class="font-mono text-[10px] uppercase text-brand-cyan block mb-0.5">Formal Mechanism</span>
+                  <p class="font-mono text-[11px] text-brand-light leading-relaxed m-0">{it.formal_mechanism}</p>
+                </div>
+                <div class="p-2.5 rounded bg-brand-rose/[0.06] border border-brand-rose/25">
+                  <span class="font-mono text-[10px] font-bold uppercase text-brand-rose block mb-0.5">
+                    Falsifier / Disproof Test:
+                  </span>
+                  <p class="font-body text-[11.5px] text-brand-light leading-snug m-0">{it.falsifier_test}</p>
+                </div>
+                <div>
+                  <span class="font-mono text-[10px] uppercase text-brand-gray block mb-0.5">Telemetry &amp; Null Audit</span>
+                  <p class="font-body text-[11px] text-brand-slate leading-snug m-0">
+                    {it.telemetry_audit?.audit_summary}
+                  </p>
+                </div>
+                {it.abstract && (
+                  <div>
+                    <span class="font-mono text-[10px] uppercase text-brand-gray block mb-0.5">Source Abstract Excerpt</span>
+                    <p class="font-body text-[11px] text-brand-slate leading-relaxed m-0">{it.abstract}</p>
+                  </div>
+                )}
+                <div class="font-mono text-[10px] text-brand-gray break-all">
+                  SHA-256: {it.sha256}
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- Footer Links -->
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-3 mt-3 border-t border-brand-border font-mono text-[10.5px]">
+            <div class="flex flex-wrap items-center gap-2">
+              <a
+                href={it.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-2 py-0.5 rounded border border-brand-cyan/35 bg-brand-cyan/10 text-brand-cyan no-underline hover:bg-brand-cyan/20"
+              >
+                Open {it.source} &#8599;
+              </a>
+              {doiHref && (
+                <a
+                  href={doiHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-2 py-0.5 rounded border border-brand-border bg-brand-white/[0.03] text-brand-slate no-underline hover:text-brand-white"
+                >
+                  DOI: {it.doi} &#8599;
+                </a>
+              )}
+            </div>
+            {it.linked_study_url && (
+              <a
+                href={it.linked_study_url}
+                class="px-2 py-0.5 rounded border border-brand-amber/30 bg-brand-amber/10 text-brand-amber no-underline hover:bg-brand-amber/20"
+              >
+                OpenIE: {it.linked_study_title} &rarr;
+              </a>
+            )}
+          </div>
+        </article>
+      );
+    })}
+  </div>
+
+  <div id="grr-empty-msg" class="hidden glass-card p-8 text-center font-mono text-xs text-brand-gray">
+    No deduplicated papers match the active Rung, regime, tier, or search query.
+  </div>
+
+  {items.length > 12 && (
+    <div id="grr-show-more-wrap" class="flex justify-center">
+      <button
+        type="button"
+        id="grr-show-all-btn"
+        class="font-mono text-xs px-5 py-2.5 rounded-lg border border-brand-cyan/40 bg-brand-cyan/10 text-brand-cyan hover:bg-brand-cyan/20 cursor-pointer transition-colors"
+      >
+        Show All {items.length} Deduplicated Papers
+      </button>
+    </div>
+  )}
+
+  <!-- Candidate Topic Proposals & Sub-60s Shape-D Pilot Verdicts -->
+  {foundryPilots.length > 0 && (
+    <details class="glass-card p-5 group">
+      <summary class="cursor-pointer select-none flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <span class="font-mono text-[10.5px] uppercase tracking-wider text-brand-amber block">
+            Autonomous Topic Foundry &middot; Sub-60s Shape-D Pilot Verdicts ({foundryPilots.length} Candidates)
+          </span>
+          <span class="font-display text-base sm:text-lg font-bold text-brand-white">
+            Candidate Lowering Hypotheses Tested Against Zero-Parameter Shape-D Null Controls
+          </span>
+        </div>
+        <span class="font-mono text-xs text-brand-cyan">
+          Inspect {foundryPilots.length} Pilot Receipts &#9662;
+        </span>
+      </summary>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 mt-4 pt-4 border-t border-brand-border">
+        {foundryPilots.map((fp: any) => {
+          const stCls =
+            fp.status === 'PROMOTED_CANDIDATE'
+              ? 'ev-theorem'
+              : fp.status === 'HOLD_NEEDS_HARDWARE'
+              ? 'ev-est'
+              : 'ev-kill';
+          return (
+            <div class="p-3.5 rounded-lg border border-brand-border bg-brand-white/[0.02] flex flex-col justify-between space-y-2.5">
+              <div>
+                <div class="flex items-center justify-between gap-1.5 mb-1.5">
+                  <span class="font-mono text-[10.5px] font-bold text-brand-cyan">
+                    {fp.topic_id} &middot; {fp.target_rung_code}
+                  </span>
+                  <span class={`ev-badge ${stCls}`}>{fp.status}</span>
+                </div>
+                <div class="font-display text-xs sm:text-[13px] font-bold text-brand-white leading-snug mb-1.5">
+                  {fp.title}
+                </div>
+                <p class="font-body text-[11.5px] text-brand-slate leading-relaxed m-0">
+                  {fp.pilot_receipt?.verdict_detail}
+                </p>
+              </div>
+              <div class="font-mono text-[10px] text-brand-gray pt-2 border-t border-brand-border">
+                {fp.target_tier} &middot; Receipt {(fp.pilot_receipt?.receipt_sha256 || '').slice(0, 12)}&hellip;
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </details>
+  )}
+</section>
+
+<style>
+  html[data-register="scientist"] .grr-details > div {
+    display: block !important;
+  }
+  .grr-rung-bar[data-active="true"] {
+    border-color: var(--color-brand-cyan) !important;
+    background: rgba(0, 212, 170, 0.12) !important;
+  }
+</style>
+
+<script type="application/json" id="grr-initial-payload" set:html={serializedPayload}></script>
+
+<script>
+  (function () {
+    const grid = document.getElementById('grr-cards-grid');
+    if (!grid) return;
+
+    let activePill = 'all';
+    let activeRung: string | null = null;
+    let activeTier = 'all';
+    let searchQuery = '';
+    let showAll = false;
+    let allExpanded = false;
+
+    const pillBtns = document.querySelectorAll<HTMLButtonElement>('.grr-pill-btn');
+    const rungBars = document.querySelectorAll<HTMLButtonElement>('.grr-rung-bar');
+    const clearRungBtn = document.getElementById('grr-clear-rung-btn');
+    const tierSelect = document.getElementById('grr-tier-select') as HTMLSelectElement | null;
+    const searchInput = document.getElementById('grr-search-input') as HTMLInputElement | null;
+    const visibleCountEl = document.getElementById('grr-visible-count');
+    const emptyMsg = document.getElementById('grr-empty-msg');
+    const showAllBtn = document.getElementById('grr-show-all-btn');
+    const showMoreWrap = document.getElementById('grr-show-more-wrap');
+    const expandAllBtn = document.getElementById('grr-expand-all-btn');
+    const refreshBtn = document.getElementById('grr-refresh-btn');
+
+    function applyFilters() {
+      const cards = grid!.querySelectorAll<HTMLElement>('.grr-card');
+      const isFiltered =
+        activePill !== 'all' || activeRung !== null || activeTier !== 'all' || searchQuery.length > 0;
+      let matched = 0;
+      let shown = 0;
+
+      cards.forEach((card) => {
+        const cRung = card.getAttribute('data-rung') || '';
+        const cRegime = card.getAttribute('data-regime') || '';
+        const cRel = card.getAttribute('data-relation') || '';
+        const cTier = card.getAttribute('data-tier') || '';
+        const cHay = card.getAttribute('data-hay') || '';
+
+        let pillOk = true;
+        if (activePill === 'ephemeral_rungs_1_5' || activePill === 'crossing_compilation_threshold' || activePill === 'compiled_rungs_6_9') {
+          pillOk = cRegime === activePill;
+        } else if (activePill !== 'all') {
+          pillOk = cRel === activePill;
+        }
+
+        const rungOk = !activeRung || cRung === activeRung;
+        const tierOk = activeTier === 'all' || cTier === activeTier;
+        const qOk = !searchQuery || cHay.includes(searchQuery);
+
+        if (pillOk && rungOk && tierOk && qOk) {
+          matched++;
+          if (showAll || isFiltered || matched <= 12) {
+            card.classList.remove('hidden');
+            shown++;
+          } else {
+            card.classList.add('hidden');
+          }
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (visibleCountEl) {
+        visibleCountEl.textContent = `Showing ${shown} of ${matched}`;
+      }
+      if (emptyMsg) {
+        emptyMsg.classList.toggle('hidden', matched > 0);
+      }
+      if (showMoreWrap) {
+        showMoreWrap.classList.toggle('hidden', showAll || isFiltered || matched <= 12);
+      }
+    }
+
+    pillBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activePill = btn.getAttribute('data-grr-pill') || 'all';
+        pillBtns.forEach((b) => {
+          const on = b === btn;
+          b.classList.toggle('border-brand-cyan', on);
+          b.classList.toggle('bg-brand-cyan/15', on);
+          b.classList.toggle('text-brand-white', on);
+          b.classList.toggle('border-brand-border', !on);
+          b.classList.toggle('bg-brand-white/[0.03]', !on);
+          b.classList.toggle('text-brand-slate', !on);
+        });
+        applyFilters();
+      });
+    });
+
+    function syncRungBars() {
+      rungBars.forEach((bar) => {
+        const r = bar.getAttribute('data-grr-rung');
+        bar.setAttribute('data-active', r === activeRung ? 'true' : 'false');
+      });
+      if (clearRungBtn) {
+        clearRungBtn.classList.toggle('hidden', activeRung === null);
+        if (activeRung) clearRungBtn.textContent = `Filtering R${activeRung} · Clear ×`;
+      }
+    }
+
+    rungBars.forEach((bar) => {
+      bar.addEventListener('click', () => {
+        const r = bar.getAttribute('data-grr-rung');
+        activeRung = activeRung === r ? null : r;
+        syncRungBars();
+        applyFilters();
+      });
+    });
+
+    if (clearRungBtn) {
+      clearRungBtn.addEventListener('click', () => {
+        activeRung = null;
+        syncRungBars();
+        applyFilters();
+      });
+    }
+
+    if (tierSelect) {
+      tierSelect.addEventListener('change', () => {
+        activeTier = tierSelect.value;
+        applyFilters();
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        searchQuery = searchInput.value.toLowerCase().trim();
+        applyFilters();
+      });
+    }
+
+    if (showAllBtn) {
+      showAllBtn.addEventListener('click', () => {
+        showAll = true;
+        applyFilters();
+      });
+    }
+
+    if (expandAllBtn) {
+      expandAllBtn.addEventListener('click', () => {
+        allExpanded = !allExpanded;
+        grid.querySelectorAll<HTMLDetailsElement>('.grr-details').forEach((d) => {
+          d.open = allExpanded;
+        });
+        expandAllBtn.textContent = allExpanded
+          ? 'Collapse Formal & Falsifier Cards'
+          : 'Expand All Formal & Falsifier Cards';
+      });
+    }
+
+    function escHtml(s: string): string {
+      return String(s || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function buildCardHtml(it: any, idx: number): string {
+      const r = Number(it.rung || 1);
+      const isP2 = r >= 6;
+      const isR5 = r === 5;
+      const rungCls = isP2
+        ? 'border-brand-cyan/45 bg-brand-cyan/12 text-brand-cyan'
+        : isR5
+        ? 'border-brand-rose/45 bg-brand-rose/12 text-brand-rose'
+        : 'border-brand-amber/45 bg-brand-amber/12 text-brand-amber';
+      const reg = it.threshold_regime || 'ephemeral_rungs_1_5';
+      const regLbl =
+        reg === 'crossing_compilation_threshold'
+          ? 'Crossing Threshold'
+          : reg === 'compiled_rungs_6_9'
+          ? 'Rungs 6–9 Compiled'
+          : 'Rungs 1–5 Ephemeral';
+      const regCls =
+        reg === 'crossing_compilation_threshold'
+          ? 'ev-theorem'
+          : reg === 'compiled_rungs_6_9'
+          ? 'ev-measured'
+          : 'ev-est';
+      const rel = it.openie_relation || it.classification || 'CORROBORATES';
+      const relCls =
+        rel === 'CHALLENGES_ASSUMPTION' ? 'ev-kill' : rel === 'NEW_FRONTIER_GAP' ? 'ev-reported' : 'ev-measured';
+      const hay = `${it.title} ${it.plain_takeaway} ${it.formal_mechanism || ''} ${it.falsifier_test || ''} ${it.external_id} ${it.doi || ''} ${it.source} ${it.rung_code} ${it.rung_name} ${it.target_tier} ${(it.authors || []).join(' ')} ${it.linked_study_title || ''}`.toLowerCase();
+      const doiLink = it.doi
+        ? `<a href="https://doi.org/${escHtml(it.doi)}" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 rounded border border-brand-border bg-brand-white/[0.03] text-brand-slate no-underline hover:text-brand-white">DOI: ${escHtml(it.doi)} &#8599;</a>`
+        : '';
+      const studyLink = it.linked_study_url
+        ? `<a href="${escHtml(it.linked_study_url)}" class="px-2 py-0.5 rounded border border-brand-amber/30 bg-brand-amber/10 text-brand-amber no-underline hover:bg-brand-amber/20">OpenIE: ${escHtml(it.linked_study_title)} &rarr;</a>`
+        : '';
+
+      return `<article class="grr-card glass-card p-5 flex flex-col justify-between ${idx >= 12 ? 'hidden' : ''}" data-rung="${r}" data-regime="${escHtml(reg)}" data-relation="${escHtml(rel)}" data-tier="${escHtml(it.target_tier)}" data-hay="${escHtml(hay)}">
+        <div class="space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-1.5">
+            <div class="flex flex-wrap items-center gap-1.5">
+              <span class="font-mono text-[11px] font-bold px-2 py-0.5 rounded border ${rungCls}">${escHtml(it.rung_code)} &middot; ${escHtml(it.rung_name)}</span>
+              <span class="ev-badge ${regCls}">${regLbl}</span>
+              <span class="font-mono text-[10.5px] px-2 py-0.5 rounded border border-brand-border bg-brand-white/[0.03] text-brand-light">${escHtml(it.epistemic_badge)}</span>
+            </div>
+            <span class="ev-badge ${relCls}">${escHtml(rel)}</span>
+          </div>
+          <div>
+            <h3 class="font-display text-base font-bold text-brand-white leading-snug">
+              <a href="${escHtml(it.url)}" target="_blank" rel="noopener noreferrer" class="text-brand-white no-underline hover:text-brand-cyan transition-colors">${escHtml(it.title)} &#8599;</a>
+            </h3>
+            <div class="font-mono text-[10.5px] text-brand-gray mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span class="text-brand-light font-semibold">${escHtml(it.source)}</span>
+              <span>${escHtml(it.external_id)}</span>
+              ${it.published_date ? `<span>${escHtml(it.published_date)}</span>` : ''}
+              <span class="text-brand-cyan">${escHtml(it.target_tier)}</span>
+            </div>
+            ${(it.authors || []).length ? `<div class="font-body text-[11px] text-brand-gray mt-1 truncate">${escHtml((it.authors || []).join(', '))}</div>` : ''}
+          </div>
+          <div class="reg-visionary p-3 rounded-lg border border-brand-border bg-brand-white/[0.025]">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-brand-amber mb-1">Plain-Language Takeaway (9-Rung Projection)</div>
+            <p class="font-body text-xs sm:text-[13px] text-brand-light leading-relaxed m-0">${escHtml(it.plain_takeaway)}</p>
+          </div>
+          <details class="grr-details group rounded-lg border border-brand-border bg-brand-white/[0.02]" ${allExpanded ? 'open' : ''}>
+            <summary class="font-mono text-[11px] text-brand-cyan px-3 py-2 cursor-pointer select-none flex items-center justify-between gap-2">
+              <span>Formal Science Invariant, Falsifier Test &amp; Digest</span>
+              <span class="text-brand-gray group-open:rotate-180 transition-transform">&#9662;</span>
+            </summary>
+            <div class="px-3 pb-3 pt-1 space-y-2.5 border-t border-brand-border text-xs">
+              <div>
+                <span class="font-mono text-[10px] uppercase text-brand-cyan block mb-0.5">Formal Mechanism</span>
+                <p class="font-mono text-[11px] text-brand-light leading-relaxed m-0">${escHtml(it.formal_mechanism)}</p>
+              </div>
+              <div class="p-2.5 rounded bg-brand-rose/[0.06] border border-brand-rose/25">
+                <span class="font-mono text-[10px] font-bold uppercase text-brand-rose block mb-0.5">Falsifier / Disproof Test:</span>
+                <p class="font-body text-[11.5px] text-brand-light leading-snug m-0">${escHtml(it.falsifier_test)}</p>
+              </div>
+              <div>
+                <span class="font-mono text-[10px] uppercase text-brand-gray block mb-0.5">Telemetry &amp; Null Audit</span>
+                <p class="font-body text-[11px] text-brand-slate leading-snug m-0">${escHtml(it.telemetry_audit?.audit_summary || '')}</p>
+              </div>
+              <div class="font-mono text-[10px] text-brand-gray break-all">SHA-256: ${escHtml(it.sha256)}</div>
+            </div>
+          </details>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-2 pt-3 mt-3 border-t border-brand-border font-mono text-[10.5px]">
+          <div class="flex flex-wrap items-center gap-2">
+            <a href="${escHtml(it.url)}" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 rounded border border-brand-cyan/35 bg-brand-cyan/10 text-brand-cyan no-underline hover:bg-brand-cyan/20">Open ${escHtml(it.source)} &#8599;</a>
+            ${doiLink}
+          </div>
+          ${studyLink}
+        </div>
+      </article>`;
+    }
+
+    async function refreshFromLiveJson(manual = false) {
+      try {
+        if (manual && refreshBtn) refreshBtn.textContent = 'Syncing…';
+        const res = await fetch('/data/global-rung-radar.json', { cache: 'no-cache' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const live = await res.json();
+        if (!live || !Array.isArray(live.items) || live.items.length === 0) return;
+
+        const tsEl = document.getElementById('grr-scraped-ts');
+        if (tsEl && live.scraped_at_utc) tsEl.textContent = live.scraped_at_utc;
+        const hashEl = document.getElementById('grr-manifest-hash');
+        if (hashEl && live.manifest_sha256) hashEl.textContent = live.manifest_sha256.slice(0, 16) + '…';
+
+        const sh = live.rung_summary?.shares_pct || {};
+        const rc = live.rung_summary?.counts_by_regime || {};
+        const cc = live.counts_by_classification || {};
+
+        const setTxt = (id: string, val: string) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = val;
+        };
+        setTxt('grr-stat-total', String(live.total_external_works || live.items.length));
+        if (sh.ephemeral_trapped_pct !== undefined) setTxt('grr-stat-ephemeral', sh.ephemeral_trapped_pct + '%');
+        if (sh.rungs_1_5_total_pct !== undefined) setTxt('grr-stat-r15-all', sh.rungs_1_5_total_pct + '%');
+        if (sh.crossing_threshold_pct !== undefined) setTxt('grr-stat-crossing', sh.crossing_threshold_pct + '%');
+        if (sh.compiled_rungs_6_9_pct !== undefined) setTxt('grr-stat-compiled', sh.compiled_rungs_6_9_pct + '%');
+
+        const setCnt = (key: string, val: number) => {
+          const el = document.querySelector(`[data-grr-count="${key}"]`);
+          if (el) el.textContent = String(val);
+        };
+        setCnt('all', live.items.length);
+        setCnt('crossing_compilation_threshold', rc.crossing_compilation_threshold || 0);
+        setCnt('ephemeral_rungs_1_5', rc.ephemeral_rungs_1_5 || 0);
+        setCnt('compiled_rungs_6_9', rc.compiled_rungs_6_9 || 0);
+        setCnt('CHALLENGES_ASSUMPTION', cc.CHALLENGES_ASSUMPTION || 0);
+        setCnt('NEW_FRONTIER_GAP', cc.NEW_FRONTIER_GAP || 0);
+
+        const hist = live.rung_summary?.histogram || [];
+        const maxCnt = Math.max(1, ...hist.map((h: any) => h.count || 0));
+        hist.forEach((h: any) => {
+          const barBtn = document.querySelector<HTMLElement>(`.grr-rung-bar[data-grr-rung="${h.rung}"]`);
+          if (!barBtn) return;
+          const cntEl = barBtn.querySelector('.grr-bar-count');
+          const fillEl = barBtn.querySelector<HTMLElement>('.grr-bar-fill');
+          if (cntEl) cntEl.textContent = String(h.count || 0);
+          if (fillEl) fillEl.style.height = Math.max(10, Math.round(((h.count || 0) / maxCnt) * 100)) + '%';
+        });
+
+        const initialEl = document.getElementById('grr-initial-payload');
+        const initialDigest = initialEl ? (JSON.parse(initialEl.textContent || '{}').manifest_sha256 || '') : '';
+        if (live.manifest_sha256 && live.manifest_sha256 !== initialDigest) {
+          grid!.innerHTML = live.items.map((it: any, idx: number) => buildCardHtml(it, idx)).join('');
+        }
+        applyFilters();
+        if (manual && refreshBtn) {
+          refreshBtn.textContent = '✓ Live Feed Synced';
+          setTimeout(() => { refreshBtn.textContent = '↻ Refresh 6h Feed'; }, 2000);
+        }
+      } catch (_) {
+        if (manual && refreshBtn) {
+          refreshBtn.textContent = 'Using Build Snapshot';
+          setTimeout(() => { refreshBtn.textContent = '↻ Refresh 6h Feed'; }, 2000);
+        }
+      }
+    }
+
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', () => refreshFromLiveJson(true));
+    }
+    refreshFromLiveJson(false);
+  })();
+</script>

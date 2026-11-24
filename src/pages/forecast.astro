@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import RegisterSwitcher from '../components/RegisterSwitcher.astro';
 import ForecastTable from '../components/ForecastTable.astro';
+import GlobalRungRadar from '../components/GlobalRungRadar.astro';
 import { AI_HISTORY_38, SIX_KERNEL_AUDIT } from '../data/forecast';
 ---
 
@@ -34,11 +35,16 @@ import { AI_HISTORY_38, SIX_KERNEL_AUDIT } from '../data/forecast';
         18 Pre-Registered Milestones Across Month, Quarter, Year, &amp; Decade Horizons
       </h2>
       <p class="font-body text-brand-slate text-sm sm:text-base mt-2 max-w-3xl">
-        Every milestone pairs a formal theorem anchor with an explicit red disproof criterion. Speculative neural (<code class="code-chip">BM18</code>) and extracellular-vesicle (<code class="code-chip">EV01–EV16</code>) clinical items are marked <strong class="text-brand-white">Speculative [S]</strong> and kept strictly separate from verified computational results.
+        Every milestone pairs a formal theorem anchor with an explicit red disproof criterion (<strong class="text-brand-emerald">7 of 18 Verified [T/E]</strong> across <code class="code-chip">HM01–HM04</code> and <code class="code-chip">HQ01–HQ03</code>; <code class="code-chip">HQ04</code> remains <strong class="text-brand-amber">Active [E]</strong> until a physical KV260 board is metered). Speculative neural (<code class="code-chip">BM18</code>) and extracellular-vesicle (<code class="code-chip">EV01–EV16</code>) clinical items are marked <strong class="text-brand-white">Speculative [S]</strong> and kept strictly separate from verified computational results.
       </p>
     </div>
 
     <ForecastTable />
+  </section>
+
+  <!-- Part IA: Live Autonomous Global Rung Radar -->
+  <section id="rung-radar" class="space-y-6 scroll-mt-24">
+    <GlobalRungRadar />
   </section>
 
   <!-- Part II: Six-Kernel Lean 4.36.0 Soundness Audit -->

@@ -153,9 +153,9 @@ export const TRANSLATION_MATRIX: TranslationRow[] = [
   {
     idx: '06',
     domain: 'Amortization & Auto-Pruning',
-    scientistStatement: 'Compiled skills with empirical hit rate h = H/N ≤ h_min = E_comp / (N · (c_high − c_low)) fail amortization and auto-evict, while surviving skills satisfy CpJ(t_M) < CpJ(t_Q) < CpJ(t_Y) < CpJ(t_D).',
+    scientistStatement: 'Compiled skills with empirical hit rate h = H/N ≤ h_min = E_comp / (N · (c_high − c_low)) fail amortization and auto-evict (6 / 6 shift transients evicted & 24 / 24 Zipf classes amortized in CTA-E7), while surviving skills satisfy CpJ(t_M) < CpJ(t_Q) < CpJ(t_Y) < CpJ(t_D).',
     plainStatement: 'If the world changes and a compiled shortcut stops getting used often enough to justify its upkeep, an exact mathematical threshold retires it automatically.',
-    anchor: 'CTA-T43 · CTA-T45',
+    anchor: 'CTA-E7 · CTA-T43 · CTA-T45',
   },
 ];
 
@@ -189,16 +189,16 @@ export const FIVE_LOOPS: ForcingLoop[] = [
     loop: 'Loop 3',
     name: 'SSP Flow + FormEBM-v3 Pre-Filter',
     summary: 'Routes tasks via Bellman–Ford + Johnson reduced-cost Dijkstra; keeps Tier-3 models asleep on OS eventfd until misses pass latent plausibility ranking.',
-    formalSpec: 'w_π(i,u) ≥ 0 · V_u < θ_u ⇒ 0 CPU cycles · AUROC = 0.9437',
-    receipt: '2.11 µs epoch-0 SSP solve (2.40 µs failover); FormEBM-v2 (47.09 mJ) cuts ~49 mJ RCE checker calls 2.39×; FormEBM-v3 reaches 0.9437 unseen-shape AUROC.',
+    formalSpec: 'w_π(i,u) ≥ 0 · V_u < θ_u ⇒ 0 CPU cycles · AUROC = 0.9580',
+    receipt: '2.11 µs epoch-0 SSP solve (2.40 µs failover); FormEBM-v3 gates 2,240 unseen C4+C6 Forms at 0.9580 AUROC (0.00% drop, 4.78× / 2.55× fewer RCE evals, 458.16 vs 567.51/1,001.48 J Thor VDD measured_j in CTA-E6).',
     theorems: 'CTA-T7..T10 · CTA-T21 · CTA-T24..T28',
   },
   {
     loop: 'Loop 4',
     name: 'Tier 3 → 2 → 1 → 0 Crystallization',
     summary: 'Checks novel solutions via isolated test/proof verifiers (0.00% broken commits) and compiles recurring equivalence classes into progressively cheaper substrates.',
-    formalSpec: 'c_3 (~15 J) > c_2 (~15 mJ) > c_1 (1.77 µJ mmap) > c_0 (~12 pJ est_j LUT6)',
-    receipt: 'N*_{3→2} = 1 repeat; N*_{2→1} = 4 hits; 1,000-task Zipfian stream drops from 15,000 J to 343.34 J (43.69× CpJ gain).',
+    formalSpec: 'c_3 (~0.5–15 J) > c_2 (~6–15 mJ) > c_1 (1.77 µJ–4.41 mJ mmap) > c_0 (~12 pJ est_j LUT6)',
+    receipt: 'Live 1,000-task Zipf(0.85) stream (CTA-E7): 1,000/1,000 (100% parity, 0 regressions), 99.11%–99.33% post-warmup <= 16 mJ, 33.33× fewer Tier-3 wakes, 25.96× Thor VDD measured_j CpJ (31.65× Zen 5 reported_j; 43.69× Tier-0 modeled).',
     theorems: 'CTA-T23 · CTA-T41..T44 (T44: 0 axioms)',
   },
   {
@@ -206,7 +206,7 @@ export const FIVE_LOOPS: ForcingLoop[] = [
     name: 'Dual-Rail Energy Ledger & h_min Pruning',
     summary: 'Records separated hardware energy receipts (measured_j, reported_j, est_j), withholds net subtraction when baseline drift > 10%, and evicts cold rules.',
     formalSpec: 'Evict skill j iff h_j = H_j / N ≤ h_min = E_comp,j / (N · (c_high − c_low))',
-    receipt: 'Pre/post quiet drift gated at <= 10.0% (9.93% in CTA-E2; withheld automatically on CTA-E1 410.2% thermal tail); proves Month→Decade CpJ monotonicity.',
+    receipt: 'Pre/post quiet drift gated <= 10.0% (0.80%–2.98% in CTA-E6/E7); Loop 5 strictly evicts 6 / 6 injected shift transients (h <= h_min) while retaining 24 / 24 amortized Zipf classes.',
     theorems: 'CTA-T43 · CTA-T45 · Falsifier 6',
   },
 ];

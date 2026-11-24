@@ -1,0 +1,194 @@
+---
+const MEDIA_ORIGIN = 'https://research.openie.dev';
+const tiers = [
+  {
+    id: '15s',
+    label: '15s · 3 Plain Points',
+    dur: '22s',
+    video: `${MEDIA_ORIGIN}/media/tv/films/eco-avalanche-15s.mp4`,
+    vtt: `${MEDIA_ORIGIN}/media/tv/captions/eco-avalanche-15s.vtt`,
+  },
+  {
+    id: '45s',
+    label: '45s · Plain + Example',
+    dur: '51s',
+    video: `${MEDIA_ORIGIN}/media/tv/films/eco-avalanche-45s.mp4`,
+    vtt: `${MEDIA_ORIGIN}/media/tv/captions/eco-avalanche-45s.vtt`,
+  },
+  {
+    id: '90s',
+    label: '90s · Full Briefing',
+    dur: '95s',
+    video: `${MEDIA_ORIGIN}/media/tv/films/eco-avalanche-90s.mp4`,
+    vtt: `${MEDIA_ORIGIN}/media/tv/captions/eco-avalanche-90s.vtt`,
+  },
+  {
+    id: '180s',
+    label: '3m · Deep Cut · 3D',
+    dur: '187s',
+    video: `${MEDIA_ORIGIN}/media/tv/films/eco-avalanche-180s.mp4`,
+    vtt: `${MEDIA_ORIGIN}/media/tv/captions/eco-avalanche-180s.vtt`,
+  },
+];
+const posterUrl = `${MEDIA_ORIGIN}/media/tv/posters/eco-avalanche-poster.jpg`;
+const radioAudioUrl = `${MEDIA_ORIGIN}/media/radio/episodes/ep09-avalanche-ratchet-desk.m4a`;
+---
+
+<section id="watch-and-listen" class="max-w-7xl mx-auto px-5 md:px-10 py-14 border-t border-brand-border">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+    <div>
+      <div class="flex flex-wrap items-center gap-2.5 mb-2">
+        <span class="font-mono text-[11px] uppercase tracking-[2px] text-brand-amber">
+          Watch &amp; Listen · Plain-Language Studio
+        </span>
+        <span class="px-2.5 py-0.5 rounded-full font-mono text-[10.5px] bg-brand-cyan/15 text-brand-cyan border border-brand-cyan/30">
+          4 Telescoping Film Depths · Zero Acronym Soup
+        </span>
+      </div>
+      <h2 class="font-display text-2xl md:text-3xl font-bold text-brand-white">
+        The Nine-Rung Avalanche in 15 Seconds to 3 Minutes
+      </h2>
+      <p class="font-body text-sm text-brand-slate mt-1.5 max-w-3xl leading-relaxed">
+        Every depth slot opens with the same three plain-language takeaways, then expands with everyday analogies, step-by-step mechanisms, and 3D architecture views—paired with our dedicated multi-voice Research Radio roundtable.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2 shrink-0">
+      <a
+        href="https://research.openie.dev/tv/?channel=avalanche"
+        class="font-mono text-xs px-3.5 py-2 rounded-lg border border-brand-amber/40 text-brand-amber bg-brand-amber/10 hover:bg-brand-amber/20 no-underline transition-all"
+      >
+        ▶ Full Avalanche TV Channel →
+      </a>
+      <a
+        href="https://research.openie.dev/radio/?desk=avalanche"
+        class="font-mono text-xs px-3.5 py-2 rounded-lg border border-brand-cyan/40 text-brand-cyan bg-brand-cyan/10 hover:bg-brand-cyan/20 no-underline transition-all"
+      >
+        ◉ Avalanche Radio Desk →
+      </a>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <!-- 4-Depth Video Player -->
+    <div class="lg:col-span-8 glass-card p-4 md:p-5">
+      <div class="flex flex-wrap items-center justify-between gap-2 pb-3.5 mb-4 border-b border-brand-border">
+        <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Choose explainer film length">
+          {tiers.map((t) => (
+            <button
+              type="button"
+              data-av-film-btn={t.id}
+              data-video={t.video}
+              data-vtt={t.vtt}
+              class={`av-film-pill font-mono text-xs px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
+                t.id === '90s'
+                  ? 'border-brand-amber bg-brand-amber/15 text-brand-white font-semibold'
+                  : 'border-brand-border bg-brand-white/[0.02] text-brand-slate hover:text-brand-white'
+              }`}
+            >
+              {t.label} <span class="text-[10px] text-brand-gray ml-1">({t.dur})</span>
+            </button>
+          ))}
+        </div>
+        <span class="font-mono text-[11px] text-brand-cyan">
+          Narrator: Cecily · ElevenLabs v4 Studio
+        </span>
+      </div>
+
+      <div class="relative rounded-xl overflow-hidden border border-brand-border bg-[#0b1020] aspect-video">
+        <video
+          id="av-flagship-video"
+          controls
+          playsinline
+          preload="metadata"
+          crossorigin="anonymous"
+          poster={posterUrl}
+          src={tiers[2].video}
+          class="w-full h-full object-contain bg-[#0b1020]"
+        >
+          <track
+            id="av-flagship-track"
+            kind="captions"
+            srclang="en"
+            label="English Studio Captions"
+            src={tiers[2].vtt}
+            default
+          />
+        </video>
+      </div>
+    </div>
+
+    <!-- 3 Plain Points + Dedicated Ep09 Radio Roundtable -->
+    <div class="lg:col-span-4 space-y-4">
+      <div class="glass-card p-5 border-l-4 border-l-brand-amber">
+        <div class="font-mono text-[10.5px] uppercase tracking-[1.8px] text-brand-amber mb-2.5">
+          The 3 Plain-Words Takeaways
+        </div>
+        <ol class="list-decimal pl-4 space-y-2 font-body text-xs text-brand-light leading-relaxed m-0">
+          <li>
+            Across 3.8 billion years of biology and 76 years of computing, intelligence climbs a nine-step ladder through one repeating signal ratchet.
+          </li>
+          <li>
+            Today's AI stalls at Rung 5 (Tool Use) because routine jobs wake giant probabilistic models from scratch, compounding cost and errors.
+          </li>
+          <li>
+            Compiling verified answers downward into low-energy lookup reflexes crosses the Compilation Threshold and unlocks Rungs 6 through 9.
+          </li>
+        </ol>
+      </div>
+
+      <div class="glass-card p-5 border-l-4 border-l-brand-cyan">
+        <div class="flex items-center justify-between gap-2 mb-1.5">
+          <span class="font-mono text-[10.5px] uppercase tracking-[1.8px] text-brand-cyan">
+            Episode 09 · Avalanche Desk Roundtable
+          </span>
+          <span class="font-mono text-[10px] text-brand-gray">4:31 · Stereo AAC</span>
+        </div>
+        <div class="font-display text-base font-bold text-brand-white leading-snug mb-1.5">
+          The Nine Rungs &amp; Crossing the Compilation Threshold
+        </div>
+        <p class="font-body text-xs text-brand-slate leading-relaxed mb-3">
+          Roundtable with <strong class="text-brand-light">Amara</strong>, <strong class="text-brand-light">Marcus</strong>, and <strong class="text-brand-light">Kenji</strong> unpacking why Rung 5 stalls and how falsifiable downward compilation unlocks Rungs 6–9.
+        </p>
+        <audio
+          controls
+          preload="none"
+          src={radioAudioUrl}
+          class="w-full h-9"
+          aria-label="Play Episode 09 OpenIE Avalanche Desk Roundtable"
+        ></audio>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const video = document.getElementById('av-flagship-video');
+    const track = document.getElementById('av-flagship-track');
+    const buttons = document.querySelectorAll('[data-av-film-btn]');
+    if (!video || !buttons.length) return;
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const nextVideo = btn.getAttribute('data-video');
+        const nextVtt = btn.getAttribute('data-vtt');
+        if (!nextVideo) return;
+        const wasPlaying = !video.paused;
+        video.src = nextVideo;
+        if (track && nextVtt) track.src = nextVtt;
+        video.load();
+        if (wasPlaying) video.play().catch(() => {});
+        buttons.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('border-brand-amber', active);
+          b.classList.toggle('bg-brand-amber/15', active);
+          b.classList.toggle('text-brand-white', active);
+          b.classList.toggle('font-semibold', active);
+          b.classList.toggle('border-brand-border', !active);
+          b.classList.toggle('bg-brand-white/[0.02]', !active);
+          b.classList.toggle('text-brand-slate', !active);
+        });
+      });
+    });
+  })();
+</script>
