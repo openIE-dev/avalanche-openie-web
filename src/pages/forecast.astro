@@ -3,7 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import RegisterSwitcher from '../components/RegisterSwitcher.astro';
 import ForecastTable from '../components/ForecastTable.astro';
 import GlobalRungRadar from '../components/GlobalRungRadar.astro';
-import { AI_HISTORY_38, SIX_KERNEL_AUDIT } from '../data/forecast';
+import {
+  AI_HISTORY_38,
+  SIX_KERNEL_AUDIT,
+  FORECAST_COMPASS_EPISTEMOLOGY,
+  OPEN_REPLICATION_PROTOCOL,
+} from '../data/forecast';
 ---
 
 <Layout
@@ -39,12 +44,85 @@ import { AI_HISTORY_38, SIX_KERNEL_AUDIT } from '../data/forecast';
       </p>
     </div>
 
+    <!-- Addition 4A: Forecast Design Intent ("A Compass, Not a Recipe") Callout -->
+    <div class="glass-card p-6 md:p-7 border-brand-amber/35 bg-gradient-to-r from-brand-amber/[0.06] via-brand-dark/50 to-brand-cyan/[0.05] space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="font-mono text-[10.5px] uppercase tracking-[0.16em] text-brand-amber font-semibold">
+          {FORECAST_COMPASS_EPISTEMOLOGY.kicker}
+        </div>
+        <a href="#replicate" class="font-mono text-xs text-brand-cyan no-underline hover:underline">
+          Jump to 4-Step Third-Party Replication Protocol &darr;
+        </a>
+      </div>
+      <h3 class="font-display text-xl sm:text-2xl font-bold text-brand-white">
+        {FORECAST_COMPASS_EPISTEMOLOGY.title}
+      </h3>
+      <div class="reg-pair">
+        <p class="reg-visionary font-body text-xs sm:text-sm text-brand-light leading-relaxed m-0">
+          {FORECAST_COMPASS_EPISTEMOLOGY.plainBody}
+        </p>
+        <p class="reg-scientist font-mono text-xs text-brand-cyan bg-brand-dark/60 p-3.5 rounded-xl border border-brand-border leading-relaxed m-0">
+          {FORECAST_COMPASS_EPISTEMOLOGY.formalBody}
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+        {FORECAST_COMPASS_EPISTEMOLOGY.pillars.map((p) => (
+          <div class="p-3 rounded-lg bg-brand-dark/50 border border-brand-border">
+            <div class="font-mono text-[10.5px] font-bold text-brand-white">{p.label}</div>
+            <div class="font-body text-xs text-brand-slate mt-1 leading-snug">{p.detail}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
     <ForecastTable />
   </section>
 
   <!-- Part IA: Live Autonomous Global Rung Radar -->
   <section id="rung-radar" class="space-y-6 scroll-mt-24">
     <GlobalRungRadar />
+  </section>
+
+  <!-- Addition 4B: Open Third-Party Replication Protocol (#replicate) -->
+  <section id="replicate" class="space-y-6 scroll-mt-24">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+      <div class="max-w-4xl">
+        <p class="section-label mb-2">IB &middot; Independent Verification &amp; Bench Bring-Up</p>
+        <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-white">
+          Open Third-Party Replication &amp; Falsification Protocol
+        </h2>
+        <p class="font-body text-brand-slate text-sm sm:text-base mt-2 leading-relaxed">
+          Scientific claims earn trust through independent replication rather than self-reported benchmarks. Any university lab, hardware group, or hobbyist can run and attempt to falsify the Avalanche ladder end-to-end across four self-contained steps:
+        </p>
+      </div>
+      <a href="/rungs#lut6-basis" class="shrink-0 font-mono text-xs text-brand-cyan border border-brand-cyan/35 px-3.5 py-2 rounded-lg no-underline hover:bg-brand-cyan/10 transition-colors">
+        Inspect 16 KB lut6-core Spec &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {OPEN_REPLICATION_PROTOCOL.map((st, idx) => (
+        <div class:list={[
+          "glass-card p-6 flex flex-col justify-between space-y-4",
+          idx === 3 ? "border-brand-rose/35" : "border-brand-cyan/30"
+        ]}>
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between gap-2 font-mono text-[10.5px]">
+              <span class="text-brand-amber font-bold uppercase tracking-wider">{st.step}</span>
+              <span class="text-brand-gray">{st.targetCostAndTime}</span>
+            </div>
+            <h3 class="font-display text-lg font-bold text-brand-white leading-snug">{st.title}</h3>
+            <p class="reg-visionary font-body text-xs sm:text-sm text-brand-light leading-relaxed">{st.plainGoal}</p>
+            <p class="reg-scientist font-mono text-[11px] text-brand-slate bg-brand-dark/60 p-3 rounded border border-brand-border leading-relaxed">
+              {st.technicalChecklist}
+            </p>
+          </div>
+          <div class="pt-3 border-t border-brand-border font-mono text-[11px] text-brand-emerald leading-snug">
+            <strong class={idx === 3 ? "text-brand-rose" : "text-brand-cyan"}>Verification Gate:</strong> {st.passFailGate}
+          </div>
+        </div>
+      ))}
+    </div>
   </section>
 
   <!-- Part II: Six-Kernel Lean 4.36.0 Soundness Audit -->
@@ -55,18 +133,19 @@ import { AI_HISTORY_38, SIX_KERNEL_AUDIT } from '../data/forecast';
         Why Formal Proofs Are Audited by Six Independent Checkers Inside bubblewrap
       </h2>
       <p class="font-body text-brand-slate text-sm sm:text-base mt-2 max-w-4xl leading-relaxed">
-        In 2026, Lean 4 kernel disclosures&mdash;<code class="code-chip">CVE-2026-72844</code> (nested inductive <code class="code-chip">.proj</code> type confusion CWE-843 in &le; v4.31.0), <code class="code-chip">CVE-2026-72711</code> (<code class="code-chip">add_opaque</code> free-variable check), <code class="code-chip">#16688</code> (<code class="code-chip">Kernel.Environment.replay</code> <code class="code-chip">.inductInfo</code> skipping), and <code class="code-chip">#16693</code> (<code class="code-chip">Lean.ofReduceBool</code> compiler-trust bypass)&mdash;demonstrated that formal certainty should not depend on a single C++ binary or unsandboxed <code class="code-chip">.olean</code> cache. All <strong class="text-brand-white">103 cataloged theorems</strong> (45 in communication-avalanche, 27 in lut-adapt, 31 in time-as-an-index) plus all <strong class="text-brand-white">5,393 RCE theorem constants</strong> (1,264 declarations at <code class="code-chip">f87d6af2</code>) contain 0 <code class="code-chip">sorry</code>, 0 custom axioms, 0 <code class="code-chip">opaque</code>, and 0 <code class="code-chip">Lean.ofReduceBool</code>, and are exported to text NDJSON inside a network-isolated Linux <code class="code-chip">bubblewrap 0.11.1</code> (<code class="code-chip">bwrap</code>) sandbox checked unanimously by six independent verifiers:
+        In 2026, Lean 4 kernel disclosures&mdash;<code class="code-chip">CVE-2026-72844</code> (nested inductive <code class="code-chip">.proj</code> type confusion CWE-843 in &le; v4.31.0), <code class="code-chip">CVE-2026-72711</code> (<code class="code-chip">add_opaque</code> free-variable check), <code class="code-chip">#16688</code> (<code class="code-chip">Kernel.Environment.replay</code> <code class="code-chip">.inductInfo</code> skipping), and <code class="code-chip">#16693</code> (<code class="code-chip">Lean.ofReduceBool</code> compiler-trust bypass)&mdash;demonstrated that formal certainty should not depend on a single C++ binary or unsandboxed <code class="code-chip">.olean</code> cache. All <strong class="text-brand-white">123 cataloged theorems</strong> (45 in communication-avalanche, 27 in lut-adapt, 20 in lut6-core-nucleus <code class="code-chip">NucleusWobble.lean</code>, and 31 in time-as-an-index at <code class="code-chip">09511ee3</code>) plus all <strong class="text-brand-white">5,393 RCE theorem constants</strong> (1,264 declarations at <code class="code-chip">f87d6af2</code>) contain 0 <code class="code-chip">sorry</code>, 0 custom axioms, 0 <code class="code-chip">opaque</code>, and 0 <code class="code-chip">Lean.ofReduceBool</code>, and are exported to text NDJSON inside a network-isolated Linux <code class="code-chip">bubblewrap 0.11.1</code> (<code class="code-chip">bwrap</code>) sandbox checked unanimously by six independent verifiers:
       </p>
     </div>
 
     <div class="glass-card overflow-x-auto">
-      <table class="w-full border-collapse text-left min-w-[920px]">
+      <table class="w-full border-collapse text-left min-w-[980px]">
         <thead>
           <tr class="border-b border-brand-border bg-brand-white/[0.02] font-mono text-[10.5px] uppercase tracking-wider text-brand-gray">
             <th class="py-3.5 px-4">Independent Proof Checker</th>
             <th class="py-3.5 px-4">Implementation &amp; Soundness Basis</th>
             <th class="py-3.5 px-4">CTA (45)</th>
             <th class="py-3.5 px-4">LUT6 (27)</th>
+            <th class="py-3.5 px-4">Nucleus (20)</th>
             <th class="py-3.5 px-4">Horizon (31)</th>
             <th class="py-3.5 px-4">RCE (f87d6af2)</th>
             <th class="py-3.5 px-4">Mitigated Vulnerability Classes</th>
@@ -79,6 +158,7 @@ import { AI_HISTORY_38, SIX_KERNEL_AUDIT } from '../data/forecast';
               <td class="py-3.5 px-4 font-body text-brand-light max-w-[260px]">{k.implementation}</td>
               <td class="py-3.5 px-4 font-mono text-brand-emerald whitespace-nowrap">{k.ctaDecls}</td>
               <td class="py-3.5 px-4 font-mono text-brand-emerald whitespace-nowrap">{k.lutDecls}</td>
+              <td class="py-3.5 px-4 font-mono text-brand-emerald whitespace-nowrap">{k.nucleusDecls}</td>
               <td class="py-3.5 px-4 font-mono text-brand-emerald whitespace-nowrap">{k.horizonDecls}</td>
               <td class="py-3.5 px-4 font-mono text-brand-emerald whitespace-nowrap">{k.rceConstants}</td>
               <td class="py-3.5 px-4 font-mono text-[11px] text-brand-slate max-w-[280px]">{k.mitigatedCves}</td>

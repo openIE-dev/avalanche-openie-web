@@ -1,12 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import RegisterSwitcher from '../components/RegisterSwitcher.astro';
-import { NINE_RUNGS, COMPILATION_THRESHOLD, LITERATURE_TRADITIONS, SEMINAR_MODULES } from '../data/rungs';
+import Lut6CodonBasis from '../components/Lut6CodonBasis.astro';
+import HybridFabricMeansTest from '../components/HybridFabricMeansTest.astro';
+import {
+  NINE_RUNGS,
+  COMPILATION_THRESHOLD,
+  LITERATURE_TRADITIONS,
+  RUNG5_TO_6_EXTERNAL_WORK,
+  AVALANCHE_UNIFYING_SYNTHESIS,
+  SEMINAR_MODULES,
+} from '../data/rungs';
 ---
 
 <Layout
-  title="The 9 Rungs Reference & Seminar Guide"
-  description="Complete encyclopedic educational reference for Rungs 1 through 9 of the Computer Intelligence Avalanche, Proposition 1's Compilation Threshold, four complementary research traditions, and a 4-part seminar teaching guide."
+  title="The 9 Rungs Reference, LUT6 64-Codon Basis & Seminar Guide"
+  description="Complete encyclopedic educational reference for Rungs 1 through 9 of the Computer Intelligence Avalanche, the atomic LUT6 (u64) 64-codon basis and Walsh-Hadamard wobble inspector, 4-tier hybrid hardware means test, Rung 5 to 6 external literature synthesis, and seminar guide."
 >
 
 <div class="max-w-6xl mx-auto px-6 py-16 space-y-20">
@@ -16,13 +25,22 @@ import { NINE_RUNGS, COMPILATION_THRESHOLD, LITERATURE_TRADITIONS, SEMINAR_MODUL
       <a href="/" class="font-mono text-xs text-brand-cyan no-underline hover:underline">&larr; Back to Avalanche Observatory</a>
       <RegisterSwitcher label="Explanation Mode" />
     </div>
-    <p class="section-label">Encyclopedic Study Reference &middot; Rungs 1 Through 9</p>
+    <p class="section-label">Encyclopedic Study Reference &middot; Rungs 1 Through 9 &amp; Atomic LUT6 Basis</p>
     <h1 class="font-display text-4xl sm:text-6xl font-bold text-brand-white tracking-tight">
       The 9-Rung Computer Intelligence Avalanche
     </h1>
     <p class="font-body text-brand-slate text-base md:text-lg max-w-3xl leading-relaxed">
-      A complete side-by-side reference contrasting <strong class="text-brand-white">Phase 1: Stateless Ephemeral Inference (Rungs 1–5)</strong> against <strong class="text-brand-cyan">Proposition 1&rsquo;s Compilation Threshold</strong> and <strong class="text-brand-white">Phase 2: Stateful Compiled Substrates (Rungs 6–9)</strong>, together with a synthesis of four external research traditions and a 4-module seminar guide.
+      A complete side-by-side reference contrasting <strong class="text-brand-white">Phase 1: Stateless Ephemeral Inference (Rungs 1–5)</strong> against <strong class="text-brand-cyan">Proposition 1&rsquo;s Compilation Threshold</strong> and <strong class="text-brand-white">Phase 2: Stateful Compiled Substrates (Rungs 6–9)</strong>, followed by the <strong class="text-brand-cyan">64-Codon <code class="code-chip">LUT6</code> (<code class="code-chip">u64</code>) Basis &amp; Walsh-Hadamard Inspector</strong>, the <strong class="text-brand-amber">4-Tier Hybrid Means Test</strong>, external Rung 5&rarr;6 validation, and a 4-module seminar guide.
     </p>
+
+    <!-- Chapter Jump Pills -->
+    <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
+      <a href="#rung-1" class="px-3 py-1.5 rounded-lg border border-brand-border bg-brand-white/[0.03] text-brand-light no-underline hover:border-brand-amber">I &middot; Rungs 1–9</a>
+      <a href="#lut6-basis" class="px-3 py-1.5 rounded-lg border border-brand-cyan/35 bg-brand-cyan/10 text-brand-cyan no-underline hover:bg-brand-cyan/20">IA &middot; 64-Codon LUT6 &amp; Walsh Inspector</a>
+      <a href="#hybrid-means-test" class="px-3 py-1.5 rounded-lg border border-brand-amber/35 bg-brand-amber/10 text-brand-amber no-underline hover:bg-brand-amber/20">IB &middot; 4-Camp Hybrid &amp; Means Test</a>
+      <a href="#external-work" class="px-3 py-1.5 rounded-lg border border-brand-border bg-brand-white/[0.03] text-brand-light no-underline hover:border-brand-cyan">II &middot; Rung 5&rarr;6 External Synthesis</a>
+      <a href="#seminar" class="px-3 py-1.5 rounded-lg border border-brand-border bg-brand-white/[0.03] text-brand-light no-underline hover:border-brand-amber">III &middot; Seminar Notes</a>
+    </div>
   </header>
 
   <!-- All 9 Rungs Printed in Full Sequential Order (with Compilation Threshold Divider after R5) -->
@@ -121,18 +139,25 @@ import { NINE_RUNGS, COMPILATION_THRESHOLD, LITERATURE_TRADITIONS, SEMINAR_MODUL
     ))}
   </section>
 
-  <!-- Literature Synthesis of 4 External Research Traditions -->
-  <section class="space-y-6">
+  <!-- Addition 1: LUT6 (u64) Atomic 64-Codon Basis, Walsh-Hadamard Inspector & 16 KB Nucleus -->
+  <Lut6CodonBasis />
+
+  <!-- Addition 2: 4-Camp Hybrid Compute Thesis, 4-Tier Hardware Metering Matrix & Dual-Reality Means Test -->
+  <HybridFabricMeansTest />
+
+  <!-- Addition 3: Literature Synthesis & Closest External Work Crossing Rung 5 -> Rung 6 -->
+  <section id="external-work" class="space-y-10 scroll-mt-24">
     <div>
-      <p class="section-label-cyan mb-2">II &middot; Literature Synthesis</p>
+      <p class="section-label-cyan mb-2">II &middot; Literature Synthesis &amp; Rung 5 &rarr; Rung 6 External Validation</p>
       <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-white">
-        Four Complementary Research Traditions Approaching the Threshold
+        Complementary Research Traditions &amp; Closest External Work Crossing the Threshold
       </h2>
-      <p class="font-body text-brand-slate text-sm sm:text-base mt-2 max-w-3xl">
-        Four active areas of computer science and machine-learning research each establish an essential piece of downward compilation, while leaving complementary gaps when studied in isolation.
+      <p class="font-body text-brand-slate text-sm sm:text-base mt-2 max-w-4xl leading-relaxed">
+        Independent breakthroughs across workflow distillation, formal verification, differentiable lookup-table synthesis, and thermodynamic physics each validate a critical segment of downward compilation&mdash;while illustrating why a unified, joule-metered falsifiable ladder is required.
       </p>
     </div>
 
+    <!-- 4 Foundational Traditions -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       {LITERATURE_TRADITIONS.map((lt) => (
         <div class="glass-card p-6 space-y-3">
@@ -150,10 +175,70 @@ import { NINE_RUNGS, COMPILATION_THRESHOLD, LITERATURE_TRADITIONS, SEMINAR_MODUL
         </div>
       ))}
     </div>
+
+    <!-- Expanded Rung 5 -> 6 Closest External Work Synthesis Matrix -->
+    <div class="space-y-4">
+      <h3 class="font-display text-xl sm:text-2xl font-bold text-brand-white">
+        Six External Research Streams Validating the Rung 5 &rarr; Rung 6 Crossing
+      </h3>
+      <div class="glass-card overflow-x-auto">
+        <table class="w-full border-collapse text-left min-w-[920px]">
+          <thead>
+            <tr class="border-b border-brand-border bg-brand-white/[0.02] font-mono text-[10.5px] uppercase tracking-wider text-brand-gray">
+              <th class="py-3.5 px-4">External Work &amp; Provenance</th>
+              <th class="py-3.5 px-4 text-brand-amber">9-Rung Projection &amp; Quantitative Anchor</th>
+              <th class="py-3.5 px-4 text-brand-cyan">What It Independently Establishes</th>
+              <th class="py-3.5 px-4 text-brand-rose">Remaining Gap in Isolation</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-brand-border text-xs">
+            {RUNG5_TO_6_EXTERNAL_WORK.map((ext) => (
+              <tr class="hover:bg-brand-white/[0.02] transition-colors align-top">
+                <td class="py-3.5 px-4 max-w-[230px]">
+                  <div class="font-display font-semibold text-brand-white leading-snug">{ext.work}</div>
+                  <div class="font-mono text-[10.5px] text-brand-gray mt-1">{ext.authorsAndDate}</div>
+                </td>
+                <td class="py-3.5 px-4 max-w-[220px]">
+                  <div class="font-mono text-[10.5px] font-bold text-brand-amber">{ext.rungProjection}</div>
+                  <div class="font-mono text-[11px] text-brand-light mt-1 leading-snug">{ext.empiricalAnchor}</div>
+                </td>
+                <td class="py-3.5 px-4 font-body text-brand-light max-w-[260px] leading-relaxed">
+                  {ext.whatItProves}
+                </td>
+                <td class="py-3.5 px-4 font-body text-brand-slate max-w-[250px] leading-relaxed">
+                  {ext.isolatedGap}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Unifying Avalanche Contribution Callout -->
+    <div class="glass-card p-6 md:p-8 border-brand-emerald/35 bg-brand-emerald/[0.04] space-y-4">
+      <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-brand-emerald font-semibold">
+        Unifying Scientific Contribution &middot; Biology to Silicon
+      </div>
+      <h3 class="font-display text-xl sm:text-2xl font-bold text-brand-white">
+        {AVALANCHE_UNIFYING_SYNTHESIS.headline}
+      </h3>
+      <p class="font-body text-sm text-brand-light leading-relaxed">
+        {AVALANCHE_UNIFYING_SYNTHESIS.plain}
+      </p>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 font-body text-xs text-brand-slate">
+        {AVALANCHE_UNIFYING_SYNTHESIS.fiveInvariants.map((inv) => (
+          <li class="p-3 rounded-lg bg-brand-dark/55 border border-brand-border flex items-start gap-2.5 leading-relaxed">
+            <span class="text-brand-emerald font-mono font-bold mt-0.5">&#10003;</span>
+            <span>{inv}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   </section>
 
   <!-- 4-Part Seminar & Lecture Guide -->
-  <section class="space-y-6">
+  <section id="seminar" class="space-y-6 scroll-mt-24">
     <div>
       <p class="section-label mb-2">III &middot; Teaching &amp; Seminar Notes</p>
       <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-white">

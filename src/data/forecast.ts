@@ -111,12 +111,12 @@ export const HORIZON_MILESTONES: HorizonMilestone[] = [
     id: 'HQ04',
     bucket: 'quarter',
     windowLabel: 'Quarter 4',
-    title: 'KV260 Board-Metered Tier 1 → 0 LUT6 Closure',
-    bridgedCamps: 'C5 / C2 → C8 (xck26)',
-    mechanism: 'Loop 4 + Loop 5 512×512 Beneš + 81 × RAMB36E2',
-    leanAnchor: 'CTA-T41..T45 · LutAdapt.BenesCopy',
-    gateMetric: '>= 250 MHz xck26 (13 levels, 170 <= 189 IOBs, 0 DSP48E2, 15.59 est_mW idle), INA260 measured_j > 100× below CPU',
-    killCriterion: 'Post-PAR timing < 250 MHz, DSP48E2 > 0, < 100% parity, or physical INA260 measured_j fails CPU Tier-1 win',
+    title: 'KV260 & Aller A7 M.2 Board-Metered Tier 1 → 0 LUT6 Closure',
+    bridgedCamps: 'C5 / C2 → C8 (xck26 & xc7)',
+    mechanism: 'Loop 4 + Loop 5 512×512 Beneš + 81 × RAMB36E2 / 83 × RAMB36E1',
+    leanAnchor: 'CTA-T41..T45 · LutAdapt.BenesCopy · NucleusWobble',
+    gateMetric: 'xck26: 13 levels, 15.59 est_mW idle; XC7A200T M.2: 62,211 LUTs (46.22%), 10,500/10,500 KV260 parity, 0.86 est_W M.2 3.3V @ 55.2 est_C (DDR3 off); pending physical INA260 / M.2 shunt measured_j > 100× CPU',
+    killCriterion: 'Post-PAR timing < 200–250 MHz, DSP48 > 0, < 100% parity, > 85 °C M.2 T_J, or physical shunt measured_j fails CPU Tier-1 win',
     statusLabel: 'Active [E]',
     statusKind: 'active',
   },
@@ -316,6 +316,7 @@ export interface KernelCheckerAudit {
   implementation: string;
   ctaDecls: string;
   lutDecls: string;
+  nucleusDecls: string;
   horizonDecls: string;
   rceConstants: string;
   verdict: string;
@@ -328,6 +329,7 @@ export const SIX_KERNEL_AUDIT: KernelCheckerAudit[] = [
     implementation: 'Minimal reference kernel (Breitner) formally proved consistent in ZFC set theory (cannot accept False)',
     ctaDecls: '58,928',
     lutDecls: '58,683',
+    nucleusDecls: '58,748',
     horizonDecls: '58,796',
     rceConstants: '5,393 (f87d6af2)',
     verdict: 'Accepts (bwrap)',
@@ -338,6 +340,7 @@ export const SIX_KERNEL_AUDIT: KernelCheckerAudit[] = [
     implementation: 'Aeneas-verified Rust refinement of con-leche',
     ctaDecls: '58,928',
     lutDecls: '58,683',
+    nucleusDecls: '58,748',
     horizonDecls: '58,796',
     rceConstants: '5,393 (f87d6af2)',
     verdict: 'Accepts (bwrap)',
@@ -348,6 +351,7 @@ export const SIX_KERNEL_AUDIT: KernelCheckerAudit[] = [
     implementation: 'Independent Lean-in-Lean Calculus of Inductive Constructions (CIC) typechecker (Carneiro)',
     ctaDecls: '58,930',
     lutDecls: '58,685',
+    nucleusDecls: '58,750',
     horizonDecls: '58,798',
     rceConstants: '5,393 (f87d6af2)',
     verdict: 'Accepts (bwrap)',
@@ -358,6 +362,7 @@ export const SIX_KERNEL_AUDIT: KernelCheckerAudit[] = [
     implementation: 'Standalone zero-Lean-runtime Rust export verifier (sorryAx strictly blocked)',
     ctaDecls: '58,930',
     lutDecls: '58,685',
+    nucleusDecls: '58,750',
     horizonDecls: '58,798',
     rceConstants: '5,393 (f87d6af2)',
     verdict: 'Accepts (bwrap)',
@@ -368,6 +373,7 @@ export const SIX_KERNEL_AUDIT: KernelCheckerAudit[] = [
     implementation: 'Fresh-environment C++ kernel replay with zero tactic or compiler trust',
     ctaDecls: '58,930',
     lutDecls: '58,685',
+    nucleusDecls: '58,750',
     horizonDecls: '58,798',
     rceConstants: '5,393 (f87d6af2)',
     verdict: 'Accepts (bwrap)',
@@ -378,9 +384,85 @@ export const SIX_KERNEL_AUDIT: KernelCheckerAudit[] = [
     implementation: 'Post-CVE November 2026 C++ kernel (#print axioms enforced)',
     ctaDecls: '58,930',
     lutDecls: '58,685',
+    nucleusDecls: '58,750',
     horizonDecls: '58,798',
     rceConstants: '5,393 (f87d6af2)',
     verdict: 'Accepts (bwrap)',
     mitigatedCves: 'All 2026 kernel CVEs patched; 0 sorry, 0 opaque, 0 custom axioms, 0 ofReduceBool',
+  },
+];
+
+export const FORECAST_COMPASS_EPISTEMOLOGY = {
+  kicker: 'FORECAST EPISTEMOLOGY · WHY CALENDAR BUCKETS REPLACE EFFORT ESTIMATES',
+  title: 'Forecast Design Intent: A Compass, Not a Recipe',
+  plainBody:
+    'The 18 hypotheses below intentionally use coarse calendar buckets (Month / Quarter / Year / Decade) rather than engineering effort estimates or sprint schedules. Depending on an implementer’s existing substrate, a "Month-1" milestone may take a single weekend of harness wiring or six months of foundational bring-up. The table functions as a directional compass rather than a step-by-step recipe: independent teams self-calibrate implementation effort while physical invariants hold every claim to the exact same falsifiable standard.',
+  formalBody:
+    'Invariant across arbitrary wall-clock pacing: (1) Binary Completion C(z) = 1 (zero partial-credit accuracy curves), (2) Horizon Monotonicity CpJ(Month) < CpJ(Quarter) < CpJ(Year) < CpJ(Decade) (Theorem CTA-T43), (3) Joules as the sole continuous variable (measured_j ⊥ reported_j ⊥ est_j), and (4) Immediate invalidation upon crossing any pre-registered Red Kill Criterion.',
+  pillars: [
+    {
+      label: 'Self-Calibrated Effort',
+      detail: 'Calendar buckets order causal dependencies (bus → router → crystallizer → silicon) without prescribing team size or man-hours.',
+    },
+    {
+      label: 'Sole Continuous Variable: Joules',
+      detail: 'Time-to-implement varies by lab; physical energy dissipated per verified task (CpJ) does not negotiate with narrative.',
+    },
+    {
+      label: 'Strict Speculative Quarantine',
+      detail: 'Neural BCI (HY04–HY05, HD02) and clinical EV items (HY06, HD03–HD04) remain quarantined as Speculative [S] until human RCT gates pass.',
+    },
+  ],
+};
+
+export interface ReplicationStep {
+  step: string;
+  title: string;
+  targetCostAndTime: string;
+  plainGoal: string;
+  technicalChecklist: string;
+  passFailGate: string;
+}
+
+export const OPEN_REPLICATION_PROTOCOL: ReplicationStep[] = [
+  {
+    step: 'Step 01',
+    title: 'Six-Kernel Sandboxed Lean 4.36.0 Soundness Audit',
+    targetCostAndTime: '$0 commodity Linux host · ~15 min',
+    plainGoal:
+      'Verify every mathematical theorem behind the ratchet, Beneš routing network, and horizon monotonicity without trusting a single prover binary or network cache.',
+    technicalChecklist:
+      'Export the 123 cataloged theorems (45 CTA + 27 LUT6 + 20 Wobble/Nucleus + 31 Horizon at 09511ee3) and 5,393 RCE constants to text NDJSON inside bubblewrap 0.11.1 (bwrap --unshare-net --ro-bind); run con-leche --verified, con-ron --verified, lean4lean, nanoda, leanchecker --paranoid, and Lean v4.36.0.',
+    passFailGate: 'PASS iff 6/6 checkers accept with 0 sorryAx, 0 custom axioms, 0 opaque, and 0 Lean.ofReduceBool.',
+  },
+  {
+    step: 'Step 02',
+    title: '16 KB #![no_std] lut6-core Nucleus & Yosys -lut 6 Packer',
+    targetCostAndTime: 'Rust 1.100.0 (edition = "2024") + Yosys 0.70 · ~30 min',
+    plainGoal:
+      'Compile and self-test the 3-part bootstrap nucleus (SEED_KNOWLEDGE, SEED_AGENCY, and the Walsh-Hadamard + anchor retention gate) in zero-heap integer Rust.',
+    technicalChecklist:
+      'Build CompactLut6Page (sizeof == 4096 B, align == 8); lower branching FSMs via Yosys synth -noalumacc -nordff; abc -lut 6 or DiffLUT-Net multilinear export; verify rustc compile-time const assertions on innate hit (0x08 → 0xA1), wobble jitter (0x37 → 0x5E), and apoptosis rollback (w63 = 1 → 0x3C).',
+    passFailGate: 'FAIL if any 1-hot high-harmonic patch (> 64 / 4096 degree-≥5 noise) or seed-breaking overlay passes refine_knowledge().',
+  },
+  {
+    step: 'Step 03',
+    title: 'GPIO-Framed Physical Shunt or Separate Counter Harness',
+    targetCostAndTime: '$4 RP2040 / Alif E3–E4 / KV260 + PPK2 or INA228/INA260',
+    plainGoal:
+      'Instrument the test bench so energy in joules is captured cleanly in the external harness rather than estimated from FLOPs or mixed across incompatible sensors.',
+    technicalChecklist:
+      'Wire an inline Nordic PPK2 (100 kS/s) or TI INA228 / INA238 high-side shunt across VSYS / VDD_MAIN (or read onboard KV260 INA260 / Jetson Thor INA3221), framing 1,000 back-to-back evaluations with GPIO_HIGH → nucleus.step() → GPIO_LOW and reading DWT->CYCCNT / SIO cycles over SWD (zero UART draw). On laptops without shunts, log RAPL / IOReport strictly as reported_j (board_metered = false).',
+    passFailGate: 'WITHHOLD net joule subtraction whenever pre/post quiet idle baseline drifts > 10.0% (Falsifier 6); never sum measured_j + reported_j.',
+  },
+  {
+    step: 'Step 04',
+    title: 'Three-Wave Dual-Reality Means Test & Kill Audit',
+    targetCostAndTime: 'Exact Repeats · Noisy Wobble · OOD Shift Stream',
+    plainGoal:
+      'Challenge compiled 4 KB .lut6 crystals against an INT8/INT4 micro-model baseline across clean repeats, noisy paraphrases/ADC jitter, and out-of-distribution shifts.',
+    technicalChecklist:
+      'Run Wave 1 (certified exact repeats), Wave 2 (1–2 bit sensor/paraphrase jitter testing ≥ 85% wake suppression), and Wave 3 (unseen OOD shifts + dead-class transients testing conformal Escalate and Loop 5 h ≤ h_min eviction). Publish SHA-256-hashed CSV/JSON receipts.',
+    passFailGate: 'KILL immediately if silent corruption > 0.00%, 1-bit jitter drops hit rate < 50%, wake+miss latency exceeds standalone baseline, or CpJ fails CTA-T43 monotonicity.',
   },
 ];

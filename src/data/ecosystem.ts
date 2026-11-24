@@ -21,7 +21,7 @@ export const LEARNING_MODALITIES: OpenLearningModality[] = [
       'Read the complete methods, pre-registration SHA-256 hashes, explicit scope limits, and negative/withheld findings across The Communication Tool Avalanche, Downward LUT6 Compilation, Deterministic Null, and Metered Commit Gates.',
     highlights: [
       '90 DOI/PMID/arXiv verified primary references in Communication Avalanche',
-      '103 Six-Kernel Lean 4.36.0 theorems + 5,393 RCE theorem constants (0 sorry)',
+      '123 Six-Kernel Lean 4.36.0 theorems + 5,393 RCE theorem constants (0 sorry)',
       'HTML + archival PDF + LaTeX source twins for every study',
     ],
   },
@@ -149,7 +149,7 @@ export const SISTER_REFERENCES: SisterReferenceItem[] = [
     rungCoord: 'Rung 3 · Threshold',
     phase: 2,
     topicArea: 'Multi-Kernel Verification',
-    formalSignature: '103 Theorems + 5,393 RCE Decls · 6/6 Kernels (bwrap)',
+    formalSignature: '123 Theorems + 5,393 RCE Decls · 6/6 Kernels (bwrap)',
     summary: 'Explains interactive theorem proving, small-kernel soundness, CVE-2026-72844 defenses, and sandboxing six independent Lean 4.36.0 checkers.',
     tvUrl: 'https://research.openie.dev/tv/?channel=proof',
     radioUrl: 'https://research.openie.dev/radio/?desk=proof',

@@ -1,0 +1,640 @@
+---
+import {
+  CODON_ISOMORPHISM_PILLARS,
+  WALSH_PRESETS,
+  NUCLEUS_THREE_PARTS,
+  AGENCY_INPUT_ABI,
+  OPERON_OUTPUT_ABI,
+  OPERON_QUADRANTS,
+} from '../data/lut6-basis';
+
+const serializedPresets = JSON.stringify(WALSH_PRESETS).replace(/</g, '\\u003c');
+---
+
+<section id="lut6-basis" class="space-y-14 scroll-mt-24">
+  <!-- Section Header -->
+  <div class="space-y-4">
+    <p class="section-label-cyan">IA &middot; Atomic Substrate &middot; 64-Codon LUT6 (u64) Basis &amp; 16 KB Bootstrap Nucleus</p>
+    <h2 class="font-display text-2xl sm:text-4xl font-bold text-brand-white tracking-tight">
+      Why <span class="text-brand-cyan">LUT6 (<code class="code-chip">u64</code>)</span> Is the Atomic 64-Codon Basis of Verified Knowledge
+    </h2>
+    <div class="reg-pair">
+      <p class="reg-visionary font-body text-sm sm:text-base text-brand-light leading-relaxed p-4 rounded-xl border border-brand-amber/20 bg-brand-amber/[0.025]">
+        Living organisms never re-run evolutionary search at runtime for routine survival: verified adaptations crystallize into a discrete <strong class="text-brand-white">64-codon genetic basis</strong> (4&sup3; = 64 nucleotide triplets) and microjoule reflex arcs. In digital hardware, a 6-input lookup table (<code class="code-chip">LUT6</code>) has the exact same state cardinality: <strong class="text-brand-cyan">2&sup6; = 64 truth-table bits</strong> packed into a single 64-bit integer (<code class="code-chip">u64</code> <code class="code-chip">INIT</code> mask). Unlike dense floating-point weights where syntax, facts, and control flow are entangled across billions of parameters, routed <code class="code-chip">LUT6</code> crystals form a discrete, local, functionally complete substrate that agents can prove, diff, and patch without catastrophic forgetting.
+      </p>
+      <div class="reg-scientist p-4 rounded-xl border border-brand-cyan/25 bg-brand-cyan/[0.025] space-y-2">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-cyan">Discrete Basis Bijection &amp; Page Invariant</div>
+        <pre class="font-mono text-xs text-brand-white bg-brand-dark/70 p-3 rounded border border-brand-border overflow-x-auto whitespace-pre-wrap">|&Sigma;_RNA&sup3;| = 4&sup3; = 64 codons  &cong;  |&#123;0,1&#125;&sup6; &rarr; &#123;0,1&#125;| = 2&sup6; = 64 bits &isin; uint64_t INIT
+sizeof(CompactLut6Page) = 4,096 B = 32,768 bits  (1:1 with 36-Kbit RAMB36 BRAM)</pre>
+        <p class="font-mono text-[11px] text-brand-slate leading-relaxed">
+          Evaluates 64-wire bitboards in pure integer shift-mask ops (<code class="code-chip">pub const fn eval_raw</code> in <code class="code-chip">#![no_std]</code> Rust 1.100.0, <code class="code-chip">edition = "2024"</code>): zero heap allocations, zero floating-point instructions, and compile-time <code class="code-chip">rustc</code> verification of seed vectors.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fig 04 SVG: 64-Codon <-> LUT6 Isomorphism & 4 KB Crystal Layout -->
+  <figure class="glass-card p-5 md:p-7">
+    <svg
+      viewBox="0 0 1080 250"
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-full h-auto"
+      role="img"
+      aria-label="Diagram of the 64-Codon to LUT6 u64 isomorphism and the exact 4,096-byte CompactLut6Page binary memory layout."
+    >
+      <rect width="1080" height="250" rx="10" fill="var(--svg-bg)" />
+      <text x="28" y="30" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="0.16em" fill="#00D4AA">
+        FIG. 04 &middot; BIOLOGICAL 64-CODON TABLE (4&sup3; = 64) &harr; DIGITAL LUT6 (2&sup6; = 64-BIT u64) &amp; 4,096-BYTE CRYSTAL PAGE
+      </text>
+
+      <!-- Left: Biological 4^3 = 64 -->
+      <g transform="translate(28, 52)">
+        <rect width="276" height="148" rx="8" fill="var(--svg-panel)" stroke="#F59E0B" stroke-width="1.3" />
+        <text x="16" y="24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#F59E0B">BIOLOGICAL BASIS &middot; 4&sup3; = 64 CODONS</text>
+        <text x="16" y="46" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700" fill="var(--svg-text)">Triplet Lookup + 3rd-Base Wobble</text>
+        <text x="16" y="68" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; 3 bases &times; 2 bits/base = 6 address bits</text>
+        <text x="16" y="86" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; LSB wobble absorbs thermal point noise</text>
+        <text x="16" y="104" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#F59E0B">&bull; Operon promoter gates ATP expenditure</text>
+        <text x="16" y="128" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-sub)">Immutable germline + local regulation</text>
+      </g>
+
+      <line x1="308" y1="126" x2="352" y2="126" stroke="#00D4AA" stroke-width="1.8" stroke-dasharray="4 3" class="anim-flow" />
+      <text x="330" y="114" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#00D4AA" text-anchor="middle">2&sup6; = 64</text>
+
+      <!-- Middle: Single LUT6 u64 -->
+      <g transform="translate(356, 52)">
+        <rect width="276" height="148" rx="8" fill="var(--svg-panel)" stroke="#00D4AA" stroke-width="1.5" />
+        <text x="16" y="24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#00D4AA">SILICON ATOM &middot; 1 &times; LUT6 = 1 &times; u64</text>
+        <text x="16" y="46" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700" fill="var(--svg-text)">6-Wire Route + 64-Bit INIT Mask</text>
+        <text x="16" y="68" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; out = (init_mask &gt;&gt; addr_6b) &amp; 1</text>
+        <text x="16" y="86" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; Wobble mask: 0xF &lt;&lt; (target &amp; 0x3C)</text>
+        <text x="16" y="104" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#00D4AA">&bull; Degree &ge; 5 Walsh noise = exact 0</text>
+        <text x="16" y="128" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-sub)">Functionally complete Boolean basis</text>
+      </g>
+
+      <line x1="636" y1="126" x2="680" y2="126" stroke="#10B981" stroke-width="1.8" stroke-dasharray="4 3" class="anim-flow" />
+      <text x="658" y="114" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#10B981" text-anchor="middle">&times; 256</text>
+
+      <!-- Right: 4,096-Byte CompactLut6Page -->
+      <g transform="translate(684, 52)">
+        <rect width="368" height="148" rx="8" fill="var(--svg-panel)" stroke="#10B981" stroke-width="1.5" />
+        <text x="16" y="24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#10B981">CANONICAL 4,096-BYTE CRYSTAL (.lut6)</text>
+        <rect x="16" y="38" width="58" height="42" rx="4" fill="rgba(245,158,11,0.14)" stroke="#F59E0B" stroke-width="1" />
+        <text x="45" y="56" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#F59E0B" text-anchor="middle">64 B</text>
+        <text x="45" y="70" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--svg-sub)" text-anchor="middle">Header</text>
+
+        <rect x="80" y="38" width="128" height="42" rx="4" fill="rgba(0,212,170,0.12)" stroke="#00D4AA" stroke-width="1" />
+        <text x="144" y="56" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#00D4AA" text-anchor="middle">1,984 B</text>
+        <text x="144" y="70" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--svg-sub)" text-anchor="middle">6-Wire Routes + Proof</text>
+
+        <rect x="214" y="38" width="138" height="42" rx="4" fill="rgba(16,185,129,0.14)" stroke="#10B981" stroke-width="1" />
+        <text x="283" y="56" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#10B981" text-anchor="middle">2,048 B</text>
+        <text x="283" y="70" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--svg-sub)" text-anchor="middle">256 &times; u64 Masks</text>
+
+        <text x="16" y="102" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; Fits 1 FPGA RAMB36 block or MCU SRAM/MRAM page</text>
+        <text x="16" y="120" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-muted)">&bull; Lineage SHA-128 + SAT/Lean proof_digest [32 B]</text>
+        <text x="16" y="137" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#10B981">&bull; Identical binary runs from $4 RP2040 to ZCU102</text>
+      </g>
+
+      <text x="28" y="228" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--svg-dim)">
+        ⟨ ZERO-ALLOCATION PORTABILITY: RP2040 STRIPED SRAM &middot; ALIF E3/E4 5.5 MB MRAM + DTCM &middot; ALLER A7 XC7A200T M.2 &middot; KRIA KV260 / ZCU102 ⟩
+      </text>
+    </svg>
+  </figure>
+
+  <!-- 4 Isomorphism Pillars -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {CODON_ISOMORPHISM_PILLARS.map((p) => (
+      <div class="glass-card spotlight-card p-5 flex flex-col justify-between space-y-3">
+        <div class="space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-mono text-[10.5px] font-bold text-brand-amber">{p.id}</span>
+            <span class="ev-badge ev-theorem">{p.badge}</span>
+          </div>
+          <h3 class="font-display text-base sm:text-lg font-bold text-brand-white leading-snug">{p.title}</h3>
+          <div class="font-mono text-[10.5px] text-brand-cyan">Biological parallel: {p.biologicalAnalog}</div>
+          <p class="reg-visionary font-body text-xs sm:text-sm text-brand-slate leading-relaxed">{p.plainSummary}</p>
+          <pre class="reg-scientist font-mono text-[11px] text-brand-light bg-brand-dark/60 p-2.5 rounded border border-brand-border overflow-x-auto whitespace-pre-wrap">{p.formalSpec}</pre>
+        </div>
+        <div class="pt-2.5 border-t border-brand-border font-mono text-[10.5px] text-brand-emerald">
+          {p.portabilityNote}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Interactive 64-Point Integer Walsh-Hadamard & 2-Bit Wobble Inspector -->
+  <div class="glass-card p-6 md:p-8 space-y-6 border-brand-cyan/35">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-5 border-b border-brand-border">
+      <div class="space-y-2 max-w-3xl">
+        <p class="section-label mb-1">Interactive Browser Instrument &middot; Zero-Float 64-Point Integer FWHT &amp; LMN Theorem</p>
+        <h3 class="font-display text-2xl sm:text-3xl font-bold text-brand-white tracking-tight">
+          Signal vs. Noise on <code class="code-chip">LUT6</code>: Walsh-Hadamard Harmonics &amp; 2-Bit Wobble Inspector
+        </h3>
+        <p class="reg-visionary font-body text-xs sm:text-sm text-brand-slate leading-relaxed">
+          By the <strong class="text-brand-white">Linial&ndash;Mansour&ndash;Nisan (LMN) theorem</strong>, stable Boolean circuits concentrate spectral energy in low-degree harmonics (<code class="code-chip">|S| &le; 3</code>), whereas brittle point-memorization leaks <strong class="text-brand-rose">7/64 (448 / 4096)</strong> of Parseval energy into high-sequency degree-5/6 parity terms that flip on 1-bit noise. Biological <strong class="text-brand-cyan">2-bit wobble degeneracy</strong> (<code class="code-chip">0xF &lt;&lt; (target &amp; 0x3C)</code>) drives degree-&ge;5 noise to <strong class="text-brand-emerald">exact 0</strong>. Select a preset or click any cell in the 64-codon bitboard below to compute all 64 Walsh-Hadamard bars live in pure integer arithmetic.
+        </p>
+        <p class="reg-scientist font-mono text-xs text-brand-light bg-brand-dark/60 p-3 rounded border border-brand-border">
+          f(x) = &Sigma;<sub>S&sube;&#123;0..5&#125;</sub> f&#770;(S)&chi;<sub>S</sub>(x) &middot; Support-normalized Parseval energy E<sub>norm</sub>(S) = (64 / ||g||₁) &middot; g&#770;(S)&sup2; (&Sigma; E<sub>norm</sub> = 4,096) &middot; Harmonic Gate admits iff &Sigma;<sub>|S|&ge;5</sub> E<sub>norm</sub>(S) &le; 64.
+        </p>
+      </div>
+
+      <!-- Preset Selector Buttons -->
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Select LUT6 Truth Table Preset">
+        {WALSH_PRESETS.map((pr, idx) => (
+          <button
+            type="button"
+            data-walsh-preset={pr.id}
+            class:list={[
+              "walsh-preset-btn px-3 py-2 rounded-lg font-mono text-xs border cursor-pointer transition-all text-left",
+              idx === 0
+                ? "border-brand-cyan bg-brand-cyan/15 text-brand-white"
+                : "border-brand-border bg-brand-white/[0.03] text-brand-slate hover:text-brand-white"
+            ]}
+          >
+            <div class="font-semibold">{pr.label}</div>
+            <div class:list={[
+              "text-[10px] mt-0.5",
+              pr.gateVerdict === 'REJECTED' ? "text-brand-rose" : "text-brand-emerald"
+            ]}>
+              {pr.shortTag}
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Live Readout KPI Strip -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+      <div class="p-3.5 rounded-xl bg-brand-dark/55 border border-brand-border">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-gray">64-Bit INIT Mask (u64)</div>
+        <div id="wh-hex-mask" class="font-mono text-sm sm:text-base font-bold text-brand-cyan mt-1 break-all">0x00F0_0000_0000_0000</div>
+        <div id="wh-popcount" class="font-mono text-[11px] text-brand-gray mt-0.5">Active codons: 4 / 64</div>
+      </div>
+
+      <div class="p-3.5 rounded-xl bg-brand-cyan/[0.07] border border-brand-cyan/30">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-cyan">Structural Signal (|S| &le; 4)</div>
+        <div id="wh-low-energy" class="font-display text-xl sm:text-2xl font-bold text-brand-white mt-1">4,096 / 4,096</div>
+        <div id="wh-low-note" class="font-mono text-[11px] text-brand-cyan mt-0.5">64 / 64 Parseval share</div>
+      </div>
+
+      <div id="wh-noise-card" class="p-3.5 rounded-xl bg-brand-emerald/[0.08] border border-brand-emerald/35">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-light">Degree &ge; 5 Parity Noise (7 Modes)</div>
+        <div id="wh-high-energy" class="font-display text-xl sm:text-2xl font-bold text-brand-emerald mt-1">0 / 4,096</div>
+        <div id="wh-gate-verdict" class="font-mono text-[11px] text-brand-emerald mt-0.5">ADMITTED (&le; 64 cap)</div>
+      </div>
+
+      <div class="p-3.5 rounded-xl bg-brand-amber/[0.06] border border-brand-amber/30">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-brand-amber">2-Bit Wobble Jitter (0x34..0x37)</div>
+        <div id="wh-wobble-hits" class="font-display text-xl sm:text-2xl font-bold text-brand-white mt-1">4 / 4 hits</div>
+        <div id="wh-wobble-note" class="font-mono text-[11px] text-brand-gray mt-0.5">Absorbs i0, i1 sensor jitter</div>
+      </div>
+    </div>
+
+    <!-- Active Preset Explanation Banner -->
+    <div class="p-3.5 rounded-xl bg-brand-white/[0.02] border border-brand-border space-y-1.5">
+      <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-[11px]">
+        <span id="wh-rust-expr" class="text-brand-amber">0xFu64 &lt;&lt; (0x34 &amp; 0x3C) // wobble_codon_mask(0x34)</span>
+        <span class="text-brand-gray">6 integer butterfly passes &middot; 0 floating-point ops</span>
+      </div>
+      <p id="wh-plain-desc" class="reg-visionary font-body text-xs text-brand-light leading-relaxed m-0">
+        {WALSH_PRESETS[0].plainNote}
+      </p>
+      <p id="wh-formal-desc" class="reg-scientist font-mono text-[11px] text-brand-cyan leading-relaxed m-0">
+        {WALSH_PRESETS[0].formalNote}
+      </p>
+    </div>
+
+    <!-- Interactive 8x8 Truth Table Grid + 64-Bar Walsh-Hadamard Spectrum -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <!-- Left: 8x8 64-Codon Bitboard -->
+      <div class="lg:col-span-5 p-4 rounded-xl bg-brand-dark/55 border border-brand-border flex flex-col justify-between space-y-3">
+        <div class="flex items-center justify-between gap-2">
+          <span class="font-mono text-[10.5px] uppercase tracking-wider text-brand-amber font-semibold">
+            64-Codon Truth Table (Click Any Cell 0x00..0x3F)
+          </span>
+          <span class="font-mono text-[10px] text-brand-gray">Rows: MSB &middot; Cols: Wobble</span>
+        </div>
+
+        <div id="wh-bitboard" class="grid grid-cols-8 gap-1" role="grid" aria-label="64-bit LUT6 truth table cells">
+          {Array.from({ length: 64 }).map((_, addr) => (
+            <button
+              type="button"
+              data-wh-bit={addr}
+              title={`Address 0x${addr.toString(16).toUpperCase().padStart(2, '0')} (wobble family 0x${(addr & 0x3c).toString(16).toUpperCase().padStart(2, '0')})`}
+              class="wh-bit-cell h-7 rounded font-mono text-[10px] border border-brand-border bg-brand-white/[0.03] text-brand-gray cursor-pointer transition-colors flex items-center justify-center"
+            >
+              0
+            </button>
+          ))}
+        </div>
+
+        <div class="font-mono text-[10px] text-brand-gray leading-snug pt-1 border-t border-brand-border">
+          Each group of 4 horizontal cells shares structural MSBs <code class="code-chip">i2..i5</code> while varying LSB wobble wires <code class="code-chip">i0, i1</code> (<code class="code-chip">00, 01, 10, 11</code>). Highlighted border marks target family <code class="code-chip">0x34..0x37</code>.
+        </div>
+      </div>
+
+      <!-- Right: 64 Walsh-Hadamard Bars + Degree Summary -->
+      <div class="lg:col-span-7 p-4 rounded-xl bg-brand-dark/55 border border-brand-border flex flex-col justify-between space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="font-mono text-[10.5px] uppercase tracking-wider text-brand-cyan font-semibold">
+            64 Walsh-Hadamard Spectral Bars (Ordered by Degree |S| = 0 &rarr; 6)
+          </span>
+          <div class="flex items-center gap-3 font-mono text-[10px]">
+            <span class="text-brand-cyan">&bull; |S| &le; 2 Signal</span>
+            <span class="text-brand-amber">&bull; |S| = 3..4 Mid</span>
+            <span class="text-brand-rose">&bull; |S| &ge; 5 Parity Noise</span>
+          </div>
+        </div>
+
+        <!-- 64 vertical bars rendered cleanly -->
+        <div id="wh-bars-wrap" class="h-36 flex items-end gap-[2px] pt-4 pb-1 px-1 rounded bg-brand-dark/70 border border-brand-border" aria-label="64 Walsh-Hadamard harmonic energy bars">
+          {Array.from({ length: 64 }).map((_, idx) => (
+            <div class="flex-1 h-full flex items-end">
+              <div
+                data-wh-bar={idx}
+                class="w-full rounded-t bg-brand-cyan transition-all duration-150"
+                style="height: 2px;"
+              ></div>
+            </div>
+          ))}
+        </div>
+
+        <!-- 7-Bin Degree Breakdown (|S| = 0..6) -->
+        <div class="grid grid-cols-7 gap-1.5 pt-1">
+          {[0, 1, 2, 3, 4, 5, 6].map((deg) => (
+            <div class:list={[
+              "p-2 rounded border text-center font-mono",
+              deg >= 5
+                ? "border-brand-rose/35 bg-brand-rose/[0.06]"
+                : deg <= 2
+                  ? "border-brand-cyan/30 bg-brand-cyan/[0.05]"
+                  : "border-brand-amber/25 bg-brand-amber/[0.04]"
+            ]}>
+              <div class:list={[
+                "text-[9.5px] font-bold",
+                deg >= 5 ? "text-brand-rose" : deg <= 2 ? "text-brand-cyan" : "text-brand-amber"
+              ]}>
+                |S|={deg}
+              </div>
+              <div id={`wh-deg-${deg}`} class="text-[11px] text-brand-white font-semibold mt-0.5">0</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Part C: 3-Part Self-Hosting Bootstrap Nucleus (16 KB) & 64-Codon Operon ABI -->
+  <div class="space-y-6">
+    <div class="space-y-2">
+      <p class="section-label mb-1">16 KB Self-Hosting Bootstrap Nucleus &middot; #![no_std] Rust 1.100.0 (lut6-core)</p>
+      <h3 class="font-display text-xl sm:text-3xl font-bold text-brand-white">
+        The Three-Part Self-Refining Nucleus &amp; 64-Codon Operon ABI
+      </h3>
+      <p class="font-body text-sm text-brand-slate max-w-4xl leading-relaxed">
+        Four 4 KB <code class="code-chip">CompactLut6Page</code> slots&mdash;<code class="code-chip">SEED_KNOWLEDGE</code> + overlay and <code class="code-chip">SEED_AGENCY</code> + overlay&mdash;total <strong class="text-brand-white">16 KB of static RAM</strong> (just 6% of a $4 <code class="code-chip">RP2040</code>&rsquo;s 264 KB SRAM, leaving 248 KB free). Because both seed roots are immutable references in hardware write-protected MRAM or Flash, a faulty upstream proposer can never corrupt innate survival reflexes or brick tool dispatch.
+      </p>
+    </div>
+
+    <!-- 3 Nucleus Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      {NUCLEUS_THREE_PARTS.map((np, i) => (
+        <div class:list={[
+          "glass-card p-5 flex flex-col justify-between space-y-3",
+          i === 0 ? "border-brand-cyan/35" : i === 1 ? "border-brand-amber/35" : "border-brand-emerald/35"
+        ]}>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-2 font-mono text-[10.5px]">
+              <span class={i === 0 ? "text-brand-cyan font-bold" : i === 1 ? "text-brand-amber font-bold" : "text-brand-emerald font-bold"}>{np.num}</span>
+              <span class="text-brand-gray">{np.footprint}</span>
+            </div>
+            <h4 class="font-display text-base font-bold text-brand-white">{np.name}</h4>
+            <div class="font-mono text-[11px] text-brand-light">{np.symbol}</div>
+            <p class="reg-visionary font-body text-xs text-brand-slate leading-relaxed">{np.plainRole}</p>
+          </div>
+          <pre class="reg-scientist font-mono text-[10.5px] text-brand-cyan bg-brand-dark/65 p-2.5 rounded border border-brand-border overflow-x-auto whitespace-pre-wrap">{np.formalInvariant}</pre>
+        </div>
+      ))}
+    </div>
+
+    <!-- 64-Bit Input / Output Operon ABI Tables -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <div class="glass-card overflow-x-auto p-5 space-y-3">
+        <div class="flex items-center justify-between gap-2">
+          <div class="font-mono text-xs font-bold text-brand-amber">Input Bus &middot; AgencyStateWord: u64</div>
+          <span class="font-mono text-[10.5px] text-brand-gray">Ingested by SEED_AGENCY (#2)</span>
+        </div>
+        <table class="w-full border-collapse text-left text-xs min-w-[460px]">
+          <thead>
+            <tr class="border-b border-brand-border font-mono text-[10px] uppercase text-brand-gray">
+              <th class="py-2 pr-3">Bits</th>
+              <th class="py-2 pr-3">Biological Analog</th>
+              <th class="py-2">Engineering Function</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-brand-border">
+            {AGENCY_INPUT_ABI.map((row) => (
+              <tr class="align-top">
+                <td class="py-2 pr-3 font-mono text-brand-amber whitespace-nowrap">{row.bits} <span class="text-brand-gray">({row.width})</span></td>
+                <td class="py-2 pr-3 font-display font-semibold text-brand-white whitespace-nowrap">{row.bioAnalog}</td>
+                <td class="py-2 font-body text-brand-slate leading-snug">{row.engFunction}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="glass-card overflow-x-auto p-5 space-y-3">
+        <div class="flex items-center justify-between gap-2">
+          <div class="font-mono text-xs font-bold text-brand-cyan">Output Bus &middot; OperonFrame: u64</div>
+          <span class="font-mono text-[10.5px] text-brand-gray">Emitted in 1 pass &middot; 0 FLOPs</span>
+        </div>
+        <table class="w-full border-collapse text-left text-xs min-w-[460px]">
+          <thead>
+            <tr class="border-b border-brand-border font-mono text-[10px] uppercase text-brand-gray">
+              <th class="py-2 pr-3">Bits</th>
+              <th class="py-2 pr-3">Biological Analog</th>
+              <th class="py-2">Engineering Function</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-brand-border">
+            {OPERON_OUTPUT_ABI.map((row) => (
+              <tr class="align-top">
+                <td class="py-2 pr-3 font-mono text-brand-cyan whitespace-nowrap">{row.bits} <span class="text-brand-gray">({row.width})</span></td>
+                <td class="py-2 pr-3 font-display font-semibold text-brand-white whitespace-nowrap">{row.bioAnalog}</td>
+                <td class="py-2 font-body text-brand-slate leading-snug">{row.engFunction}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4 Wobble-Tolerant Codon Opcode Quadrants -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+      {OPERON_QUADRANTS.map((q, idx) => (
+        <div class="glass-card p-4 space-y-2">
+          <div class="flex items-center justify-between font-mono text-[10.5px]">
+            <span class={idx === 3 ? "text-brand-rose font-bold" : idx === 0 ? "text-brand-emerald font-bold" : "text-brand-cyan font-bold"}>{q.quadrant}</span>
+            <span class="text-brand-gray">{q.range}</span>
+          </div>
+          <div class="font-display text-sm font-bold text-brand-white">{q.name}</div>
+          <div class="font-mono text-[10px] text-brand-amber leading-snug">{q.opcodes}</div>
+          <p class="font-body text-xs text-brand-slate leading-relaxed">{q.behavior}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/json" id="walsh-presets-json" set:html={serializedPresets}></script>
+
+<script>
+  (function initWalshInspector() {
+    const payloadEl = document.getElementById('walsh-presets-json');
+    const bitboardEl = document.getElementById('wh-bitboard');
+    if (!payloadEl || !bitboardEl) return;
+
+    interface PresetItem {
+      id: string;
+      label: string;
+      lo32: number;
+      hi32: number;
+      rustExpr: string;
+      plainNote: string;
+      formalNote: string;
+    }
+
+    const presets: PresetItem[] = JSON.parse(payloadEl.textContent || '[]');
+    const bits = new Int32Array(64);
+
+    // Precompute popcount(0..63) and sort indices 0..63 by Hamming degree |S| = 0..6 in pure integers
+    const pop6 = new Int32Array(64);
+    for (let s = 0; s < 64; s++) {
+      let c = 0;
+      let v = s;
+      while (v > 0) {
+        c += v & 1;
+        v >>= 1;
+      }
+      pop6[s] = c;
+    }
+
+    const sortedIndices = new Int32Array(64);
+    let writePos = 0;
+    for (let deg = 0; deg <= 6; deg++) {
+      for (let s = 0; s < 64; s++) {
+        if (pop6[s] === deg) {
+          sortedIndices[writePos] = s;
+          writePos++;
+        }
+      }
+    }
+
+    const presetBtns = document.querySelectorAll<HTMLButtonElement>('[data-walsh-preset]');
+    const bitBtns = bitboardEl.querySelectorAll<HTMLButtonElement>('[data-wh-bit]');
+    const barEls = document.querySelectorAll<HTMLElement>('[data-wh-bar]');
+
+    function loadMaskFromWords(lo32: number, hi32: number) {
+      const uLo = lo32 >>> 0;
+      const uHi = hi32 >>> 0;
+      for (let i = 0; i < 32; i++) {
+        bits[i] = (uLo >>> i) & 1;
+        bits[i + 32] = (uHi >>> i) & 1;
+      }
+    }
+
+    function hex16(val16: number): string {
+      return (val16 & 0xffff).toString(16).toUpperCase().padStart(4, '0');
+    }
+
+    function formatMaskHex(): string {
+      let lo = 0;
+      let hi = 0;
+      for (let i = 0; i < 32; i++) {
+        if (bits[i] === 1) lo = (lo | (1 << i)) >>> 0;
+        if (bits[i + 32] === 1) hi = (hi | (1 << i)) >>> 0;
+      }
+      const h3 = hex16(hi >>> 16);
+      const h2 = hex16(hi & 0xffff);
+      const h1 = hex16(lo >>> 16);
+      const h0 = hex16(lo & 0xffff);
+      return `0x${h3}_${h2}_${h1}_${h0}`;
+    }
+
+    function recomputeAndRender() {
+      // 1. Count active bits in pure 32-bit integers
+      let pop = 0;
+      for (let i = 0; i < 64; i++) {
+        pop += bits[i];
+      }
+
+      // 2. 64-Point Integer Fast Walsh-Hadamard Transform (6 butterfly passes, ZERO floats!)
+      const w = new Int32Array(64);
+      for (let i = 0; i < 64; i++) {
+        w[i] = bits[i];
+      }
+      for (let len = 1; len < 64; len <<= 1) {
+        const step = len << 1;
+        for (let base = 0; base < 64; base += step) {
+          for (let j = 0; j < len; j++) {
+            const u = w[base + j];
+            const v = w[base + j + len];
+            w[base + j] = u + v;
+            w[base + j + len] = u - v;
+          }
+        }
+      }
+
+      // 3. Support-normalized integer Parseval energy E_norm[S] = (w[S]^2 * 64) / max(1, pop)
+      const eNorm = new Int32Array(64);
+      const degSum = new Int32Array(7);
+      const denom = pop > 0 ? pop : 1;
+      let maxBarE = 64;
+
+      for (let s = 0; s < 64; s++) {
+        const sq64 = w[s] * w[s] * 64;
+        const e = pop > 0 ? ((sq64 / denom) | 0) : 0;
+        eNorm[s] = e;
+        degSum[pop6[s]] += e;
+        if (e > maxBarE) maxBarE = e;
+      }
+
+      const highNoise = degSum[5] + degSum[6];
+      let totalNorm = 0;
+      for (let d = 0; d <= 6; d++) totalNorm += degSum[d];
+      const lowSignal = totalNorm - highNoise;
+
+      // 4. Update 64 bitboard cells
+      bitBtns.forEach((btn, addr) => {
+        const on = bits[addr] === 1;
+        const isTargetFamily = (addr & 0x3c) === 0x34;
+        btn.textContent = on ? '1' : '0';
+        btn.className = [
+          'wh-bit-cell h-7 rounded font-mono text-[10px] border cursor-pointer transition-colors flex items-center justify-center',
+          on
+            ? 'bg-brand-cyan/25 border-brand-cyan text-brand-white font-bold'
+            : isTargetFamily
+              ? 'bg-brand-amber/[0.06] border-brand-amber/40 text-brand-gray'
+              : 'bg-brand-white/[0.03] border-brand-border text-brand-gray',
+        ].join(' ');
+      });
+
+      // 5. Update 64 spectral bars (pure integer height percentage 2..100)
+      barEls.forEach((barEl, pos) => {
+        const s = sortedIndices[pos];
+        const deg = pop6[s];
+        const e = eNorm[s];
+        const pct = e === 0 ? 2 : 8 + (((e * 92) / maxBarE) | 0);
+        barEl.style.height = `${pct}%`;
+        barEl.title = `S = 0x${s.toString(16).toUpperCase().padStart(2, '0')} (|S| = ${deg}): E_norm = ${e} / 4096`;
+        barEl.className = [
+          'w-full rounded-t transition-all duration-150',
+          e === 0
+            ? 'bg-brand-white/10'
+            : deg >= 5
+              ? 'bg-brand-rose'
+              : deg <= 2
+                ? 'bg-brand-cyan'
+                : 'bg-brand-amber',
+        ].join(' ');
+      });
+
+      // 6. Update Degree Bins & KPI Strip
+      for (let d = 0; d <= 6; d++) {
+        const dEl = document.getElementById(`wh-deg-${d}`);
+        if (dEl) dEl.textContent = String(degSum[d]);
+      }
+
+      const hexEl = document.getElementById('wh-hex-mask');
+      const popEl = document.getElementById('wh-popcount');
+      const lowEl = document.getElementById('wh-low-energy');
+      const lowNoteEl = document.getElementById('wh-low-note');
+      const highEl = document.getElementById('wh-high-energy');
+      const verdictEl = document.getElementById('wh-gate-verdict');
+      const noiseCardEl = document.getElementById('wh-noise-card');
+      const wobbleEl = document.getElementById('wh-wobble-hits');
+      const wobbleNoteEl = document.getElementById('wh-wobble-note');
+
+      if (hexEl) hexEl.textContent = formatMaskHex();
+      if (popEl) popEl.textContent = `Active codons: ${pop} / 64`;
+      if (lowEl) lowEl.textContent = `${lowSignal.toLocaleString()} / 4,096`;
+      const share64 = ((lowSignal + 32) >> 6);
+      if (lowNoteEl) lowNoteEl.textContent = `~${share64} / 64 Parseval share`;
+
+      const admitted = pop > 0 && highNoise <= 64;
+      if (highEl) {
+        highEl.textContent = highNoise === 448 ? '448 / 4,096 (7/64)' : `${highNoise} / 4,096`;
+        highEl.className = `font-display text-xl sm:text-2xl font-bold mt-1 ${admitted ? 'text-brand-emerald' : 'text-brand-rose'}`;
+      }
+      if (verdictEl) {
+        verdictEl.textContent = pop === 0
+          ? 'EMPTY MASK (0 active codons)'
+          : admitted
+            ? `ADMITTED (noise ${highNoise} ≤ 64 cap)`
+            : `REJECTED (noise ${highNoise} > 64 cap)`;
+        verdictEl.className = `font-mono text-[11px] mt-0.5 ${admitted ? 'text-brand-emerald' : 'text-brand-rose'}`;
+      }
+      if (noiseCardEl) {
+        noiseCardEl.className = `p-3.5 rounded-xl border ${admitted ? 'bg-brand-emerald/[0.08] border-brand-emerald/35' : 'bg-brand-rose/[0.08] border-brand-rose/40'}`;
+      }
+
+      const wobbleHits = bits[0x34] + bits[0x35] + bits[0x36] + bits[0x37];
+      if (wobbleEl) wobbleEl.textContent = `${wobbleHits} / 4 hits`;
+      if (wobbleNoteEl) {
+        wobbleNoteEl.textContent = wobbleHits === 4
+          ? '100% immune to 2-bit i0, i1 jitter'
+          : wobbleHits === 1
+            ? 'Brittle: 1-bit LSB flip drops output'
+            : `${wobbleHits * 25}% survival on 0x34..0x37`;
+      }
+    }
+
+    function selectPreset(id: string) {
+      const found = presets.find((p) => p.id === id) || presets[0];
+      if (!found) return;
+      loadMaskFromWords(found.lo32, found.hi32);
+
+      presetBtns.forEach((btn) => {
+        const active = btn.getAttribute('data-walsh-preset') === found.id;
+        btn.classList.toggle('border-brand-cyan', active);
+        btn.classList.toggle('bg-brand-cyan/15', active);
+        btn.classList.toggle('text-brand-white', active);
+        btn.classList.toggle('border-brand-border', !active);
+        btn.classList.toggle('bg-brand-white/[0.03]', !active);
+        btn.classList.toggle('text-brand-slate', !active);
+      });
+
+      const rustEl = document.getElementById('wh-rust-expr');
+      const plainEl = document.getElementById('wh-plain-desc');
+      const formalEl = document.getElementById('wh-formal-desc');
+      if (rustEl) rustEl.textContent = found.rustExpr;
+      if (plainEl) plainEl.textContent = found.plainNote;
+      if (formalEl) formalEl.textContent = found.formalNote;
+
+      recomputeAndRender();
+    }
+
+    presetBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        selectPreset(btn.getAttribute('data-walsh-preset') || 'wobble');
+      });
+    });
+
+    bitBtns.forEach((btn, addr) => {
+      btn.addEventListener('click', () => {
+        bits[addr] = bits[addr] === 1 ? 0 : 1;
+        presetBtns.forEach((b) => {
+          b.classList.remove('border-brand-cyan', 'bg-brand-cyan/15', 'text-brand-white');
+          b.classList.add('border-brand-border', 'bg-brand-white/[0.03]', 'text-brand-slate');
+        });
+        const rustEl = document.getElementById('wh-rust-expr');
+        if (rustEl) rustEl.textContent = 'Custom interactive 64-bit truth table mutation (click any preset above to reset)';
+        recomputeAndRender();
+      });
+    });
+
+    selectPreset('wobble');
+  })();
+</script>

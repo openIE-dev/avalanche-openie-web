@@ -327,29 +327,121 @@ export const LITERATURE_TRADITIONS: LiteratureTradition[] = [
   },
   {
     id: 'LT-02',
-    tradition: '2 · Weightless & FPGA Lookup-Table Networks',
-    exemplars: 'LogicNets (FPL 2020), DiffLogic (NeurIPS 2022), Differentiable Weightless Neural Networks (DWN, 2024)',
-    whatItEstablishes: 'Shows that Boolean LUT fabrics evaluate learned discrete mappings in nanoseconds with zero floating-point multiply-accumulates (0 DSP48 slices).',
-    openGapInIsolation: 'Fixes wire connectivity in static FPGA routing—requiring vendor place-and-route (re-PAR) when input distributions shift (52.34% post-VLAN-shift accuracy) and rounding bit-planes independently.',
-    howPiecesCombine: 'Adding a non-blocking 512×512 Beneš–Copy–Beneš multicast switch + 81 × RAMB36E2 shadow-paged BRAM (Theorem 2) enables single-cycle (4.0 ns) online page updates without re-PAR.',
+    tradition: '2 · Weightless & Differentiable FPGA Lookup-Table Networks',
+    exemplars: 'LogicNets (FPL 2020), DiffLogic (NeurIPS 2022), DWN (2024), DiffLUT-Net (Sept 2026, arXiv:2609.09254)',
+    whatItEstablishes: 'Shows that Boolean LUT fabrics evaluate learned discrete mappings in nanoseconds with zero floating-point MACs (0 DSP48 slices); DiffLUT-Net introduces closed-form multilinear relaxation over all 64 LUT6 entries + learnable port wiring (−52% LUT6s vs. DWN on Fashion-MNIST).',
+    openGapInIsolation: 'Static LUT netlists fix wire connectivity in vendor place-and-route (re-PAR) when distributions shift (52.34% post-VLAN-shift accuracy) and lack conformal abstention gates or non-regressing overlay lineage.',
+    howPiecesCombine: 'Pairing DiffLUT-Net pruning with a 512×512 Beneš–Copy–Beneš switch + RAMB36E2 pages (or 4 KB #![no_std] lut6-core crystals) and Walsh-Hadamard wobble gates enables online zero-regression patching.',
   },
   {
     id: 'LT-03',
-    tradition: '3 · Model Cascades & Multi-Agent Protocols',
-    exemplars: 'Simon & Kadane (1975), FrugalGPT (2023), RouteLLM (ICLR 2025), GreenServ (2026), MCP (2024)',
-    whatItEstablishes: 'Establishes mathematical cost-ordered search (p_i / c_i) and standardized tool/message schemas (N + M vs. N × M connectors).',
-    openGapInIsolation: 'Confidence-only routers without deterministic C(z) = 1 checks admit broken outputs (68.75% in Claim LA-11), while unattested prose relays amplify context 3.71× (CTA-E2 Arm C).',
-    howPiecesCombine: 'Replacing prose handoffs with <1 mJ BLAKE3 + Ed25519 binary Φ_IR envelopes and 2.11 µs SSP min-cost flow preserves 0.00% broken commits.',
+    tradition: '3 · Model Cascades, Planner-Free Distillation & Deterministic Scaling',
+    exemplars: 'Simon & Kadane (1975), RouteLLM (ICLR 2025), Grounded Scaling (Ding & Wang, 2026), ReTrace (Nov 2026)',
+    whatItEstablishes: 'Formalizes cost-ordered routing (p_i / c_i), exponential δ^k decay of unverified multi-step agent chains (D0–D4 Determinism Maturity Model), and planner-free workflow compilation from agent traces (τ²-Bench 170 s → 1.3 s in ReTrace).',
+    openGapInIsolation: 'Confidence-only routers admit broken outputs (68.75% in Claim LA-11), while software workflow distillation stays in cloud API runtimes without physical joule ledgers or silicon-level LUT6 lowering.',
+    howPiecesCombine: 'Coupling planner-free distillation with <1 mJ BLAKE3 + Ed25519 binary Φ_IR envelopes, C(z) = 1 commit gates, and h_min joule eviction bridges Rung 5 cleanly into Rungs 6–9.',
   },
   {
     id: 'LT-04',
-    tradition: '4 · Sub-Bit Quantization, Speculative Drafters & NVMe Streaming',
-    exemplars: 'PLD (2023), REST (2024), EAGLE-2 (2024), AirLLM (2023), LittleBit-1/2 (2025–2026)',
-    whatItEstablishes: 'Proves that memory-bandwidth and I/O movement dominate frontier inference energy and latency on local workstations.',
-    openGapInIsolation: 'Sub-1-bit factorizations unpacked to dense binary MACs lose exact code-synthesis fidelity (0.00% in Claim LA-11), and dense SSD streamers read 100% of inactive MoE experts.',
-    howPiecesCombine: 'Router-sparse INT4 expert pread (Expert-AirMoL) paired with zero-FLOP ≤64-bit LUT6 burst speculation cuts 34.66B NVMe I/O 12.30× at 100.0% lossless greedy parity.',
+    tradition: '4 · Lookup-Driven Edge Inference, Ternary Streaming & NVMe Sparsity',
+    exemplars: 'EAGLE-2 (2024), LittleBit-1/2 (2025–26), EntroMCU (Sept 2026), PALUTE (Oct 2026)',
+    whatItEstablishes: 'Proves that memory movement dominates inference joules and that table-lookup engines replace multipliers even inside neural fallbacks—with EntroMCU streaming Huffman-coded ternary weights on Cortex-M55 MCUs and PALUTE reaching 1,264 tok/s at 0.16 W on W4A4 LUT engines.',
+    openGapInIsolation: 'Sub-1-bit factorizations unpacked to dense MACs lose exact code-synthesis parity (0.00% in Claim LA-11), and standalone edge LUT inference still re-evaluates neural layers on already-solved deterministic repeats.',
+    howPiecesCombine: 'Placing zero-FLOP LUT6 crystals ahead of PALUTE / EntroMCU micro-fallbacks and Expert-AirMoL INT4 NVMe streaming (12.30× I/O cut) turns both reflex and fallback tiers into table-lookup substrates.',
   },
 ];
+
+export interface ExternalRungCrossingWork {
+  id: string;
+  work: string;
+  authorsAndDate: string;
+  rungProjection: string;
+  empiricalAnchor: string;
+  whatItProves: string;
+  isolatedGap: string;
+}
+
+export const RUNG5_TO_6_EXTERNAL_WORK: ExternalRungCrossingWork[] = [
+  {
+    id: 'EXT-01',
+    work: 'ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows',
+    authorsAndDate: 'Columbia University & Amazon · Nov 2026',
+    rungProjection: 'R5 → R6/R7 Software Transition',
+    empiricalAnchor: 'τ²-Bench latency 170 s → 1.3 s (~130× faster); ~94% task completion at 24% lower API cost',
+    whatItProves:
+      'Strongest direct engineering demonstration that recurring multi-turn Rung-5 tool-use trajectories collapse into deterministic, planner-free state machines without runtime LLM deliberation.',
+    isolatedGap:
+      'Targets Python/API workflow graphs measured in cloud API dollars and seconds rather than hardware joule shunts, 4 KB silicon-portable LUT6 pages, or Lean-verified non-regression proofs.',
+  },
+  {
+    id: 'EXT-02',
+    work: 'Skill Compilation & Multi-Agent-to-Single-Agent Distillation',
+    authorsAndDate: '2026 SoK Surveys on Agent Skill Lifecycles',
+    rungProjection: 'R4/R5 → R7 Ratchet Lifecycle',
+    empiricalAnchor: '5-stage phase transition: discovery → practice → distillation → storage → composition',
+    whatItProves:
+      'Independently observes sharp token-usage and latency phase transitions when multi-agent exploration is distilled into reusable skill libraries—describing the conserved ratchet operator from inside software engineering.',
+    isolatedGap:
+      'Prompt-level or script-level skill libraries still wake the base LLM context window on invocation (SKILL.md bloat) and lack an analytical amortization eviction floor h_min.',
+  },
+  {
+    id: 'EXT-03',
+    work: 'Mode-2 → Mode-1 Compilation & Counterfactual JEPA',
+    authorsAndDate: 'LeCun; Assran et al. · 2022–2026',
+    rungProjection: 'R3 → R6/R7 Cognitive Architecture',
+    empiricalAnchor: 'Latent world-model prediction & compressibility without token/pixel decoding',
+    whatItProves:
+      'Establishes the cognitive distinction between deliberative world-model search (System/Mode 2) and compiled reactive policy (Mode 1), showing world representations compress cleanly in abstract latent space.',
+    isolatedGap:
+      'Continuous latent energy minima alone cannot certify discrete code or safety invariants (0% solo pass on deceptive discrete regimes in CTA-E5 C3 without a terminal C(z) = 1 gate).',
+  },
+  {
+    id: 'EXT-04',
+    work: 'Grounded Scaling: Why Agentic AI Needs Deterministic Environments',
+    authorsAndDate: 'Liang Ding & Xintong Wang · 2026',
+    rungProjection: 'R4/R5 Chasm Diagnosis (D0–D4)',
+    empiricalAnchor: 'k-step chain success decays as δ^k; 5-level D0–D4 Determinism Maturity Model',
+    whatItProves:
+      'Formalizes why stochastic agent loops hit a reliability wall across multi-step horizons (δ^k decay, matching CTA-T2 f^k) and charts environment maturity from human-only GUIs (D0) to deterministic telemetry-rich agent interfaces (D4).',
+    isolatedGap:
+      'Diagnoses the environment boundary (D0–D4) without specifying how verified D4 trajectories compile downward into microjoule/picojoule Boolean substrates.',
+  },
+  {
+    id: 'EXT-05',
+    work: 'DiffLUT-Net, PALUTE & EntroMCU Lookup-Driven Edge Stack',
+    authorsAndDate: 'Ye, Gong, Wang, Kondrateva, Li & Zhang (Sept 2026, arXiv:2609.09254); PALUTE (Oct 2026); EntroMCU (Sept 2026)',
+    rungProjection: 'R6/R7 Silicon & MCU Substrate',
+    empiricalAnchor: 'DiffLUT-Net: −52% LUT6s vs. DWN; PALUTE: 1,264 tok/s @ 0.16 W; EntroMCU: Cortex-M55 ternary streaming',
+    whatItProves:
+      'Eliminates gradient mismatch across all 64 LUT6 truth-table entries simultaneously while proving that even edge LLM fallbacks execute faster as SRAM/PIM lookup tables than as floating-point MACs.',
+    isolatedGap:
+      'Optimizes individual neural/LUT blocks on fixed benchmarks without closed-loop agentic trace harvesting, Walsh-Hadamard wobble filtering, or non-destructive overlay lineage.',
+  },
+  {
+    id: 'EXT-06',
+    work: 'Thermodynamic Computing & Physics-Native Substrates',
+    authorsAndDate: 'Whitelam; Extropic · 2023–2026',
+    rungProjection: 'R6–R9 Physical Foundation',
+    empiricalAnchor: 'k_B T ln 2 Landauer grounding & natural stochastic/Boltzmann energy relaxation',
+    whatItProves:
+      'Reframes computation around physical joules dissipated per state transition rather than hardware-agnostic FLOPs—aligning directly with CpJ as the governing ecological coordinate.',
+    isolatedGap:
+      'Focuses primarily on analog/stochastic sampling primitives for generative distributions rather than deterministic C(z) = 1 verification ratchets and cross-paradigm synthesis.',
+  },
+];
+
+export const AVALANCHE_UNIFYING_SYNTHESIS = {
+  headline: 'What Unifies All Six Traditions Inside the Avalanche Framework',
+  plain:
+    'Each external breakthrough above validates a distinct segment of the Rung 5 → Rung 6 crossing—from planner-free workflow distillation (ReTrace) and deterministic environment interfaces (Grounded Scaling) to closed-form LUT6 pruning (DiffLUT-Net) and joule-native physics (Thermodynamic Computing). Yet no prior framework connects them end-to-end. OpenIE Avalanche unifies them under one conserved three-phase operator across 3.8 Gyr of biology and 76 years of AI, governed by five non-negotiable scientific invariants:',
+  fiveInvariants: [
+    'One Falsifiable 9-Rung Ladder: Maps biological quorum switches (CL01–CL24), historical AI winters (AI01–AI38), and downward silicon compilation onto C = T ∘ G_θ ∘ E.',
+    'Binary Completion Authority C(z) = 1: Stochastic outputs never self-certify; zero broken commits cross into persistent memory.',
+    'Physical Joules as the Sole Continuous Variable: Strict hardware separation of physical DC shunts (measured_j), on-chip counters (reported_j), and circuit switching models (est_j).',
+    'Explicit Pre-Registered Red Kill Criteria: Every compiled page and horizon forecast (HM01–HD04) states an exact mathematical threshold (h ≤ h_min, Falsifiers 1–6) that immediately invalidates or evicts it.',
+    'Six-Kernel Lean 4.36.0 Proof Anchors: 123 formal theorems + 5,393 RCE constants audited unanimously inside network-isolated bubblewrap sandboxes with 0 sorry and 0 custom axioms.',
+  ],
+};
 
 export interface SeminarModule {
   part: string;

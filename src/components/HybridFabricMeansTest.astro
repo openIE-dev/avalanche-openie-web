@@ -1,0 +1,166 @@
+---
+import {
+  FOUR_COMPUTE_CAMPS,
+  HARDWARE_METERING_MATRIX,
+  LUT6_MEANS_TEST,
+  DUAL_REALITY_PROTOCOL,
+} from '../data/lut6-basis';
+---
+
+<section id="hybrid-means-test" class="space-y-14 scroll-mt-24">
+  <!-- Part A: The 4 Competing Compute Camps & Why Hybrid Fabric Wins -->
+  <div class="space-y-5">
+    <div>
+      <p class="section-label mb-2">IB &middot; Hybrid Substrate Thesis, Hardware Harness &amp; Thermodynamic Means Test</p>
+      <h2 class="font-display text-2xl sm:text-4xl font-bold text-brand-white tracking-tight">
+        Why <span class="text-brand-amber">Four Compute Camps</span> Converge on <span class="text-brand-cyan">Hybrid Reconfigurable Fabric</span>
+      </h2>
+      <p class="font-body text-sm sm:text-base text-brand-slate max-w-4xl leading-relaxed mt-2">
+        Contemporary hardware and machine-learning engineering is split across four competing bets. Rather than picking a single monoculture, reconfigurable <code class="code-chip">LUT6</code> fabric paired with bare-metal <code class="code-chip">lut6-core</code> combines all four&mdash;using frontier weights as an offline compiler, world models and SAT/Lean checkers as the gate, integer/ternary streaming as the local fallback, and zero-FLOP lookup tables as the deployed reflex floor.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {FOUR_COMPUTE_CAMPS.map((c, idx) => (
+        <div class:list={[
+          "glass-card spotlight-card p-5 flex flex-col justify-between space-y-3",
+          idx === 3 ? "border-brand-cyan/35" : "border-brand-border"
+        ]}>
+          <div class="space-y-2">
+            <div class="font-mono text-[10.5px] font-bold text-brand-amber uppercase tracking-wider">{c.num}</div>
+            <h3 class="font-display text-base font-bold text-brand-white leading-snug">{c.camp}</h3>
+            <p class="font-body text-xs text-brand-light leading-relaxed">{c.premise}</p>
+            <p class="font-body text-xs text-brand-slate leading-relaxed">
+              <strong class="text-brand-white">Niche strength:</strong> {c.strength}
+            </p>
+            <p class="font-body text-xs text-brand-slate leading-relaxed">
+              <strong class="text-brand-rose">Isolated limit:</strong> {c.isolatedCeiling}
+            </p>
+          </div>
+          <div class="pt-2.5 border-t border-brand-border font-mono text-[10.5px] text-brand-cyan leading-snug">
+            <strong class="text-brand-emerald">Hybrid role:</strong> {c.hybridRole}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Part B: Dual-Track Hardware & Harness-Side Metering Matrix -->
+  <div class="space-y-4">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+      <div class="max-w-3xl">
+        <h3 class="font-display text-xl sm:text-2xl font-bold text-brand-white">
+          Dual-Track Hardware &amp; Harness-Side Metering Matrix (4 Target Tiers)
+        </h3>
+        <p class="font-body text-xs sm:text-sm text-brand-slate leading-relaxed mt-1">
+          Core metrology principle: <strong class="text-brand-white">energy in joules is the sole continuous variable, and measurement belongs in the harness</strong> rather than solely inside the silicon under test. Validated microjoule designs move from rail-instrumented FPGA/MCU benches onto compact scale-out nodes, while virtualized cloud FPGAs serve functional parity sweeps only.
+        </p>
+      </div>
+      <span class="ev-badge ev-measured">measured_j &perp; reported_j &perp; est_j</span>
+    </div>
+
+    <div class="glass-card overflow-x-auto">
+      <table class="w-full border-collapse text-left min-w-[940px]">
+        <thead>
+          <tr class="border-b border-brand-border bg-brand-white/[0.02] font-mono text-[10.5px] uppercase tracking-wider text-brand-gray">
+            <th class="py-3.5 px-4">Target Tier</th>
+            <th class="py-3.5 px-4">Hardware Platform</th>
+            <th class="py-3.5 px-4">Memory Placement &amp; Execution Kernel</th>
+            <th class="py-3.5 px-4 text-brand-cyan">Physical Harness &amp; Telemetry</th>
+            <th class="py-3.5 px-4">Primary Role</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-brand-border text-xs">
+          {HARDWARE_METERING_MATRIX.map((row) => (
+            <tr class="hover:bg-brand-white/[0.02] transition-colors align-top">
+              <td class="py-3.5 px-4 whitespace-nowrap">
+                <div class="font-mono font-bold text-brand-amber">{row.tier}</div>
+                <span class:list={[
+                  "ev-badge mt-1.5",
+                  row.telemetryClass === 'measured' ? 'ev-measured' : row.telemetryClass === 'reported' ? 'ev-reported' : 'ev-est'
+                ]}>
+                  {row.badgeLabel}
+                </span>
+              </td>
+              <td class="py-3.5 px-4 font-display font-semibold text-brand-white max-w-[210px] leading-snug">
+                {row.platforms}
+              </td>
+              <td class="py-3.5 px-4 font-body text-brand-light max-w-[270px] leading-relaxed">
+                {row.memoryAndKernel}
+              </td>
+              <td class="py-3.5 px-4 font-mono text-[11px] text-brand-cyan max-w-[250px] leading-relaxed">
+                {row.harnessMetering}
+              </td>
+              <td class="py-3.5 px-4 font-body text-brand-slate max-w-[200px] leading-relaxed">
+                {row.primaryRole}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Part C: 4-Part LUT6 Thermodynamic Means Test & Dual-Reality Evaluation Protocol -->
+  <div class="space-y-6">
+    <div>
+      <h3 class="font-display text-xl sm:text-2xl font-bold text-brand-white">
+        The Four-Part <code class="code-chip">LUT6</code> Thermodynamic Means Test &amp; Dual-Reality Evaluation Protocol
+      </h3>
+      <p class="font-body text-xs sm:text-sm text-brand-slate max-w-4xl leading-relaxed mt-1">
+        Edge memory is finite&mdash;<code class="code-chip">144</code> <code class="code-chip">RAMB36E2</code> blocks on a <code class="code-chip">KV260</code>, <code class="code-chip">365</code> <code class="code-chip">RAMB36E1</code> blocks on a <code class="code-chip">Numato Aller A7 XC7A200T</code>, <code class="code-chip">5.5 MB</code> of on-chip MRAM on an <code class="code-chip">Alif E3/E4</code>, and <code class="code-chip">264 KB</code> of SRAM on a <code class="code-chip">Pi Pico</code>. A pattern earns and retains its 8-byte <code class="code-chip">u64</code> truth table only by passing four admission/eviction gates and surviving simultaneous testing across noisy host reality and ecological Rung-6 targets:
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {LUT6_MEANS_TEST.map((g, idx) => (
+        <div class:list={[
+          "glass-card p-5 space-y-2.5",
+          idx === 3 ? "border-brand-rose/35" : "border-brand-cyan/25"
+        ]}>
+          <div class="flex items-center justify-between gap-2 font-mono text-[10.5px]">
+            <span class={idx === 3 ? "text-brand-rose font-bold uppercase" : "text-brand-cyan font-bold uppercase"}>{g.step}</span>
+            <span class="text-brand-white font-semibold">{g.title}</span>
+          </div>
+          <pre class="font-mono text-xs text-brand-amber bg-brand-dark/65 px-3 py-2 rounded border border-brand-border overflow-x-auto whitespace-pre-wrap">{g.formula}</pre>
+          <p class="reg-visionary font-body text-xs text-brand-light leading-relaxed">{g.plainRule}</p>
+          <p class="reg-scientist font-mono text-[11px] text-brand-slate leading-relaxed">{g.formalRule}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Dual-Reality Evaluation Protocol Table -->
+    <div class="glass-card overflow-x-auto">
+      <table class="w-full border-collapse text-left min-w-[900px]">
+        <thead>
+          <tr class="border-b border-brand-border bg-brand-white/[0.02] font-mono text-[10.5px] uppercase tracking-wider text-brand-gray">
+            <th class="py-3.5 px-4">Evaluation Axis</th>
+            <th class="py-3.5 px-4 text-brand-amber">&ldquo;World As It Is&rdquo; Stress Test (Dirty, Noisy Reality)</th>
+            <th class="py-3.5 px-4 text-brand-cyan">&ldquo;World As We Want It&rdquo; Target (Ecological Rung 6)</th>
+            <th class="py-3.5 px-4 text-brand-rose">Explicit Falsification / Kill Threshold</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-brand-border text-xs">
+          {DUAL_REALITY_PROTOCOL.map((r) => (
+            <tr class="hover:bg-brand-white/[0.02] transition-colors align-top">
+              <td class="py-3.5 px-4 font-display font-semibold text-brand-white max-w-[190px]">
+                {r.metric}
+              </td>
+              <td class="py-3.5 px-4 font-body text-brand-slate max-w-[260px] leading-relaxed">
+                {r.worldAsItIs}
+              </td>
+              <td class="py-3.5 px-4 font-mono text-[11px] text-brand-light max-w-[270px] leading-relaxed">
+                {r.worldAsWeWantIt}
+              </td>
+              <td class="py-3.5 px-4 max-w-[260px]">
+                <div class="p-2 rounded bg-brand-rose/[0.06] border border-brand-rose/25 font-body text-[11.5px] text-brand-light leading-snug">
+                  {r.redKillThreshold}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
