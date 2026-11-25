@@ -5,6 +5,7 @@ import NineRungRatchet from '../components/NineRungRatchet.astro';
 import AvalancheFilmEmbed from '../components/AvalancheFilmEmbed.astro';
 import ForcingSimulator from '../components/ForcingSimulator.astro';
 import ForecastTable from '../components/ForecastTable.astro';
+import PlanetaryWellObservatory from '../components/PlanetaryWellObservatory.astro';
 import { BIO_MODELS, AI_WINTER_DIAGNOSES, TRANSLATION_MATRIX, TEN_CAMPS } from '../data/science';
 import { LEARNING_MODALITIES, SISTER_REFERENCES } from '../data/ecosystem';
 ---
@@ -163,11 +164,20 @@ import { LEARNING_MODALITIES, SISTER_REFERENCES } from '../data/ecosystem';
       <a href="/forecast" class="text-brand-cyan hover:underline no-underline">/forecast (1950–2026 AI Ratchet, Global Rung Radar &amp; 6-Kernel Proof Audit)</a>
       <span aria-hidden="true">&middot;</span>
       <a href="/ecosystem" class="text-brand-cyan hover:underline no-underline">/ecosystem (Open Papers, Interactive Labs &amp; TV/Radio)</a>
+      <span aria-hidden="true">&middot;</span>
+      <a href="/planetary" class="text-brand-emerald hover:underline no-underline">/planetary (Live 6-Stratum Planetary Digital Well &amp; Scholar Codifier)</a>
     </div>
   </div>
 </section>
 
 <AvalancheFilmEmbed />
+
+<hr class="section-divider" aria-hidden="true" />
+
+<!-- ═══ LIVE PLANETARY DIGITAL WELL & SCHOLAR CODIFIER ═══ -->
+<div class="px-6 py-16">
+  <PlanetaryWellObservatory compact={true} />
+</div>
 
 <hr class="section-divider" aria-hidden="true" />
 

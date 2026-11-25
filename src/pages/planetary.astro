@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import RegisterSwitcher from '../components/RegisterSwitcher.astro';
+import PlanetaryWellObservatory from '../components/PlanetaryWellObservatory.astro';
+---
+
+<Layout
+  title="The Planetary Digital Well — Codifying Global Tools, Databases, Libraries, AI & Infrastructure"
+  description="How OpenIE Avalanche and Commons Scholar ingest from the entire digital planet—tools, databases, package registries, AI models, applications, and RFC standards—codifying each onto the 9-Rung Avalanche Ratchet."
+>
+  <div class="max-w-7xl mx-auto px-6 py-16 space-y-16">
+    <header class="space-y-5 border-b border-brand-border pb-10">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <a href="/" class="font-mono text-xs text-brand-cyan no-underline hover:underline">&larr; Back to Avalanche Observatory</a>
+        <RegisterSwitcher label="Explanation Mode" />
+      </div>
+      <p class="section-label-cyan">Planetary Digital Infrastructure &middot; Scholar Codification</p>
+      <h1 class="font-display text-4xl sm:text-6xl font-bold text-brand-white tracking-tight">
+        Drinking from the Well of the <span class="text-brand-cyan">Entire Digital Planet</span>
+      </h1>
+      <p class="reg-visionary font-body text-brand-slate text-base md:text-lg max-w-4xl leading-relaxed">
+        Civilization has already externalized millions of verified procedures into open compilers, theorem provers, relational and columnar databases, <code class="code-chip">crates.io</code> / <code class="code-chip">PyPI</code> / <code class="code-chip">npm</code> libraries, <code class="code-chip">HuggingFace</code> models, CAD/EDA suites, OS kernels, and <code class="code-chip">IETF RFC</code> protocols. Instead of forcing neural networks to hallucinate those capabilities from scratch in floating-point weights, <strong class="text-brand-white">Commons Scholar</strong> continuously ingests and codifies them into attested <strong class="text-brand-cyan">Rung 6–9</strong> building blocks.
+      </p>
+      <p class="reg-scientist font-mono text-xs sm:text-sm text-brand-light max-w-4xl leading-relaxed">
+        Continuous <code class="code-chip">Autopilot 4c2</code> planetary sweep &rarr; IFLA LRM <code class="code-chip">WEMI</code> + <code class="code-chip">PURL</code> + <code class="code-chip">SPDX</code> &rarr; 9-Rung &amp; <code class="code-chip">DES-10</code> (<code class="code-chip">C1..C10</code>) projection &rarr; Proposition 1 <code class="code-chip">&Delta;T*</code> (<code class="code-chip">est_j</code>) + <code class="code-chip">JCR-1 COSE_Sign1</code> &amp; <code class="code-chip">WAI1</code> receipts.
+      </p>
+    </header>
+
+    <!-- 4-Step Scholar Codification Architecture -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="glass-card p-5 space-y-2 border-brand-amber/30">
+        <div class="font-mono text-[10.5px] uppercase tracking-wider text-brand-amber font-bold">01 &middot; Planetary Harvest</div>
+        <h2 class="font-display text-base font-bold text-brand-white">6 Global Infrastructure Strata</h2>
+        <p class="font-body text-xs text-brand-slate leading-relaxed">
+          Polite, SSRF-guarded harvesters index <code class="code-chip">crates.io</code>, <code class="code-chip">PyPI</code>, <code class="code-chip">npm</code>, <code class="code-chip">HuggingFace Hub</code>, <code class="code-chip">GitHub</code> compilers/DBs/CAD, scientific databases, and <code class="code-chip">IETF/W3C</code> standards alongside 260M+ scholarly works.
+        </p>
+      </div>
+      <div class="glass-card p-5 space-y-2 border-brand-cyan/30">
+        <div class="font-mono text-[10.5px] uppercase tracking-wider text-brand-cyan font-bold">02 &middot; Scholar WEMI &amp; SPDX</div>
+        <h2 class="font-display text-base font-bold text-brand-white">Provenance, Fixity &amp; Rights</h2>
+        <p class="font-body text-xs text-brand-slate leading-relaxed">
+          Every artifact receives a canonical <code class="code-chip">pkg:…</code> PURL, 4-level IFLA LRM Work/Expression/Manifestation/Item identity, <code class="code-chip">BLAKE3</code> Merkle digest, SPDX open-license audit, and <code class="code-chip">JCR-1</code> receipt.
+        </p>
+      </div>
+      <div class="glass-card p-5 space-y-2 border-brand-emerald/30">
+        <div class="font-mono text-[10.5px] uppercase tracking-wider text-brand-emerald font-bold">03 &middot; 9-Rung &amp; DES-10 Map</div>
+        <h2 class="font-display text-base font-bold text-brand-white">Threshold &amp; Niche Assignment</h2>
+        <p class="font-body text-xs text-brand-slate leading-relaxed">
+          Separates <code class="code-chip">R1–R5</code> stochastic proposers (<code class="code-chip">C1</code>) that must sit behind <code class="code-chip">C(z)=1</code> gates from <code class="code-chip">R6–R9</code> deterministic verifiers (<code class="code-chip">C2</code>), stores (<code class="code-chip">C5</code>), kernels (<code class="code-chip">C7/C10</code>), and <code class="code-chip">LUT6/Wasm</code> (<code class="code-chip">C8</code>).
+        </p>
+      </div>
+      <div class="glass-card p-5 space-y-2 border-brand-indigo/35">
+        <div class="font-mono text-[10.5px] uppercase tracking-wider text-brand-cyan font-bold">04 &middot; Downward Compilation</div>
+        <h2 class="font-display text-base font-bold text-brand-white">Shared L0 Agent Routing</h2>
+        <p class="font-body text-xs text-brand-slate leading-relaxed">
+          Agents query <code class="code-chip">/api/avalanche/planetary</code> and <code class="code-chip">/api/ecosystem/agent-context</code> in milliseconds to invoke verified compiled substrates via <code class="code-chip">&lt;1 mJ &Phi;_IR</code> instead of burning neural joules.
+        </p>
+      </div>
+    </section>
+
+    <PlanetaryWellObservatory compact={false} />
+  </div>
+</Layout>

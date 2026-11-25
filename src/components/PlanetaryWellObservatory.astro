@@ -1,0 +1,492 @@
+---
+import wellSnapshot from '../data/planetary-well.json';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const items = wellSnapshot?.items || [];
+const strataCounts: Record<string, number> = wellSnapshot?.counts_by_stratum || {};
+const rungCounts: Record<string, number> = wellSnapshot?.counts_by_rung || {};
+const totalHarvested = wellSnapshot?.total_harvested || items.length;
+
+const STRATA = [
+  { id: 'all', label: 'All 6 Strata', short: 'All', count: totalHarvested, accent: 'cyan' },
+  { id: 'tools', label: 'Tools, Compilers & Provers', short: 'Tools & Provers', count: strataCounts.tools || 0, accent: 'emerald' },
+  { id: 'databases', label: 'Databases & Knowledge Graphs', short: 'Databases', count: strataCounts.databases || 0, accent: 'cyan' },
+  { id: 'libraries', label: 'Libraries (crates.io · PyPI · npm)', short: 'Libraries', count: strataCounts.libraries || 0, accent: 'indigo' },
+  { id: 'ai', label: 'AI Models & Datasets (HF)', short: 'AI Models', count: strataCounts.ai || 0, accent: 'amber' },
+  { id: 'applications', label: 'CAD, EDA, GIS & Science Apps', short: 'Applications', count: strataCounts.applications || 0, accent: 'cyan' },
+  { id: 'infrastructure', label: 'Kernels, Protocols, RFCs & ISAs', short: 'Infrastructure', count: strataCounts.infrastructure || 0, accent: 'emerald' },
+];
+
+const RUNG_NAMES: Record<number, string> = {
+  1: 'Search',
+  2: 'Generation',
+  3: 'Reasoning',
+  4: 'Communication',
+  5: 'Tool Use',
+  6: 'Immersion',
+  7: 'Competence',
+  8: 'Ecology',
+  9: 'Economy',
+};
+
+const maxRungCount = Math.max(1, ...Object.values(rungCounts).map((v) => Number(v || 0)));
+const initialVisible = compact ? 8 : 18;
+---
+
+<section id="planetary-well" class="max-w-7xl mx-auto space-y-6 scroll-mt-24">
+  <!-- Header + Live Commons Proof Bar -->
+  <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5">
+    <div class="max-w-4xl">
+      <p class="section-label-cyan mb-2">
+        Planetary Digital Well &middot; Continuous Ingestion &amp; Scholar Codification
+      </p>
+      <h2 class="font-display text-2xl sm:text-4xl font-bold text-brand-white tracking-tight">
+        Beyond One Lab: Ingesting &amp; Codifying the <span class="text-brand-cyan">Entire Digital Planet</span> onto Rungs 1–9
+      </h2>
+      <p class="reg-visionary font-body text-brand-slate text-sm sm:text-base mt-3 leading-relaxed">
+        The Avalanche is fueled by everything humanity has already built in the open: compilers and theorem provers (<strong class="text-brand-white">Lean 4, Z3, LLVM, Yosys, OpenROAD</strong>), databases (<strong class="text-brand-white">SQLite, PostgreSQL, DuckDB, ClickHouse, Wikidata, UniProt</strong>), package registries (<strong class="text-brand-white">crates.io, PyPI, npm</strong>), open-weight AI (<strong class="text-brand-white">HuggingFace Hub</strong>), applications (<strong class="text-brand-white">KiCad, FreeCAD, Blender, QGIS, FFmpeg</strong>), and planetary standards (<strong class="text-brand-white">Linux, seL4, RISC-V, QUIC, WebAssembly</strong>). Each is ingested into <a href="https://scholar.askdavidc.ai/avalanche" class="text-brand-cyan hover:underline">Commons Scholar</a> and codified with a <code class="code-chip">PURL</code>, <code class="code-chip">SPDX</code> license, <code class="code-chip">DES-10</code> niche, and Proposition 1 downward-compilation recipe.
+      </p>
+      <p class="reg-scientist font-mono text-xs text-brand-light mt-3 leading-relaxed">
+        IFLA LRM 4-level <code class="code-chip">WEMI</code> software projection + <code class="code-chip">JCR-1</code> (<code class="code-chip">COSE_Sign1</code>) &amp; <code class="code-chip">WAI1</code> (<code class="code-chip">BLAKE3 + Ed25519</code>) receipts. Analytical tier lowering reported strictly as <code class="code-chip">est_j</code> (never mixed with <code class="code-chip">measured_j</code> or <code class="code-chip">reported_j</code>).
+      </p>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+      <button
+        type="button"
+        id="pwell-live-sync-btn"
+        class="font-mono text-xs px-3.5 py-2 rounded-lg border border-brand-cyan/45 bg-brand-cyan/10 text-brand-cyan hover:bg-brand-cyan/20 cursor-pointer transition-colors"
+      >
+        &#8635; Sync Live Commons API
+      </button>
+      {compact ? (
+        <a
+          href="/planetary"
+          class="font-mono text-xs px-4 py-2 rounded-lg bg-brand-amber text-brand-dark font-semibold no-underline hover:bg-brand-gold transition-colors"
+        >
+          Open Full /planetary Observatory &rarr;
+        </a>
+      ) : (
+        <a
+          href="https://scholar.askdavidc.ai/avalanche"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-mono text-xs px-3.5 py-2 rounded-lg border border-brand-amber/40 bg-brand-amber/10 text-brand-amber no-underline hover:bg-brand-amber/20 transition-colors"
+        >
+          Open Commons HyperDB &#8599;
+        </a>
+      )}
+    </div>
+  </div>
+
+  <!-- Live Shadow-DOM Epistemic Proof Bar from scholar.askdavidc.ai -->
+  <div>
+    <script type="module" src="https://scholar.askdavidc.ai/embed/scholar-evidence.js" is:inline></script>
+    <scholar-evidence query="Communication Avalanche" compact="true"></scholar-evidence>
+  </div>
+
+  <!-- 6-Stratum Planetary Digital Well Filter Strip -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2.5" role="group" aria-label="Filter Planetary Digital Well by Stratum">
+    {STRATA.map((st, i) => (
+      <button
+        type="button"
+        data-pwell-stratum={st.id}
+        aria-pressed={i === 0 ? 'true' : 'false'}
+        class:list={[
+          'pwell-stratum-btn glass-card p-3.5 text-left flex flex-col justify-between cursor-pointer transition-all',
+          i === 0 ? 'border-brand-cyan bg-brand-cyan/12' : 'hover:border-brand-cyan/40',
+        ]}
+      >
+        <span class="font-mono text-[10px] uppercase tracking-wider text-brand-gray">{st.short}</span>
+        <span class="font-display text-2xl font-bold text-brand-white mt-1" data-pwell-stratum-count={st.id}>
+          {st.count.toLocaleString()}
+        </span>
+        <span class="font-mono text-[10px] text-brand-cyan mt-1 truncate w-full">{st.id === 'all' ? 'live indexed' : `stratum:${st.id}`}</span>
+      </button>
+    ))}
+  </div>
+
+  <!-- Interactive 9-Rung Planetary Distribution + Live "Codify Any Package/Model/Tool" Workbench -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+    <!-- Left 7 cols: 9-Rung Planetary Infrastructure Histogram -->
+    <div class="lg:col-span-7 glass-card p-5 flex flex-col justify-between space-y-4">
+      <div class="flex items-center justify-between gap-2">
+        <div>
+          <div class="font-mono text-[10.5px] uppercase tracking-[0.15em] text-brand-cyan">
+            9-Rung Planetary Infrastructure Projection &middot; Click Any Rung to Filter
+          </div>
+          <p class="font-body text-xs text-brand-slate mt-0.5">
+            Open-weight neural models cluster in <span class="text-brand-amber font-semibold">R1–R5</span>; compilers, SMT/Lean provers, databases, Rust/Python/C kernels, and RFCs anchor <span class="text-brand-cyan font-semibold">R6–R9 Compiled Competence</span>.
+          </p>
+        </div>
+        <button
+          type="button"
+          id="pwell-clear-rung"
+          class="hidden font-mono text-[11px] px-2.5 py-1 rounded border border-brand-cyan text-brand-cyan bg-brand-cyan/10 cursor-pointer"
+        >
+          Clear Rung &times;
+        </button>
+      </div>
+
+      <div class="grid grid-cols-9 gap-1.5 items-end h-36 pt-2">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((r) => {
+          const cnt = Number(rungCounts[String(r)] || 0);
+          const hPct = Math.max(10, Math.round((cnt / maxRungCount) * 100));
+          const isCompiled = r >= 6;
+          return (
+            <button
+              type="button"
+              data-pwell-rung={String(r)}
+              aria-label={`Filter Planetary Well by Rung R${r} ${RUNG_NAMES[r]} (${cnt} artifacts)`}
+              class="pwell-rung-btn flex flex-col items-center justify-end h-full p-1 rounded-lg border border-transparent hover:border-brand-cyan/45 cursor-pointer bg-transparent transition-all"
+            >
+              <span class="font-mono text-[10.5px] font-bold text-brand-white mb-1">{cnt}</span>
+              <div class="w-full flex-1 flex items-end justify-center">
+                <div
+                  class:list={[
+                    'w-full max-w-[32px] rounded-t border',
+                    isCompiled
+                      ? 'bg-gradient-to-t from-brand-cyan/60 to-brand-emerald/90 border-brand-cyan/60'
+                      : r === 5
+                      ? 'bg-gradient-to-t from-brand-rose/70 to-brand-amber/90 border-brand-rose/60'
+                      : 'bg-gradient-to-t from-brand-amber/60 to-brand-amber/90 border-brand-amber/50',
+                  ]}
+                  style={`height: ${hPct}%`}
+                ></div>
+              </div>
+              <span class={`font-mono text-[10.5px] font-bold mt-1.5 ${isCompiled ? 'text-brand-cyan' : r === 5 ? 'text-brand-rose' : 'text-brand-amber'}`}>
+                R{r}
+              </span>
+              <span class="font-mono text-[9px] text-brand-gray truncate max-w-full">{RUNG_NAMES[r]}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Right 5 cols: Live "Codify Any Digital Artifact in the Scholar Way" Workbench -->
+    <div class="lg:col-span-5 glass-card p-5 border-brand-amber/30 flex flex-col justify-between space-y-3">
+      <div>
+        <div class="font-mono text-[10.5px] uppercase tracking-[0.15em] text-brand-amber font-semibold">
+          Live Scholar Codifier &middot; WAI1 + CSP-1 Receipt Minter
+        </div>
+        <h3 class="font-display text-base sm:text-lg font-bold text-brand-white mt-0.5">
+          Codify Any Package, Database, AI Model, or Tool Live
+        </h3>
+        <p class="font-body text-xs text-brand-slate mt-1">
+          Fetches live registry metadata (<code class="code-chip">pkg:cargo/…</code>, <code class="code-chip">pkg:pypi/…</code>, <code class="code-chip">pkg:npm/…</code>, <code class="code-chip">pkg:huggingface/…</code>) on <code class="code-chip">scholar.askdavidc.ai</code>, projects onto Rungs 1–9 + <code class="code-chip">DES-10</code>, and mints an <code class="code-chip">Ed25519</code> receipt.
+        </p>
+      </div>
+
+      <form id="pwell-codify-form" class="space-y-2.5">
+        <div class="flex gap-2">
+          <input
+            id="pwell-codify-purl"
+            type="text"
+            value="pkg:cargo/ripgrep"
+            placeholder="e.g. pkg:cargo/tokio, pkg:pypi/scipy, pkg:npm/three…"
+            aria-label="Package URL or artifact name to codify"
+            class="flex-1 font-mono text-xs px-3 py-2 rounded-lg border border-brand-border bg-brand-navy text-brand-white"
+          />
+          <button
+            type="submit"
+            class="font-mono text-xs px-3.5 py-2 rounded-lg bg-brand-cyan text-brand-dark font-semibold hover:bg-brand-teal cursor-pointer transition-colors shrink-0"
+          >
+            &#9889; Codify
+          </button>
+        </div>
+        <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
+          <button type="button" data-pwell-preset="pkg:cargo/tokio" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">pkg:cargo/tokio</button>
+          <button type="button" data-pwell-preset="pkg:pypi/duckdb" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">pkg:pypi/duckdb</button>
+          <button type="button" data-pwell-preset="pkg:npm/three" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">pkg:npm/three</button>
+          <button type="button" data-pwell-preset="Lean 4 Theorem Prover" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">Lean 4</button>
+        </div>
+      </form>
+
+      <div id="pwell-codify-result" class="p-3 rounded-lg border border-brand-border bg-brand-dark/60 font-mono text-[11px] text-brand-slate min-h-[82px] flex items-center">
+        Submit any PURL or artifact name above to mint a live WAI1 + CSP-1 Avalanche specification.
+      </div>
+    </div>
+  </div>
+
+  <!-- Search & DES-10 Camp Filter Bar -->
+  <div class="glass-card p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+    <div class="flex flex-wrap items-center gap-2.5">
+      <select
+        id="pwell-camp-select"
+        aria-label="Filter by DES-10 Paradigm Niche"
+        class="font-mono text-xs px-3 py-1.5 rounded-lg border border-brand-border bg-brand-navy text-brand-light"
+      >
+        <option value="all">All DES-10 Niches (C1–C10)</option>
+        <option value="C1">C1 · Frontier Neural Proposer</option>
+        <option value="C2">C2 · Exact Formal / SAT / SMT Verifier</option>
+        <option value="C3">C3 · Latent World-Model / EBM Pre-Filter</option>
+        <option value="C4">C4 · Combinatorial / Min-Cost Flow Planner</option>
+        <option value="C5">C5 · Columnar / Episodic Case Store</option>
+        <option value="C7">C7 · Causal / Physical / Numerical Kernel</option>
+        <option value="C8">C8 · Boolean LUT6 / Wasm Automaton</option>
+        <option value="C9">C9 · Attested Binary Φ_IR Enzyme Bus</option>
+        <option value="C10">C10 · Deterministic Kernel / Library Primitive</option>
+      </select>
+      <span id="pwell-status-text" class="font-mono text-[11px] text-brand-gray">
+        Showing {Math.min(initialVisible, items.length)} of {items.length} featured ({totalHarvested.toLocaleString()} in Commons Well)
+      </span>
+    </div>
+
+    <input
+      id="pwell-search-input"
+      type="search"
+      placeholder="Search tools, databases, crates, PyPI, npm, HF models, RFCs…"
+      aria-label="Search Planetary Digital Well artifacts"
+      class="font-body text-xs px-3.5 py-1.5 rounded-lg border border-brand-border bg-brand-navy text-brand-white placeholder:text-brand-gray min-w-[260px]"
+    />
+  </div>
+
+  <!-- Artifact Cards Grid -->
+  <div id="pwell-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" data-initial-limit={String(initialVisible)}>
+    {items.map((it: any, idx: number) => {
+      const isCompiled = Number(it.rung || 7) >= 6;
+      const hay = `${it.name} ${it.purl} ${it.stratum} ${it.registry} ${it.description} ${it.des10_camp_id} ${it.des10_camp_name} ${it.target_tier} ${it.spdx_license}`.toLowerCase();
+      return (
+        <article
+          class:list={['pwell-card glass-card p-5 flex flex-col justify-between space-y-3', idx >= initialVisible ? 'hidden' : '']}
+          data-stratum={it.stratum}
+          data-rung={String(it.rung)}
+          data-camp={it.des10_camp_id}
+          data-hay={hay}
+        >
+          <div class="space-y-2.5">
+            <div class="flex flex-wrap items-center justify-between gap-1.5 font-mono text-[10.5px]">
+              <span class:list={[
+                'px-2 py-0.5 rounded border font-bold',
+                isCompiled ? 'border-brand-cyan/45 bg-brand-cyan/12 text-brand-cyan' : 'border-brand-amber/45 bg-brand-amber/12 text-brand-amber'
+              ]}>
+                {it.rung_code} &middot; {it.rung_name}
+              </span>
+              <span class="px-2 py-0.5 rounded border border-brand-border bg-brand-white/[0.03] text-brand-emerald">
+                {it.des10_camp_id} &middot; {it.stratum}
+              </span>
+            </div>
+
+            <div>
+              <h3 class="font-display text-base font-bold text-brand-white leading-snug">
+                <a href={it.upstream_url} target="_blank" rel="noopener noreferrer" class="text-brand-white no-underline hover:text-brand-cyan transition-colors">
+                  {it.name} &#8599;
+                </a>
+              </h3>
+              <div class="font-mono text-[10.5px] text-brand-gray mt-1 break-all">
+                {it.purl} &middot; SPDX <span class="text-brand-light">{it.spdx_license}</span>
+              </div>
+            </div>
+
+            <p class="font-body text-xs text-brand-slate leading-relaxed m-0">
+              {it.description}
+            </p>
+
+            <div class="p-2.5 rounded-lg border border-brand-cyan/20 bg-brand-cyan/[0.04] font-mono text-[10.5px] text-brand-light leading-relaxed">
+              <span class="text-brand-cyan font-bold">Avalanche Role ({it.target_tier}):</span> {it.downward_compilation_recipe}
+            </div>
+          </div>
+
+          <div class="pt-2.5 border-t border-brand-border flex items-center justify-between font-mono text-[10.5px]">
+            <span class="text-brand-gray">{it.registry}</span>
+            <a
+              href={`https://scholar.askdavidc.ai/avalanche?q=${encodeURIComponent(it.name)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-brand-amber no-underline hover:underline"
+            >
+              Scholar Provenance &#8599;
+            </a>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+
+  {!compact && items.length > initialVisible && (
+    <div id="pwell-more-wrap" class="flex justify-center">
+      <button
+        type="button"
+        id="pwell-show-all-btn"
+        class="font-mono text-xs px-5 py-2.5 rounded-lg border border-brand-cyan/40 bg-brand-cyan/10 text-brand-cyan hover:bg-brand-cyan/20 cursor-pointer transition-colors"
+      >
+        Show All {items.length} Featured Planetary Artifacts
+      </button>
+    </div>
+  )}
+</section>
+
+<script>
+  (function () {
+    const grid = document.getElementById('pwell-grid');
+    if (!grid) return;
+
+    const initialLimit = Number(grid.getAttribute('data-initial-limit') || '18');
+    let activeStratum = 'all';
+    let activeRung: string | null = null;
+    let activeCamp = 'all';
+    let query = '';
+    let showAll = false;
+
+    const stratumBtns = document.querySelectorAll<HTMLButtonElement>('.pwell-stratum-btn');
+    const rungBtns = document.querySelectorAll<HTMLButtonElement>('.pwell-rung-btn');
+    const clearRungBtn = document.getElementById('pwell-clear-rung');
+    const campSelect = document.getElementById('pwell-camp-select') as HTMLSelectElement | null;
+    const searchInput = document.getElementById('pwell-search-input') as HTMLInputElement | null;
+    const statusText = document.getElementById('pwell-status-text');
+    const showAllBtn = document.getElementById('pwell-show-all-btn');
+    const moreWrap = document.getElementById('pwell-more-wrap');
+
+    function filterCards() {
+      const cards = grid!.querySelectorAll<HTMLElement>('.pwell-card');
+      const filtered = activeStratum !== 'all' || activeRung !== null || activeCamp !== 'all' || query.length > 0;
+      let matched = 0;
+      let shown = 0;
+      cards.forEach((c) => {
+        const stOk = activeStratum === 'all' || c.getAttribute('data-stratum') === activeStratum;
+        const rOk = !activeRung || c.getAttribute('data-rung') === activeRung;
+        const campOk = activeCamp === 'all' || c.getAttribute('data-camp') === activeCamp;
+        const qOk = !query || (c.getAttribute('data-hay') || '').includes(query);
+        if (stOk && rOk && campOk && qOk) {
+          matched++;
+          if (showAll || filtered || matched <= initialLimit) {
+            c.classList.remove('hidden');
+            shown++;
+          } else {
+            c.classList.add('hidden');
+          }
+        } else {
+          c.classList.add('hidden');
+        }
+      });
+      if (statusText) statusText.textContent = `Showing ${shown} of ${matched} matching artifacts`;
+      if (moreWrap) moreWrap.classList.toggle('hidden', showAll || filtered || matched <= initialLimit);
+    }
+
+    stratumBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeStratum = btn.getAttribute('data-pwell-stratum') || 'all';
+        stratumBtns.forEach((b) => {
+          const on = b === btn;
+          b.setAttribute('aria-pressed', String(on));
+          b.classList.toggle('border-brand-cyan', on);
+          b.classList.toggle('bg-brand-cyan/12', on);
+        });
+        filterCards();
+      });
+    });
+
+    rungBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const r = btn.getAttribute('data-pwell-rung');
+        activeRung = activeRung === r ? null : r;
+        rungBtns.forEach((b) => b.classList.toggle('border-brand-cyan', b.getAttribute('data-pwell-rung') === activeRung));
+        if (clearRungBtn) clearRungBtn.classList.toggle('hidden', activeRung === null);
+        filterCards();
+      });
+    });
+
+    clearRungBtn?.addEventListener('click', () => {
+      activeRung = null;
+      rungBtns.forEach((b) => b.classList.remove('border-brand-cyan'));
+      clearRungBtn.classList.add('hidden');
+      filterCards();
+    });
+
+    campSelect?.addEventListener('change', () => {
+      activeCamp = campSelect.value;
+      filterCards();
+    });
+
+    searchInput?.addEventListener('input', () => {
+      query = searchInput.value.toLowerCase().trim();
+      filterCards();
+    });
+
+    showAllBtn?.addEventListener('click', () => {
+      showAll = true;
+      filterCards();
+    });
+
+    function esc(s: unknown): string {
+      return String(s || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // Live Scholar Codifier Workbench
+    const form = document.getElementById('pwell-codify-form');
+    const purlIn = document.getElementById('pwell-codify-purl') as HTMLInputElement | null;
+    const outBox = document.getElementById('pwell-codify-result');
+
+    async function runLiveCodify(spec: string) {
+      if (!outBox || !spec.trim()) return;
+      outBox.innerHTML = `<span class="text-brand-cyan">Codifying <code>${esc(spec)}</code> on scholar.askdavidc.ai…</span>`;
+      try {
+        const isPurl = spec.trim().startsWith('pkg:');
+        const qs = isPurl
+          ? `purl=${encodeURIComponent(spec.trim())}&live=true`
+          : `q=${encodeURIComponent(spec.trim())}&live=true`;
+        const resp = await fetch(`https://scholar.askdavidc.ai/api/avalanche/codify?${qs}`);
+        const d = await resp.json();
+        const c = d.codified || {};
+        const p1 = c.proposition_1 || {};
+        const gates = d.wai1_three_gates?.overall_passed ? 'WAI1 3-Gate ✓' : 'WAI1 Checked';
+        const rcpt = (d.csp1_receipt?.nanopub?.nanopub_id || '').slice(0, 20);
+        outBox.innerHTML = `<div class="space-y-1.5 w-full">
+          <div class="flex flex-wrap items-center justify-between gap-1">
+            <span class="text-brand-cyan font-bold">${esc(c.rung_code)} &middot; ${esc(c.rung_name)} (${esc(c.des10_camp_id)})</span>
+            <span class="text-brand-emerald">${gates} &middot; ${esc(rcpt)}</span>
+          </div>
+          <div class="text-brand-white font-semibold">${esc(c.name)} <span class="text-brand-gray font-normal">(${esc(c.purl)})</span></div>
+          <div class="text-brand-light">${esc(c.target_tier)} &middot; &Delta;T* = ${esc(p1.horizon_delta_t_star_calls)} calls &middot; ${esc(p1.cpj_multiplier_at_10k_calls)}&times; est_j CpJ</div>
+          <div class="text-brand-slate text-[10.5px]">${esc(c.downward_compilation_recipe)}</div>
+        </div>`;
+      } catch (err) {
+        outBox.innerHTML = `<span class="text-brand-amber">Offline / network notice: ${esc(err)}</span>`;
+      }
+    }
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (purlIn) runLiveCodify(purlIn.value);
+    });
+
+    document.querySelectorAll<HTMLButtonElement>('.pwell-preset').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-pwell-preset') || '';
+        if (purlIn) {
+          purlIn.value = val;
+          runLiveCodify(val);
+        }
+      });
+    });
+
+    // Live Sync from https://scholar.askdavidc.ai/api/avalanche/planetary
+    const syncBtn = document.getElementById('pwell-live-sync-btn');
+    syncBtn?.addEventListener('click', async () => {
+      syncBtn.textContent = '↻ Syncing Commons…';
+      try {
+        const r = await (await fetch('https://scholar.askdavidc.ai/api/avalanche/planetary?limit=36')).json();
+        const allEl = document.querySelector('[data-pwell-stratum-count="all"]');
+        if (allEl && r.total_codified_in_pool) {
+          allEl.textContent = Number(r.total_codified_in_pool).toLocaleString();
+        }
+        (r.counts_by_stratum || []).forEach((s: any) => {
+          const el = document.querySelector(`[data-pwell-stratum-count="${s.stratum}"]`);
+          if (el && s.count) el.textContent = Number(s.count).toLocaleString();
+        });
+        syncBtn.textContent = `✓ Live Synced (${Number(r.corpus_works_total || 0).toLocaleString()} Commons works)`;
+      } catch {
+        syncBtn.textContent = '↻ Sync Live Commons API';
+      }
+    });
+  })();
+</script>

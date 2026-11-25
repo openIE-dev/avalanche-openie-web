@@ -84,6 +84,9 @@ const isHome = pathname === '/' || pathname === '';
         <a href={isHome ? "/#ecosystem" : "/ecosystem"} class:list={["font-body text-[13px] max-xl:text-base font-medium no-underline transition-colors", pathname.startsWith('/ecosystem') ? "text-brand-cyan" : "text-brand-slate hover:text-brand-white"]}>
           Open Resources
         </a>
+        <a href="/planetary" class:list={["font-mono text-[12px] max-xl:text-base font-semibold px-2.5 py-1 rounded-md border no-underline transition-colors", pathname.startsWith('/planetary') ? "border-brand-cyan bg-brand-cyan/15 text-brand-cyan" : "border-brand-cyan/35 text-brand-cyan hover:bg-brand-cyan/10"]}>
+          Planetary Well
+        </a>
         <a href="https://research.openie.dev/tv/?channel=avalanche" class="inline-flex items-center gap-1 font-mono text-[11px] max-xl:text-sm text-brand-amber border border-brand-amber/30 px-2.5 py-1 rounded-md no-underline hover:bg-brand-amber/10 hover:border-brand-amber transition-all" title="Watch Research TV — Avalanche Visual Explainers">
           <span aria-hidden="true">&#9654;</span> TV
         </a>
@@ -122,6 +125,7 @@ const isHome = pathname === '/' || pathname === '';
             <div class="space-y-2">
               <a href="/" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-white transition-colors">Observatory Home</a>
               <a href="/rungs" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-amber transition-colors">The 9 Rungs &amp; Seminar Guide</a>
+              <a href="/planetary" class="block font-body text-[12px] text-brand-cyan no-underline hover:text-brand-white transition-colors">The Planetary Digital Well</a>
               <a href="/forecast" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">1950–2026 History &amp; Forecast</a>
               <a href="/ecosystem" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Open Papers, Labs &amp; Media</a>
             </div>
