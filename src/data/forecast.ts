@@ -26,7 +26,7 @@ export const HORIZON_MILESTONES: HorizonMilestone[] = [
     leanAnchor: 'CTA-T7..T10 · CTA-T16..T18 · CTA-T32..T35',
     gateMetric: '25.95–37.39 µs (643–926 µJ reported_j); 0 empty polls; 2.21× 1%-duty energy cut; 200/200 faults blocked',
     killCriterion: 'Edge verify > 100 µs or > 5 mJ; corrupt commits > 0; or eventfd fails 1%-duty joule win (Falsifiers 1, 2, 5)',
-    statusLabel: 'Verified [T/E]',
+    statusLabel: 'Self-Checked [T/E]',
     statusKind: 'verified',
   },
   {
@@ -39,7 +39,7 @@ export const HORIZON_MILESTONES: HorizonMilestone[] = [
     leanAnchor: 'CTA-T19..T22 · CTA-T24..T28 · CTA-T36..T40',
     gateMetric: '2.11 µs SSP (2.40 µs failover); 59/60 (98.33%) pass, 0/60 false commits, 2.09× / 14.97× CpJ',
     killCriterion: 'SSP failover > 100 µs, false commits > 0%, or CpJ <= 1.0× monolithic LLM (CA-H6 / Falsifier 4)',
-    statusLabel: 'Verified [T/E]',
+    statusLabel: 'Self-Checked [T/E]',
     statusKind: 'verified',
   },
   {
@@ -52,7 +52,7 @@ export const HORIZON_MILESTONES: HorizonMilestone[] = [
     leanAnchor: 'CTA-T3..T6 · CTA-T23 · CTA-T41 · CTA-T44',
     gateMetric: '1.77 µJ O(1) POSIX mmap lookup; 0 test-time LLM calls on crystallized classes; frozen SHA-256',
     killCriterion: 'Any unverified output, test-time byte mutation, or > 4 KiB / > 50k-op per-class reducer',
-    statusLabel: 'Verified [T/E]',
+    statusLabel: 'Self-Checked [T/E]',
     statusKind: 'verified',
   },
   {
@@ -63,9 +63,9 @@ export const HORIZON_MILESTONES: HorizonMilestone[] = [
     bridgedCamps: 'C1–C10 5-Host Fleet',
     mechanism: 'Loop 5 hash-chained energy receipts + h_min eviction + 5-host audit',
     leanAnchor: 'CTA-T20 · CTA-T41 · CTA-T45',
-    gateMetric: 'Pre/post quiet drift <= 10.0% (9.93% CTA-E2); 927.30 µJ Jetson Thor INA3221 measured_j; auto-evict h <= h_min',
-    killCriterion: 'Drift > 10.0% claimed as net joules (Falsifier 6) or unamortized skill h <= h_min retained (CTA-T45)',
-    statusLabel: 'Verified [T/E]',
+    gateMetric: 'Pre/post quiet drift <= 10.0% (9.93% CTA-E2; <= 5.0% in Shot #6 @ 813eb96: 0.11% & 0.09% KV260 INA260); 927.30 µJ Jetson Thor INA3221 measured_j; auto-evict h <= h_min',
+    killCriterion: 'Drift > threshold claimed as net joules (Falsifier 6) or unamortized skill h <= h_min retained (CTA-T45)',
+    statusLabel: 'Self-Checked [T/E]',
     statusKind: 'verified',
   },
   {
@@ -76,9 +76,9 @@ export const HORIZON_MILESTONES: HorizonMilestone[] = [
     bridgedCamps: 'All C1–C10',
     mechanism: 'Loop 1 + Loop 2 sequential Digital Enzymes',
     leanAnchor: 'CTA-T35..T40',
-    gateMetric: '98 / 100 (98.0%) DES-10 synthesis where all 10 solo camps <= 49%; 9.26×–26.87× Thor measured_j CpJ',
+    gateMetric: '98 / 100 (98.0%, 1/100 false commit) DES-10 synthesis where all 10 solo camps <= 49%; 9.26×–26.87× Thor measured_j CpJ',
     killCriterion: 'Any single solo monoculture reaches >= 80% pass rate at <= DES-10 joules (CTA-T37 / CTA-T38 / CA-H10)',
-    statusLabel: 'Verified [T/E]',
+    statusLabel: 'Self-Checked [T/E]',
     statusKind: 'verified',
   },
   {
@@ -91,7 +91,7 @@ export const HORIZON_MILESTONES: HorizonMilestone[] = [
     leanAnchor: 'CTA-T21 · CTA-T22 · CTA-T34 · CTA-T35',
     gateMetric: '0.9580 unseen-shape AUROC (2,240 C4+C6 Forms, 140 tasks, 0.00% drop: 124/140); 4.78× / 2.55× fewer RCE evals; 458.16 J vs 567.51 / 1,001.48 J Thor VDD measured_j (948.67 J vs 1,106.93 / 1,949.40 J Zen 5 reported_j)',
     killCriterion: 'Pre-filtering drops terminal verified solve rate > 1.0% or fails E_gate < F · E_down (CTA-T21)',
-    statusLabel: 'Verified [T/E]',
+    statusLabel: 'Self-Checked [T/E]',
     statusKind: 'verified',
   },
   {
@@ -104,7 +104,7 @@ export const HORIZON_MILESTONES: HorizonMilestone[] = [
     leanAnchor: 'CTA-T41 · CTA-T42 · CTA-T44 · CTA-T45',
     gateMetric: 'Live 1,000-task Zipf(0.85) stream: 1,000/1,000 (100% parity, 0 regressions), 99.11%–99.33% post-warmup <= 16 mJ, 33.33× fewer Tier-3 wakes, 25.96× Thor VDD measured_j CpJ (26.95× VIN; 31.65× Zen 5 reported_j), 6/6 shift transients evicted',
     killCriterion: 'Promoted Tier-2 rule causes >= 1 regression (CTA-T44) or fails E_comp payback by N = 1,000',
-    statusLabel: 'Verified [T/E]',
+    statusLabel: 'Self-Checked [T/E]',
     statusKind: 'verified',
   },
   {
@@ -115,7 +115,7 @@ export const HORIZON_MILESTONES: HorizonMilestone[] = [
     bridgedCamps: 'C5 / C2 → C8 (xck26 & xc7)',
     mechanism: 'Loop 4 + Loop 5 512×512 Beneš + 81 × RAMB36E2 / 83 × RAMB36E1',
     leanAnchor: 'CTA-T41..T45 · LutAdapt.BenesCopy · NucleusWobble',
-    gateMetric: 'xck26: 13 levels, 15.59 est_mW idle; XC7A200T M.2: 62,211 LUTs (46.22%), 10,500/10,500 KV260 parity, 0.86 est_W M.2 3.3V @ 55.2 est_C (DDR3 off); pending physical INA260 / M.2 shunt measured_j > 100× CPU',
+    gateMetric: 'KV260 TI INA260 SOM 5V DC measured_j live (@ 813eb96, 0.09%–0.11% drift): 26.58× gross (24.49× net: 685.43 / 40.49 µJ) 4-stage cascade & 187.49 / 10.30 µJ sub-bit packed int (4.13×/5.15× < INT8); xck26 RTL 15.59 est_mW idle; XC7A200T M.2 62,211 LUTs @ 0.86 est_W (M.2 3.3V gateware shunt active)',
     killCriterion: 'Post-PAR timing < 200–250 MHz, DSP48 > 0, < 100% parity, > 85 °C M.2 T_J, or physical shunt measured_j fails CPU Tier-1 win',
     statusLabel: 'Active [E]',
     statusKind: 'active',

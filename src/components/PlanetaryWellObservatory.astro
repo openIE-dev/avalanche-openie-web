@@ -9,6 +9,8 @@ const { compact = false } = Astro.props;
 const items = wellSnapshot?.items || [];
 const strataCounts: Record<string, number> = wellSnapshot?.counts_by_stratum || {};
 const rungCounts: Record<string, number> = wellSnapshot?.counts_by_rung || {};
+const stageCounts: Record<string, number> = (wellSnapshot as any)?.counts_by_stage || {};
+const shot4PackCount = Number((wellSnapshot as any)?.shot4_pack_count || 24);
 const totalHarvested = wellSnapshot?.total_harvested || items.length;
 
 const STRATA = [
@@ -19,6 +21,49 @@ const STRATA = [
   { id: 'ai', label: 'AI Models & Datasets (HF)', short: 'AI Models', count: strataCounts.ai || 0, accent: 'amber' },
   { id: 'applications', label: 'CAD, EDA, GIS & Science Apps', short: 'Applications', count: strataCounts.applications || 0, accent: 'cyan' },
   { id: 'infrastructure', label: 'Kernels, Protocols, RFCs & ISAs', short: 'Infrastructure', count: strataCounts.infrastructure || 0, accent: 'emerald' },
+];
+
+const LOWERED_STAGES = [
+  {
+    id: 'all',
+    short: 'All 4 Stages',
+    title: 'Full 4-Stage Cascade',
+    count: items.length,
+    desc: 'All codified artifacts across Stages 1–4',
+    recipe: './replicate/run_replication.sh # Full Apache-2.0 Commodity + Cascade Suite (@ 813eb96)',
+  },
+  {
+    id: 'stage1',
+    short: 'Stage 1 · LUT6 / Table',
+    title: 'Stage 1: Lookup First (0 Neural FLOPs)',
+    count: stageCounts.stage1 || 0,
+    desc: 'CE-gated LUT6 BRAM pages (162.7 nJ), DNULLMM1 O(1) mmap (0.93–1.77 µJ), FST & rkyv',
+    recipe: "yosys -p 'read_verilog wake.v; synth -noalumacc -nordff; abc -lut 6; write_json crystal.lut6.json'",
+  },
+  {
+    id: 'stage2',
+    short: 'Stage 2 · Zero-Copy Index',
+    title: 'Stage 2: Search / Retrieve',
+    count: stageCounts.stage2 || 0,
+    desc: 'De Bruijn RCE normal forms, ripgrep DFA, tree-sitter CST, Roaring bitmaps, DuckDB & SQLite',
+    recipe: 'rce canon --de-bruijn src/ | b3sum && rg --json -F "symbol" src/',
+  },
+  {
+    id: 'stage3',
+    short: 'Stage 3 · Integer / Solver',
+    title: 'Stage 3: Hybrid Integer Mosaic & Exact Solvers',
+    count: stageCounts.stage3 || 0,
+    desc: 'waiOS 4-ISA integer kernels (a541323b…46f0), packed 0.1517 bpw WHT, Z3, CaDiCaL & Lean 4',
+    recipe: './kits/waios-mosaic-cascade/run_kit.sh && ./kits/littlebit-joule/run_kit.sh',
+  },
+  {
+    id: 'stage4',
+    short: 'Stage 4 · Gate-Wrapped Proposer',
+    title: 'Stage 4: Frontier Inference (Last Resort)',
+    count: stageCounts.stage4 || 0,
+    desc: 'Invoked strictly on ~2.6% novel misses, gated by C(z)=1, and crystallized back to Stage 1',
+    recipe: 'llama-cli -m model.gguf --temp 0 --grammar-file schema.gbnf -p "$MISS" | rce-vc check --crystallize',
+  },
 ];
 
 const RUNG_NAMES: Record<number, string> = {
@@ -34,7 +79,7 @@ const RUNG_NAMES: Record<number, string> = {
 };
 
 const maxRungCount = Math.max(1, ...Object.values(rungCounts).map((v) => Number(v || 0)));
-const initialVisible = compact ? 8 : 18;
+const initialVisible = compact ? 9 : 24;
 ---
 
 <section id="planetary-well" class="max-w-7xl mx-auto space-y-6 scroll-mt-24">
@@ -42,16 +87,16 @@ const initialVisible = compact ? 8 : 18;
   <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5">
     <div class="max-w-4xl">
       <p class="section-label-cyan mb-2">
-        Planetary Digital Well &middot; Continuous Ingestion &amp; Scholar Codification
+        Planetary Digital Well &middot; Shot #4 Downward-Compilation Explorer &amp; Scholar Codifier
       </p>
       <h2 class="font-display text-2xl sm:text-4xl font-bold text-brand-white tracking-tight">
-        Beyond One Lab: Ingesting &amp; Codifying the <span class="text-brand-cyan">Entire Digital Planet</span> onto Rungs 1–9
+        Beyond One Lab: Codifying &amp; Lowering the <span class="text-brand-cyan">Entire Digital Planet</span> onto Rungs 1–9
       </h2>
       <p class="reg-visionary font-body text-brand-slate text-sm sm:text-base mt-3 leading-relaxed">
-        The Avalanche is fueled by everything humanity has already built in the open: compilers and theorem provers (<strong class="text-brand-white">Lean 4, Z3, LLVM, Yosys, OpenROAD</strong>), databases (<strong class="text-brand-white">SQLite, PostgreSQL, DuckDB, ClickHouse, Wikidata, UniProt</strong>), package registries (<strong class="text-brand-white">crates.io, PyPI, npm</strong>), open-weight AI (<strong class="text-brand-white">HuggingFace Hub</strong>), applications (<strong class="text-brand-white">KiCad, FreeCAD, Blender, QGIS, FFmpeg</strong>), and planetary standards (<strong class="text-brand-white">Linux, seL4, RISC-V, QUIC, WebAssembly</strong>). Each is ingested into <a href="https://scholar.askdavidc.ai/avalanche" class="text-brand-cyan hover:underline">Commons Scholar</a> and codified with a <code class="code-chip">PURL</code>, <code class="code-chip">SPDX</code> license, <code class="code-chip">DES-10</code> niche, and Proposition 1 downward-compilation recipe.
+        The Avalanche is fueled by everything humanity has already built in the open: compilers and theorem provers (<strong class="text-brand-white">Lean 4, Z3, CaDiCaL, LLVM, Yosys, nextpnr, Verilator</strong>), databases (<strong class="text-brand-white">SQLite, PostgreSQL, DuckDB, ClickHouse, Wikidata, UniProt</strong>), high-efficiency systems crates &amp; libraries (<strong class="text-brand-white">ripgrep, tree-sitter, BLAKE3, Roaring, FST, rkyv, simdjson, T-MAC, Wasmtime, libbpf</strong>), open-weight AI (<strong class="text-brand-white">llama.cpp, BitNet.cpp, HuggingFace Hub</strong>), and OpenIE&rsquo;s runnable kits (<strong class="text-brand-cyan">deterministic-null, rce, lut-adapt-ai, littlebit-joule, waios-mosaic-cascade</strong>). Each is projected onto Rungs 1–9 in <a href="https://scholar.askdavidc.ai/avalanche" class="text-brand-cyan hover:underline">Commons Scholar</a> with an actionable <strong class="text-brand-emerald">Stage 4 &rarr; Stage 1 downward-compilation recipe</strong>.
       </p>
       <p class="reg-scientist font-mono text-xs text-brand-light mt-3 leading-relaxed">
-        IFLA LRM 4-level <code class="code-chip">WEMI</code> software projection + <code class="code-chip">JCR-1</code> (<code class="code-chip">COSE_Sign1</code>) &amp; <code class="code-chip">WAI1</code> (<code class="code-chip">BLAKE3 + Ed25519</code>) receipts. Analytical tier lowering reported strictly as <code class="code-chip">est_j</code> (never mixed with <code class="code-chip">measured_j</code> or <code class="code-chip">reported_j</code>).
+        IFLA LRM 4-level <code class="code-chip">WEMI</code> software projection + <code class="code-chip">JCR-1</code> (<code class="code-chip">COSE_Sign1</code>) &amp; <code class="code-chip">WAI1</code> (<code class="code-chip">BLAKE3 + Ed25519</code>) receipts &middot; <strong class="text-brand-emerald">Signed Provenance &middot; Self-Checked</strong> (<code class="code-chip">measured_j &perp; reported_j &perp; est_j &perp; unmetered</code>).
       </p>
     </div>
 
@@ -64,12 +109,20 @@ const initialVisible = compact ? 8 : 18;
         &#8635; Sync Live Commons API
       </button>
       <a
+        href="https://research.openie.dev/living/compiled-agency/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-mono text-xs px-3.5 py-2 rounded-lg border border-brand-emerald/45 bg-brand-emerald/12 text-brand-emerald font-semibold no-underline hover:bg-brand-emerald/20 transition-colors"
+      >
+        Compiled Agency Simulator &#8599;
+      </a>
+      <a
         href="https://scholar.askdavidc.ai/capabilities"
         target="_blank"
         rel="noopener noreferrer"
         class="font-mono text-xs px-3.5 py-2 rounded-lg border border-brand-cyan/40 bg-brand-navy text-brand-light no-underline hover:border-brand-cyan hover:text-brand-cyan transition-colors"
       >
-        Sovereign Capability Blueprints &#8599;
+        Sovereign Blueprints &#8599;
       </a>
       {compact ? (
         <a
@@ -88,6 +141,103 @@ const initialVisible = compact ? 8 : 18;
           Open Commons HyperDB &#8599;
         </a>
       )}
+    </div>
+  </div>
+
+  <!-- Shot #6 Physical Shunt Receipts (@ 813eb96) & Compiled Agency Observatory Callout -->
+  <div class="glass-card p-5 border-brand-emerald/40 bg-gradient-to-r from-brand-emerald/[0.07] via-brand-dark/55 to-brand-cyan/[0.06] space-y-3">
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <span class="font-mono text-[10.5px] uppercase tracking-[0.15em] text-brand-emerald font-bold">
+        Shot #6 Live Physical DC Shunt Receipts &middot; openIE-dev/openie-research-experiments @ 813eb96 &middot; 4,366/4,366 CHECKSUMS.sha256
+      </span>
+      <div class="flex flex-wrap items-center gap-3 font-mono text-[11px]">
+        <a href="https://research.openie.dev/living/compiled-agency/" target="_blank" rel="noopener noreferrer" class="text-brand-emerald hover:underline no-underline font-semibold">
+          Open Interactive Observatory &nearr;
+        </a>
+        <a href="https://blog.openie.dev/posts/from-ephemeral-inference-to-compiled-agency/" target="_blank" rel="noopener noreferrer" class="text-brand-amber hover:underline no-underline">
+          Capstone Position Essay #58 &nearr;
+        </a>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 font-mono text-[11px] text-brand-light leading-relaxed">
+      <div class="p-3 rounded-lg bg-brand-dark/65 border border-brand-border">
+        <div class="text-brand-cyan font-bold mb-1">AMD Kria KV260 &middot; TI INA260 SOM 5V DC (measured_j)</div>
+        <div><code class="code-chip">Falsifier 6</code> PASSED (<code class="code-chip">0.11%</code> &amp; <code class="code-chip">0.09% &le; 5%</code> drift): sub-bit packed int <strong class="text-brand-white">187.49 &micro;J</strong> gross (<strong class="text-brand-white">10.30 &micro;J</strong> net = <strong class="text-brand-emerald">4.13&times; / 5.15&times; &lt; INT8</strong>; avoids <code class="code-chip">81.86&times;</code> FP32 unpack tax); 4-stage cascade <strong class="text-brand-white">685.43 &micro;J</strong> gross (<strong class="text-brand-white">40.49 &micro;J</strong> net = <strong class="text-brand-emerald">26.58&times; / 24.49&times; cut</strong>).</div>
+      </div>
+      <div class="p-3 rounded-lg bg-brand-dark/65 border border-brand-border">
+        <div class="text-brand-amber font-bold mb-1">NVIDIA Jetson AGX Thor &middot; TI INA3221 / INA238 (measured_j)</div>
+        <div>Shared-host drift gated (<code class="code-chip">A1/A2</code> net withheld): sub-bit packed int <strong class="text-brand-white">104.44 &micro;J</strong> (<code class="code-chip">202.94 &micro;J VIN</code> = <strong class="text-brand-emerald">7.95&times; &lt; INT8</strong>, <code class="code-chip">151.66&times; &lt; FP32</code> unpack); 4-stage cascade <strong class="text-brand-white">530.39 &micro;J</strong> (<code class="code-chip">981.55 &micro;J VIN</code> = <strong class="text-brand-emerald">16.26&times; cut</strong>).</div>
+      </div>
+      <div class="p-3 rounded-lg bg-brand-dark/65 border border-brand-border">
+        <div class="text-brand-white font-bold mb-1">4-ISA waiOS Digest &amp; Separated RAPL (reported_j)</div>
+        <div>All 5 lanes match <code class="code-chip">a541323b&hellip;46f0</code> across ARMv9 Thor, ARMv8 KV260, Core i9-13900H, &amp; Ryzen AI Max+ 395 (<strong class="text-brand-emerald">0 / 400 drift</strong>, 95% CP &le; 0.00746); RAPL <code class="code-chip">reported_j</code> isolated (<code class="code-chip">18.33&times;</code> Core i9, <code class="code-chip">20.78&times;</code> Ryzen).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shot #4 Interactive 4-Stage Downward-Compilation Lowering Guide & Stage Filter -->
+  <div class="glass-card p-5 border-brand-cyan/35 space-y-4">
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+      <div>
+        <div class="font-mono text-[10.5px] uppercase tracking-[0.15em] text-brand-cyan font-bold">
+          Shot #4 Downward-Compilation Lowering Guide &middot; Stage 4 Frontier &rarr; Stage 3 Hybrid/Mosaic &rarr; Stage 2 Zero-Copy Index &rarr; Stage 1 LUT6 / De Bruijn
+        </div>
+        <p class="font-body text-xs text-brand-slate mt-0.5">
+          Filter any Planetary Well artifact by its <strong class="text-brand-white">Target Lowered Stage</strong> in the 4-Stage Spellcheck Cascade, toggle the curated <strong class="text-brand-amber">Shot #4 Developer &amp; Systems Pack ({shot4PackCount} blueprints)</strong>, or copy ready-to-run <code class="code-chip">RCE</code> / <code class="code-chip">LUT6</code> / <code class="code-chip">waiOS</code> lowering recipes.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 shrink-0">
+        <button
+          type="button"
+          id="pwell-shot4-toggle"
+          aria-pressed="false"
+          class="font-mono text-[11px] px-3 py-1.5 rounded-lg border border-brand-amber/45 bg-brand-amber/10 text-brand-amber hover:bg-brand-amber/20 cursor-pointer transition-all font-semibold"
+        >
+          &#9889; Shot #4 Pack ({shot4PackCount})
+        </button>
+        <button
+          type="button"
+          id="pwell-copy-stage-recipe"
+          data-recipe={LOWERED_STAGES[0].recipe}
+          class="font-mono text-[11px] px-3 py-1.5 rounded-lg border border-brand-cyan/45 bg-brand-cyan/10 text-brand-cyan hover:bg-brand-cyan/20 cursor-pointer transition-all"
+        >
+          &#128203; Copy Stage Recipe
+        </button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5" role="group" aria-label="Filter by Target Lowered Cascade Stage">
+      {LOWERED_STAGES.map((stg, idx) => (
+        <button
+          type="button"
+          data-pwell-stage={stg.id}
+          data-stage-recipe={stg.recipe}
+          aria-pressed={idx === 0 ? 'true' : 'false'}
+          class:list={[
+            'pwell-stage-btn p-3 rounded-xl border text-left flex flex-col justify-between cursor-pointer transition-all bg-brand-dark/55',
+            idx === 0 ? 'border-brand-cyan bg-brand-cyan/12' : 'border-brand-border hover:border-brand-cyan/40',
+          ]}
+        >
+          <div class="flex items-center justify-between gap-1 w-full">
+            <span class:list={[
+              'font-mono text-[10.5px] font-bold',
+              stg.id === 'stage1' ? 'text-brand-emerald' :
+              stg.id === 'stage2' ? 'text-brand-cyan' :
+              stg.id === 'stage3' ? 'text-brand-white' :
+              stg.id === 'stage4' ? 'text-brand-amber' : 'text-brand-cyan'
+            ]}>
+              {stg.short}
+            </span>
+            <span class="font-mono text-xs font-bold text-brand-white" data-pwell-stage-count={stg.id}>{stg.count}</span>
+          </div>
+          <p class="font-body text-[11px] text-brand-slate leading-snug mt-1.5 mb-0">{stg.desc}</p>
+        </button>
+      ))}
+    </div>
+
+    <div class="p-2.5 rounded-lg bg-brand-dark/80 border border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono text-[11px]">
+      <span class="text-brand-gray shrink-0">Active Stage Lowering Command:</span>
+      <code id="pwell-active-stage-cmd" class="text-brand-cyan overflow-x-auto whitespace-nowrap flex-1">{LOWERED_STAGES[0].recipe}</code>
     </div>
   </div>
 
@@ -196,7 +346,7 @@ const initialVisible = compact ? 8 : 18;
             id="pwell-codify-purl"
             type="text"
             value="pkg:cargo/ripgrep"
-            placeholder="e.g. pkg:cargo/tokio, pkg:pypi/scipy, pkg:npm/three…"
+            placeholder="e.g. pkg:cargo/ripgrep, pkg:pypi/z3-solver, pkg:github/YosysHQ/yosys…"
             aria-label="Package URL or artifact name to codify"
             class="flex-1 font-mono text-xs px-3 py-2 rounded-lg border border-brand-border bg-brand-navy text-brand-white"
           />
@@ -208,9 +358,10 @@ const initialVisible = compact ? 8 : 18;
           </button>
         </div>
         <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
-          <button type="button" data-pwell-preset="pkg:cargo/tokio" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">pkg:cargo/tokio</button>
-          <button type="button" data-pwell-preset="pkg:pypi/duckdb" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">pkg:pypi/duckdb</button>
-          <button type="button" data-pwell-preset="pkg:npm/three" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">pkg:npm/three</button>
+          <button type="button" data-pwell-preset="pkg:cargo/ripgrep" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">ripgrep</button>
+          <button type="button" data-pwell-preset="pkg:pypi/z3-solver" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">z3-solver</button>
+          <button type="button" data-pwell-preset="pkg:pypi/duckdb" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">duckdb</button>
+          <button type="button" data-pwell-preset="Yosys LUT6 Synthesis" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">yosys</button>
           <button type="button" data-pwell-preset="Lean 4 Theorem Prover" class="pwell-preset px-2 py-0.5 rounded border border-brand-border text-brand-slate hover:text-brand-cyan cursor-pointer bg-transparent">Lean 4</button>
         </div>
       </form>
@@ -241,14 +392,14 @@ const initialVisible = compact ? 8 : 18;
         <option value="C10">C10 · Deterministic Kernel / Library Primitive</option>
       </select>
       <span id="pwell-status-text" class="font-mono text-[11px] text-brand-gray">
-        Showing {Math.min(initialVisible, items.length)} of {items.length} featured ({totalHarvested.toLocaleString()} in Commons Well)
+        Showing {Math.min(initialVisible, items.length)} of {items.length} codified blueprints ({totalHarvested.toLocaleString()} in Commons Well)
       </span>
     </div>
 
     <input
       id="pwell-search-input"
       type="search"
-      placeholder="Search tools, databases, crates, PyPI, npm, HF models, RFCs…"
+      placeholder="Search ripgrep, z3, yosys, duckdb, littlebit, waios, crates, RFCs…"
       aria-label="Search Planetary Digital Well artifacts"
       class="font-body text-xs px-3.5 py-1.5 rounded-lg border border-brand-border bg-brand-navy text-brand-white placeholder:text-brand-gray min-w-[260px]"
     />
@@ -258,26 +409,43 @@ const initialVisible = compact ? 8 : 18;
   <div id="pwell-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" data-initial-limit={String(initialVisible)}>
     {items.map((it: any, idx: number) => {
       const isCompiled = Number(it.rung || 7) >= 6;
-      const hay = `${it.name} ${it.purl} ${it.stratum} ${it.registry} ${it.description} ${it.des10_camp_id} ${it.des10_camp_name} ${it.target_tier} ${it.spdx_license}`.toLowerCase();
+      const stg = it.lowered_stage || 'stage3';
+      const stgLabel = it.lowered_stage_label || 'Stage 3 · Integer / Solver';
+      const isShot4 = Boolean(it.shot4_pack);
+      const cliRecipe = it.cli_lowering_recipe || `scholar-codify --purl '${it.purl}'`;
+      const hay = `${it.name} ${it.purl} ${it.stratum} ${it.registry} ${it.description} ${it.des10_camp_id} ${it.des10_camp_name} ${it.target_tier} ${stgLabel} ${it.spdx_license} ${cliRecipe}`.toLowerCase();
       return (
         <article
-          class:list={['pwell-card glass-card p-5 flex flex-col justify-between space-y-3', idx >= initialVisible ? 'hidden' : '']}
+          class:list={[
+            'pwell-card glass-card p-5 flex flex-col justify-between space-y-3',
+            isShot4 ? 'border-brand-cyan/35' : '',
+            idx >= initialVisible ? 'hidden' : '',
+          ]}
           data-stratum={it.stratum}
           data-rung={String(it.rung)}
           data-camp={it.des10_camp_id}
+          data-stage={stg}
+          data-shot4={isShot4 ? '1' : '0'}
           data-hay={hay}
         >
           <div class="space-y-2.5">
-            <div class="flex flex-wrap items-center justify-between gap-1.5 font-mono text-[10.5px]">
+            <div class="flex flex-wrap items-center justify-between gap-1.5 font-mono text-[10px]">
               <span class:list={[
                 'px-2 py-0.5 rounded border font-bold',
                 isCompiled ? 'border-brand-cyan/45 bg-brand-cyan/12 text-brand-cyan' : 'border-brand-amber/45 bg-brand-amber/12 text-brand-amber'
               ]}>
                 {it.rung_code} &middot; {it.rung_name}
               </span>
-              <span class="px-2 py-0.5 rounded border border-brand-border bg-brand-white/[0.03] text-brand-emerald">
-                {it.des10_camp_id} &middot; {it.stratum}
-              </span>
+              <div class="flex items-center gap-1">
+                {isShot4 && (
+                  <span class="px-1.5 py-0.5 rounded border border-brand-amber/45 bg-brand-amber/12 text-brand-amber font-semibold">
+                    Shot #4
+                  </span>
+                )}
+                <span class="px-2 py-0.5 rounded border border-brand-border bg-brand-white/[0.03] text-brand-emerald">
+                  {stgLabel}
+                </span>
+              </div>
             </div>
 
             <div>
@@ -287,7 +455,7 @@ const initialVisible = compact ? 8 : 18;
                 </a>
               </h3>
               <div class="font-mono text-[10.5px] text-brand-gray mt-1 break-all">
-                {it.purl} &middot; SPDX <span class="text-brand-light">{it.spdx_license}</span>
+                {it.purl} &middot; <span class="text-brand-cyan">{it.des10_camp_id}</span> &middot; SPDX <span class="text-brand-light">{it.spdx_license}</span>
               </div>
             </div>
 
@@ -295,13 +463,25 @@ const initialVisible = compact ? 8 : 18;
               {it.description}
             </p>
 
-            <div class="p-2.5 rounded-lg border border-brand-cyan/20 bg-brand-cyan/[0.04] font-mono text-[10.5px] text-brand-light leading-relaxed">
-              <span class="text-brand-cyan font-bold">Avalanche Role ({it.target_tier}):</span> {it.downward_compilation_recipe}
+            <div class="p-2.5 rounded-lg border border-brand-cyan/20 bg-brand-cyan/[0.04] font-mono text-[10.5px] text-brand-light leading-relaxed space-y-1.5">
+              <div>
+                <span class="text-brand-cyan font-bold">Lowering Role ({it.target_tier}):</span> {it.downward_compilation_recipe}
+              </div>
+              <div class="pt-1.5 border-t border-brand-border/60 flex items-center justify-between gap-2">
+                <code class="text-[10px] text-brand-emerald truncate flex-1" title={cliRecipe}>{cliRecipe}</code>
+                <button
+                  type="button"
+                  data-copy-recipe={cliRecipe}
+                  class="pwell-copy-btn shrink-0 px-2 py-0.5 rounded border border-brand-cyan/40 bg-brand-dark/80 text-[10px] text-brand-cyan hover:bg-brand-cyan/15 cursor-pointer transition-colors"
+                >
+                  Copy
+                </button>
+              </div>
             </div>
           </div>
 
           <div class="pt-2.5 border-t border-brand-border flex items-center justify-between font-mono text-[10.5px]">
-            <span class="text-brand-gray">{it.registry}</span>
+            <span class="text-brand-gray">{it.registry} &middot; {it.stratum}</span>
             <a
               href={`https://scholar.askdavidc.ai/avalanche?q=${encodeURIComponent(it.name)}`}
               target="_blank"
@@ -323,7 +503,7 @@ const initialVisible = compact ? 8 : 18;
         id="pwell-show-all-btn"
         class="font-mono text-xs px-5 py-2.5 rounded-lg border border-brand-cyan/40 bg-brand-cyan/10 text-brand-cyan hover:bg-brand-cyan/20 cursor-pointer transition-colors"
       >
-        Show All {items.length} Featured Planetary Artifacts
+        Show All {items.length} Codified Planetary Blueprints
       </button>
     </div>
   )}
@@ -334,14 +514,20 @@ const initialVisible = compact ? 8 : 18;
     const grid = document.getElementById('pwell-grid');
     if (!grid) return;
 
-    const initialLimit = Number(grid.getAttribute('data-initial-limit') || '18');
+    const initialLimit = Number(grid.getAttribute('data-initial-limit') || '24');
     let activeStratum = 'all';
     let activeRung: string | null = null;
     let activeCamp = 'all';
+    let activeStage = 'all';
+    let shot4Only = false;
     let query = '';
     let showAll = false;
 
     const stratumBtns = document.querySelectorAll<HTMLButtonElement>('.pwell-stratum-btn');
+    const stageBtns = document.querySelectorAll<HTMLButtonElement>('.pwell-stage-btn');
+    const shot4Btn = document.getElementById('pwell-shot4-toggle');
+    const stageCmdEl = document.getElementById('pwell-active-stage-cmd');
+    const copyStageBtn = document.getElementById('pwell-copy-stage-recipe');
     const rungBtns = document.querySelectorAll<HTMLButtonElement>('.pwell-rung-btn');
     const clearRungBtn = document.getElementById('pwell-clear-rung');
     const campSelect = document.getElementById('pwell-camp-select') as HTMLSelectElement | null;
@@ -352,15 +538,23 @@ const initialVisible = compact ? 8 : 18;
 
     function filterCards() {
       const cards = grid!.querySelectorAll<HTMLElement>('.pwell-card');
-      const filtered = activeStratum !== 'all' || activeRung !== null || activeCamp !== 'all' || query.length > 0;
+      const filtered =
+        activeStratum !== 'all' ||
+        activeRung !== null ||
+        activeCamp !== 'all' ||
+        activeStage !== 'all' ||
+        shot4Only ||
+        query.length > 0;
       let matched = 0;
       let shown = 0;
       cards.forEach((c) => {
         const stOk = activeStratum === 'all' || c.getAttribute('data-stratum') === activeStratum;
         const rOk = !activeRung || c.getAttribute('data-rung') === activeRung;
         const campOk = activeCamp === 'all' || c.getAttribute('data-camp') === activeCamp;
+        const stgOk = activeStage === 'all' || c.getAttribute('data-stage') === activeStage;
+        const s4Ok = !shot4Only || c.getAttribute('data-shot4') === '1';
         const qOk = !query || (c.getAttribute('data-hay') || '').includes(query);
-        if (stOk && rOk && campOk && qOk) {
+        if (stOk && rOk && campOk && stgOk && s4Ok && qOk) {
           matched++;
           if (showAll || filtered || matched <= initialLimit) {
             c.classList.remove('hidden');
@@ -372,7 +566,7 @@ const initialVisible = compact ? 8 : 18;
           c.classList.add('hidden');
         }
       });
-      if (statusText) statusText.textContent = `Showing ${shown} of ${matched} matching artifacts`;
+      if (statusText) statusText.textContent = `Showing ${shown} of ${matched} matching blueprints`;
       if (moreWrap) moreWrap.classList.toggle('hidden', showAll || filtered || matched <= initialLimit);
     }
 
@@ -387,6 +581,56 @@ const initialVisible = compact ? 8 : 18;
         });
         filterCards();
       });
+    });
+
+    stageBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeStage = btn.getAttribute('data-pwell-stage') || 'all';
+        const recipe = btn.getAttribute('data-stage-recipe') || '';
+        if (stageCmdEl && recipe) stageCmdEl.textContent = recipe;
+        if (copyStageBtn && recipe) copyStageBtn.setAttribute('data-recipe', recipe);
+        stageBtns.forEach((b) => {
+          const on = b === btn;
+          b.setAttribute('aria-pressed', String(on));
+          b.classList.toggle('border-brand-cyan', on);
+          b.classList.toggle('bg-brand-cyan/12', on);
+          b.classList.toggle('border-brand-border', !on);
+        });
+        filterCards();
+      });
+    });
+
+    shot4Btn?.addEventListener('click', () => {
+      shot4Only = !shot4Only;
+      shot4Btn.setAttribute('aria-pressed', String(shot4Only));
+      shot4Btn.classList.toggle('bg-brand-amber', shot4Only);
+      shot4Btn.classList.toggle('text-brand-dark', shot4Only);
+      shot4Btn.classList.toggle('bg-brand-amber/10', !shot4Only);
+      shot4Btn.classList.toggle('text-brand-amber', !shot4Only);
+      filterCards();
+    });
+
+    copyStageBtn?.addEventListener('click', async () => {
+      const txt = copyStageBtn.getAttribute('data-recipe') || '';
+      if (!txt) return;
+      try {
+        await navigator.clipboard.writeText(txt);
+        const prev = copyStageBtn.textContent;
+        copyStageBtn.textContent = '✓ Copied Recipe';
+        setTimeout(() => { copyStageBtn.textContent = prev || '📋 Copy Stage Recipe'; }, 1500);
+      } catch {}
+    });
+
+    grid.addEventListener('click', async (e) => {
+      const target = (e.target as HTMLElement | null)?.closest<HTMLButtonElement>('[data-copy-recipe]');
+      if (!target) return;
+      const txt = target.getAttribute('data-copy-recipe') || '';
+      if (!txt) return;
+      try {
+        await navigator.clipboard.writeText(txt);
+        target.textContent = '✓ Copied';
+        setTimeout(() => { target.textContent = 'Copy'; }, 1400);
+      } catch {}
     });
 
     rungBtns.forEach((btn) => {
@@ -446,7 +690,7 @@ const initialVisible = compact ? 8 : 18;
         const d = await resp.json();
         const c = d.codified || {};
         const p1 = c.proposition_1 || {};
-        const gates = d.wai1_three_gates?.overall_passed ? 'WAI1 3-Gate ✓' : 'WAI1 Checked';
+        const gates = d.wai1_three_gates?.overall_passed ? 'WAI1 3-Gate Self-Checked ✓' : 'WAI1 Self-Checked';
         const rcpt = (d.csp1_receipt?.nanopub?.nanopub_id || '').slice(0, 20);
         outBox.innerHTML = `<div class="space-y-1.5 w-full">
           <div class="flex flex-wrap items-center justify-between gap-1">
@@ -482,7 +726,7 @@ const initialVisible = compact ? 8 : 18;
     syncBtn?.addEventListener('click', async () => {
       syncBtn.textContent = '↻ Syncing Commons…';
       try {
-        const r = await (await fetch('https://scholar.askdavidc.ai/api/avalanche/planetary?limit=36')).json();
+        const r = await (await fetch('https://scholar.askdavidc.ai/api/avalanche/planetary?limit=48')).json();
         const allEl = document.querySelector('[data-pwell-stratum-count="all"]');
         if (allEl && r.total_codified_in_pool) {
           allEl.textContent = Number(r.total_codified_in_pool).toLocaleString();
@@ -491,7 +735,7 @@ const initialVisible = compact ? 8 : 18;
           const el = document.querySelector(`[data-pwell-stratum-count="${s.stratum}"]`);
           if (el && s.count) el.textContent = Number(s.count).toLocaleString();
         });
-        syncBtn.textContent = `✓ Live Synced (${Number(r.corpus_works_total || 0).toLocaleString()} Commons works)`;
+        syncBtn.textContent = `✓ Live Synced (${Number(r.total_codified_in_pool || r.corpus_works_total || 0).toLocaleString()} indexed)`;
       } catch {
         syncBtn.textContent = '↻ Sync Live Commons API';
       }

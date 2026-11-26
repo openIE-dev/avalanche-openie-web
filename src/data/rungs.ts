@@ -111,7 +111,7 @@ export const NINE_RUNGS: RungData[] = [
     structuralLimit: 'Thinking traces evaporate after each query; identical problem classes re-burn full reasoning energy',
     plainHeadline: 'Test-time reasoning solves hard problems—by re-deriving them from scratch on every encounter.',
     plainBody:
-      'Training models via reinforcement learning against math and compiler verifiers (such as GRPO <think> traces) enables genuine multi-step deduction. However, because nothing Verified is compiled into a cheaper representation afterward, the system expends tens of joules of deliberation on the thousandth instance of a problem class just as it did on the first.',
+      'Training models via reinforcement learning against math and compiler verifiers (such as GRPO <think> traces) enables genuine multi-step deduction. However, because nothing verified is compiled into a cheaper representation afterward, the system expends tens of joules of deliberation on the thousandth instance of a problem class just as it did on the first.',
     keyTakeaway:
       'Deliberation is essential for novel problems, but thermodynamically wasteful when repeated unchanged on recurring structures.',
     scientificLaw: 'Latent energy pre-filtering (FormEBM) + deterministic checker authority',

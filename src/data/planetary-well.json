@@ -1,6 +1,7 @@
 {
-  "generated_at_utc": "2026-11-25T08:46:55Z",
+  "generated_at_utc": "2026-11-26T08:18:04Z",
   "total_harvested": 1198,
+  "shot4_pack_count": 25,
   "counts_by_stratum": {
     "tools": 78,
     "databases": 55,
@@ -10,17 +11,736 @@
     "infrastructure": 69
   },
   "counts_by_rung": {
-    "1": 42,
-    "2": 178,
+    "1": 0,
+    "2": 0,
     "3": 1,
-    "4": 0,
-    "5": 47,
-    "6": 13,
-    "7": 876,
-    "8": 36,
-    "9": 5
+    "4": 1,
+    "5": 2,
+    "6": 8,
+    "7": 180,
+    "8": 18,
+    "9": 1
+  },
+  "counts_by_stage": {
+    "stage1": 26,
+    "stage2": 49,
+    "stage3": 132,
+    "stage4": 4
   },
   "items": [
+    {
+      "purl": "pkg:github/openIE-dev/openie-research-experiments/kits/waios-mosaic-cascade@813eb96",
+      "name": "openie/waios-mosaic-cascade",
+      "stratum": "infrastructure",
+      "registry": "GitHub (Apache-2.0)",
+      "version": "813eb96",
+      "description": "4-substrate cross-ISA waiOS ternary matvec conformance (a541323b…46f0, 0/400 drift) + 1,000-query 4-stage Spellcheck cascade (26.58× KV260 INA260 & 16.26× Jetson Thor INA3221 measured_j cut).",
+      "spdx_license": "Apache-2.0",
+      "upstream_url": "https://github.com/openIE-dev/openie-research-experiments/tree/main/kits/waios-mosaic-cascade",
+      "popularity": 10000000,
+      "rung": 8,
+      "rung_code": "R8",
+      "rung_name": "Ecology",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C9",
+      "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
+      "target_tier": "Stage 3 (waiOS Mosaic + 4-Stage Router)",
+      "lowered_stage": "stage3",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Gate cross-ISA execution on BLAKE3 a541323b…46f0 (Ed25519 receipt) while routing 55% Stage-1 hash LUT -> 25% Stage-2 trigram -> 17.4% Stage-3 Mosaic -> 2.6% Stage-4.",
+      "cli_lowering_recipe": "./kits/waios-mosaic-cascade/run_kit.sh --verify-digest a541323b13653ed36515ff24ef08deb7dfa771e570a434712708fb72552f46f0",
+      "lowered_stage_label": "Stage 3 · Integer / Solver"
+    },
+    {
+      "purl": "pkg:github/openIE-dev/openie-research-experiments/kits/littlebit-joule@813eb96",
+      "name": "openie/littlebit-joule",
+      "stratum": "libraries",
+      "registry": "GitHub (Apache-2.0)",
+      "version": "813eb96",
+      "description": "Clean-room 0.1517 bpw SVD + binary latents + integer Walsh-Hadamard + XNOR+popcount + nibble LUT kernel (4.13× KV260 INA260 & 7.95× Thor INA3221 measured_j below INT8, avoiding 19.1×–81.9× FP32 unpack tax).",
+      "spdx_license": "Apache-2.0",
+      "upstream_url": "https://github.com/openIE-dev/openie-research-experiments/tree/main/kits/littlebit-joule",
+      "popularity": 9950000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C8",
+      "des10_camp_name": "Boolean LUT6 / Wasm Automaton",
+      "target_tier": "Stage 3 (Packed Sub-Bit Integer + Stage-1 Null)",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Pair 4 KiB Stage-1 Deterministic Null LUT (96.33% @ 1.49 µJ KV260 / 0.93 µJ Thor measured_j) with Stage-3 packed integer WHT + XNOR+popcount (zero FP32 unpack).",
+      "cli_lowering_recipe": "./kits/littlebit-joule/run_kit.sh --bpw 0.1517 --mode packed-int --with-deterministic-null"
+    },
+    {
+      "purl": "pkg:github/openIE-dev/deterministic-null@2026.11",
+      "name": "openie/deterministic-null",
+      "stratum": "tools",
+      "registry": "GitHub (Apache-2.0)",
+      "version": "2026.11",
+      "description": "5-language (Rust, C++20, Go, Julia, Python) bit-identical Shape D (DNULLMM1) zero-model O(1) mmap lookup baseline anchored via OpenTimestamps + drand.",
+      "spdx_license": "Apache-2.0",
+      "upstream_url": "https://github.com/openIE-dev/deterministic-null",
+      "popularity": 9900000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C5",
+      "des10_camp_name": "Columnar / Episodic Case Store",
+      "target_tier": "Stage 1 (O(1) DNULLMM1 Table)",
+      "lowered_stage": "stage1",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Freeze verified Stage-4/Stage-3 outputs into SHA-256-sealed DNULLMM1 POSIX mmap pages (~0.93–1.77 µJ recall, 0 neural FLOPs) as mandatory standard-of-care control.",
+      "cli_lowering_recipe": "git clone https://github.com/openIE-dev/deterministic-null && cargo test --release -- --nocapture",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table"
+    },
+    {
+      "purl": "pkg:github/openIE-dev/lut-adapt-ai@2026.11",
+      "name": "openie/lut-adapt-ai",
+      "stratum": "tools",
+      "registry": "GitHub (Apache-2.0)",
+      "version": "2026.11",
+      "description": "Downward LUT6 compiler lowering verified recurrent wakes into clock-enable-gated 36-Kb BRAM pages over a 512×512 Beneš multicast switch (162.7 nJ Artix-7/KV260, 87× vs INT8).",
+      "spdx_license": "Apache-2.0",
+      "upstream_url": "https://github.com/openIE-dev/lut-adapt-ai",
+      "popularity": 9850000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C8",
+      "des10_camp_name": "Boolean LUT6 / Wasm Automaton",
+      "target_tier": "Stage 1 (CE-Gated LUT6 / BRAM Page)",
+      "lowered_stage": "stage1",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Compile C(z)=1 recurrent sub-circuits via Yosys -lut 6 + Walsh-Hadamard 2-bit wobble check into 4,096 B CompactLut6Page crystals or 81×RAMB36E2 pages.",
+      "cli_lowering_recipe": "yosys -p 'read_verilog wake.v; synth -noalumacc -nordff; abc -lut 6; write_json crystal.lut6.json'",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table"
+    },
+    {
+      "purl": "pkg:github/openIE-dev/rce@2026.11",
+      "name": "openie/rce",
+      "stratum": "tools",
+      "registry": "GitHub (Apache-2.0)",
+      "version": "2026.11",
+      "description": "Reality Code Engine: canonical nameless De Bruijn AST/CFG graph representation (0/500 alpha-swap collisions) with content-addressed incremental compilation (up to 448.5× warm rebuild cut).",
+      "spdx_license": "Apache-2.0",
+      "upstream_url": "https://github.com/openIE-dev/rce",
+      "popularity": 9800000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C2",
+      "des10_camp_name": "Exact Formal / SAT / SMT Verifier",
+      "target_tier": "Stage 2 (De Bruijn Content-Addressed Store)",
+      "lowered_stage": "stage2",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Canonicalize Stage-4 synthesized code to nameless De Bruijn normal forms, check RCE-VC verification conditions, and memoize BLAKE3-indexed subgraph builds.",
+      "cli_lowering_recipe": "rce canon --de-bruijn input.rs | rce-vc check --seal-wai1 -o verified.form",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index"
+    },
+    {
+      "purl": "pkg:cargo/ripgrep@14.1.1",
+      "name": "ripgrep",
+      "stratum": "tools",
+      "registry": "crates.io",
+      "version": "14.1.1",
+      "description": "SIMD-accelerated regex + finite-automaton line search respecting .gitignore via Teddy/Aho-Corasick literal prefilters and zero-copy mmap scanning.",
+      "spdx_license": "MIT OR Unlicense",
+      "upstream_url": "https://github.com/BurntSushi/ripgrep",
+      "popularity": 9700000,
+      "rung": 6,
+      "rung_code": "R6",
+      "rung_name": "Immersion",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C5",
+      "des10_camp_name": "Columnar / Episodic Case Store",
+      "target_tier": "Stage 2 (DFA + SIMD Zero-Copy Retrieve)",
+      "lowered_stage": "stage2",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Replace multi-joule LLM full-repo context stuffing with <1 mJ Stage-2 DFA/SIMD literal span localization before waking any downstream solver.",
+      "cli_lowering_recipe": "rg --json -F 'target_symbol' src/ | wai1-pack --schema span_hits.v1",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index"
+    },
+    {
+      "purl": "pkg:cargo/tree-sitter@0.24.7",
+      "name": "tree-sitter",
+      "stratum": "tools",
+      "registry": "crates.io",
+      "version": "0.24.7",
+      "description": "Incremental GLR concrete syntax tree parser updating edited source files in microseconds with error-recovering deterministic grammars.",
+      "spdx_license": "MIT",
+      "upstream_url": "https://github.com/tree-sitter/tree-sitter",
+      "popularity": 9650000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C2",
+      "des10_camp_name": "Exact Formal / SAT / SMT Verifier",
+      "target_tier": "Stage 2 (Incremental CST + S-Expr Query)",
+      "lowered_stage": "stage2",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Lower LLM AST-inspection prompts into deterministic Stage-2 tree-sitter S-expression structural queries + RCE De Bruijn hashing.",
+      "cli_lowering_recipe": "tree-sitter query queries/calls.scm src/ | rce hash-cst --canonical",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index"
+    },
+    {
+      "purl": "pkg:pypi/z3-solver@4.13.4",
+      "name": "z3-solver",
+      "stratum": "tools",
+      "registry": "PyPI",
+      "version": "4.13.4",
+      "description": "Satisfiability Modulo Theories (SMT) prover over bitvectors, linear/nonlinear integer arithmetic, arrays, and uninterpreted functions.",
+      "spdx_license": "MIT",
+      "upstream_url": "https://github.com/Z3Prover/z3",
+      "popularity": 9600000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C2",
+      "des10_camp_name": "Exact Formal / SAT / SMT Verifier",
+      "target_tier": "Stage 3 (Exact SMT Bitvector Gate C(z)=1)",
+      "lowered_stage": "stage3",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Enforce C(z)=1 equivalence between Stage-4 synthesized code and Stage-1/3 lowered integer/LUT6 kernels via SMT-LIB2 QF_BV miter proofs.",
+      "cli_lowering_recipe": "z3 -smt2 miter_qf_bv.smt2 # UNSAT => bit-exact equivalence C(z)=1",
+      "lowered_stage_label": "Stage 3 · Integer / Solver"
+    },
+    {
+      "purl": "pkg:github/arminbiere/cadical@2.1.2",
+      "name": "cadical",
+      "stratum": "tools",
+      "registry": "GitHub",
+      "version": "2.1.2",
+      "description": "Conflict-Driven Clause Learning (CDCL) SAT solver emitting machine-checkable DRAT/LRAT unsatisfiability proofs in millijoules.",
+      "spdx_license": "MIT",
+      "upstream_url": "https://github.com/arminbiere/cadical",
+      "popularity": 9550000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C2",
+      "des10_camp_name": "Exact Formal / SAT / SMT Verifier",
+      "target_tier": "Stage 3 (CDCL SAT + LRAT Certificate)",
+      "lowered_stage": "stage3",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Route hard combinatorial constraint tasks (where frontier LLMs score ~2%) directly to Stage-3 CaDiCaL CNF + verified LRAT proof checking.",
+      "cli_lowering_recipe": "cadical problem.cnf proof.lrat --binary && lrat-check problem.cnf proof.lrat",
+      "lowered_stage_label": "Stage 3 · Integer / Solver"
+    },
+    {
+      "purl": "pkg:github/YosysHQ/yosys@0.71",
+      "name": "yosys",
+      "stratum": "tools",
+      "registry": "GitHub",
+      "version": "0.71",
+      "description": "Open RTL synthesis suite mapping behavioural Verilog/FSMs directly into 6-input Boolean lookup tables (abc -lut 6) and BRAM netlists.",
+      "spdx_license": "ISC",
+      "upstream_url": "https://github.com/YosysHQ/yosys",
+      "popularity": 9500000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C8",
+      "des10_camp_name": "Boolean LUT6 / Wasm Automaton",
+      "target_tier": "Stage 1 (RTL -> 6-Input LUT6 Netlist)",
+      "lowered_stage": "stage1",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Lower verified integer/FSM decision trees into zero-DSP48 64-bit LUT6 truth tables (`u64` INIT masks) for KV260/Artix-7 or #![no_std] lut6-core.",
+      "cli_lowering_recipe": "yosys -p 'read_verilog fsm.v; synth_xilinx -family xcup -nolutram; abc -lut 6; stat'",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table"
+    },
+    {
+      "purl": "pkg:github/YosysHQ/nextpnr@0.8",
+      "name": "nextpnr",
+      "stratum": "tools",
+      "registry": "GitHub",
+      "version": "0.8",
+      "description": "Timing-driven open FPGA place-and-route engine targeting Lattice iCE40/ECP5/Nexus and Xilinx 7-series reconfigurable fabrics.",
+      "spdx_license": "ISC",
+      "upstream_url": "https://github.com/YosysHQ/nextpnr",
+      "popularity": 9450000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C8",
+      "des10_camp_name": "Boolean LUT6 / Wasm Automaton",
+      "target_tier": "Stage 1 (Deterministic FPGA Bitstream)",
+      "lowered_stage": "stage1",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Place and route static Beneš–Copy–Beneš + BRAM shells once; hot-swap compiled LUT6 truth-table pages in 1 clock cycle without re-PAR.",
+      "cli_lowering_recipe": "nextpnr-ecp5 --json shell_lut6.json --lpf board.lpf --textcfg shell.config --seed 1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table"
+    },
+    {
+      "purl": "pkg:github/verilator/verilator@5.032",
+      "name": "verilator",
+      "stratum": "tools",
+      "registry": "GitHub",
+      "version": "5.032",
+      "description": "High-speed cycle-accurate SystemVerilog-to-C++ compiler auditing hardware gateware parity prior to FPGA bitstream flash.",
+      "spdx_license": "LGPL-3.0-only OR Artistic-2.0",
+      "upstream_url": "https://github.com/verilator/verilator",
+      "popularity": 9400000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C2",
+      "des10_camp_name": "Exact Formal / SAT / SMT Verifier",
+      "target_tier": "Stage 3 (Cycle-Exact RTL Parity Gate)",
+      "lowered_stage": "stage3",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Gate every Stage-1 LUT6/BRAM page on 10,500+ cycle-exact Verilator test vectors against the waiOS integer reference before hardware deployment.",
+      "cli_lowering_recipe": "verilator --cc --exe --build -j 0 lut6_shell.sv sim_main.cpp && ./obj_dir/Vlut6_shell",
+      "lowered_stage_label": "Stage 3 · Integer / Solver"
+    },
+    {
+      "purl": "pkg:generic/sqlite@3.47.2",
+      "name": "sqlite",
+      "stratum": "databases",
+      "registry": "sqlite.org",
+      "version": "3.47.2",
+      "description": "Single-file ACID transactional B-tree + FTS5 lexical engine deployed on billions of edge devices with zero server daemon overhead.",
+      "spdx_license": "blessing",
+      "upstream_url": "https://sqlite.org",
+      "popularity": 9380000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C5",
+      "des10_camp_name": "Columnar / Episodic Case Store",
+      "target_tier": "Stage 2 (ACID B-Tree + FTS5 Local Store)",
+      "lowered_stage": "stage2",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Store BLAKE3-keyed episodic receipts, h_min hit counters, and FTS5 lexical indices in WAL-mode SQLite before invoking dense vector RAG or LLMs.",
+      "cli_lowering_recipe": "sqlite3 state.db 'PRAGMA journal_mode=WAL; SELECT out_blob FROM lut_cache WHERE key_b3=?1;'",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index"
+    },
+    {
+      "purl": "pkg:pypi/duckdb@1.1.3",
+      "name": "duckdb",
+      "stratum": "databases",
+      "registry": "PyPI",
+      "version": "1.1.3",
+      "description": "In-process vectorized OLAP columnar database executing SIMD aggregations and Parquet/Arrow scans inside the caller's address space.",
+      "spdx_license": "MIT",
+      "upstream_url": "https://github.com/duckdb/duckdb",
+      "popularity": 9350000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C5",
+      "des10_camp_name": "Columnar / Episodic Case Store",
+      "target_tier": "Stage 2 (Vectorized Columnar OLAP Scan)",
+      "lowered_stage": "stage2",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Compile NL analytical table questions once into verified SQL over Parquet/Arrow via DuckDB vectorized SIMD scans instead of LLM row reading.",
+      "cli_lowering_recipe": "duckdb -c \"SELECT meter_class, median(joules) FROM 'receipts.parquet' GROUP BY 1;\"",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index"
+    },
+    {
+      "purl": "pkg:cargo/blake3@1.5.5",
+      "name": "blake3",
+      "stratum": "libraries",
+      "registry": "crates.io",
+      "version": "1.5.5",
+      "description": "Cryptographic Merkle-tree hash function saturating AVX-512 / NEON SIMD lanes for WAI1 envelopes and waiOS reference conformance.",
+      "spdx_license": "CC0-1.0 OR Apache-2.0",
+      "upstream_url": "https://github.com/BLAKE3-team/BLAKE3",
+      "popularity": 9320000,
+      "rung": 8,
+      "rung_code": "R8",
+      "rung_name": "Ecology",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C9",
+      "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
+      "target_tier": "Stage 2 (Cryptographic Content Address)",
+      "lowered_stage": "stage2",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Hash canonical De Bruijn inputs & 256×128 waiOS outputs with 256-bit BLAKE3 (927.30 µJ Thor INA3221 measured_j verify with Ed25519).",
+      "cli_lowering_recipe": "b3sum --no-names canonical_output.bin # compare a541323b…46f0",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index"
+    },
+    {
+      "purl": "pkg:cargo/roaring@0.10.9",
+      "name": "roaring",
+      "stratum": "libraries",
+      "registry": "crates.io",
+      "version": "0.10.9",
+      "description": "Compressed hybrid array/bitmap/run-length set structure performing SIMD AND/OR/XOR intersections in sub-microsecond L1 cache.",
+      "spdx_license": "MIT OR Apache-2.0",
+      "upstream_url": "https://github.com/RoaringBitmap/roaring-rs",
+      "popularity": 9290000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C5",
+      "des10_camp_name": "Columnar / Episodic Case Store",
+      "target_tier": "Stage 2 (SIMD Compressed Posting Intersection)",
+      "lowered_stage": "stage2",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Execute Stage-2 trigram & attribute candidate pruning via RoaringBitmap popcount intersections (~25% Spellcheck cascade hits in <2 µs).",
+      "cli_lowering_recipe": "cargo add roaring && cargo test --release bitmap_trigram_gate",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index"
+    },
+    {
+      "purl": "pkg:cargo/fst@0.4.7",
+      "name": "fst",
+      "stratum": "libraries",
+      "registry": "crates.io",
+      "version": "0.4.7",
+      "description": "Memory-mapped minimal acyclic finite-state transducers mapping millions of ordered string keys to u64 ordinals with zero heap allocation.",
+      "spdx_license": "MIT OR Unlicense",
+      "upstream_url": "https://github.com/BurntSushi/fst",
+      "popularity": 9260000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C5",
+      "des10_camp_name": "Columnar / Episodic Case Store",
+      "target_tier": "Stage 1 (Zero-Heap Mmap FST Automaton)",
+      "lowered_stage": "stage1",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Compile recurring lexical/token-routing vocabularies into immutable POSIX mmap FST automata for sub-microjoule Stage-1 exact + Levenshtein lookup.",
+      "cli_lowering_recipe": "fst map sorted_keys.csv compiled_stage1.fst && fst grep compiled_stage1.fst 'query'",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table"
+    },
+    {
+      "purl": "pkg:cargo/rkyv@0.8.9",
+      "name": "rkyv",
+      "stratum": "libraries",
+      "registry": "crates.io",
+      "version": "0.8.9",
+      "description": "Zero-copy deserialization framework casting validated mmap byte slices directly into typed Rust structs in 0 parse cycles.",
+      "spdx_license": "MIT",
+      "upstream_url": "https://github.com/rkyv/rkyv",
+      "popularity": 9230000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C9",
+      "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
+      "target_tier": "Stage 1 (Zero-Copy Binary Wire Cast)",
+      "lowered_stage": "stage1",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Eliminate JSON/UTF-8 serialization tax between agent organs by mapping bytecheck-validated rkyv archives directly inside WAI1 envelopes.",
+      "cli_lowering_recipe": "cargo add rkyv bytecheck # rkyv::access::<ArchivedPayload, rancor::Error>(mmap_bytes)",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table"
+    },
+    {
+      "purl": "pkg:github/simdjson/simdjson@3.11.6",
+      "name": "simdjson",
+      "stratum": "libraries",
+      "registry": "GitHub",
+      "version": "3.11.6",
+      "description": "Gigabytes-per-second SIMD structural JSON parser using AVX-512 / NEON bitmasks and on-demand tape traversal.",
+      "spdx_license": "Apache-2.0",
+      "upstream_url": "https://github.com/simdjson/simdjson",
+      "popularity": 9200000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C10",
+      "des10_camp_name": "Deterministic Kernel / Library Primitive",
+      "target_tier": "Stage 2 (SIMD On-Demand Ingress Parser)",
+      "lowered_stage": "stage2",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Parse external JSON/MCP ingress at multi-GB/s via simdjson on-demand cursor, validate schema, and immediately transcode into binary WAI1.",
+      "cli_lowering_recipe": "ondemand::parser parser; auto doc = parser.iterate(padded_json); // -> WAI1 frame",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index"
+    },
+    {
+      "purl": "pkg:github/microsoft/BitNet@1.0.0",
+      "name": "bitnet.cpp",
+      "stratum": "ai",
+      "registry": "GitHub",
+      "version": "1.0.0",
+      "description": "1.58-bit ternary {-1, 0, +1} CPU/ARM inference framework replacing floating-point matrix multiplications with integer additions and LUTs.",
+      "spdx_license": "MIT",
+      "upstream_url": "https://github.com/microsoft/BitNet",
+      "popularity": 9170000,
+      "rung": 6,
+      "rung_code": "R6",
+      "rung_name": "Immersion",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C10",
+      "des10_camp_name": "Deterministic Kernel / Library Primitive",
+      "target_tier": "Stage 3 (Ternary {-1,0,+1} Integer Kernel)",
+      "lowered_stage": "stage3",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Execute Stage-3 local hybrid classification/reranking on CPU/NPU using ternary {-1,0,+1} integer kernels gated by waiOS BLAKE3 receipts.",
+      "cli_lowering_recipe": "python setup_env.py -md BitNet-b1.58-2B-4T -q i2_s && ./build/bin/llama-cli -temp 0",
+      "lowered_stage_label": "Stage 3 · Integer / Solver"
+    },
+    {
+      "purl": "pkg:github/microsoft/T-MAC@0.2.0",
+      "name": "t-mac",
+      "stratum": "libraries",
+      "registry": "GitHub",
+      "version": "0.2.0",
+      "description": "Table-lookup low-bit matrix multiplication engine using bit-serial activation precomputation and SIMD byte-shuffle LUTs (pshufb / tbl).",
+      "spdx_license": "MIT",
+      "upstream_url": "https://github.com/microsoft/T-MAC",
+      "popularity": 9140000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C8",
+      "des10_camp_name": "Boolean LUT6 / Wasm Automaton",
+      "target_tier": "Stage 3 (4-Bit Pair-LUT SIMD Matvec)",
+      "lowered_stage": "stage3",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Replace runtime sub-bit->FP32 decompression with T-MAC nibble-LUT integer accumulation, verified bit-identical to scalar i32 under waiOS.",
+      "cli_lowering_recipe": "./kits/waios-mosaic-cascade/run_kit.sh --lane c_tmac_pair_lut",
+      "lowered_stage_label": "Stage 3 · Integer / Solver"
+    },
+    {
+      "purl": "pkg:github/ggerganov/llama.cpp@b4500",
+      "name": "llama.cpp",
+      "stratum": "ai",
+      "registry": "GitHub",
+      "version": "b4500",
+      "description": "Dependency-free C/C++ GGUF quantized LLM runtime across CPU SIMD, Metal, Vulkan, CUDA, and SYCL with grammar-constrained decoding.",
+      "spdx_license": "MIT",
+      "upstream_url": "https://github.com/ggerganov/llama.cpp",
+      "popularity": 9110000,
+      "rung": 5,
+      "rung_code": "R5",
+      "rung_name": "Tool Use",
+      "threshold_regime": "ephemeral_rungs_1_5",
+      "des10_camp_id": "C1",
+      "des10_camp_name": "Frontier Neural Proposer",
+      "target_tier": "Stage 4 (GBNF-Constrained Last-Resort Proposer)",
+      "lowered_stage": "stage4",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Invoke strictly on Stage 1–3 misses (~2.6% tail) with GBNF grammar constraints, verify via C(z)=1, and crystallize accepted solutions to Stage 1.",
+      "cli_lowering_recipe": "llama-cli -m model.gguf --temp 0 --grammar-file schema.gbnf -p \"$NOVEL_MISS\" | rce-vc check",
+      "lowered_stage_label": "Stage 4 · Gate-Wrapped Proposer"
+    },
+    {
+      "purl": "pkg:cargo/wasmtime@28.0.0",
+      "name": "wasmtime",
+      "stratum": "infrastructure",
+      "registry": "crates.io",
+      "version": "28.0.0",
+      "description": "Cranelift-compiled capability-sandboxed WebAssembly + WASI runtime with deterministic fuel metering and microsecond instance startup.",
+      "spdx_license": "Apache-2.0 WITH LLVM-exception",
+      "upstream_url": "https://github.com/bytecodealliance/wasmtime",
+      "popularity": 9080000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C8",
+      "des10_camp_name": "Boolean LUT6 / Wasm Automaton",
+      "target_tier": "Stage 3 (Fuel-Metered Wasm Sandbox)",
+      "lowered_stage": "stage3",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Compile verified Stage-4 synthesized functions into fuel-bounded Wasm modules with zero ambient filesystem/network authority.",
+      "cli_lowering_recipe": "wasmtime run --fuel 50000 --Wasi=none compiled_skill.wasm",
+      "lowered_stage_label": "Stage 3 · Integer / Solver"
+    },
+    {
+      "purl": "pkg:github/libbpf/libbpf@1.5.0",
+      "name": "libbpf",
+      "stratum": "infrastructure",
+      "registry": "GitHub",
+      "version": "1.5.0",
+      "description": "CO-RE Linux eBPF loader running kernel-verifier-checked bounded-loop bytecode directly on NIC/socket/tracepoint hooks in nanoseconds.",
+      "spdx_license": "LGPL-2.1 OR BSD-2-Clause",
+      "upstream_url": "https://github.com/libbpf/libbpf",
+      "popularity": 9050000,
+      "rung": 6,
+      "rung_code": "R6",
+      "rung_name": "Immersion",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C8",
+      "des10_camp_name": "Boolean LUT6 / Wasm Automaton",
+      "target_tier": "Stage 1 (Verifier-Checked eBPF Reflex)",
+      "lowered_stage": "stage1",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Lower packet/telemetry filtering policies into Linux eBPF verifier-proved maps and XDP/socket programs so non-events drop at 0 userspace wakes.",
+      "cli_lowering_recipe": "clang -O2 -g -target bpf -c reflex_gate.bpf.c -o reflex_gate.bpf.o && bpftool prog load reflex_gate.bpf.o /sys/fs/bpf/gate",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table"
+    },
+    {
+      "purl": "pkg:github/leanprover/lean4@4.36.0",
+      "name": "lean4",
+      "stratum": "tools",
+      "registry": "GitHub",
+      "version": "4.36.0",
+      "description": "Dependent-type interactive theorem prover and small-kernel verifier checking all 132 Avalanche/LUT6 theorems + 5,393 RCE constants (0 sorry).",
+      "spdx_license": "Apache-2.0",
+      "upstream_url": "https://github.com/leanprover/lean4",
+      "popularity": 9040000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C2",
+      "des10_camp_name": "Exact Formal / SAT / SMT Verifier",
+      "target_tier": "Stage 3 (6-Kernel Soundness Gate [T])",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": true,
+      "downward_compilation_recipe": "Audit Proposition 1 (ΔT > ΔT*), Beneš routing, and NucleusWobble invariants inside bwrap across 6 independent checkers.",
+      "cli_lowering_recipe": "bwrap --unshare-net --ro-bind / / leanchecker --paranoid --fresh"
+    },
+    {
+      "purl": "pkg:huggingface/Qwen/Qwen3.6-35B-A3B@2026.11",
+      "name": "Qwen3.6-35B-A3B",
+      "stratum": "ai",
+      "registry": "HuggingFace Hub",
+      "version": "2026.11",
+      "description": "Open-weight Sparse-MoE proposer (3B active parameters) streamed from NVMe inside 970 MB host RAM via Paged BenesLUT6 burst speculation (12.30× I/O cut).",
+      "spdx_license": "Apache-2.0",
+      "upstream_url": "https://huggingface.co/Qwen",
+      "popularity": 9020000,
+      "rung": 5,
+      "rung_code": "R5",
+      "rung_name": "Tool Use",
+      "threshold_regime": "ephemeral_rungs_1_5",
+      "des10_camp_id": "C1",
+      "des10_camp_name": "Frontier Neural Proposer",
+      "target_tier": "Stage 4 (Gate-Wrapped Sparse-MoE Proposer)",
+      "lowered_stage": "stage4",
+      "lowered_stage_label": "Stage 4 · Gate-Wrapped Proposer",
+      "shot4_pack": false,
+      "downward_compilation_recipe": "Wake only on Stage 1–3 abstentions, prefetch active experts via Stage-1 LUT6 minterm proposer, gate outputs on C(z)=1, and compile down.",
+      "cli_lowering_recipe": "lut-adapt stream --model Qwen3.6-35B-A3B --ram-cap-mb 970 --gate 'C(z)=1'"
+    },
+    {
+      "purl": "pkg:huggingface/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B@1.0",
+      "name": "DeepSeek-R1-Distill-Qwen-32B",
+      "stratum": "ai",
+      "registry": "HuggingFace Hub",
+      "version": "1.0",
+      "description": "Verifier-RL reasoning proposer emitting explicit <think> derivations for novel math/code synthesis before deterministic RCE-VC crystallization.",
+      "spdx_license": "MIT",
+      "upstream_url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "popularity": 9010000,
+      "rung": 3,
+      "rung_code": "R3",
+      "rung_name": "Reasoning",
+      "threshold_regime": "ephemeral_rungs_1_5",
+      "des10_camp_id": "C1",
+      "des10_camp_name": "Frontier Neural Proposer",
+      "target_tier": "Stage 4 (Cold-Novelty Reasoning Proposer)",
+      "lowered_stage": "stage4",
+      "lowered_stage_label": "Stage 4 · Gate-Wrapped Proposer",
+      "shot4_pack": false,
+      "downward_compilation_recipe": "Pay multi-joule <think> deliberation strictly once per unseen equivalence class, prove C(z)=1, and lower to Stage-2 De Bruijn / Stage-1 DNULLMM1.",
+      "cli_lowering_recipe": "rce escalate --stage4 DeepSeek-R1-Distill-Qwen-32B --require-vc --crystallize"
+    },
+    {
+      "purl": "pkg:huggingface/meta-llama/Llama-3.3-70B-Instruct@1.0",
+      "name": "Llama-3.3-70B-Instruct",
+      "stratum": "ai",
+      "registry": "HuggingFace Hub",
+      "version": "1.0",
+      "description": "Open-weights instruction proposer used solely at Stage-4 tail escalation (~2.6% miss rate) behind FormEBM pre-filtering and deterministic commit gates.",
+      "spdx_license": "Llama-3.3",
+      "upstream_url": "https://huggingface.co/meta-llama",
+      "popularity": 9005000,
+      "rung": 4,
+      "rung_code": "R4",
+      "rung_name": "Communication",
+      "threshold_regime": "ephemeral_rungs_1_5",
+      "des10_camp_id": "C1",
+      "des10_camp_name": "Frontier Neural Proposer",
+      "target_tier": "Stage 4 (Tail-Miss Proposer Behind FormEBM)",
+      "lowered_stage": "stage4",
+      "lowered_stage_label": "Stage 4 · Gate-Wrapped Proposer",
+      "shot4_pack": false,
+      "downward_compilation_recipe": "Never invoke for inter-agent prose relays; restrict to novel natural-language intent translation into typed Φ_IR / WAI1 schemas.",
+      "cli_lowering_recipe": "waios-cascade --stage4-fallback llama-3.3-70b --max-escalation-rate 0.03"
+    },
+    {
+      "purl": "pkg:generic/kicad@8.0.7",
+      "name": "KiCad EDA",
+      "stratum": "applications",
+      "registry": "kicad.org",
+      "version": "8.0.7",
+      "description": "Open-source schematic capture, SPICE simulation, and multi-layer PCB layout suite with deterministic ERC/DRC geometric rule engines.",
+      "spdx_license": "GPL-3.0-or-later",
+      "upstream_url": "https://www.kicad.org",
+      "popularity": 8990000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C2",
+      "des10_camp_name": "Exact Formal / SAT / SMT Verifier",
+      "target_tier": "Stage 3 (Deterministic ERC/DRC Geometry Gate)",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "downward_compilation_recipe": "Gate synthesized S-expression `.kicad_pcb` boards on headless `kicad-cli pcb drc --exit-code-violations` (`C(z)=1`) before Gerber export.",
+      "cli_lowering_recipe": "kicad-cli pcb drc --severity-error --exit-code-violations board.kicad_pcb"
+    },
+    {
+      "purl": "pkg:github/FreeCAD/FreeCAD@1.0.0",
+      "name": "FreeCAD (OpenCASCADE)",
+      "stratum": "applications",
+      "registry": "GitHub",
+      "version": "1.0.0",
+      "description": "Parametric 3D B-Rep CAD modeler backed by OpenCASCADE topological manifold, interference, and STEP/IGES geometric solvers.",
+      "spdx_license": "LGPL-2.0-or-later",
+      "upstream_url": "https://github.com/FreeCAD/FreeCAD",
+      "popularity": 8980000,
+      "rung": 7,
+      "rung_code": "R7",
+      "rung_name": "Competence",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C7",
+      "des10_camp_name": "Causal / Physical / Numerical Kernel",
+      "target_tier": "Stage 3 (Parametric B-Rep Solid Kernel)",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "downward_compilation_recipe": "Compile parametric CAD scripts into watertight B-Rep solids verified via `Shape.isValid()` + bounding-box/interference checks.",
+      "cli_lowering_recipe": "freecadcmd -c \"import Part; s=Part.read('part.step'); assert s.isValid()\""
+    },
+    {
+      "purl": "pkg:generic/postgresql@17.2",
+      "name": "PostgreSQL",
+      "stratum": "databases",
+      "registry": "postgresql.org",
+      "version": "17.2",
+      "description": "Extensible ACID relational engine with GiST/GIN/BRIN indices, MVCC snapshot isolation, and deterministic SQL constraint enforcement.",
+      "spdx_license": "PostgreSQL",
+      "upstream_url": "https://www.postgresql.org",
+      "popularity": 8970000,
+      "rung": 8,
+      "rung_code": "R8",
+      "rung_name": "Ecology",
+      "threshold_regime": "compiled_rungs_6_9",
+      "des10_camp_id": "C5",
+      "des10_camp_name": "Columnar / Episodic Case Store",
+      "target_tier": "Stage 2 (MVCC Relational + GIN Index Store)",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "downward_compilation_recipe": "Lower recurring retrieval workflows into parameterized prepared statements over GIN/BRIN indices with CHECK invariants.",
+      "cli_lowering_recipe": "psql -v ON_ERROR_STOP=1 -c 'EXPLAIN (ANALYZE, BUFFERS) EXECUTE lookup_plan($1);'"
+    },
     {
       "purl": "pkg:cargo/hashbrown@0.17.2",
       "name": "hashbrown",
@@ -38,7 +758,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `hashbrown` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `hashbrown` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/hashbrown@0.17.2' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/syn@3.0.10",
@@ -57,7 +781,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `syn` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `syn` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/syn@3.0.10' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/getrandom@0.4.3",
@@ -76,7 +804,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `getrandom` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `getrandom` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/getrandom@0.4.3' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/bitflags@2.13.2",
@@ -95,7 +827,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `bitflags` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `bitflags` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/bitflags@2.13.2' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/rand_core@0.10.1",
@@ -114,7 +850,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `rand_core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `rand_core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/rand_core@0.10.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/rand@0.10.4",
@@ -133,7 +873,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `rand` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `rand` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/rand@0.10.4' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/base64@0.23.1",
@@ -152,7 +896,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `base64` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `base64` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/base64@0.23.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/libc@0.2.191",
@@ -171,7 +919,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `libc` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `libc` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/libc@0.2.191' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/quote@1.0.47",
@@ -190,7 +942,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `quote` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `quote` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/quote@1.0.47' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/proc-macro2@1.0.107",
@@ -209,7 +965,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `proc-macro2` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `proc-macro2` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/proc-macro2@1.0.107' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/windows-sys@0.61.2",
@@ -228,7 +988,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `windows-sys` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `windows-sys` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/windows-sys@0.61.2' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/indexmap@2.14.2",
@@ -247,7 +1011,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `indexmap` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `indexmap` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/indexmap@2.14.2' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/thiserror-impl@2.0.21",
@@ -266,7 +1034,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `thiserror-impl` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `thiserror-impl` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/thiserror-impl@2.0.21' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/thiserror@2.0.21",
@@ -285,7 +1057,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `thiserror` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `thiserror` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/thiserror@2.0.21' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/itertools@0.15.0",
@@ -304,7 +1080,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `itertools` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `itertools` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/itertools@0.15.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/cfg-if@1.0.5",
@@ -323,7 +1103,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `cfg-if` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `cfg-if` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/cfg-if@1.0.5' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/memchr@2.8.3",
@@ -342,7 +1126,11 @@
       "des10_camp_id": "C8",
       "des10_camp_name": "Boolean LUT6 / Wasm Automaton",
       "target_tier": "Tier 0 (Single-Cycle Silicon)",
-      "downward_compilation_recipe": "Invoke compiled `memchr` (`C8` · Tier 0 (Single-Cycle Silicon)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `memchr` (`C8` · Tier 0 (Single-Cycle Silicon)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/memchr@2.8.3' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/unicode-ident@1.0.27",
@@ -361,7 +1149,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `unicode-ident` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `unicode-ident` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/unicode-ident@1.0.27' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/serde@1.0.229",
@@ -380,7 +1172,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `serde` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `serde` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/serde@1.0.229' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/regex-syntax@0.8.12",
@@ -399,7 +1195,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `regex-syntax` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `regex-syntax` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/regex-syntax@0.8.12' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/rand_chacha@0.10.0",
@@ -418,7 +1218,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `rand_chacha` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `rand_chacha` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/rand_chacha@0.10.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/itoa@1.0.19",
@@ -437,7 +1241,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `itoa` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `itoa` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/itoa@1.0.19' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/serde_derive@1.0.229",
@@ -456,7 +1264,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `serde_derive` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `serde_derive` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/serde_derive@1.0.229' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/serde_json@1.0.154",
@@ -475,7 +1287,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `serde_json` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `serde_json` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/serde_json@1.0.154' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/heck@0.5.0",
@@ -494,7 +1310,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `heck` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `heck` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/heck@0.5.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/autocfg@1.5.1",
@@ -513,7 +1333,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `autocfg` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `autocfg` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/autocfg@1.5.1' --verify-receipt"
     },
     {
       "purl": "pkg:npm/yargs-parser@22.0.0",
@@ -532,7 +1356,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `yargs-parser` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `yargs-parser` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:npm/yargs-parser@22.0.0' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/log@0.4.35",
@@ -551,7 +1379,11 @@
       "des10_camp_id": "C7",
       "des10_camp_name": "Causal / Physical / Numerical Kernel",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `log` (`C7` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `log` (`C7` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/log@0.4.35' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/once_cell@1.21.4",
@@ -570,7 +1402,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `once_cell` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `once_cell` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/once_cell@1.21.4' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/cc@1.11.3",
@@ -589,7 +1425,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `cc` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `cc` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/cc@1.11.3' --verify-receipt"
     },
     {
       "purl": "pkg:npm/@babel/parser@8.1.3",
@@ -608,7 +1448,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `@babel/parser` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `@babel/parser` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:npm/@babel/parser@8.1.3' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/regex-automata@0.4.19",
@@ -627,7 +1471,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `regex-automata` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `regex-automata` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/regex-automata@0.4.19' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/socket2@0.6.5",
@@ -646,7 +1494,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `socket2` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `socket2` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/socket2@0.6.5' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/smallvec@1.16.6",
@@ -665,7 +1517,11 @@
       "des10_camp_id": "C4",
       "des10_camp_name": "Combinatorial / Min-Cost Flow Planner",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `smallvec` (`C4` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `smallvec` (`C4` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/smallvec@1.16.6' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/rustix@1.1.6",
@@ -684,7 +1540,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `rustix` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `rustix` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/rustix@1.1.6' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/digest@0.11.3",
@@ -703,7 +1563,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `digest` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `digest` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/digest@0.11.3' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/regex@1.13.2",
@@ -722,7 +1586,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `regex` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `regex` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/regex@1.13.2' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/aho-corasick@1.1.5",
@@ -741,7 +1609,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `aho-corasick` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `aho-corasick` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/aho-corasick@1.1.5' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/block-buffer@0.12.1",
@@ -760,7 +1632,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `block-buffer` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `block-buffer` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/block-buffer@0.12.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/ryu@1.0.23",
@@ -779,7 +1655,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `ryu` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `ryu` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/ryu@1.0.23' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/clap@4.6.10",
@@ -798,7 +1678,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `clap` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `clap` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/clap@4.6.10' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/linux-raw-sys@0.12.1",
@@ -817,7 +1701,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `linux-raw-sys` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `linux-raw-sys` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/linux-raw-sys@0.12.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/cpufeatures@0.3.1",
@@ -836,7 +1724,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `cpufeatures` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `cpufeatures` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/cpufeatures@0.3.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/parking_lot_core@0.10.0",
@@ -855,7 +1747,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `parking_lot_core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `parking_lot_core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/parking_lot_core@0.10.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/windows_x86_64_msvc@0.53.1",
@@ -874,7 +1770,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `windows_x86_64_msvc` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `windows_x86_64_msvc` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/windows_x86_64_msvc@0.53.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/bytes@1.12.2",
@@ -893,7 +1793,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `bytes` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `bytes` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/bytes@1.12.2' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/parking_lot@0.13.0",
@@ -912,7 +1816,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `parking_lot` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `parking_lot` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/parking_lot@0.13.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/strsim@0.11.1",
@@ -931,7 +1839,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `strsim` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `strsim` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/strsim@0.11.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/mio@1.2.5",
@@ -950,7 +1862,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `mio` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `mio` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/mio@1.2.5' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/pin-project-lite@0.2.18",
@@ -969,7 +1885,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `pin-project-lite` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `pin-project-lite` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/pin-project-lite@0.2.18' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/http@1.5.0",
@@ -988,7 +1908,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `http` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `http` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/http@1.5.0' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/sha2@0.11.1",
@@ -1007,7 +1931,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `sha2` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `sha2` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/sha2@0.11.1' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/windows_x86_64_gnu@0.53.1",
@@ -1026,7 +1954,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `windows_x86_64_gnu` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `windows_x86_64_gnu` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/windows_x86_64_gnu@0.53.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/num-traits@0.2.19",
@@ -1045,7 +1977,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `num-traits` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `num-traits` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/num-traits@0.2.19' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/version_check@0.9.5",
@@ -1064,7 +2000,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `version_check` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `version_check` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/version_check@0.9.5' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/windows-targets@0.53.5",
@@ -1083,7 +2023,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `windows-targets` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `windows-targets` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/windows-targets@0.53.5' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/windows_aarch64_msvc@0.53.1",
@@ -1102,7 +2046,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `windows_aarch64_msvc` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `windows_aarch64_msvc` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/windows_aarch64_msvc@0.53.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/windows_i686_msvc@0.53.1",
@@ -1121,7 +2069,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `windows_i686_msvc` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `windows_i686_msvc` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/windows_i686_msvc@0.53.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/either@1.19.0",
@@ -1140,7 +2092,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `either` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `either` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/either@1.19.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/windows_i686_gnu@0.53.1",
@@ -1159,7 +2115,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `windows_i686_gnu` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `windows_i686_gnu` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/windows_i686_gnu@0.53.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/semver@1.0.28",
@@ -1178,7 +2138,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `semver` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `semver` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/semver@1.0.28' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/crypto-common@0.2.2",
@@ -1197,7 +2161,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `crypto-common` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `crypto-common` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/crypto-common@0.2.2' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/tokio@1.54.1",
@@ -1216,7 +2184,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / OS Sandbox",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `tokio` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `tokio` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/tokio@1.54.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/winnow@1.0.5",
@@ -1235,7 +2207,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `winnow` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `winnow` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/winnow@1.0.5' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/lock_api@0.5.0",
@@ -1254,7 +2230,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `lock_api` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `lock_api` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/lock_api@0.5.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/windows_aarch64_gnullvm@0.53.1",
@@ -1273,7 +2253,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `windows_aarch64_gnullvm` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `windows_aarch64_gnullvm` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/windows_aarch64_gnullvm@0.53.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/windows_x86_64_gnullvm@0.53.1",
@@ -1292,7 +2276,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `windows_x86_64_gnullvm` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `windows_x86_64_gnullvm` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/windows_x86_64_gnullvm@0.53.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/lazy_static@1.5.1",
@@ -1311,7 +2299,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `lazy_static` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `lazy_static` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/lazy_static@1.5.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/anyhow@1.0.105",
@@ -1330,7 +2322,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `anyhow` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `anyhow` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/anyhow@1.0.105' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/futures-core@0.3.34",
@@ -1349,7 +2345,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `futures-core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `futures-core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/futures-core@0.3.34' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/zerocopy@0.8.65",
@@ -1368,7 +2368,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `zerocopy` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `zerocopy` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/zerocopy@0.8.65' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/idna@1.1.0",
@@ -1387,7 +2391,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `idna` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `idna` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/idna@1.1.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/toml@1.2.3+spec-1.1.0",
@@ -1406,7 +2414,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `toml` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `toml` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/toml@1.2.3+spec-1.1.0' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/scopeguard@1.2.0",
@@ -1425,7 +2437,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `scopeguard` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `scopeguard` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/scopeguard@1.2.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/futures-util@0.3.34",
@@ -1444,7 +2460,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `futures-util` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `futures-util` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/futures-util@0.3.34' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/slab@0.4.12",
@@ -1463,7 +2483,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `slab` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `slab` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/slab@0.4.12' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/futures-task@0.3.34",
@@ -1482,7 +2506,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `futures-task` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `futures-task` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/futures-task@0.3.34' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/hyper@1.13.0",
@@ -1501,7 +2529,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `hyper` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `hyper` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/hyper@1.13.0' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/typenum@1.20.1",
@@ -1520,7 +2552,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `typenum` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `typenum` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/typenum@1.20.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/fastrand@2.5.0",
@@ -1539,7 +2575,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `fastrand` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `fastrand` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/fastrand@2.5.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/miniz_oxide@0.9.1",
@@ -1558,7 +2598,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `miniz_oxide` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `miniz_oxide` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/miniz_oxide@0.9.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/rustls@0.23.46",
@@ -1577,7 +2621,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `rustls` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `rustls` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/rustls@0.23.46' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/crossbeam-utils@0.8.23",
@@ -1596,7 +2644,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `crossbeam-utils` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `crossbeam-utils` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/crossbeam-utils@0.8.23' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/shlex@2.0.1",
@@ -1615,7 +2667,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `shlex` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `shlex` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/shlex@2.0.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/percent-encoding@2.3.2",
@@ -1634,7 +2690,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `percent-encoding` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `percent-encoding` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/percent-encoding@2.3.2' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/generic-array@1.4.5",
@@ -1653,7 +2713,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `generic-array` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `generic-array` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/generic-array@1.4.5' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/http-body@1.1.0",
@@ -1672,7 +2736,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `http-body` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `http-body` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/http-body@1.1.0' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/futures-channel@0.3.34",
@@ -1691,7 +2759,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `futures-channel` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `futures-channel` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/futures-channel@0.3.34' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/futures-sink@0.3.34",
@@ -1710,7 +2782,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `futures-sink` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `futures-sink` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/futures-sink@0.3.34' --verify-receipt"
     },
     {
       "purl": "pkg:npm/math-intrinsics@1.1.0",
@@ -1729,7 +2805,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `math-intrinsics` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `math-intrinsics` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:npm/math-intrinsics@1.1.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/time@0.3.55",
@@ -1748,7 +2828,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `time` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `time` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/time@0.3.55' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/equivalent@1.0.3",
@@ -1767,7 +2851,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `equivalent` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `equivalent` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/equivalent@1.0.3' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/ppv-lite86@0.2.21",
@@ -1786,7 +2874,11 @@
       "des10_camp_id": "C8",
       "des10_camp_name": "Boolean LUT6 / Wasm Automaton",
       "target_tier": "Tier 0 (Single-Cycle Silicon)",
-      "downward_compilation_recipe": "Invoke compiled `ppv-lite86` (`C8` · Tier 0 (Single-Cycle Silicon)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `ppv-lite86` (`C8` · Tier 0 (Single-Cycle Silicon)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/ppv-lite86@0.2.21' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/url@2.5.9",
@@ -1805,7 +2897,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `url` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `url` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/url@2.5.9' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/errno@0.3.15",
@@ -1824,7 +2920,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `errno` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `errno` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/errno@0.3.15' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/tracing-core@0.1.36",
@@ -1843,7 +2943,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `tracing-core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `tracing-core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/tracing-core@0.1.36' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/toml_datetime@1.1.3+spec-1.1.0",
@@ -1862,7 +2966,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `toml_datetime` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `toml_datetime` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/toml_datetime@1.1.3+spec-1.1.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/clap_lex@1.1.2",
@@ -1881,7 +2989,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `clap_lex` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `clap_lex` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/clap_lex@1.1.2' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/tracing@0.1.44",
@@ -1900,7 +3012,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `tracing` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `tracing` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/tracing@0.1.44' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/toml_edit@0.25.21+spec-1.1.0",
@@ -1919,7 +3035,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `toml_edit` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `toml_edit` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/toml_edit@0.25.21+spec-1.1.0' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/rustc-hash@2.1.3",
@@ -1938,7 +3058,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `rustc-hash` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `rustc-hash` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/rustc-hash@2.1.3' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/futures-io@0.3.34",
@@ -1957,7 +3081,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `futures-io` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `futures-io` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/futures-io@0.3.34' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/tempfile@3.27.0",
@@ -1976,7 +3104,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `tempfile` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `tempfile` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/tempfile@3.27.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/uuid@1.29.3",
@@ -1995,7 +3127,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `uuid` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `uuid` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/uuid@1.29.3' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/form_urlencoded@1.2.3",
@@ -2014,7 +3150,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `form_urlencoded` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `form_urlencoded` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/form_urlencoded@1.2.3' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/rustls-webpki@0.103.17",
@@ -2033,7 +3173,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `rustls-webpki` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `rustls-webpki` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/rustls-webpki@0.103.17' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/nix@0.32.0",
@@ -2052,7 +3196,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `nix` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `nix` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/nix@0.32.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/tokio-macros@2.7.2",
@@ -2071,7 +3219,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / OS Sandbox",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `tokio-macros` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `tokio-macros` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/tokio-macros@2.7.2' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/chrono@0.4.45",
@@ -2090,7 +3242,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `chrono` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `chrono` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/chrono@0.4.45' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/h2@0.4.21",
@@ -2109,7 +3265,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `h2` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `h2` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/h2@0.4.21' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/rustversion@1.0.23",
@@ -2128,7 +3288,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `rustversion` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `rustversion` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/rustversion@1.0.23' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/untrusted@0.9.0",
@@ -2147,7 +3311,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `untrusted` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `untrusted` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/untrusted@0.9.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/unicode-width@0.2.3",
@@ -2166,7 +3334,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `unicode-width` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `unicode-width` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/unicode-width@0.2.3' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/futures-macro@0.3.34",
@@ -2185,7 +3357,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `futures-macro` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `futures-macro` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/futures-macro@0.3.34' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/fnv@1.0.7",
@@ -2204,7 +3380,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `fnv` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `fnv` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/fnv@1.0.7' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:ietf/rfc/791",
@@ -2223,7 +3403,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `IETF RFC 791 IPv4 Internet Protocol` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `IETF RFC 791 IPv4 Internet Protocol` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:ietf/rfc/791' --seal-wai1"
     },
     {
       "purl": "pkg:ietf/rfc/9293",
@@ -2242,7 +3426,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `IETF RFC 9293 Transmission Control Protocol (TCP)` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `IETF RFC 9293 Transmission Control Protocol (TCP)` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:ietf/rfc/9293' --seal-wai1"
     },
     {
       "purl": "pkg:ietf/rfc/3629",
@@ -2261,7 +3449,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `IETF RFC 3629 UTF-8 Unicode Transformation Format` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `IETF RFC 3629 UTF-8 Unicode Transformation Format` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:ietf/rfc/3629' --seal-wai1"
     },
     {
       "purl": "pkg:generic/infra/linux-kernel",
@@ -2280,7 +3472,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / OS Sandbox",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `Linux Kernel (eventfd, io_uring, eBPF, cgroups)` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `Linux Kernel (eventfd, io_uring, eBPF, cgroups)` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:generic/infra/linux-kernel' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:generic/db/sqlite",
@@ -2299,7 +3495,11 @@
       "des10_camp_id": "C5",
       "des10_camp_name": "Columnar / Episodic Case Store",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `SQLite Transactional Embedded Database Engine` (`C5` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `SQLite Transactional Embedded Database Engine` (`C5` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:generic/db/sqlite' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/tokio-util@0.7.20",
@@ -2318,7 +3518,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / OS Sandbox",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `tokio-util` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `tokio-util` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/tokio-util@0.7.20' --verify-receipt"
     },
     {
       "purl": "pkg:ietf/rfc/1035",
@@ -2337,7 +3541,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `IETF RFC 1035 Domain Names (DNS)` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `IETF RFC 1035 Domain Names (DNS)` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:ietf/rfc/1035' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/byteorder@1.5.0",
@@ -2356,7 +3564,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `byteorder` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `byteorder` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/byteorder@1.5.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/pkg-config@0.3.34",
@@ -2375,7 +3587,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `pkg-config` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `pkg-config` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/pkg-config@0.3.34' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/tokio-rustls@0.26.6",
@@ -2394,7 +3610,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / OS Sandbox",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `tokio-rustls` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `tokio-rustls` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/tokio-rustls@0.26.6' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/futures@0.3.34",
@@ -2413,7 +3633,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `futures` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `futures` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/futures@0.3.34' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/clap_builder@4.6.10",
@@ -2432,7 +3656,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `clap_builder` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `clap_builder` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/clap_builder@4.6.10' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/webpki-roots@1.0.12",
@@ -2451,7 +3679,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `webpki-roots` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `webpki-roots` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/webpki-roots@1.0.12' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/synstructure@0.14.0",
@@ -2470,7 +3702,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `synstructure` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `synstructure` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/synstructure@0.14.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/darling_core@0.24.1",
@@ -2489,7 +3725,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `darling_core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `darling_core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/darling_core@0.24.1' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/darling@0.24.1",
@@ -2508,7 +3748,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `darling` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `darling` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/darling@0.24.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/darling_macro@0.24.1",
@@ -2527,7 +3771,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `darling_macro` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `darling_macro` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/darling_macro@0.24.1' --seal-wai1"
     },
     {
       "purl": "pkg:ietf/rfc/8446",
@@ -2546,7 +3794,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `IETF RFC 8446 Transport Layer Security (TLS 1.3)` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `IETF RFC 8446 Transport Layer Security (TLS 1.3)` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:ietf/rfc/8446' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/tracing-attributes@0.1.31",
@@ -2565,7 +3817,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `tracing-attributes` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `tracing-attributes` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/tracing-attributes@0.1.31' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/clap_derive@4.6.9",
@@ -2584,7 +3840,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `clap_derive` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `clap_derive` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/clap_derive@4.6.9' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/reqwest@0.13.5",
@@ -2603,7 +3863,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `reqwest` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `reqwest` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/reqwest@0.13.5' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/anstyle@1.0.14",
@@ -2622,7 +3886,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `anstyle` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `anstyle` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/anstyle@1.0.14' --verify-receipt"
     },
     {
       "purl": "pkg:ietf/rfc/9110",
@@ -2641,7 +3909,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `IETF RFC 9110 HTTP Semantics & 206 Range Requests` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `IETF RFC 9110 HTTP Semantics & 206 Range Requests` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:ietf/rfc/9110' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/rustc_version@0.4.1",
@@ -2660,7 +3932,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `rustc_version` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `rustc_version` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/rustc_version@0.4.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/ring@0.17.14",
@@ -2679,7 +3955,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `ring` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `ring` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/ring@0.17.14' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/tinyvec@1.13.3",
@@ -2698,7 +3978,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `tinyvec` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `tinyvec` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/tinyvec@1.13.3' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/futures-executor@0.3.34",
@@ -2717,7 +4001,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `futures-executor` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `futures-executor` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/futures-executor@0.3.34' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/ahash@0.8.13",
@@ -2736,7 +4024,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `ahash` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `ahash` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/ahash@0.8.13' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/signal-hook-registry@1.4.8",
@@ -2755,7 +4047,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `signal-hook-registry` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `signal-hook-registry` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/signal-hook-registry@1.4.8' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/httparse@1.10.1",
@@ -2774,7 +4070,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `httparse` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `httparse` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/httparse@1.10.1' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/nom@8.0.0",
@@ -2793,7 +4093,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `nom` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `nom` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/nom@8.0.0' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/zeroize@1.9.2",
@@ -2812,7 +4116,11 @@
       "des10_camp_id": "C8",
       "des10_camp_name": "Boolean LUT6 / Wasm Automaton",
       "target_tier": "Tier 0 (Single-Cycle Silicon)",
-      "downward_compilation_recipe": "Invoke compiled `zeroize` (`C8` · Tier 0 (Single-Cycle Silicon)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `zeroize` (`C8` · Tier 0 (Single-Cycle Silicon)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/zeroize@1.9.2' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/wasi@0.14.7+wasi-0.2.4",
@@ -2831,7 +4139,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `wasi` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `wasi` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/wasi@0.14.7+wasi-0.2.4' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/serde_core@1.0.229",
@@ -2850,7 +4162,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `serde_core` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `serde_core` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/serde_core@1.0.229' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/subtle@2.6.1",
@@ -2869,7 +4185,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `subtle` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `subtle` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/subtle@2.6.1' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/crc32fast@1.5.6",
@@ -2888,7 +4208,11 @@
       "des10_camp_id": "C8",
       "des10_camp_name": "Boolean LUT6 / Wasm Automaton",
       "target_tier": "Tier 0 (Single-Cycle Silicon)",
-      "downward_compilation_recipe": "Invoke compiled `crc32fast` (`C8` · Tier 0 (Single-Cycle Silicon)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `crc32fast` (`C8` · Tier 0 (Single-Cycle Silicon)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/crc32fast@1.5.6' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/redox_syscall@0.10.0",
@@ -2907,7 +4231,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `redox_syscall` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `redox_syscall` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/redox_syscall@0.10.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/flate2@1.1.11",
@@ -2926,7 +4254,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `flate2` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `flate2` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/flate2@1.1.11' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/stable_deref_trait@1.2.1",
@@ -2945,7 +4277,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `stable_deref_trait` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `stable_deref_trait` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/stable_deref_trait@1.2.1' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/foldhash@0.2.0",
@@ -2964,7 +4300,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `foldhash` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `foldhash` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/foldhash@0.2.0' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/num-integer@0.1.47",
@@ -2983,7 +4323,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `num-integer` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `num-integer` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/num-integer@0.1.47' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/time-macros@0.2.32",
@@ -3002,7 +4346,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `time-macros` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `time-macros` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/time-macros@0.2.32' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/tower@0.5.3",
@@ -3021,7 +4369,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `tower` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `tower` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/tower@0.5.3' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/anstream@1.0.0",
@@ -3040,7 +4392,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `anstream` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `anstream` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/anstream@1.0.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/thread_local@1.1.10",
@@ -3059,7 +4415,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `thread_local` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `thread_local` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/thread_local@1.1.10' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/memoffset@0.9.1",
@@ -3078,7 +4438,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `memoffset` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `memoffset` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/memoffset@0.9.1' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/anstyle-parse@1.0.0",
@@ -3097,7 +4461,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `anstyle-parse` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `anstyle-parse` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/anstyle-parse@1.0.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/iana-time-zone@0.1.65",
@@ -3116,7 +4484,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `iana-time-zone` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `iana-time-zone` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/iana-time-zone@0.1.65' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/crossbeam-epoch@0.9.21",
@@ -3135,7 +4507,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `crossbeam-epoch` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `crossbeam-epoch` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/crossbeam-epoch@0.9.21' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/time-core@0.1.9",
@@ -3154,7 +4530,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `time-core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `time-core` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/time-core@0.1.9' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/async-trait@0.1.92",
@@ -3173,7 +4553,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `async-trait` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `async-trait` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/async-trait@0.1.92' --verify-receipt"
     },
     {
       "purl": "pkg:ietf/rfc/8200",
@@ -3192,7 +4576,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `IETF RFC 8200 IPv6 Internet Protocol Version 6` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `IETF RFC 8200 IPv6 Internet Protocol Version 6` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:ietf/rfc/8200' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/sync_wrapper@1.0.2",
@@ -3211,7 +4599,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `sync_wrapper` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `sync_wrapper` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/sync_wrapper@1.0.2' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/hyper-rustls@0.27.10",
@@ -3230,7 +4622,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `hyper-rustls` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `hyper-rustls` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:cargo/hyper-rustls@0.27.10' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/colorchoice@1.0.5",
@@ -3249,7 +4645,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `colorchoice` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `colorchoice` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/colorchoice@1.0.5' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/spin@0.12.3",
@@ -3268,7 +4668,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `spin` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `spin` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/spin@0.12.3' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/hex@0.4.3",
@@ -3287,7 +4691,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `hex` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `hex` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/hex@0.4.3' --verify-receipt"
     },
     {
       "purl": "pkg:npm/range-parser@2.0.0",
@@ -3306,7 +4714,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `range-parser` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `range-parser` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:npm/range-parser@2.0.0' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/hmac@0.13.0",
@@ -3325,7 +4737,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `hmac` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `hmac` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/hmac@0.13.0' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/num-bigint@0.5.1",
@@ -3344,7 +4760,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `num-bigint` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `num-bigint` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/num-bigint@0.5.1' --verify-receipt"
     },
     {
       "purl": "pkg:npm/postcss-selector-parser@7.2.1",
@@ -3363,7 +4783,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `postcss-selector-parser` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `postcss-selector-parser` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:npm/postcss-selector-parser@7.2.1' --seal-wai1"
     },
     {
       "purl": "pkg:ietf/rfc/4271",
@@ -3382,7 +4806,11 @@
       "des10_camp_id": "C9",
       "des10_camp_name": "Attested Binary Φ_IR Enzyme Bus",
       "target_tier": "Tier 1 (Indexed Case Store)",
-      "downward_compilation_recipe": "Invoke compiled `IETF RFC 4271 Border Gateway Protocol 4 (BGP-4)` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `IETF RFC 4271 Border Gateway Protocol 4 (BGP-4)` (`C9` · Tier 1 (Indexed Case Store)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage2",
+      "lowered_stage_label": "Stage 2 · Zero-Copy Index",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce bind-index --stage 2 --purl 'pkg:ietf/rfc/4271' --seal-wai1"
     },
     {
       "purl": "pkg:cargo/object@0.41.0",
@@ -3401,7 +4829,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `object` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `object` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/object@0.41.0' --verify-receipt"
     },
     {
       "purl": "pkg:cargo/sha1@0.11.0",
@@ -3420,7 +4852,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `sha1` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `sha1` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage1",
+      "lowered_stage_label": "Stage 1 · LUT6 / O(1) Table",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "rce lower --stage 1 --purl 'pkg:cargo/sha1@0.11.0' --emit-lut6-or-mmap"
     },
     {
       "purl": "pkg:cargo/cfg_aliases@0.2.2",
@@ -3439,7 +4875,11 @@
       "des10_camp_id": "C10",
       "des10_camp_name": "Deterministic Kernel / Library Primitive",
       "target_tier": "Tier 2 (Verified Rule/Checker)",
-      "downward_compilation_recipe": "Invoke compiled `cfg_aliases` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference."
+      "downward_compilation_recipe": "Invoke compiled `cfg_aliases` (`C10` · Tier 2 (Verified Rule/Checker)) via <1 mJ binary Φ_IR instead of waking L5 neural inference.",
+      "lowered_stage": "stage3",
+      "lowered_stage_label": "Stage 3 · Integer / Solver",
+      "shot4_pack": false,
+      "cli_lowering_recipe": "waios-exec --stage 3 --purl 'pkg:cargo/cfg_aliases@0.2.2' --verify-receipt"
     }
   ]
 }

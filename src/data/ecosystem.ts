@@ -35,8 +35,8 @@ export const LEARNING_MODALITIES: OpenLearningModality[] = [
     description:
       'Manipulate Hill cooperativity exponents, cyanobacterial SepJ pore closure constants, Beneš 512×512 switch schedules, 64-codon LUT6 Walsh-Hadamard wobble masks, and fanless XC7A200T M.2 thermal envelopes directly in the browser without installing toolchains.',
     highlights: [
-      'Living Observatory: /living/communication-avalanche/ (4 instruments + 10 figures)',
-      'Living Observatory: /living/lut-adapt/ (Beneš router & NVMe streaming explorer)',
+      'Living Observatory: /living/compiled-agency/ (Shot #6 KV260 INA260 & Jetson Thor INA3221 measured_j bitwidth & 4-stage cascade explorer @ 813eb96)',
+      'Living Observatory: /living/communication-avalanche/ (4 instruments + 10 figures) & /living/lut-adapt/ (Beneš router & NVMe streaming)',
       'Guided Tutorials: /tutorials/ — 12 Interactive Labs (including Lab 11 64-Codon Wobble FWHT & Lab 12 XC7A200T M.2 Thermal Envelope)',
     ],
   },

@@ -68,7 +68,7 @@ const isHome = pathname === '/' || pathname === '';
         <span class="block w-5 h-0.5 bg-current transition-transform" id="burger-bot"></span>
       </button>
 
-      <div id="nav-links" class="hidden xl:flex xl:flex-wrap xl:justify-end gap-4 items-center max-xl:fixed max-xl:inset-0 max-xl:top-[58px] max-xl:bg-brand-dark/96 max-xl:backdrop-blur-xl max-xl:flex-col max-xl:justify-center max-xl:gap-6 max-xl:z-50 max-xl:p-6">
+      <div id="nav-links" class="hidden xl:flex xl:flex-wrap xl:justify-end gap-3 items-center max-xl:fixed max-xl:inset-0 max-xl:top-[58px] max-xl:bg-brand-dark/96 max-xl:backdrop-blur-xl max-xl:flex-col max-xl:justify-center max-xl:gap-5 max-xl:z-50 max-xl:p-6">
         <a href={isHome ? "/#rungs" : "/rungs"} class:list={["font-body text-[13px] max-xl:text-base font-medium no-underline transition-colors", pathname.startsWith('/rungs') ? "text-brand-amber" : "text-brand-slate hover:text-brand-white"]}>
           The 9 Rungs
         </a>
@@ -87,7 +87,13 @@ const isHome = pathname === '/' || pathname === '';
         <a href="/planetary" class:list={["font-mono text-[12px] max-xl:text-base font-semibold px-2.5 py-1 rounded-md border no-underline transition-colors", pathname.startsWith('/planetary') ? "border-brand-cyan bg-brand-cyan/15 text-brand-cyan" : "border-brand-cyan/35 text-brand-cyan hover:bg-brand-cyan/10"]}>
           Planetary Well
         </a>
-        <a href="https://blog.openie.dev" class="inline-flex items-center gap-1 font-mono text-[11px] max-xl:text-sm text-brand-amber border border-brand-amber/30 px-2.5 py-1 rounded-md no-underline hover:bg-brand-amber/10 hover:border-brand-amber transition-all" title="OpenIE Chronicle — 57-Entry Research & Engineering Log">
+        <a href="https://blog.openie.dev/posts/from-ephemeral-inference-to-compiled-agency/" class="inline-flex items-center gap-1 font-mono text-[11px] max-xl:text-sm text-brand-emerald border border-brand-emerald/35 bg-brand-emerald/[0.08] px-2.5 py-1 rounded-md no-underline hover:bg-brand-emerald/15 hover:border-brand-emerald transition-all" title="Capstone Research Position: From Ephemeral Inference to Compiled Agency">
+          Position
+        </a>
+        <a href="https://research.openie.dev/living/compiled-agency/" class="inline-flex items-center gap-1 font-mono text-[11px] max-xl:text-sm text-brand-cyan border border-brand-cyan/35 bg-brand-cyan/[0.06] px-2.5 py-1 rounded-md no-underline hover:bg-brand-cyan/15 hover:border-brand-cyan transition-all" title="Interactive Compiled Agency Simulator & Shot #6 Shunt Receipts">
+          Simulator
+        </a>
+        <a href="https://blog.openie.dev" class="inline-flex items-center gap-1 font-mono text-[11px] max-xl:text-sm text-brand-amber border border-brand-amber/30 px-2.5 py-1 rounded-md no-underline hover:bg-brand-amber/10 hover:border-brand-amber transition-all" title="OpenIE Chronicle — 58-Entry Research & Engineering Log">
           Chronicle
         </a>
         <a href="https://research.openie.dev/tv/?channel=avalanche" class="inline-flex items-center gap-1 font-mono text-[11px] max-xl:text-sm text-brand-amber border border-brand-amber/30 px-2.5 py-1 rounded-md no-underline hover:bg-brand-amber/10 hover:border-brand-amber transition-all" title="Watch Research TV — Avalanche Visual Explainers">
@@ -99,8 +105,8 @@ const isHome = pathname === '/' || pathname === '';
         <button
           type="button"
           data-openie-live-trigger
-          aria-label="Open Live Voice Call and Video Mode (Cmd+Shift+V)"
-          title="Voice Call & Video Mode (⌘⇧V)"
+          aria-label="Open 24 kHz Studio Live Voice Call and Video Mode (Cmd+Shift+V)"
+          title="24 kHz Studio Live Voice & Video (⌘⇧V)"
           onclick="const e=event;setTimeout(()=>{if(!e.defaultPrevented&&!document.querySelector('body > [id*=&quot;openie&quot;],body > [class*=&quot;openie&quot;],[data-openie-dock]')){window.location.href='https://research.openie.dev/live/?surface=avalanche';}},60)"
           class="inline-flex items-center gap-1.5 font-mono text-[11px] max-xl:text-sm text-brand-cyan border border-brand-cyan/40 bg-brand-cyan/10 px-2.5 py-1 rounded-md cursor-pointer hover:bg-brand-cyan/20 hover:border-brand-cyan transition-all shrink-0"
         >
@@ -147,9 +153,11 @@ const isHome = pathname === '/' || pathname === '';
           <div>
             <div class="font-mono text-[10px] text-brand-cyan tracking-[2px] uppercase mb-3">Primary Research &amp; Labs</div>
             <div class="space-y-2">
-              <a href="https://blog.openie.dev" class="block font-body text-[12px] text-brand-amber no-underline hover:text-brand-gold transition-colors">Chronicle (57)</a>
+              <a href="https://blog.openie.dev/posts/from-ephemeral-inference-to-compiled-agency/" class="block font-body text-[12px] text-brand-emerald font-medium no-underline hover:text-brand-white transition-colors">Capstone Position Essay</a>
+              <a href="https://research.openie.dev/living/compiled-agency/" class="block font-body text-[12px] text-brand-cyan font-medium no-underline hover:text-brand-white transition-colors">Compiled Agency Simulator</a>
+              <a href="https://blog.openie.dev" class="block font-body text-[12px] text-brand-amber no-underline hover:text-brand-gold transition-colors">Chronicle (58)</a>
               <a href="https://blog.openie.dev/verification/" class="block font-body text-[12px] text-brand-cyan no-underline hover:text-brand-white transition-colors">Verification &amp; Replicate</a>
-              <a href="https://research.openie.dev/live/" class="block font-body text-[12px] text-brand-cyan no-underline hover:text-brand-white transition-colors">Live Voice &amp; Video Studio</a>
+              <a href="https://research.openie.dev/live/" class="block font-body text-[12px] text-brand-cyan no-underline hover:text-brand-white transition-colors">24 kHz Live S2S Studio</a>
               <a href="https://research.openie.dev/papers/communication-avalanche/" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Communication Avalanche Paper</a>
               <a href="https://research.openie.dev/papers/lut-adapt/" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Downward LUT6 Paper</a>
               <a href="https://research.openie.dev/living/communication-avalanche/" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Living Figures Observatory</a>
