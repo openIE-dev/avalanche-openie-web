@@ -373,12 +373,12 @@ const initialVisible = compact ? 9 : 24;
   </div>
 
   <!-- Search & DES-10 Camp Filter Bar -->
-  <div class="glass-card p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-    <div class="flex flex-wrap items-center gap-2.5">
+  <div class="glass-card p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 min-w-0">
+    <div class="flex flex-wrap items-center gap-2.5 min-w-0">
       <select
         id="pwell-camp-select"
         aria-label="Filter by DES-10 Paradigm Niche"
-        class="font-mono text-xs px-3 py-1.5 rounded-lg border border-brand-border bg-brand-navy text-brand-light"
+        class="font-mono text-xs px-3 py-1.5 rounded-lg border border-brand-border bg-brand-navy text-brand-light w-full sm:w-auto max-w-full min-w-0"
       >
         <option value="all">All DES-10 Niches (C1–C10)</option>
         <option value="C1">C1 · Frontier Neural Proposer</option>
