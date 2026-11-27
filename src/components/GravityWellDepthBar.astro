@@ -1,0 +1,319 @@
+---
+// Global 4-Altitude Reading Depth Bar ("Simplest First, Complex Last Resort") for avalanche.openie.dev.
+// Coexists orthogonally with Avalanche's Visionary/Scientist RegisterSwitcher (html[data-register]).
+---
+
+<nav
+  id="gw-depth-bar"
+  aria-label="Reading depth selector"
+  class="gw-depth-nav sticky top-[56px] lg:top-[60px] z-80 border-b border-brand-border px-4 lg:px-8 py-2 backdrop-blur-xl print:hidden"
+>
+  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-2 min-w-0">
+    <div class="flex items-center gap-2 min-w-0">
+      <span class="font-mono text-[10px] tracking-[0.14em] uppercase text-brand-cyan font-semibold shrink-0">
+        Reading Depth
+      </span>
+      <span id="gw-depth-desc" class="font-body text-xs text-brand-slate truncate min-w-0">
+        Everyday words &amp; paved-road / ice-track analogy first &mdash; formal ratchet equations &amp; forecast tables stay tucked away until you ask.
+      </span>
+    </div>
+
+    <div
+      class="grid grid-cols-2 sm:inline-flex sm:flex-wrap items-center gap-1 p-0.5 rounded-lg border border-brand-border bg-brand-dark/70 w-full sm:w-auto"
+      role="group"
+      aria-label="Choose how much technical detail to show"
+    >
+      <button
+        type="button"
+        data-gw-set-depth="plain"
+        aria-pressed="true"
+        title="Default: Everyday words, paved-road / ice-track analogy & plain summary"
+        class="gw-depth-btn font-mono text-[11px] px-2.5 py-1.5 sm:py-1 rounded-md cursor-pointer transition-all text-center leading-tight"
+      >
+        1 &middot; Plain Story
+      </button>
+      <button
+        type="button"
+        data-gw-set-depth="visual"
+        aria-pressed="false"
+        title="Expand Planetary Digital Well (1,315 recipes), 145 Research TV films & 17 Radio broadcasts"
+        class="gw-depth-btn font-mono text-[11px] px-2.5 py-1.5 sm:py-1 rounded-md cursor-pointer transition-all text-center leading-tight"
+      >
+        2 &middot; Visual &amp; Hands-On
+      </button>
+      <button
+        type="button"
+        data-gw-set-depth="builder"
+        aria-pressed="false"
+        title="Expand 7 Apache-2.0 replication kits, 29 [G0–G12] source sheets & hardware joule receipts"
+        class="gw-depth-btn font-mono text-[11px] px-2.5 py-1.5 sm:py-1 rounded-md cursor-pointer transition-all text-center leading-tight"
+      >
+        3 &middot; Builder &amp; Evidence
+      </button>
+      <button
+        type="button"
+        data-gw-set-depth="formal"
+        aria-pressed="false"
+        title="Last Resort: Expand operator equations, 10-paradigm DES-10 benchmarks & 18 falsifiable forecast tables"
+        class="gw-depth-btn font-mono text-[11px] px-2.5 py-1.5 sm:py-1 rounded-md cursor-pointer transition-all text-center leading-tight"
+      >
+        4 &middot; Full Technical Spec
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  (function () {
+    var DESCRIPTIONS = {
+      plain: 'Everyday words & paved-road / ice-track analogy first — formal ratchet equations & forecast tables stay tucked away until you ask.',
+      visual: 'Plain story + Planetary Digital Well (1,315 recipes), 145 Research TV films & 17 Radio broadcasts.',
+      builder: 'Plain + Visual + 7 Apache-2.0 replication kits, 29 [G0–G12] source sheets & separated joule classes.',
+      formal: 'Last Resort active: formal cycle operator equations, DES-10 benchmark matrix & 18 falsifiable forecasts expanded.'
+    };
+    var ALLOWED = ['plain', 'visual', 'builder', 'formal'];
+    var RANK = { plain: 1, visual: 2, builder: 3, formal: 4 };
+
+    function currentDepth() {
+      var attr = document.documentElement.getAttribute('data-reading-depth') || 'plain';
+      return ALLOWED.indexOf(attr) !== -1 ? attr : 'plain';
+    }
+
+    function wakeFoldedReveals(root) {
+      var scope = root || document;
+      scope.querySelectorAll('[data-reveal]').forEach(function (el) {
+        el.classList.add('revealed');
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+      try {
+        window.dispatchEvent(new Event('scroll'));
+        window.dispatchEvent(new Event('resize'));
+      } catch (_e) {}
+    }
+
+    function syncAltitudeDetails(depth) {
+      var r = RANK[depth] || 1;
+      document.querySelectorAll('details[data-gw-min-depth]').forEach(function (det) {
+        var minD = det.getAttribute('data-gw-min-depth') || 'visual';
+        var need = RANK[minD] || 2;
+        det.open = r >= need;
+      });
+    }
+
+    function syncFoldButtons(depth) {
+      document.querySelectorAll('.gw-formal-fold').forEach(function (fold) {
+        var isOpen = depth === 'formal' || fold.classList.contains('gw-force-open');
+        fold.querySelectorAll('[data-gw-fold-toggle]').forEach(function (btn) {
+          btn.setAttribute('aria-expanded', String(isOpen));
+          var lbl = btn.querySelector('[data-gw-fold-label]');
+          if (lbl) {
+            lbl.textContent = isOpen
+              ? 'Collapse Full Technical Spec \u25B4'
+              : 'Expand Full Technical Spec \u25BE';
+          }
+        });
+        if (isOpen) wakeFoldedReveals(fold);
+      });
+    }
+
+    function syncDepthUi(depth) {
+      var descEl = document.getElementById('gw-depth-desc');
+      if (descEl && DESCRIPTIONS[depth]) descEl.textContent = DESCRIPTIONS[depth];
+      document.querySelectorAll('[data-gw-set-depth]').forEach(function (btn) {
+        var active = btn.getAttribute('data-gw-set-depth') === depth;
+        btn.setAttribute('aria-pressed', String(active));
+        btn.classList.toggle('gw-depth-btn-active', active);
+      });
+      syncAltitudeDetails(depth);
+      syncFoldButtons(depth);
+    }
+
+    function setReadingDepth(nextDepth, opts) {
+      if (ALLOWED.indexOf(nextDepth) === -1) nextDepth = 'plain';
+      document.documentElement.setAttribute('data-reading-depth', nextDepth);
+      if (nextDepth !== 'formal') {
+        if (!opts || !opts.keepForceOpen) {
+          document.querySelectorAll('.gw-formal-fold.gw-force-open').forEach(function (f) {
+            f.classList.remove('gw-force-open');
+          });
+        }
+      }
+      if (!opts || opts.persist !== false) {
+        try { localStorage.setItem('oe-reading-depth', nextDepth); } catch (_e) {}
+      }
+      if (opts && opts.syncUrl && window.history && window.history.replaceState) {
+        var u = new URL(window.location.href);
+        if (nextDepth === 'plain' && !u.searchParams.has('depth')) {
+          // keep clean default URL
+        } else {
+          u.searchParams.set('depth', nextDepth);
+          window.history.replaceState(null, '', u.pathname + u.search + u.hash);
+        }
+      }
+      syncDepthUi(nextDepth);
+      window.dispatchEvent(new CustomEvent('openie:reading-depth', { detail: { depth: nextDepth } }));
+    }
+
+    window.__openieSetReadingDepth = setReadingDepth;
+
+    document.querySelectorAll('[data-gw-set-depth]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var d = btn.getAttribute('data-gw-set-depth') || 'plain';
+        var hasParam = new URLSearchParams(window.location.search).has('depth');
+        setReadingDepth(d, { persist: true, syncUrl: hasParam });
+      });
+    });
+
+    function initProgressiveControls() {
+      document.querySelectorAll('[data-gw-fold-toggle]').forEach(function (btn) {
+        if (btn.hasAttribute('data-gw-bound')) return;
+        btn.setAttribute('data-gw-bound', '1');
+        btn.addEventListener('click', function () {
+          var fold = btn.closest('.gw-formal-fold');
+          if (!fold) return;
+          var depth = currentDepth();
+          if (depth === 'formal') {
+            setReadingDepth('plain', { persist: true, syncUrl: new URLSearchParams(window.location.search).has('depth') });
+            return;
+          }
+          fold.classList.toggle('gw-force-open');
+          syncFoldButtons(depth);
+        });
+      });
+
+      function unfoldForHash(rawHash, smoothScroll) {
+        if (!rawHash || rawHash.length < 2) return false;
+        var id = decodeURIComponent(rawHash.replace(/^#/, ''));
+        var target = document.getElementById(id);
+        if (!target) return false;
+        var fold = target.closest('.gw-formal-fold');
+        var opened = false;
+        var cur = fold;
+        while (cur) {
+          if (!cur.classList.contains('gw-force-open')) {
+            cur.classList.add('gw-force-open');
+            opened = true;
+          }
+          cur = cur.parentElement ? cur.parentElement.closest('.gw-formal-fold') : null;
+        }
+        if (opened) syncFoldButtons(currentDepth());
+        if (smoothScroll) {
+          setTimeout(function () {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 20);
+        }
+        return Boolean(fold);
+      }
+
+      if (window.location.hash) {
+        unfoldForHash(window.location.hash, true);
+      }
+      window.addEventListener('hashchange', function () {
+        unfoldForHash(window.location.hash, true);
+      });
+
+      if (!window.__openieGwDocBound) {
+        window.__openieGwDocBound = true;
+        document.addEventListener('click', function (e) {
+          var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+          if (!a) return;
+          var rawHref = a.getAttribute('href') || '';
+          if (!rawHref || rawHref.indexOf('mailto:') === 0 || rawHref.indexOf('tel:') === 0 || rawHref.indexOf('javascript:') === 0) return;
+
+          var u;
+          try { u = new URL(a.href, window.location.origin); } catch (_err) { return; }
+
+          var normCur = window.location.pathname.replace(/\/+$/, '') || '/';
+          var normDst = u.pathname.replace(/\/+$/, '') || '/';
+          if (u.origin === window.location.origin && normCur === normDst && u.hash) {
+            var id = decodeURIComponent(u.hash.slice(1));
+            var target = document.getElementById(id);
+            if (target && target.closest('.gw-formal-fold')) {
+              e.preventDefault();
+              if (window.history && window.history.pushState) {
+                window.history.pushState(null, '', u.hash);
+              } else {
+                window.location.hash = u.hash;
+              }
+              unfoldForHash(u.hash, true);
+              return;
+            }
+          }
+
+          var d = currentDepth();
+          var isEco = u.hostname === 'openie.dev' || u.hostname.slice(-11) === '.openie.dev' ||
+                      u.hostname === 'joulesperbit.ai' || u.hostname.slice(-16) === '.joulesperbit.ai';
+          if (d !== 'plain' && isEco && u.origin !== window.location.origin) {
+            if (!u.searchParams.has('depth')) {
+              u.searchParams.set('depth', d);
+              a.href = u.toString();
+            }
+          }
+        });
+      }
+
+      syncDepthUi(currentDepth());
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initProgressiveControls);
+    } else {
+      initProgressiveControls();
+    }
+    syncDepthUi(currentDepth());
+  })();
+</script>
+
+<style is:global>
+  html {
+    scroll-padding-top: 128px;
+  }
+  .gw-depth-nav {
+    background: rgba(10, 10, 15, 0.9);
+  }
+  html[data-theme="light"] .gw-depth-nav {
+    background: rgba(250, 251, 252, 0.94);
+  }
+  @media (pointer: coarse) {
+    .gw-depth-nav button {
+      min-height: 36px;
+      min-width: 0;
+    }
+  }
+  .gw-depth-btn {
+    color: var(--color-brand-slate);
+    background: transparent;
+    border: 1px solid transparent;
+  }
+  .gw-depth-btn:hover {
+    color: var(--color-brand-white);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  html[data-theme="light"] .gw-depth-btn:hover {
+    background: rgba(15, 23, 42, 0.05);
+  }
+  .gw-depth-btn.gw-depth-btn-active {
+    color: #0A0A0F;
+    background: var(--color-brand-cyan);
+    border-color: var(--color-brand-cyan);
+    font-weight: 700;
+  }
+  html[data-theme="light"] .gw-depth-btn.gw-depth-btn-active {
+    color: #FFFFFF;
+  }
+
+  .gw-altitude-details > summary {
+    list-style: none;
+  }
+  .gw-altitude-details > summary::-webkit-details-marker {
+    display: none;
+  }
+  .gw-altitude-details[open] .gw-chevron {
+    transform: rotate(180deg);
+  }
+
+  html:not([data-reading-depth="formal"]) .gw-formal-fold:not(.gw-force-open) .gw-formal-fold-body {
+    display: none;
+  }
+</style>

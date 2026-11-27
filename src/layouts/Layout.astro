@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import RegisterSwitcher from '../components/RegisterSwitcher.astro';
+import GravityWellDepthBar from '../components/GravityWellDepthBar.astro';
 
 interface Props {
   title: string;
@@ -51,6 +52,17 @@ const isHome = pathname === '/' || pathname === '';
         var storedReg = localStorage.getItem('oe-avalanche-register');
         var reg = storedReg && ['both','visionary','scientist'].indexOf(storedReg) !== -1 ? storedReg : 'both';
         document.documentElement.setAttribute('data-register', reg);
+
+        var allowedDepth = ['plain', 'visual', 'builder', 'formal'];
+        var qDepth = '';
+        try { qDepth = (new URLSearchParams(window.location.search).get('depth') || '').toLowerCase(); } catch (_e) {}
+        var savedDepth = '';
+        try { savedDepth = localStorage.getItem('oe-reading-depth') || ''; } catch (_e) {}
+        var depth = allowedDepth.indexOf(qDepth) !== -1 ? qDepth : (allowedDepth.indexOf(savedDepth) !== -1 ? savedDepth : 'plain');
+        if (allowedDepth.indexOf(qDepth) !== -1) {
+          try { localStorage.setItem('oe-reading-depth', depth); } catch (_e) {}
+        }
+        document.documentElement.setAttribute('data-reading-depth', depth);
       })();
     </script>
   </head>
@@ -120,7 +132,8 @@ const isHome = pathname === '/' || pathname === '';
       </div>
     </nav>
 
-    <main class="flex-1 pt-16 relative z-10">
+    <main id="main" class="flex-1 pt-[56px] lg:pt-[60px] relative z-10">
+      <GravityWellDepthBar />
       <slot />
     </main>
 
