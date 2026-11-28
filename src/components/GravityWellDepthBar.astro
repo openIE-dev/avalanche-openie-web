@@ -1,65 +1,61 @@
 ---
-// Global 4-Altitude Reading Depth Bar ("Simplest First, Complex Last Resort") for avalanche.openie.dev.
+// Whisper-Quiet Floating 4-Altitude Reading Depth Pill ("Simplest First, Complex Last Resort") for avalanche.openie.dev.
 // Coexists orthogonally with Avalanche's Visionary/Scientist RegisterSwitcher (html[data-register]).
 ---
 
 <nav
   id="gw-depth-bar"
   aria-label="Reading depth selector"
-  class="gw-depth-nav sticky top-[56px] lg:top-[60px] z-80 border-b border-brand-border px-4 lg:px-8 py-2 backdrop-blur-xl print:hidden"
+  class="gw-depth-nav sticky top-[62px] lg:top-[68px] z-80 flex justify-center px-3 py-2 pointer-events-none print:hidden"
 >
-  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-2 min-w-0">
-    <div class="flex items-center gap-2 min-w-0">
-      <span class="font-mono text-[10px] tracking-[0.14em] uppercase text-brand-cyan font-semibold shrink-0">
-        Reading Depth
-      </span>
-      <span id="gw-depth-desc" class="font-body text-xs text-brand-slate truncate min-w-0">
-        Everyday words &amp; paved-road / ice-track analogy first &mdash; formal ratchet equations &amp; forecast tables stay tucked away until you ask.
-      </span>
-    </div>
+  <span id="gw-depth-desc" class="sr-only">
+    Everyday words &amp; paved-road / ice-track analogy first &mdash; formal ratchet equations &amp; forecast tables stay tucked away until you ask.
+  </span>
 
-    <div
-      class="grid grid-cols-2 sm:inline-flex sm:flex-wrap items-center gap-1 p-0.5 rounded-lg border border-brand-border bg-brand-dark/70 w-full sm:w-auto"
-      role="group"
-      aria-label="Choose how much technical detail to show"
+  <div
+    class="gw-depth-pill pointer-events-auto inline-flex flex-wrap items-center justify-center gap-1 px-1.5 py-1 rounded-full border backdrop-blur-xl max-w-full"
+    role="group"
+    aria-label="Choose how much technical detail to show"
+  >
+    <span class="hidden sm:inline-block font-mono text-[9.5px] tracking-[0.16em] uppercase text-brand-gray pl-2.5 pr-1 select-none">
+      Depth
+    </span>
+    <button
+      type="button"
+      data-gw-set-depth="plain"
+      aria-pressed="true"
+      title="Default: Everyday words, paved-road / ice-track analogy & plain summary"
+      class="gw-depth-btn font-mono text-[10.5px] sm:text-[11px] px-2.5 sm:px-3 py-1 rounded-full cursor-pointer transition-all text-center leading-tight whitespace-nowrap"
     >
-      <button
-        type="button"
-        data-gw-set-depth="plain"
-        aria-pressed="true"
-        title="Default: Everyday words, paved-road / ice-track analogy & plain summary"
-        class="gw-depth-btn font-mono text-[11px] px-2.5 py-1.5 sm:py-1 rounded-md cursor-pointer transition-all text-center leading-tight"
-      >
-        1 &middot; Plain Story
-      </button>
-      <button
-        type="button"
-        data-gw-set-depth="visual"
-        aria-pressed="false"
-        title="Expand Planetary Digital Well (1,315 recipes), 145 Research TV films & 17 Radio broadcasts"
-        class="gw-depth-btn font-mono text-[11px] px-2.5 py-1.5 sm:py-1 rounded-md cursor-pointer transition-all text-center leading-tight"
-      >
-        2 &middot; Visual &amp; Hands-On
-      </button>
-      <button
-        type="button"
-        data-gw-set-depth="builder"
-        aria-pressed="false"
-        title="Expand 7 Apache-2.0 replication kits, 29 [G0–G12] source sheets & hardware joule receipts"
-        class="gw-depth-btn font-mono text-[11px] px-2.5 py-1.5 sm:py-1 rounded-md cursor-pointer transition-all text-center leading-tight"
-      >
-        3 &middot; Builder &amp; Evidence
-      </button>
-      <button
-        type="button"
-        data-gw-set-depth="formal"
-        aria-pressed="false"
-        title="Last Resort: Expand operator equations, 10-paradigm DES-10 benchmarks & 18 falsifiable forecast tables"
-        class="gw-depth-btn font-mono text-[11px] px-2.5 py-1.5 sm:py-1 rounded-md cursor-pointer transition-all text-center leading-tight"
-      >
-        4 &middot; Full Technical Spec
-      </button>
-    </div>
+      1 &middot; Plain
+    </button>
+    <button
+      type="button"
+      data-gw-set-depth="visual"
+      aria-pressed="false"
+      title="Reveal Planetary Digital Well (1,315 recipes), 145 Research TV films & 17 Radio broadcasts"
+      class="gw-depth-btn font-mono text-[10.5px] sm:text-[11px] px-2.5 sm:px-3 py-1 rounded-full cursor-pointer transition-all text-center leading-tight whitespace-nowrap"
+    >
+      2 &middot; Visual
+    </button>
+    <button
+      type="button"
+      data-gw-set-depth="builder"
+      aria-pressed="false"
+      title="Reveal 7 Apache-2.0 replication kits, 29 [G0–G12] source sheets & hardware joule receipts"
+      class="gw-depth-btn font-mono text-[10.5px] sm:text-[11px] px-2.5 sm:px-3 py-1 rounded-full cursor-pointer transition-all text-center leading-tight whitespace-nowrap"
+    >
+      3 &middot; Builder
+    </button>
+    <button
+      type="button"
+      data-gw-set-depth="formal"
+      aria-pressed="false"
+      title="Last Resort: Expand operator equations, 10-paradigm DES-10 benchmarks & 18 falsifiable forecast tables"
+      class="gw-depth-btn font-mono text-[10.5px] sm:text-[11px] px-2.5 sm:px-3 py-1 rounded-full cursor-pointer transition-all text-center leading-tight whitespace-nowrap"
+    >
+      4 &middot; Full Spec
+    </button>
   </div>
 </nav>
 
@@ -109,8 +105,8 @@
           var lbl = btn.querySelector('[data-gw-fold-label]');
           if (lbl) {
             lbl.textContent = isOpen
-              ? 'Collapse Full Technical Spec \u25B4'
-              : 'Expand Full Technical Spec \u25BE';
+              ? 'Collapse Full Spec \u25B4'
+              : 'Expand Full Spec \u25BE';
           }
         });
         if (isOpen) wakeFoldedReveals(fold);
@@ -166,6 +162,16 @@
     });
 
     function initProgressiveControls() {
+      document.querySelectorAll('[data-gw-jump-depth]').forEach(function (btn) {
+        if (btn.hasAttribute('data-gw-jump-bound')) return;
+        btn.setAttribute('data-gw-jump-bound', '1');
+        btn.addEventListener('click', function () {
+          var d = btn.getAttribute('data-gw-jump-depth') || 'visual';
+          var hasParam = new URLSearchParams(window.location.search).has('depth');
+          setReadingDepth(d, { persist: true, syncUrl: hasParam });
+        });
+      });
+
       document.querySelectorAll('[data-gw-fold-toggle]').forEach(function (btn) {
         if (btn.hasAttribute('data-gw-bound')) return;
         btn.setAttribute('data-gw-bound', '1');
@@ -197,13 +203,21 @@
           }
           cur = cur.parentElement ? cur.parentElement.closest('.gw-formal-fold') : null;
         }
+        var det = target.closest('details[data-gw-min-depth]');
+        if (det) {
+          var minD = det.getAttribute('data-gw-min-depth') || 'visual';
+          if ((RANK[currentDepth()] || 1) < (RANK[minD] || 2)) {
+            setReadingDepth(minD, { persist: false, keepForceOpen: true });
+          }
+          det.open = true;
+        }
         if (opened) syncFoldButtons(currentDepth());
         if (smoothScroll) {
           setTimeout(function () {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 20);
         }
-        return Boolean(fold);
+        return Boolean(fold || det);
       }
 
       if (window.location.hash) {
@@ -229,7 +243,7 @@
           if (u.origin === window.location.origin && normCur === normDst && u.hash) {
             var id = decodeURIComponent(u.hash.slice(1));
             var target = document.getElementById(id);
-            if (target && target.closest('.gw-formal-fold')) {
+            if (target && (target.closest('.gw-formal-fold') || target.closest('details[data-gw-min-depth]'))) {
               e.preventDefault();
               if (window.history && window.history.pushState) {
                 window.history.pushState(null, '', u.hash);
@@ -267,17 +281,21 @@
 
 <style is:global>
   html {
-    scroll-padding-top: 128px;
+    scroll-padding-top: 116px;
   }
-  .gw-depth-nav {
-    background: rgba(10, 10, 15, 0.9);
+  .gw-depth-pill {
+    background: rgba(10, 14, 22, 0.74);
+    border-color: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.55);
   }
-  html[data-theme="light"] .gw-depth-nav {
-    background: rgba(250, 251, 252, 0.94);
+  html[data-theme="light"] .gw-depth-pill {
+    background: rgba(255, 255, 255, 0.86);
+    border-color: rgba(15, 23, 42, 0.1);
+    box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.12);
   }
   @media (pointer: coarse) {
     .gw-depth-nav button {
-      min-height: 36px;
+      min-height: 32px;
       min-width: 0;
     }
   }
@@ -288,7 +306,7 @@
   }
   .gw-depth-btn:hover {
     color: var(--color-brand-white);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.06);
   }
   html[data-theme="light"] .gw-depth-btn:hover {
     background: rgba(15, 23, 42, 0.05);
@@ -298,6 +316,7 @@
     background: var(--color-brand-cyan);
     border-color: var(--color-brand-cyan);
     font-weight: 700;
+    box-shadow: 0 2px 12px rgba(0, 212, 170, 0.28);
   }
   html[data-theme="light"] .gw-depth-btn.gw-depth-btn-active {
     color: #FFFFFF;
@@ -311,6 +330,15 @@
   }
   .gw-altitude-details[open] .gw-chevron {
     transform: rotate(180deg);
+  }
+
+  /* Hide Depth 2 & 3 drawers and dense footnotes in Plain mode */
+  html[data-reading-depth="plain"] .gw-altitude-details,
+  html[data-reading-depth="plain"] .gw-non-plain-detail {
+    display: none;
+  }
+  html:not([data-reading-depth="plain"]) .gw-plain-whisper {
+    display: none;
   }
 
   html:not([data-reading-depth="formal"]) .gw-formal-fold:not(.gw-force-open) .gw-formal-fold-body {

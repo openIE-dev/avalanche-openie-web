@@ -69,81 +69,77 @@ const isHome = pathname === '/' || pathname === '';
   <body class="min-h-screen flex flex-col noise-overlay grid-bg">
     <canvas id="particle-canvas"></canvas>
 
-    <nav id="nav" aria-label="Main navigation" class="nav-glass fixed top-0 left-0 right-0 z-100 px-4 lg:px-8 py-3.5 flex justify-between items-center transition-all duration-300">
+    <!-- Streamlined, Airy Top Navbar (4 primary links + Explore menu) -->
+    <nav id="nav" aria-label="Main navigation" class="nav-glass fixed top-0 left-0 right-0 z-100 px-5 lg:px-10 py-3.5 flex justify-between items-center transition-all duration-300">
       <a href="/" aria-label="OpenIE Avalanche educational home" class="font-display text-[20px] lg:text-[22px] font-bold tracking-tight text-brand-white no-underline hover:no-underline shrink-0">
         Open<span class="text-brand-cyan">IE</span> <span class="text-brand-amber">Avalanche</span>
       </a>
 
-      <button id="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" class="xl:hidden flex flex-col gap-1.5 p-2 text-brand-slate cursor-pointer bg-transparent border-none">
+      <button id="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" class="lg:hidden flex flex-col gap-1.5 p-2 text-brand-slate cursor-pointer bg-transparent border-none">
         <span class="block w-5 h-0.5 bg-current transition-transform" id="burger-top"></span>
         <span class="block w-5 h-0.5 bg-current transition-opacity" id="burger-mid"></span>
         <span class="block w-5 h-0.5 bg-current transition-transform" id="burger-bot"></span>
       </button>
 
-      <div id="nav-links" class="hidden xl:flex xl:flex-wrap xl:justify-end gap-3 items-center max-xl:fixed max-xl:inset-0 max-xl:top-[58px] max-xl:bg-brand-dark/96 max-xl:backdrop-blur-xl max-xl:flex-col max-xl:justify-center max-xl:gap-5 max-xl:z-50 max-xl:p-6">
-        <a href={isHome ? "/#rungs" : "/rungs"} class:list={["font-body text-[13px] max-xl:text-base font-medium no-underline transition-colors", pathname.startsWith('/rungs') ? "text-brand-amber" : "text-brand-slate hover:text-brand-white"]}>
+      <div id="nav-links" class="hidden lg:flex lg:items-center gap-6 max-lg:fixed max-lg:inset-0 max-lg:top-[58px] max-lg:bg-brand-dark/96 max-lg:backdrop-blur-xl max-lg:flex-col max-lg:justify-center max-lg:gap-5 max-lg:z-50 max-lg:p-6">
+        <a href="/#plain-story" class="font-body text-[13.5px] max-lg:text-lg font-medium text-brand-light no-underline hover:text-brand-cyan transition-colors">
+          Start Here
+        </a>
+        <a href={isHome ? "/#rungs" : "/rungs"} class:list={["font-body text-[13.5px] max-lg:text-lg font-medium no-underline transition-colors", pathname.startsWith('/rungs') ? "text-brand-amber" : "text-brand-slate hover:text-brand-white"]}>
           The 9 Rungs
         </a>
-        <a href="/#science" class="font-body text-[13px] max-xl:text-base font-medium text-brand-slate no-underline hover:text-brand-white transition-colors">
-          Science
-        </a>
-        <a href="/#forcing" class="font-body text-[13px] max-xl:text-base font-medium text-brand-slate no-underline hover:text-brand-white transition-colors">
-          Forcing Function
-        </a>
-        <a href={isHome ? "/#forecast" : "/forecast"} class:list={["font-body text-[13px] max-xl:text-base font-medium no-underline transition-colors", pathname.startsWith('/forecast') ? "text-brand-cyan" : "text-brand-slate hover:text-brand-white"]}>
-          Forecast
-        </a>
-        <a href={isHome ? "/#ecosystem" : "/ecosystem"} class:list={["font-body text-[13px] max-xl:text-base font-medium no-underline transition-colors", pathname.startsWith('/ecosystem') ? "text-brand-cyan" : "text-brand-slate hover:text-brand-white"]}>
-          Open Resources
-        </a>
-        <a href="/planetary" class:list={["font-mono text-[12px] max-xl:text-base font-semibold px-2.5 py-1 rounded-md border no-underline transition-colors", pathname.startsWith('/planetary') ? "border-brand-cyan bg-brand-cyan/15 text-brand-cyan" : "border-brand-cyan/35 text-brand-cyan hover:bg-brand-cyan/10"]}>
+        <a href="/planetary" class:list={["font-body text-[13.5px] max-lg:text-lg font-medium no-underline transition-colors", pathname.startsWith('/planetary') ? "text-brand-cyan" : "text-brand-slate hover:text-brand-cyan"]}>
           Planetary Well
         </a>
-        <a href="https://blog.openie.dev/posts/from-ephemeral-inference-to-compiled-agency/" class="inline-flex items-center gap-1 font-mono text-[11px] max-xl:text-sm text-brand-emerald border border-brand-emerald/35 bg-brand-emerald/[0.08] px-2.5 py-1 rounded-md no-underline hover:bg-brand-emerald/15 hover:border-brand-emerald transition-all" title="Capstone Research Position: From Ephemeral Inference to Compiled Agency">
-          Position
+        <a href={isHome ? "/#forecast" : "/forecast"} class:list={["font-body text-[13.5px] max-lg:text-lg font-medium no-underline transition-colors", pathname.startsWith('/forecast') ? "text-brand-cyan" : "text-brand-slate hover:text-brand-white"]}>
+          Forecast
         </a>
-        <a href="https://research.openie.dev/living/compiled-agency/" class="inline-flex items-center gap-1 font-mono text-[11px] max-xl:text-sm text-brand-cyan border border-brand-cyan/35 bg-brand-cyan/[0.06] px-2.5 py-1 rounded-md no-underline hover:bg-brand-cyan/15 hover:border-brand-cyan transition-all" title="Interactive Compiled Agency Simulator & Shot #6 Shunt Receipts">
-          Simulator
-        </a>
-        <a href="https://blog.openie.dev" class="inline-flex items-center gap-1 font-mono text-[11px] max-xl:text-sm text-brand-amber border border-brand-amber/30 px-2.5 py-1 rounded-md no-underline hover:bg-brand-amber/10 hover:border-brand-amber transition-all" title="OpenIE Chronicle — 58-Entry Research & Engineering Log">
-          Chronicle
-        </a>
-        <a href="https://research.openie.dev/tv/?channel=avalanche" class="inline-flex items-center gap-1 font-mono text-[11px] max-xl:text-sm text-brand-amber border border-brand-amber/30 px-2.5 py-1 rounded-md no-underline hover:bg-brand-amber/10 hover:border-brand-amber transition-all" title="Watch Research TV — Avalanche Visual Explainers">
-          <span aria-hidden="true">&#9654;</span> TV
-        </a>
-        <a href="https://research.openie.dev/radio/?desk=avalanche" class="inline-flex items-center gap-1 font-mono text-[11px] max-xl:text-sm text-brand-cyan border border-brand-cyan/30 px-2.5 py-1 rounded-md no-underline hover:bg-brand-cyan/10 hover:border-brand-cyan transition-all" title="Listen on Research Radio — Avalanche Audio Deep-Dives">
-          <span aria-hidden="true">&#9673;</span> Radio
-        </a>
-        <button
-          type="button"
-          data-openie-live-trigger
-          aria-label="Open 24 kHz Studio Live Voice Call and Video Mode (Cmd+Shift+V)"
-          title="24 kHz Studio Live Voice & Video (⌘⇧V)"
-          onclick="const e=event;setTimeout(()=>{if(!e.defaultPrevented&&!document.querySelector('body > [id*=&quot;openie&quot;],body > [class*=&quot;openie&quot;],[data-openie-dock]')){window.location.href='https://research.openie.dev/live/?surface=avalanche';}},60)"
-          class="inline-flex items-center gap-1.5 font-mono text-[11px] max-xl:text-sm text-brand-cyan border border-brand-cyan/40 bg-brand-cyan/10 px-2.5 py-1 rounded-md cursor-pointer hover:bg-brand-cyan/20 hover:border-brand-cyan transition-all shrink-0"
-        >
-          <span aria-hidden="true">&#128222;</span> Live
-        </button>
 
-        <div class="flex items-center gap-2.5 xl:ml-1 xl:pl-3 xl:border-l xl:border-brand-border">
+        <details class="relative nav-explore max-lg:text-center">
+          <summary class="font-body text-[13.5px] max-lg:text-lg font-medium text-brand-slate hover:text-brand-white transition-colors cursor-pointer select-none inline-flex items-center gap-1">
+            <span>Explore</span>
+            <span class="text-[10px] opacity-70" aria-hidden="true">&#9662;</span>
+          </summary>
+          <div class="lg:absolute lg:right-0 lg:mt-3 lg:w-60 lg:rounded-2xl lg:border lg:border-brand-border lg:bg-brand-dark/95 lg:backdrop-blur-xl lg:p-2 lg:shadow-2xl max-lg:mt-3 max-lg:flex max-lg:flex-col max-lg:gap-2">
+            <a href="/#science" class="block px-3.5 py-2 rounded-xl font-body text-[13px] text-brand-light no-underline hover:bg-brand-cyan/10 hover:text-brand-cyan transition-colors">Ratchet Science</a>
+            <a href="/#forcing" class="block px-3.5 py-2 rounded-xl font-body text-[13px] text-brand-slate no-underline hover:bg-brand-cyan/10 hover:text-brand-white transition-colors">Forcing Simulator</a>
+            <a href="/ecosystem" class="block px-3.5 py-2 rounded-xl font-body text-[13px] text-brand-slate no-underline hover:bg-brand-cyan/10 hover:text-brand-white transition-colors">Open Resources</a>
+            <a href="https://research.openie.dev/living/compiled-agency/" class="block px-3.5 py-2 rounded-xl font-body text-[13px] text-brand-cyan no-underline hover:bg-brand-cyan/10 transition-colors">Compiled Agency Simulator &nearr;</a>
+            <a href="https://research.openie.dev/tv/?channel=avalanche" class="block px-3.5 py-2 rounded-xl font-body text-[13px] text-brand-amber no-underline hover:bg-brand-amber/10 transition-colors">&#9654; Research TV (145) &nearr;</a>
+            <a href="https://research.openie.dev/radio/?desk=avalanche" class="block px-3.5 py-2 rounded-xl font-body text-[13px] text-brand-slate no-underline hover:bg-brand-cyan/10 hover:text-brand-cyan transition-colors">&#9673; Research Radio (17) &nearr;</a>
+            <a href="https://blog.openie.dev" class="block px-3.5 py-2 rounded-xl font-body text-[13px] text-brand-slate no-underline hover:bg-brand-amber/10 hover:text-brand-amber transition-colors">Chronicle (58) &nearr;</a>
+          </div>
+        </details>
+
+        <div class="flex flex-wrap items-center justify-center gap-2.5 lg:ml-1 lg:pl-4 lg:border-l lg:border-brand-border">
           <RegisterSwitcher compact={true} label="Explanation Mode" />
+          <button
+            type="button"
+            data-openie-live-trigger
+            aria-label="Open 24 kHz Studio Live Voice Call and Video Mode (Cmd+Shift+V)"
+            title="24 kHz Studio Live Voice & Video (⌘⇧V)"
+            onclick="const e=event;setTimeout(()=>{if(!e.defaultPrevented&&!document.querySelector('body > [id*=&quot;openie&quot;],body > [class*=&quot;openie&quot;],[data-openie-dock]')){window.location.href='https://research.openie.dev/live/?surface=avalanche';}},60)"
+            class="inline-flex items-center gap-1.5 font-mono text-[11px] text-brand-cyan border border-brand-cyan/35 bg-brand-cyan/10 px-3 py-1 rounded-full cursor-pointer hover:bg-brand-cyan/20 transition-all shrink-0"
+          >
+            <span aria-hidden="true">&#128222;</span> Live
+          </button>
           <ThemeToggle />
         </div>
       </div>
     </nav>
 
-    <main id="main" class="flex-1 pt-[56px] lg:pt-[60px] relative z-10">
+    <main id="main" class="flex-1 pt-[56px] lg:pt-[62px] relative z-10">
       <GravityWellDepthBar />
       <slot />
     </main>
 
-    <footer class="relative z-10 border-t border-brand-border px-6 md:px-10 py-12 mt-12" role="contentinfo">
-      <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-start gap-10">
+    <footer class="relative z-10 border-t border-brand-border px-6 md:px-10 py-16 md:py-20 mt-16" role="contentinfo">
+      <div class="max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-start gap-12">
         <div class="max-w-xs">
-          <div class="font-display text-base font-bold text-brand-white mb-2">
+          <div class="font-display text-base font-bold text-brand-white mb-3">
             Open<span class="text-brand-cyan">IE</span> <span class="text-brand-amber">Avalanche</span>
           </div>
-          <p class="font-body text-[12px] text-brand-slate leading-relaxed mb-3">
+          <p class="font-body text-[13px] text-brand-slate leading-relaxed mb-4">
             An open educational reference on evolutionary ratchets, the 9-Rung Computer Intelligence Avalanche, thermodynamic compilation thresholds, and falsifiable scientific forecasting.
           </p>
           <p class="font-mono text-[11px] text-brand-gray leading-relaxed">
@@ -155,64 +151,64 @@ const isHome = pathname === '/' || pathname === '';
           <div>
             <div class="font-mono text-[10px] text-brand-amber tracking-[2px] uppercase mb-3">Study Guide</div>
             <div class="space-y-2">
-              <a href="/" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-white transition-colors">Observatory Home</a>
-              <a href="/rungs" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-amber transition-colors">The 9 Rungs &amp; Seminar Guide</a>
-              <a href="/planetary" class="block font-body text-[12px] text-brand-cyan no-underline hover:text-brand-white transition-colors">The Planetary Digital Well</a>
-              <a href="/forecast" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">1950–2026 History &amp; Forecast</a>
-              <a href="/ecosystem" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Open Papers, Labs &amp; Media</a>
+              <a href="/" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-white transition-colors">Observatory Home</a>
+              <a href="/rungs" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-amber transition-colors">The 9 Rungs &amp; Seminar Guide</a>
+              <a href="/planetary" class="block font-body text-[12.5px] text-brand-cyan no-underline hover:text-brand-white transition-colors">The Planetary Digital Well</a>
+              <a href="/forecast" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">1950–2026 History &amp; Forecast</a>
+              <a href="/ecosystem" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Open Papers, Labs &amp; Media</a>
             </div>
           </div>
 
           <div>
             <div class="font-mono text-[10px] text-brand-cyan tracking-[2px] uppercase mb-3">Primary Research &amp; Labs</div>
             <div class="space-y-2">
-              <a href="https://blog.openie.dev/posts/from-ephemeral-inference-to-compiled-agency/" class="block font-body text-[12px] text-brand-emerald font-medium no-underline hover:text-brand-white transition-colors">Capstone Position Essay</a>
-              <a href="https://research.openie.dev/living/compiled-agency/" class="block font-body text-[12px] text-brand-cyan font-medium no-underline hover:text-brand-white transition-colors">Compiled Agency Simulator</a>
-              <a href="https://blog.openie.dev" class="block font-body text-[12px] text-brand-amber no-underline hover:text-brand-gold transition-colors">Chronicle (58)</a>
-              <a href="https://blog.openie.dev/verification/" class="block font-body text-[12px] text-brand-cyan no-underline hover:text-brand-white transition-colors">Verification &amp; Replicate</a>
-              <a href="https://research.openie.dev/live/" class="block font-body text-[12px] text-brand-cyan no-underline hover:text-brand-white transition-colors">24 kHz Live S2S Studio</a>
-              <a href="https://research.openie.dev/papers/communication-avalanche/" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Communication Avalanche Paper</a>
-              <a href="https://research.openie.dev/papers/lut-adapt/" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Downward LUT6 Paper</a>
-              <a href="https://research.openie.dev/living/communication-avalanche/" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Living Figures Observatory</a>
-              <a href="https://research.openie.dev/tutorials/" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">13 Interactive Labs</a>
-              <a href="https://research.openie.dev/tv/?channel=avalanche" class="block font-body text-[12px] text-brand-amber no-underline hover:text-brand-gold transition-colors">&#9654; Research TV (29 Studies &middot; 145 Films)</a>
-              <a href="https://research.openie.dev/radio/?desk=avalanche" class="block font-body text-[12px] text-brand-cyan no-underline hover:text-brand-teal transition-colors">&#9673; Research Radio (17 Eps)</a>
+              <a href="https://blog.openie.dev/posts/from-ephemeral-inference-to-compiled-agency/" class="block font-body text-[12.5px] text-brand-emerald font-medium no-underline hover:text-brand-white transition-colors">Capstone Position Essay</a>
+              <a href="https://research.openie.dev/living/compiled-agency/" class="block font-body text-[12.5px] text-brand-cyan font-medium no-underline hover:text-brand-white transition-colors">Compiled Agency Simulator</a>
+              <a href="https://blog.openie.dev" class="block font-body text-[12.5px] text-brand-amber no-underline hover:text-brand-gold transition-colors">Chronicle (58)</a>
+              <a href="https://blog.openie.dev/verification/" class="block font-body text-[12.5px] text-brand-cyan no-underline hover:text-brand-white transition-colors">Verification &amp; Replicate</a>
+              <a href="https://research.openie.dev/live/" class="block font-body text-[12.5px] text-brand-cyan no-underline hover:text-brand-white transition-colors">24 kHz Live S2S Studio</a>
+              <a href="https://research.openie.dev/papers/communication-avalanche/" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Communication Avalanche Paper</a>
+              <a href="https://research.openie.dev/papers/lut-adapt/" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Downward LUT6 Paper</a>
+              <a href="https://research.openie.dev/tutorials/" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">14 Interactive Labs</a>
+              <a href="https://research.openie.dev/tv/?channel=avalanche" class="block font-body text-[12.5px] text-brand-amber no-underline hover:text-brand-gold transition-colors">&#9654; Research TV (145 Films)</a>
+              <a href="https://research.openie.dev/radio/?desk=avalanche" class="block font-body text-[12.5px] text-brand-cyan no-underline hover:text-brand-teal transition-colors">&#9673; Research Radio (17 Eps)</a>
             </div>
           </div>
 
           <div>
             <div class="font-mono text-[10px] text-brand-gray tracking-[2px] uppercase mb-3">Sister Teaching Maps</div>
-            <div class="space-y-1.5">
-              <a href="https://stack.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Periodic Stack Overview</a>
-              <a href="https://compute.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Compute Reference</a>
-              <a href="https://synthesis.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Synthesis Reference</a>
-              <a href="https://knowledge.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Knowledge Reference</a>
-              <a href="https://database.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Database &amp; Data</a>
-              <a href="https://energy.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Energy Reference</a>
-              <a href="https://state.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">State Reference</a>
-              <a href="https://memory.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Memory Reference</a>
-              <a href="https://communication.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Communication Reference</a>
-              <a href="https://agent.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Agent Reference</a>
-              <a href="https://proof.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Formal Proof Reference</a>
+            <div class="space-y-2">
+              <a href="https://stack.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Periodic Stack Overview</a>
+              <a href="https://compute.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Compute Reference</a>
+              <a href="https://synthesis.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Synthesis Reference</a>
+              <a href="https://knowledge.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Knowledge Reference</a>
+              <a href="https://database.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Database &amp; Data</a>
+              <a href="https://energy.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Energy Reference</a>
+              <a href="https://state.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">State Reference</a>
+              <a href="https://memory.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Memory Reference</a>
+              <a href="https://communication.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Communication Reference</a>
+              <a href="https://agent.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Agent Reference</a>
+              <a href="https://proof.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Formal Proof Reference</a>
             </div>
           </div>
 
           <div>
             <div class="font-mono text-[10px] text-brand-gray tracking-[2px] uppercase mb-3">Open Access &amp; Legal</div>
-            <div class="space-y-1.5">
-              <a href="https://research.openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">research.openie.dev</a>
+            <div class="space-y-2">
+              <a href="https://openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">openie.dev</a>
+              <a href="https://research.openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">research.openie.dev</a>
               <a href="/llms.txt" class="block font-mono text-[11px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">llms.txt</a>
-              <a href="mailto:contact@openie.dev" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Questions &amp; Errata</a>
-              <a href="/terms" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Terms of Educational Use</a>
-              <a href="/privacy" class="block font-body text-[12px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Privacy (Zero Tracking)</a>
+              <a href="mailto:contact@openie.dev" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Questions &amp; Errata</a>
+              <a href="/terms" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Terms of Educational Use</a>
+              <a href="/privacy" class="block font-body text-[12.5px] text-brand-slate no-underline hover:text-brand-cyan transition-colors">Privacy (Zero Tracking)</a>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-brand-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-        <p class="font-body text-[11px] text-brand-gray">&copy; {new Date().getFullYear()} Open Interface Engineering &middot; Educational Monograph Series. Free to read, link, and cite with attribution.</p>
-        <p class="font-mono text-[10px] text-brand-gray">Signed Provenance &middot; Self-Checked &middot; <span class="text-brand-cyan">measured_j</span> &perp; <span class="text-brand-indigo">reported_j</span> &perp; <span class="text-brand-amber">est_j</span> &perp; <span>unmetered</span></p>
+      <div class="max-w-6xl mx-auto mt-12 pt-8 border-t border-brand-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <p class="font-body text-[11.5px] text-brand-gray">&copy; {new Date().getFullYear()} Open Interface Engineering &middot; Educational Monograph Series. Free to read, link, and cite with attribution.</p>
+        <p class="font-mono text-[10.5px] text-brand-gray">Signed Provenance &middot; Self-Checked &middot; <span class="text-brand-cyan">measured_j</span> &perp; <span class="text-brand-indigo">reported_j</span> &perp; <span class="text-brand-amber">est_j</span> &perp; <span>unmetered</span></p>
       </div>
     </footer>
 
@@ -223,6 +219,16 @@ const isHome = pathname === '/' || pathname === '';
       const burgerMid = document.getElementById('burger-mid');
       const burgerBot = document.getElementById('burger-bot');
       let menuOpen = false;
+
+      // Close Explore dropdown on outside click or link click
+      document.addEventListener('click', (e) => {
+        document.querySelectorAll('details.nav-explore[open]').forEach((det) => {
+          const target = e.target as Node | null;
+          if (!target || !det.contains(target) || (target instanceof Element && target.closest('a'))) {
+            det.removeAttribute('open');
+          }
+        });
+      });
 
       menuBtn?.addEventListener('click', () => {
         menuOpen = !menuOpen;
@@ -298,9 +304,8 @@ const isHome = pathname === '/' || pathname === '';
         });
       });
 
-      // Dual-Tone Phase-Transition Particle Canvas:
-      // Left/top Phase 1 = Ephemeral Heat (Amber #F59E0B) -> Right/bottom Phase 2 = Compiled Substrates (Crystalline Cyan #00D4AA)
-      (function initPhaseParticles() {
+      // Whisper-subtle ambient field below the fold
+      (function initAmbientParticles() {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement | null;
         if (!canvas) return;
@@ -309,33 +314,29 @@ const isHome = pathname === '/' || pathname === '';
 
         let w = canvas.width = window.innerWidth;
         let h = canvas.height = window.innerHeight;
-        let mx = -9999, my = -9999;
-
-        const count = window.innerWidth < 768 ? 36 : 74;
+        const count = window.innerWidth < 768 ? 16 : 30;
         const particles: { x: number; y: number; vx: number; vy: number; r: number; }[] = [];
 
         for (let i = 0; i < count; i++) {
           particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.34,
-            vy: (Math.random() - 0.5) * 0.34,
-            r: Math.random() * 1.5 + 0.55,
+            vx: (Math.random() - 0.5) * 0.22,
+            vy: (Math.random() - 0.5) * 0.22,
+            r: Math.random() * 1.3 + 0.5,
           });
         }
 
         window.addEventListener('resize', () => {
           w = canvas.width = window.innerWidth;
           h = canvas.height = window.innerHeight;
-        });
-        document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
-        document.addEventListener('mouseleave', () => { mx = -9999; my = -9999; });
+        }, { passive: true });
 
         const amber = [245, 158, 11];
         const cyan = [0, 212, 170];
 
         function phaseColor(x: number, y: number, alpha: number) {
-          const t = Math.max(0, Math.min(1, (x / Math.max(w, 1)) * 0.72 + (y / Math.max(h, 1)) * 0.28));
+          const t = Math.max(0, Math.min(1, (x / Math.max(w, 1)) * 0.65 + (y / Math.max(h, 1)) * 0.35));
           const r = Math.round(amber[0] + (cyan[0] - amber[0]) * t);
           const g = Math.round(amber[1] + (cyan[1] - amber[1]) * t);
           const b = Math.round(amber[2] + (cyan[2] - amber[2]) * t);
@@ -346,20 +347,6 @@ const isHome = pathname === '/' || pathname === '';
           ctx!.clearRect(0, 0, w, h);
           for (let i = 0; i < count; i++) {
             const p = particles[i];
-            if (mx > -9000) {
-              const dx = mx - p.x;
-              const dy = my - p.y;
-              const dist = Math.sqrt(dx * dx + dy * dy);
-              if (dist < 190 && dist > 0) {
-                const force = (190 - dist) / 190 * 0.0075;
-                p.vx += (dx / dist) * force;
-                p.vy += (dy / dist) * force;
-              }
-            }
-            const phaseT = p.x / Math.max(w, 1);
-            const damp = phaseT > 0.55 ? 0.978 : 0.986;
-            p.vx *= damp;
-            p.vy *= damp;
             p.x += p.vx;
             p.y += p.vy;
             if (p.x < 0) p.x = w;
@@ -369,23 +356,8 @@ const isHome = pathname === '/' || pathname === '';
 
             ctx!.beginPath();
             ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx!.fillStyle = phaseColor(p.x, p.y, 0.42);
+            ctx!.fillStyle = phaseColor(p.x, p.y, 0.22);
             ctx!.fill();
-
-            for (let j = i + 1; j < count; j++) {
-              const q = particles[j];
-              const dx = p.x - q.x;
-              const dy = p.y - q.y;
-              const dist = Math.sqrt(dx * dx + dy * dy);
-              if (dist < 118) {
-                ctx!.beginPath();
-                ctx!.moveTo(p.x, p.y);
-                ctx!.lineTo(q.x, q.y);
-                ctx!.strokeStyle = phaseColor((p.x + q.x) * 0.5, (p.y + q.y) * 0.5, 0.085 * (1 - dist / 118));
-                ctx!.lineWidth = 0.55;
-                ctx!.stroke();
-              }
-            }
           }
           requestAnimationFrame(draw);
         }
